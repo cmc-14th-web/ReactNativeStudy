@@ -1,0 +1,15 @@
+.history
+.DS_Store
+
+node_modules/
+vendor/
+
+Pods/
+build/
+*.xcodeproj/
+*.xcworkspace/
+*Test/
+
+.gradle/
+.idea/
+gradle/
