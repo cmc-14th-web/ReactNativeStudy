@@ -12,7 +12,8 @@
   "dependencies": {
     "@types/react-native": "^0.72.7",
     "react": "18.2.0",
-    "react-native": "0.72.7"
+    "react-native": "0.72.7",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
