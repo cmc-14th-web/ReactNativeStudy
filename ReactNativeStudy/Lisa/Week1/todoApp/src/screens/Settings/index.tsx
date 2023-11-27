@@ -1,7 +1,7 @@
 import {View} from 'react-native';
 
-const Home = () => {
+const Settings = () => {
   return <View></View>;
 };
 
-export default Home;
+export default Settings;
