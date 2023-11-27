@@ -24,6 +24,7 @@
     /* 절대경로 사용 */
     "baseUrl": "./src",
     "paths": {
+      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@libs/*": ["src/libs/*"],
       "@screens/*": ["src/screens/*"],
