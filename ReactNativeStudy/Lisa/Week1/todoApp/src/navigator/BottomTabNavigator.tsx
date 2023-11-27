@@ -37,7 +37,7 @@ const BottomTabNavigator = () => {
         headerTitleStyle: {
           fontFamily: 'Pretendard',
           fontSize: 18,
-          lineHeight: 18 * 1.4,
+          lineHeight: 25.2,
           color: theme.palette.orange,
         },
       })}>

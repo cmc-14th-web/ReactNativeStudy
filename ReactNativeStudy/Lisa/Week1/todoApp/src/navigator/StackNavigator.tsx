@@ -75,5 +75,4 @@ const StyledTextButton = styled(TouchableOpacity)`
 const StyledText = styled(Text)`
   ${theme.typo.title};
   color: ${theme.palette.orange};
-  line-height: 25.2;
 `;
