@@ -13,3 +13,7 @@ build/
 .gradle/
 .idea/
 gradle/
+
+.bundle/
+*.iml
+.idea
