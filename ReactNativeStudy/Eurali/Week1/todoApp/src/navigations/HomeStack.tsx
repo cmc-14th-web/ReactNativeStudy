@@ -1,10 +1,15 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../screens/Home';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store';
 
 const Stack = createStackNavigator();
 
 const HomeStackNavigation = () => {
+  const mainColor = useSelector((state: RootState) => {
+    return state.color.mainColor;
+  });
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -15,7 +20,7 @@ const HomeStackNavigation = () => {
           headerStyle: {
             backgroundColor: 'var(--Gray, #F5F5F5)',
           },
-          headerTintColor: '#FF8F50',
+          headerTintColor: mainColor,
           headerTitleStyle: {
             fontWeight: '500',
             fontSize: 18,

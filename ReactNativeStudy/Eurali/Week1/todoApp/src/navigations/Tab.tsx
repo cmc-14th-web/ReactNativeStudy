@@ -6,15 +6,20 @@ import SetStackNavigation from './SetStack';
 import Home from '../assets/home.svg';
 import Add from '../assets/add.svg';
 import Set from '../assets/set.svg';
+import {useSelector} from 'react-redux';
+import {RootState} from '../store';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
+  const mainColor = useSelector((state: RootState) => {
+    return state.color.mainColor;
+  });
   return (
     <Tab.Navigator
       initialRouteName="홈"
       screenOptions={{
-        tabBarActiveTintColor: '#FF8F50',
+        tabBarActiveTintColor: mainColor,
         tabBarInactiveTintColor: '#888888',
       }}>
       <Tab.Screen
@@ -31,7 +36,7 @@ const TabNavigation = () => {
         options={{
           tabBarLabel: () => null,
           headerShown: false,
-          tabBarIcon: ({color, size}) => <Add color={color} />,
+          tabBarIcon: ({color, size}) => <Add color={mainColor} />,
           tabBarStyle: {
             display: 'none',
           },
