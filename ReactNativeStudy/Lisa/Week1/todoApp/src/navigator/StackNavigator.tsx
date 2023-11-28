@@ -8,14 +8,27 @@ import BottomTabNavigator from './BottomTabNavigator';
 import AddTodo from 'screens/AddTodo';
 import styled from 'styled-components';
 import ArrowBackIcon from 'assets/icons/ArrowBackIcon';
-import {useRecoilValue} from 'recoil';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {colorState} from 'libs/store/color';
+import {todoListState} from 'libs/store/todoList';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   const navigation = useNavigation();
   const colorData = useRecoilValue(colorState);
+  const setTodoListData = useSetRecoilState(todoListState);
+
+  const handlePressCompleteButton = () => {
+    setTodoListData(prevState => ({
+      ...prevState,
+      todo: [
+        ...prevState.todo,
+        {id: new Date().getTime(), todo: prevState.newTodo, done: false},
+      ],
+    }));
+    navigation.navigate('Home');
+  };
 
   return (
     <Stack.Navigator
@@ -49,7 +62,7 @@ const StackNavigator = () => {
             </StyledIconButton>
           ),
           headerRight: () => (
-            <StyledTextButton>
+            <StyledTextButton onPress={handlePressCompleteButton}>
               <StyledText textColor={colorData.color}>완료</StyledText>
             </StyledTextButton>
           ),
