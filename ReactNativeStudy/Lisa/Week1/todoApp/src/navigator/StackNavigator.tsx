@@ -1,7 +1,7 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {KeyOfPalette, theme} from 'styles';
 import {Text} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigator from './BottomTabNavigator';
 import styled from 'styled-components/native';
@@ -12,10 +12,16 @@ import ArrowBackIcon from 'assets/icons/ArrowBackIcon';
 import {colorState} from 'libs/store/color';
 import {modalState} from 'libs/store/modal';
 
-const Stack = createStackNavigator();
+export type RootStackParamList = {
+  Home: undefined;
+  AddTodo: undefined;
+  BottomTabNavigator: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const StackNavigator = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const colorData = useRecoilValue(colorState);
   const setModalData = useSetRecoilState(modalState);
 

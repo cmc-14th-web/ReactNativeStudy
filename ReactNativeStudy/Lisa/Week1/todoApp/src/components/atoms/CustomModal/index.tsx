@@ -1,10 +1,11 @@
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {View, Modal, Text, TouchableOpacity} from 'react-native';
 import {useRecoilState, useSetRecoilState} from 'recoil';
 import styled from 'styled-components/native';
 
 import {modalState} from 'libs/store/modal';
 import {todoListState} from 'libs/store/todoList';
+import {RootStackParamList} from 'navigator/StackNavigator';
 
 type CustomModalVariant = 'removeTodo' | 'addTodo';
 
@@ -13,7 +14,7 @@ type CustomModalPropsType = {
 };
 
 const CustomModal = ({variant}: CustomModalPropsType) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const setModalData = useSetRecoilState(modalState);
   const [todoListData, setTodoListData] = useRecoilState(todoListState);
 
