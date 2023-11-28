@@ -1,24 +1,27 @@
-import {useRecoilState} from 'recoil';
+import {useRecoilValue} from 'recoil';
 import {useEffect} from 'react';
 import {TextInput} from 'react-native';
 import styled from 'styled-components';
 import {theme} from 'styles/theme';
 
 import {todoListState} from 'libs/store/todoList';
+import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 
 const AddTodoInput = () => {
-  const [todoListData, setTodoListData] = useRecoilState(todoListState);
+  const todoListData = useRecoilValue(todoListState);
+
+  const {addNewTodoTitle} = useSetTodoListData();
 
   const handleChangeTodoText = (newTodoData: string) => {
     if (!newTodoData.length) {
       return;
     }
 
-    setTodoListData(prevState => ({...prevState, newTodo: newTodoData}));
+    addNewTodoTitle(newTodoData);
   };
 
   useEffect(() => {
-    setTodoListData(prevState => ({...prevState, newTodo: ''}));
+    addNewTodoTitle('');
   }, []);
 
   return (

@@ -1,11 +1,12 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {View, Modal, Text, TouchableOpacity} from 'react-native';
-import {useRecoilState, useSetRecoilState} from 'recoil';
+import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 
-import {modalState} from 'libs/store/modal';
 import {todoListState} from 'libs/store/todoList';
 import {RootStackParamList} from 'navigator/StackNavigator';
+import useSetTodoListData from 'libs/hooks/useSetTodoListData';
+import useSetModalData from 'libs/hooks/useSetModalData';
 
 type CustomModalVariant = 'removeTodo' | 'addTodo';
 
@@ -15,43 +16,28 @@ type CustomModalPropsType = {
 
 const CustomModal = ({variant}: CustomModalPropsType) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const setModalData = useSetRecoilState(modalState);
-  const [todoListData, setTodoListData] = useRecoilState(todoListState);
+  const todoListData = useRecoilValue(todoListState);
+  const {addNewTodo, updateTodoList} = useSetTodoListData();
+  const {setAddTodoModalVisible, setRemoveTodoModalVisible} = useSetModalData();
 
   const handlePressAddTodoConfirm = () => {
-    setTodoListData(prevState => ({
-      ...prevState,
-      todo: [
-        ...prevState.todo,
-        {id: new Date().getTime(), todo: prevState.newTodo, done: false},
-      ],
-    }));
-    setModalData(prevState => ({
-      ...prevState,
-      isAddTodoVisible: false,
-    }));
+    addNewTodo();
+    setAddTodoModalVisible(false);
     navigation.navigate('Home');
   };
 
   const handlePressRemoveTodoConfirm = () => {
-    const updatedTodoList = Array.isArray(todoListData.todo)
+    const updatedTodoListData = Array.isArray(todoListData.todo)
       ? todoListData.todo.filter(todo => todo.id !== todoListData.removeTodo)
       : [];
 
-    setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
-
-    setModalData(prevState => ({
-      ...prevState,
-      isRemoveTodoVisible: false,
-    }));
+    updateTodoList(updatedTodoListData);
+    setRemoveTodoModalVisible(false);
     navigation.navigate('Home');
   };
 
   const handlePressRemoveTodoCancel = () => {
-    setModalData(prevState => ({
-      ...prevState,
-      isRemoveTodoVisible: false,
-    }));
+    setRemoveTodoModalVisible(false);
   };
 
   const renderTopText = () => {
@@ -84,28 +70,33 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
   };
 
   return (
-    <View style={{width: '100%'}}>
+    <CustomModalWrapper>
       <Modal visible={true} transparent={true}>
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          }}>
+        <StyledView>
           <ModalWrapper>
             <ModalTopWrapper>{renderTopText()}</ModalTopWrapper>
             <ModalBottomWrapper variant={variant}>
               {renderBottomText()}
             </ModalBottomWrapper>
           </ModalWrapper>
-        </View>
+        </StyledView>
       </Modal>
-    </View>
+    </CustomModalWrapper>
   );
 };
 
 export default CustomModal;
+
+const CustomModalWrapper = styled(View)`
+  width: 100%;
+`;
+
+const StyledView = styled(View)`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+`;
 
 const ModalWrapper = styled(View)`
   width: 246px;

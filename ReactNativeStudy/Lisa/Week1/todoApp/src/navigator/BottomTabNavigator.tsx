@@ -7,44 +7,57 @@ import ThemeIcon from 'assets/icons/ThemeIcon';
 import Home from 'screens/Home';
 import Settings from 'screens/Settings';
 import {colorState} from 'libs/store/color';
+import {ParamListBase, RouteProp} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
   const colorData = useRecoilValue(colorState);
 
-  return (
-    <Tab.Navigator
-      screenOptions={({route}) => ({
-        tabBarIcon: ({focused}) => {
-          const iconColor = focused ? colorData.color : 'dark_gray';
+  const getTabBarIcon = (routeName: string, focused: boolean) => {
+    const iconColor = focused ? colorData.color : 'dark_gray';
 
-          return route.name === 'Home' ? (
-            <HomeIcon fill={iconColor} />
-          ) : (
-            route.name === 'Settings' && <ThemeIcon fill={iconColor} />
-          );
-        },
-        tabBarActiveTintColor: theme.palette[colorData.color],
-        tabBarInactiveTintColor: theme.palette.dark_gray,
-        tabBarStyle: {
-          height: 61,
-          paddingTop: 10.5,
-          paddingBottom: 10.5,
-        },
-        headerStyle: {
-          backgroundColor: theme.palette.gray,
-          height: 48,
-        },
-        headerTitleAlign: 'center',
-        headerTintColor: theme.palette[colorData.color],
-        headerTitleStyle: {
-          fontFamily: 'Pretendard',
-          fontSize: 18,
-          lineHeight: 25.2,
-          color: theme.palette[colorData.color],
-        },
-      })}>
+    switch (routeName) {
+      case 'Home':
+        return <HomeIcon fill={iconColor} />;
+      case 'Settings':
+        return <ThemeIcon fill={iconColor} />;
+      default:
+        return null;
+    }
+  };
+
+  const screenOptions = ({
+    route,
+  }: {
+    route: RouteProp<ParamListBase, string>;
+  }) => ({
+    tabBarIcon: ({focused}: {focused: boolean}) =>
+      getTabBarIcon(route.name, focused),
+
+    tabBarActiveTintColor: theme.palette[colorData.color],
+    tabBarInactiveTintColor: theme.palette.dark_gray,
+    tabBarStyle: {
+      height: 61,
+      paddingTop: 10.5,
+      paddingBottom: 10.5,
+    },
+    headerStyle: {
+      backgroundColor: theme.palette.gray,
+      height: 48,
+    },
+    headerTitleAlign: 'center' as const,
+    headerTintColor: theme.palette[colorData.color],
+    headerTitleStyle: {
+      fontFamily: 'Pretendard',
+      fontSize: 18,
+      lineHeight: 25.2,
+      color: theme.palette[colorData.color],
+    },
+  });
+
+  return (
+    <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
         name="Home"
         component={Home}

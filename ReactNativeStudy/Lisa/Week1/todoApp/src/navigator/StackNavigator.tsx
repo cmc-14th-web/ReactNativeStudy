@@ -5,12 +5,12 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigator from './BottomTabNavigator';
 import styled from 'styled-components/native';
-import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {useRecoilValue} from 'recoil';
 
 import AddTodo from 'screens/AddTodo';
 import ArrowBackIcon from 'assets/icons/ArrowBackIcon';
 import {colorState} from 'libs/store/color';
-import {modalState} from 'libs/store/modal';
+import useSetModalData from 'libs/hooks/useSetModalData';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -23,31 +23,48 @@ const Stack = createStackNavigator<RootStackParamList>();
 const StackNavigator = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const colorData = useRecoilValue(colorState);
-  const setModalData = useSetRecoilState(modalState);
+  const {setAddTodoModalVisible} = useSetModalData();
 
   const handlePressCompleteButton = () => {
-    setModalData(prevState => ({
-      ...prevState,
-      isAddTodoVisible: true,
-    }));
+    setAddTodoModalVisible(true);
+  };
+
+  const screenOptions = () => ({
+    headerStyle: {
+      backgroundColor: theme.palette.gray,
+      height: 48,
+    },
+    headerTitleAlign: 'center' as const,
+    headerTintColor: theme.palette[colorData.color],
+    headerTitleStyle: {
+      fontFamily: 'Pretendard',
+      fontSize: 18,
+      color: theme.palette[colorData.color],
+      lineHeight: 25.2,
+    },
+  });
+
+  const headerLeftChildren = () => (
+    <StyledIconButton onPress={() => navigation.navigate('Home')}>
+      <ArrowBackIcon fill={colorData.color} />
+    </StyledIconButton>
+  );
+
+  const headerRightChildren = () => (
+    <StyledTextButton onPress={handlePressCompleteButton}>
+      <StyledText textColor={colorData.color}>완료</StyledText>
+    </StyledTextButton>
+  );
+
+  const headerRightContainerStyle = {
+    marginTop: 'auto' as const,
+    marginBottom: 'auto' as const,
+    padding: 0,
+    margin: 0,
   };
 
   return (
-    <Stack.Navigator
-      screenOptions={() => ({
-        headerStyle: {
-          backgroundColor: theme.palette.gray,
-          height: 48,
-        },
-        headerTitleAlign: 'center',
-        headerTintColor: theme.palette[colorData.color],
-        headerTitleStyle: {
-          fontFamily: 'Pretendard',
-          fontSize: 18,
-          color: theme.palette[colorData.color],
-          lineHeight: 25.2,
-        },
-      })}>
+    <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
         name="BottomTabNavigator"
         component={BottomTabNavigator}
@@ -58,22 +75,9 @@ const StackNavigator = () => {
         component={AddTodo}
         options={{
           title: '할일을 추가해주세요!',
-          headerLeft: () => (
-            <StyledIconButton onPress={() => navigation.navigate('Home')}>
-              <ArrowBackIcon fill={colorData.color} />
-            </StyledIconButton>
-          ),
-          headerRight: () => (
-            <StyledTextButton onPress={handlePressCompleteButton}>
-              <StyledText textColor={colorData.color}>완료</StyledText>
-            </StyledTextButton>
-          ),
-          headerRightContainerStyle: {
-            marginTop: 'auto',
-            marginBottom: 'auto',
-            padding: 0,
-            margin: 0,
-          },
+          headerLeft: headerLeftChildren,
+          headerRight: headerRightChildren,
+          headerRightContainerStyle: headerRightContainerStyle,
         }}
       />
     </Stack.Navigator>
