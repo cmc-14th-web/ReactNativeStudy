@@ -9,7 +9,7 @@ export const HomeSVG = ({
 }: {
   focused: boolean;
   color: string;
-}) => <Home width={24} height={24} color={focused ? color : colors.darkGray} />;
+}) => <Home width={28} height={28} color={focused ? color : colors.darkGray} />;
 
 export const SettingSVG = ({
   focused,
@@ -18,5 +18,5 @@ export const SettingSVG = ({
   focused: boolean;
   color: string;
 }) => (
-  <Setting width={24} height={24} color={focused ? color : colors.darkGray} />
+  <Setting width={28} height={28} color={focused ? color : colors.darkGray} />
 );

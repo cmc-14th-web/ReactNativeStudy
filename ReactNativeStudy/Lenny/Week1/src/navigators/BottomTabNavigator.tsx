@@ -17,7 +17,6 @@ import Add from '../assets/icons/add.svg';
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = ({navigation}: any) => {
-  // todo : BottomTab에서 +버튼 클릭 시 Stack navigation 활성화
   const {color} = useStore();
 
   return (
@@ -36,6 +35,7 @@ const BottomTabNavigator = ({navigation}: any) => {
             tabBarIcon: HomeSvg,
             tabBarActiveTintColor: color,
             tabBarInactiveTintColor: colors.darkGray,
+            tabBarLabelStyle: {fontSize: 12},
             headerTitle: 'Today',
           }}
         />
@@ -46,6 +46,7 @@ const BottomTabNavigator = ({navigation}: any) => {
             tabBarIcon: SettingSvg,
             tabBarActiveTintColor: color,
             tabBarInactiveTintColor: colors.darkGray,
+            tabBarLabelStyle: {fontSize: 12},
           }}
         />
       </Tab.Navigator>
