@@ -3,12 +3,15 @@ import Svg, { Path, SvgProps } from "react-native-svg";
 
 type SvgIconProps = {
   label: SvgLabelType;
+  size?: number;
 } & SvgProps;
 
-export default function SvgIcon({ label, ...props }: SvgIconProps) {
+export default function SvgIcon({ label, size, ...props }: SvgIconProps) {
   return (
     <Svg
       {...props}
+      width={size ?? 24}
+      height={size ?? 24}
       viewBox="0 0 24 24"
       // xmlns="http://www.w3.org/2000/svg"
     >
