@@ -21,6 +21,7 @@ export default function Tabs({ navigation }) {
           backgroundColor: Colors.backgroundColor,
         },
         headerTintColor: primaryColor,
+        tabBarActiveTintColor: primaryColor,
       }}
     >
       <Tab.Screen
