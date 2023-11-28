@@ -1,40 +1,21 @@
 import {FlatList, View} from 'react-native';
 import styled from 'styled-components';
+import {useRecoilValue} from 'recoil';
 
 import Spacing from 'components/atoms/Spacing';
 import TodoItem from 'components/atoms/TodoItem';
-
-const todoList = [
-  {
-    id: '1',
-    todo: '아침 먹기',
-    isComplete: false,
-  },
-  {
-    id: '2',
-    todo: '점심 먹기',
-    isComplete: true,
-  },
-  {
-    id: '3',
-    todo: '저녁 먹기',
-    isComplete: false,
-  },
-  {
-    id: '4',
-    todo: '아침 먹기',
-    isComplete: false,
-  },
-];
+import {todoListState} from 'libs/store/todoList';
 
 const Home = () => {
+  const todoListData = useRecoilValue(todoListState);
+
   return (
     <HomeWrapper>
       <FlatList
-        keyExtractor={item => item.id}
-        data={todoList}
+        keyExtractor={item => String(item.id)}
+        data={todoListData.todo}
         renderItem={({item}) => (
-          <TodoItem todo={item.todo} isComplete={item.isComplete} />
+          <TodoItem id={item.id} todo={item.todo} done={item.done} />
         )}
         ItemSeparatorComponent={() => <Spacing />}
       />

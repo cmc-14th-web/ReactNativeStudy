@@ -2,41 +2,42 @@ import CheckIcon from 'assets/icons/CheckIcon';
 import CircleIcon from 'assets/icons/CircleIcon';
 import TrashIcon from 'assets/icons/TrashIcon';
 import {colorState} from 'libs/store/color';
-import {TouchableOpacity, Text} from 'react-native';
+import {View, Text} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components';
 import {KeyOfPalette, theme} from 'styles';
 
-type TodoItemPropsType = {
+export type TodoItemPropsType = {
+  id: number;
   todo: string;
-  isComplete: boolean;
+  done: boolean;
 };
 
-const TodoItem = ({todo, isComplete}: TodoItemPropsType) => {
+const TodoItem = ({todo, done, id}: TodoItemPropsType) => {
   const colorData = useRecoilValue(colorState);
 
   const renderIcon = () => {
-    if (isComplete) {
-      return <CheckIcon />;
+    if (done) {
+      return <CheckIcon id={id} />;
     } else {
-      return <CircleIcon fill={colorData.color} />;
+      return <CircleIcon fill={colorData.color} id={id} />;
     }
   };
 
   return (
-    <TodoItemWrapper isComplete={isComplete} color={colorData.color}>
+    <TodoItemWrapper done={done} color={colorData.color}>
       {renderIcon()}
-      <StyledText isComplete={isComplete}>{todo}</StyledText>
-      <TrashIcon fill={isComplete ? 'white' : colorData.color} />
+      <StyledText done={done}>{todo}</StyledText>
+      <TrashIcon fill={done ? 'white' : colorData.color} id={id} />
     </TodoItemWrapper>
   );
 };
 
 export default TodoItem;
 
-const TodoItemWrapper = styled(TouchableOpacity)<{
+const TodoItemWrapper = styled(View)<{
   color: KeyOfPalette;
-  isComplete: boolean;
+  done: boolean;
 }>`
   height: 56px;
   border-radius: 20px;
@@ -45,13 +46,12 @@ const TodoItemWrapper = styled(TouchableOpacity)<{
   align-items: center;
   gap: 10px;
   padding: 16px 20px;
-  background-color: ${({isComplete, color}) =>
-    isComplete ? theme.palette[color] : theme.palette.white};
+  background-color: ${({done, color}) =>
+    done ? theme.palette[color] : theme.palette.white};
 `;
 
-const StyledText = styled(Text)<{isComplete: boolean}>`
+const StyledText = styled(Text)<{done: boolean}>`
   ${theme.typo.body};
-  color: ${({isComplete}) =>
-    isComplete ? theme.palette.white : theme.palette.black};
+  color: ${({done}) => (done ? theme.palette.white : theme.palette.black)};
   flex: 1;
 `;
