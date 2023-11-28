@@ -1,5 +1,5 @@
 import {createStackNavigator} from '@react-navigation/stack';
-import {theme} from 'styles';
+import {KeyOfPalette, theme} from 'styles';
 import {Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -8,11 +8,14 @@ import BottomTabNavigator from './BottomTabNavigator';
 import AddTodo from 'screens/AddTodo';
 import styled from 'styled-components';
 import ArrowBackIcon from 'assets/icons/ArrowBackIcon';
+import {useRecoilValue} from 'recoil';
+import {colorState} from 'libs/store/color';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   const navigation = useNavigation();
+  const colorData = useRecoilValue(colorState);
 
   return (
     <Stack.Navigator
@@ -22,11 +25,11 @@ const StackNavigator = () => {
           height: 48,
         },
         headerTitleAlign: 'center',
-        headerTintColor: theme.palette.orange,
+        headerTintColor: theme.palette[colorData.color],
         headerTitleStyle: {
           fontFamily: 'Pretendard',
           fontSize: 18,
-          color: theme.palette.orange,
+          color: theme.palette[colorData.color],
           lineHeight: 25.2,
         },
       })}>
@@ -42,12 +45,12 @@ const StackNavigator = () => {
           title: '할일을 추가해주세요!',
           headerLeft: () => (
             <StyledIconButton onPress={() => navigation.navigate('Home')}>
-              <ArrowBackIcon />
+              <ArrowBackIcon fill={colorData.color} />
             </StyledIconButton>
           ),
           headerRight: () => (
             <StyledTextButton>
-              <StyledText>완료</StyledText>
+              <StyledText textColor={colorData.color}>완료</StyledText>
             </StyledTextButton>
           ),
           headerRightContainerStyle: {
@@ -72,7 +75,7 @@ const StyledTextButton = styled(TouchableOpacity)`
   margin-right: 20px;
 `;
 
-const StyledText = styled(Text)`
+const StyledText = styled(Text)<{textColor: KeyOfPalette}>`
   ${theme.typo.title};
-  color: ${theme.palette.orange};
+  color: ${({textColor}) => theme.palette[textColor]};
 `;

@@ -1,18 +1,27 @@
 import Color from 'components/Color';
+import {colorState} from 'libs/store/color';
 import {View, Text} from 'react-native';
+import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
-import {theme} from 'styles';
+import {theme, KeyOfPalette} from 'styles';
 import {colorList} from 'utils/colorList';
 
 const Settings = () => {
+  const setColorData = useSetRecoilState(colorState);
+
   return (
     <>
       <TextWrapper>
         <StyledText>색상을 선택해주세요.</StyledText>
       </TextWrapper>
       <ColorWrapper>
-        {colorList.map(color => (
-          <Color color={color} />
+        {colorList.map((colorData: KeyOfPalette) => (
+          <Color
+            color={colorData}
+            onClick={() =>
+              setColorData(prevData => ({...prevData, color: colorData}))
+            }
+          />
         ))}
       </ColorWrapper>
     </>

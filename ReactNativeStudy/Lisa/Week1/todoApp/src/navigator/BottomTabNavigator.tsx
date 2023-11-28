@@ -5,15 +5,20 @@ import HomeIcon from 'assets/icons/HomeIcon';
 import ThemeIcon from 'assets/icons/ThemeIcon';
 import Home from 'screens/Home';
 import Settings from 'screens/Settings';
+import {useRecoilValue} from 'recoil';
+import {colorState} from 'libs/store/color';
+import {useEffect} from 'react';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const colorData = useRecoilValue(colorState);
+
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
         tabBarIcon: ({focused}) => {
-          const iconColor = focused ? 'orange' : 'dark_gray';
+          const iconColor = focused ? colorData.color : 'dark_gray';
 
           return route.name === 'Home' ? (
             <HomeIcon fill={iconColor} />
@@ -21,7 +26,7 @@ const BottomTabNavigator = () => {
             route.name === 'Settings' && <ThemeIcon fill={iconColor} />
           );
         },
-        tabBarActiveTintColor: theme.palette.orange,
+        tabBarActiveTintColor: theme.palette[colorData.color],
         tabBarInactiveTintColor: theme.palette.dark_gray,
         tabBarStyle: {
           height: 61,
@@ -33,12 +38,12 @@ const BottomTabNavigator = () => {
           height: 48,
         },
         headerTitleAlign: 'center',
-        headerTintColor: theme.palette.orange,
+        headerTintColor: theme.palette[colorData.color],
         headerTitleStyle: {
           fontFamily: 'Pretendard',
           fontSize: 18,
           lineHeight: 25.2,
-          color: theme.palette.orange,
+          color: theme.palette[colorData.color],
         },
       })}>
       <Tab.Screen
