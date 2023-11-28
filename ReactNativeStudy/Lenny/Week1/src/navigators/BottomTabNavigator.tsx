@@ -10,20 +10,19 @@ import Setting from '../screens/Setting';
 
 import HomeSvg from '../assets/icons/home.svg';
 import SettingSvg from '../assets/icons/setting.svg';
+import {useStore} from '../store/store';
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = (props: any) => {
+const BottomTabNavigator = ({route}: any) => {
   // todo : BottomTab에서 +버튼 클릭 시 Stack navigation 활성화
-  const currentColor = props.currentColor;
-
-  const PassParam = () => <Setting setCurrentColor={props.setCurrentColor} />;
+  const {color} = useStore();
 
   return (
     <Tab.Navigator
       initialRouteName={BottomTabMenu.Home}
       screenOptions={{
-        headerTintColor: currentColor,
+        headerTintColor: color,
         headerShadowVisible: false,
         headerStyle: {backgroundColor: colors.gray},
       }}>
@@ -32,16 +31,16 @@ const BottomTabNavigator = (props: any) => {
         component={Home}
         options={{
           tabBarIcon: HomeSvg,
-          tabBarActiveTintColor: currentColor,
+          tabBarActiveTintColor: color,
           tabBarInactiveTintColor: colors.darkGray,
         }}
       />
       <Tab.Screen
         name={BottomTabMenu.Setting}
-        component={PassParam}
+        component={Setting}
         options={{
           tabBarIcon: SettingSvg,
-          tabBarActiveTintColor: currentColor,
+          tabBarActiveTintColor: color,
           tabBarInactiveTintColor: colors.darkGray,
         }}
       />

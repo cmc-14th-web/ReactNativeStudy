@@ -7,8 +7,9 @@ import {
   View,
 } from 'react-native';
 import colors from '../styles/color';
+import {useStore} from '../store/store';
 
-export default function Setting(props: any) {
+export default function Setting() {
   const themeColors: string[] = [
     colors.orange,
     colors.green,
@@ -16,11 +17,10 @@ export default function Setting(props: any) {
     colors.purple,
     colors.pink,
   ];
-  const setCurrentColor = props.setCurrentColor;
-
+  const {setColor} = useStore();
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{paddingHorizontal: 32, paddingVertical: 16, fontSize: 18}}>
+      <Text style={{paddingHorizontal: 32, paddingVertical: 16}}>
         색상을 선택해주세요.
       </Text>
       <View
@@ -32,7 +32,7 @@ export default function Setting(props: any) {
         }}>
         {themeColors.map((themeColor: string) => (
           <TouchableOpacity
-            onPress={() => setCurrentColor(themeColor)}
+            onPress={() => setColor(themeColor)}
             activeOpacity={0.5}
             key={`color-${themeColor}`}
             style={{
