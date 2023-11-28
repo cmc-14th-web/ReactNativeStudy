@@ -6,7 +6,7 @@ type ModalStateType = {
 };
 
 const initialState: ModalStateType = {
-  isRemoveTodoVisible: true,
+  isRemoveTodoVisible: false,
   isAddTodoVisible: false,
 };
 

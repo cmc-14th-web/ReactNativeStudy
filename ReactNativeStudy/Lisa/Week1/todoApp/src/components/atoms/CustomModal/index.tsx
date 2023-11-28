@@ -3,7 +3,7 @@ import {modalState} from 'libs/store/modal';
 import {todoListState} from 'libs/store/todoList';
 import {View, Modal, Text, TouchableOpacity} from 'react-native';
 import {useRecoilState, useSetRecoilState} from 'recoil';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 
 type CustomModalVariant = 'removeTodo' | 'addTodo';
 

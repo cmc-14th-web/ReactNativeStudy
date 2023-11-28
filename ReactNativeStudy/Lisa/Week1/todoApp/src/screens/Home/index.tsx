@@ -1,7 +1,6 @@
 import {FlatList, View} from 'react-native';
 import styled from 'styled-components';
 import {useRecoilValue} from 'recoil';
-import {useEffect} from 'react';
 
 import Spacing from 'components/atoms/Spacing';
 import TodoItem from 'components/atoms/TodoItem';

@@ -10,11 +10,12 @@ const BottomTabFloatingButton = () => {
   const navigation = useNavigation();
   const colorData = useRecoilValue(colorState);
 
+  const handlePress = () => {
+    navigation.navigate('AddTodo');
+  };
+
   return (
-    <StyledButtonWrapper
-      onPress={() => {
-        navigation.navigate('AddTodo');
-      }}>
+    <StyledButtonWrapper onPress={handlePress}>
       <AddIcon fill={colorData.color} />
     </StyledButtonWrapper>
   );

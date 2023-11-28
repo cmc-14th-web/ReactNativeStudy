@@ -4,7 +4,7 @@ import TrashIcon from 'assets/icons/TrashIcon';
 import {colorState} from 'libs/store/color';
 import {View, Text} from 'react-native';
 import {useRecoilValue} from 'recoil';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import {KeyOfPalette, theme} from 'styles';
 
 export type TodoItemPropsType = {
@@ -35,10 +35,7 @@ const TodoItem = ({todo, done, id}: TodoItemPropsType) => {
 
 export default TodoItem;
 
-const TodoItemWrapper = styled(View)<{
-  color: KeyOfPalette;
-  done: boolean;
-}>`
+const TodoItemWrapper = styled(View)<{color: KeyOfPalette; done: boolean}>`
   height: 56px;
   border-radius: 20px;
   display: inline-flex;
