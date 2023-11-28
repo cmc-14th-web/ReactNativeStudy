@@ -3,18 +3,37 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BottomTabNavigator from './BottomTabNavigator';
 import AddTodo from '../screens/AddTodo/AddTodo';
 import {StackMenu} from '../constants/app/menu';
+import {useStore} from '../store/store';
+import BackButton from '../screens/AddTodo/BackButton';
+import CompleteButton from '../screens/AddTodo/CompleteButton';
+import colors from '../styles/color';
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
+  const {color} = useStore();
   return (
     <Stack.Navigator>
       <Stack.Screen
         name={StackMenu.BottomTabNavigator}
         component={BottomTabNavigator}
-        options={{headerShown: false}}
+        options={{
+          headerShown: false,
+        }}
       />
-      <Stack.Screen name={StackMenu.AddTodo} component={AddTodo} />
+      <Stack.Screen
+        name={StackMenu.AddTodo}
+        component={AddTodo}
+        options={{
+          headerTitle: '할일을 추가해주세요!',
+          headerTitleStyle: {color: color, fontSize: 18},
+          headerBackTitleVisible: false,
+          headerStyle: {backgroundColor: colors.gray},
+          headerShadowVisible: false,
+          headerLeft: BackButton,
+          headerRight: CompleteButton,
+        }}
+      />
     </Stack.Navigator>
   );
 };
