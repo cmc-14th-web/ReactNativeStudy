@@ -4,6 +4,6 @@ export const enum StackMenu {
 }
 
 export const enum BottomTabMenu {
-  Home = 'Home',
-  Setting = 'Setting',
+  Home = '홈',
+  Setting = '설정',
 }
