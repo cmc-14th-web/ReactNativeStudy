@@ -1,12 +1,12 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
 import ScreenLayout from '../layout/screenLayout';
 import Check from '../assets/check.svg';
 import Trash from '../assets/trash.svg';
 import Circle from '../assets/circle.svg';
-import { itemComplete, itemDelete } from '../store/itemSlice';
+import {itemComplete, itemDelete} from '../store/itemSlice';
 
 const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
   const mainColor = useSelector((state: RootState) => state.color.mainColor);
@@ -19,7 +19,17 @@ const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
     dispatch(itemComplete({title: title, completed: true}));
   };
   const handleDelete = () => {
-    dispatch(itemDelete({title: title}));
+    Alert.alert('정말 삭제하시겠습니끼?', '', [
+      {
+        text: '취소',
+      },
+      {
+        text: '확인',
+        onPress: () => {
+          dispatch(itemDelete({title: title}));
+        },
+      },
+    ]);
   };
   return (
     <View
@@ -44,10 +54,10 @@ const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
           </TouchableOpacity>
         ) : (
           <TouchableOpacity onPress={handlePressCircle}>
-            <Circle />
+            <Circle color={mainColor} />
           </TouchableOpacity>
         )}
-        <Text style={{color: completed ? 'white' : mainColor}}>{title}</Text>
+        <Text style={{color: completed ? 'white' : 'black'}}>{title}</Text>
       </View>
       <TouchableOpacity onPress={handleDelete}>
         <Trash color={completed ? 'white' : mainColor} />
@@ -61,8 +71,6 @@ const Home = () => {
   return (
     <ScreenLayout>
       <View style={{gap: 16}}>
-        <ItemBox title="example" completed={true} />
-        <ItemBox title="example" completed={false} />
         {items &&
           items.map(item => (
             <ItemBox title={item.title} completed={item.completed} />

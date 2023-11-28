@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 import colorSlice from './colorSlice';
 import itemSlice from './itemSlice';
+import textSlice from './textSlice';
 
 const store = configureStore({
   reducer: {
     color: colorSlice.reducer,
     item: itemSlice.reducer,
+    text: textSlice.reducer,
   },
 });
 

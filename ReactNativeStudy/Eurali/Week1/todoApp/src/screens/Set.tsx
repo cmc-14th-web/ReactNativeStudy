@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Alert} from 'react-native';
+import {View, Text} from 'react-native';
 import ScreenLayout from '../layout/screenLayout';
 import color from '../constants/color';
 import {useDispatch} from 'react-redux';
@@ -9,7 +9,6 @@ import {colorChange} from '../store/colorSlice';
 const ColorPick = ({color}: {color: string}) => {
   const dispatch = useDispatch();
   const handlePress = () => {
-    //Alert.alert('pressed!');
     dispatch(colorChange(color));
   };
   return (

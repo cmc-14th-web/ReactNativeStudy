@@ -10,10 +10,7 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  todoItems: [
-    {title: 'example123',
-    completed: false},
-  ],
+  todoItems: [],
 };
 const itemSlice = createSlice({
   name: 'item',
