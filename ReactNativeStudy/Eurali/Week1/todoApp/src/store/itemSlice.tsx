@@ -10,7 +10,10 @@ type InitialState = {
 };
 
 const initialState: InitialState = {
-  todoItems: [],
+  todoItems: [
+    {title: 'example123',
+    completed: false},
+  ],
 };
 const itemSlice = createSlice({
   name: 'item',
@@ -24,7 +27,7 @@ const itemSlice = createSlice({
         item => item.title === action.payload.title,
       );
       if (itemToComplete) {
-        itemToComplete.completed = true;
+        itemToComplete.completed = action.payload.completed;
       }
     },
     itemDelete: (state, action) => {
