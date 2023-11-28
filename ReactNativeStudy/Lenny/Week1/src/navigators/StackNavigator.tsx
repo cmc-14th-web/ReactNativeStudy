@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BottomTabNavigator from './BottomTabNavigator';
-import AddTodo from '../screens/AddTodo';
+import AddTodo from '../screens/AddTodo/AddTodo';
 import {StackMenu} from '../constants/app/menu';
 
 const Stack = createNativeStackNavigator();
