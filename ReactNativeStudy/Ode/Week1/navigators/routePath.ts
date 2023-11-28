@@ -1,8 +1,8 @@
 const RoutePath = {
   MainTab: "MainTab",
   CreateTodoScreen: "CreateTodoScreen",
-  HomeScreen: "HomeScreen",
-  SettingScreen: "SettingScreen",
+  HomeScreen: "홈",
+  SettingScreen: "설정",
 };
 
 export default RoutePath;
