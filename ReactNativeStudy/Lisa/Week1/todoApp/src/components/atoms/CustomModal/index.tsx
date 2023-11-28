@@ -40,6 +40,15 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
     setRemoveTodoModalVisible(false);
   };
 
+  const handleCloseModal = () => {
+    if (variant === 'removeTodo') {
+      setRemoveTodoModalVisible(false);
+    } else {
+      handlePressAddTodoConfirm();
+      setAddTodoModalVisible(false);
+    }
+  };
+
   const renderTopText = () => {
     if (variant === 'addTodo') {
       return <StyledText>할일이 추가되었습니다!</StyledText>;
@@ -71,8 +80,11 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
 
   return (
     <CustomModalWrapper>
-      <Modal visible={true} transparent={true}>
-        <StyledView>
+      <Modal
+        visible={true}
+        transparent={true}
+        onRequestClose={handleCloseModal}>
+        <StyledView onPress={handleCloseModal}>
           <ModalWrapper>
             <ModalTopWrapper>{renderTopText()}</ModalTopWrapper>
             <ModalBottomWrapper variant={variant}>
@@ -91,7 +103,7 @@ const CustomModalWrapper = styled(View)`
   width: 100%;
 `;
 
-const StyledView = styled(View)`
+const StyledView = styled(TouchableOpacity)`
   flex: 1;
   justify-content: center;
   align-items: center;
