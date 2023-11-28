@@ -1,9 +1,10 @@
-import Color from 'components/Color';
-import {colorState} from 'libs/store/color';
 import {View, Text} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import styled from 'styled-components';
 import {theme, KeyOfPalette} from 'styles';
+
+import Color from 'components/Color';
+import {colorState} from 'libs/store/color';
 import {colorList} from 'utils/colorList';
 
 const Settings = () => {

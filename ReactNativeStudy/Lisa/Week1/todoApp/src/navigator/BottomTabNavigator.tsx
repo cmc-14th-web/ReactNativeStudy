@@ -1,12 +1,12 @@
 import {theme} from 'styles';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {useRecoilValue} from 'recoil';
-import {colorState} from 'libs/store/color';
 
 import HomeIcon from 'assets/icons/HomeIcon';
 import ThemeIcon from 'assets/icons/ThemeIcon';
 import Home from 'screens/Home';
 import Settings from 'screens/Settings';
+import {colorState} from 'libs/store/color';
 
 const Tab = createBottomTabNavigator();
 

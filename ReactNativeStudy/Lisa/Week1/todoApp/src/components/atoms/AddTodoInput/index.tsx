@@ -1,10 +1,10 @@
-import {TextInput} from 'react-native';
 import {useRecoilState} from 'recoil';
+import {useEffect} from 'react';
+import {TextInput} from 'react-native';
 import styled from 'styled-components';
 import {theme} from 'styles/theme';
 
 import {todoListState} from 'libs/store/todoList';
-import {useEffect} from 'react';
 
 const AddTodoInput = () => {
   const [todoListData, setTodoListData] = useRecoilState(todoListState);

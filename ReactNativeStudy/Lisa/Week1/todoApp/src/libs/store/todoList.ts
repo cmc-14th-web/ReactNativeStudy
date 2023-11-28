@@ -1,5 +1,6 @@
-import {TodoItemPropsType} from 'components/atoms/TodoItem';
 import {atom} from 'recoil';
+
+import {TodoItemPropsType} from 'components/atoms/TodoItem';
 
 type TodoListStateType = {
   todo: TodoItemPropsType[];

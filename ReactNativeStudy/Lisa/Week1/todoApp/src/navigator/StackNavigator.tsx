@@ -4,11 +4,11 @@ import {Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigator from './BottomTabNavigator';
+import styled from 'styled-components/native';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
 
 import AddTodo from 'screens/AddTodo';
-import styled from 'styled-components/native';
 import ArrowBackIcon from 'assets/icons/ArrowBackIcon';
-import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {colorState} from 'libs/store/color';
 import {modalState} from 'libs/store/modal';
 

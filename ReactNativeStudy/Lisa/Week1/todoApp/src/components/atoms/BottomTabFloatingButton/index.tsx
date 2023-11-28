@@ -1,9 +1,9 @@
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
+import {useRecoilValue} from 'recoil';
 import {useNavigation} from '@react-navigation/native';
 
 import AddIcon from 'assets/icons/AddIcon';
-import {useRecoilValue} from 'recoil';
 import {colorState} from 'libs/store/color';
 
 const BottomTabFloatingButton = () => {

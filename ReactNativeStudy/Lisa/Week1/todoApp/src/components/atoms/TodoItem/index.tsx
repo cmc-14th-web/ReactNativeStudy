@@ -1,11 +1,12 @@
-import CheckIcon from 'assets/icons/CheckIcon';
-import CircleIcon from 'assets/icons/CircleIcon';
-import TrashIcon from 'assets/icons/TrashIcon';
-import {colorState} from 'libs/store/color';
 import {View, Text} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 import {KeyOfPalette, theme} from 'styles';
+
+import CheckIcon from 'assets/icons/CheckIcon';
+import CircleIcon from 'assets/icons/CircleIcon';
+import TrashIcon from 'assets/icons/TrashIcon';
+import {colorState} from 'libs/store/color';
 
 export type TodoItemPropsType = {
   id: number;
