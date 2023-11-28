@@ -15,9 +15,11 @@ const CircleIcon = ({
   const [todoListData, setTodoListData] = useRecoilState(todoListState);
 
   const handlePressCircleIcon = () => {
-    const updatedTodoList = todoListData.todo.map(todo =>
-      todo.id === id ? {...todo, done: true} : todo,
-    );
+    const updatedTodoList = Array.isArray(todoListData.todo)
+      ? todoListData.todo.map(todo =>
+          todo.id === id ? {...todo, done: true} : todo,
+        )
+      : [];
 
     setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
   };

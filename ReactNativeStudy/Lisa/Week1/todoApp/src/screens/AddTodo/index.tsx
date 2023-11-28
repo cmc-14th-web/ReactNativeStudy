@@ -1,12 +1,18 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
+import styled from 'styled-components';
+
+import AddTodoInput from 'components/atoms/AddTodoInput';
 
 const AddTodo = () => {
   return (
-    <View>
-      <Text>Add Todo Page</Text>
-    </View>
+    <AddTodoWrapper>
+      <AddTodoInput />
+    </AddTodoWrapper>
   );
 };
 
 export default AddTodo;
+
+const AddTodoWrapper = styled(View)`
+  padding: 19px 32px;
+`;

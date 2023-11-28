@@ -8,9 +8,11 @@ const CheckIcon = ({id}: {id: number}) => {
   const [todoListData, setTodoListData] = useRecoilState(todoListState);
 
   const handlePressCheckIcon = () => {
-    const updatedTodoList = todoListData.todo.map(todo =>
-      todo.id === id ? {...todo, done: false} : todo,
-    );
+    const updatedTodoList = Array.isArray(todoListData.todo)
+      ? todoListData.todo.map(todo =>
+          todo.id === id ? {...todo, done: false} : todo,
+        )
+      : [];
 
     setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
   };

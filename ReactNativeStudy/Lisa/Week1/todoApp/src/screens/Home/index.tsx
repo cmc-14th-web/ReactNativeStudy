@@ -5,9 +5,14 @@ import {useRecoilValue} from 'recoil';
 import Spacing from 'components/atoms/Spacing';
 import TodoItem from 'components/atoms/TodoItem';
 import {todoListState} from 'libs/store/todoList';
+import {useEffect} from 'react';
 
 const Home = () => {
   const todoListData = useRecoilValue(todoListState);
+
+  useEffect(() => {
+    console.log(todoListData.todo);
+  }, [todoListData.todo]);
 
   return (
     <HomeWrapper>

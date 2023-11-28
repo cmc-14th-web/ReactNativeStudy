@@ -15,7 +15,9 @@ const TrashIcon = ({
   const [todoListData, setTodoListData] = useRecoilState(todoListState);
 
   const handlePressTrashIcon = () => {
-    const updatedTodoList = todoListData.todo.filter(todo => todo.id !== id);
+    const updatedTodoList = Array.isArray(todoListData.todo)
+      ? todoListData.todo.filter(todo => todo.id !== id)
+      : [];
 
     setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
   };
