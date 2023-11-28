@@ -13,6 +13,7 @@ export default function SettingScreen() {
       <View style={{ flexDirection: "row", gap: 28, justifyContent: "center", padding: 16 }}>
         {Object.entries(Colors.main).map(([colorCode, color]) => (
           <TouchableOpacity
+            key={colorCode}
             onPress={() => updatePrimaryColor(colorCode as MainColorCodeKeys)}
             style={{ borderRadius: 100, width: 30, height: 30, backgroundColor: color }}
           />
