@@ -31,7 +31,9 @@ const AddStackNavigation = () => {
             fontSize: 16,
           },
           headerShadowVisible: false,
-          headerLeft: () => <BackArrow color={mainColor} style={{marginLeft: 20}}/>,
+          headerLeft: () => (
+            <BackArrow color={mainColor} style={{marginLeft: 20}} />
+          ),
           headerRight: () => (
             <Text style={{marginRight: 20, color: mainColor}}> 완료 </Text>
           ),

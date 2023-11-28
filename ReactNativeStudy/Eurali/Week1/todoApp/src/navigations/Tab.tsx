@@ -27,7 +27,7 @@ const TabNavigation = () => {
         component={HomeStackNavigation}
         options={{
           headerShown: false,
-          tabBarIcon: ({color, size}) => <Home color={color} />,
+          tabBarIcon: ({color}) => <Home color={color} />,
         }}
       />
       <Tab.Screen
@@ -36,7 +36,7 @@ const TabNavigation = () => {
         options={{
           tabBarLabel: () => null,
           headerShown: false,
-          tabBarIcon: ({color, size}) => <Add color={mainColor} />,
+          tabBarIcon: () => <Add color={mainColor} />,
           tabBarStyle: {
             display: 'none',
           },
@@ -47,7 +47,7 @@ const TabNavigation = () => {
         component={SetStackNavigation}
         options={{
           headerShown: false,
-          tabBarIcon: ({color, size}) => <Set color={color} />,
+          tabBarIcon: ({color}) => <Set color={color} />,
         }}
       />
     </Tab.Navigator>

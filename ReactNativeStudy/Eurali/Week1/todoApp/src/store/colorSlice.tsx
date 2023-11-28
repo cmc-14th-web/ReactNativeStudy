@@ -9,7 +9,7 @@ const initialState: InitialState = {
   mainColor: color.orange,
 };
 const colorSlice = createSlice({
-  name: 'counter',
+  name: 'color',
   initialState,
   reducers: {
     colorChange: (state, action) => {
