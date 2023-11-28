@@ -6,13 +6,15 @@ const Colors = {
   darkGray: "#888888",
   black: "#000000",
 
-  pink: "#FF7474",
-  orange: "#FF8F50",
-  green: "#57BB73",
-  blue: "#5061FF",
-  purple: "#C750FF",
+  main: {
+    orange: "#FF8F50",
+    green: "#57BB73",
+    blue: "#5061FF",
+    purple: "#C750FF",
+    pink: "#FF7474",
+  },
 };
 
 export default Colors;
 
-export type ColorCodes = keyof typeof Colors;
+export type MainColorCodeKeys = keyof typeof Colors.main;

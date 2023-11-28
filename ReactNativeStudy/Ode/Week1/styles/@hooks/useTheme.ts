@@ -1,14 +1,14 @@
 import { createContext, useContext } from "react";
-import Colors, { ColorCodes } from "../colors";
+import Colors, { MainColorCodeKeys } from "../colors";
 
 type ThemeContextType = {
   primaryColor: string;
-  togglePrimaryColor: (color: ColorCodes) => void;
+  updatePrimaryColor: (color: MainColorCodeKeys) => void;
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
-  primaryColor: Colors.orange,
-  togglePrimaryColor: () => {},
+  primaryColor: Colors.main.orange,
+  updatePrimaryColor: () => {},
 });
 
 export const useTheme = () => useContext(ThemeContext);
