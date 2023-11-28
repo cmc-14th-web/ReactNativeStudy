@@ -1,8 +1,9 @@
 import {Path, Svg} from 'react-native-svg';
 import {KeyOfPalette, theme} from 'styles';
 import {TouchableOpacity} from 'react-native';
-import {useRecoilState} from 'recoil';
+import {useSetRecoilState} from 'recoil';
 
+import {modalState} from 'libs/store/modal';
 import {todoListState} from 'libs/store/todoList';
 
 const TrashIcon = ({
@@ -12,14 +13,18 @@ const TrashIcon = ({
   fill?: KeyOfPalette;
   id: number;
 }) => {
-  const [todoListData, setTodoListData] = useRecoilState(todoListState);
+  const setModalData = useSetRecoilState(modalState);
+  const setTodoListData = useSetRecoilState(todoListState);
 
   const handlePressTrashIcon = () => {
-    const updatedTodoList = Array.isArray(todoListData.todo)
-      ? todoListData.todo.filter(todo => todo.id !== id)
-      : [];
-
-    setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
+    setTodoListData(prevState => ({
+      ...prevState,
+      removeTodo: id,
+    }));
+    setModalData(prevState => ({
+      ...prevState,
+      isRemoveTodoVisible: true,
+    }));
   };
 
   return (

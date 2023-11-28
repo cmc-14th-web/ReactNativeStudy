@@ -10,24 +10,20 @@ import styled from 'styled-components';
 import ArrowBackIcon from 'assets/icons/ArrowBackIcon';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {colorState} from 'libs/store/color';
-import {todoListState} from 'libs/store/todoList';
+import {modalState} from 'libs/store/modal';
 
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   const navigation = useNavigation();
   const colorData = useRecoilValue(colorState);
-  const setTodoListData = useSetRecoilState(todoListState);
+  const setModalData = useSetRecoilState(modalState);
 
   const handlePressCompleteButton = () => {
-    setTodoListData(prevState => ({
+    setModalData(prevState => ({
       ...prevState,
-      todo: [
-        ...prevState.todo,
-        {id: new Date().getTime(), todo: prevState.newTodo, done: false},
-      ],
+      isAddTodoVisible: true,
     }));
-    navigation.navigate('Home');
   };
 
   return (

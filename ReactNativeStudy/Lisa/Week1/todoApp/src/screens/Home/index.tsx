@@ -1,18 +1,17 @@
 import {FlatList, View} from 'react-native';
 import styled from 'styled-components';
 import {useRecoilValue} from 'recoil';
+import {useEffect} from 'react';
 
 import Spacing from 'components/atoms/Spacing';
 import TodoItem from 'components/atoms/TodoItem';
 import {todoListState} from 'libs/store/todoList';
-import {useEffect} from 'react';
+import Modal from 'components/atoms/CustomModal';
+import {modalState} from 'libs/store/modal';
 
 const Home = () => {
   const todoListData = useRecoilValue(todoListState);
-
-  useEffect(() => {
-    console.log(todoListData.todo);
-  }, [todoListData.todo]);
+  const modalData = useRecoilValue(modalState);
 
   return (
     <HomeWrapper>
@@ -24,6 +23,8 @@ const Home = () => {
         )}
         ItemSeparatorComponent={() => <Spacing />}
       />
+      {modalData.isRemoveTodoVisible && <Modal variant={'removeTodo'} />}
+      {modalData.isAddTodoVisible && <Modal variant={'addTodo'} />}
     </HomeWrapper>
   );
 };
