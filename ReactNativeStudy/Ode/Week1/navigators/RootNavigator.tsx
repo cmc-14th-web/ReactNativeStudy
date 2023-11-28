@@ -3,12 +3,23 @@ import React from "react";
 import CreateTodoScreen from "../screens/CreateTodoScreen";
 import Tabs from "./TabNavigator";
 import RoutePath from "./routePath";
+import { useTheme } from "../styles/@hooks/useTheme";
+import Colors from "../styles/colors";
 
 const RootStack = createNativeStackNavigator();
 
 export default function RootNavigator() {
+  const { primaryColor } = useTheme();
+
   return (
-    <RootStack.Navigator>
+    <RootStack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: Colors.backgroundColor,
+        },
+        headerTintColor: primaryColor,
+      }}
+    >
       <RootStack.Screen
         name={RoutePath.MainTab}
         component={Tabs}

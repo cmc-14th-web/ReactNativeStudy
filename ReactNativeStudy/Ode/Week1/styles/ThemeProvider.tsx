@@ -1,14 +1,16 @@
 import React, { ReactNode, useState } from "react";
-import { ColorCodes } from "./colors";
-import { ThemeContext, baseTheme } from "./@hooks/useTheme";
+import Colors, { ColorCodes } from "./colors";
+import { ThemeContext } from "./@hooks/useTheme";
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState(baseTheme);
+  const [primaryColor, setPrimaryColor] = useState<ColorCodes>("orange");
 
-  const toggleTheme = (color: ColorCodes) => setTheme((prevTheme) => ({ ...prevTheme, color }));
+  const toggleTheme = (color: ColorCodes) => setPrimaryColor(color);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider
+      value={{ primaryColor: Colors[primaryColor], togglePrimaryColor: toggleTheme }}
+    >
       <>{children}</>
     </ThemeContext.Provider>
   );

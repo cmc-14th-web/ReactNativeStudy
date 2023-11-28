@@ -1,24 +1,36 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import CreateTodoButton from "../components/CreateTodoButton";
 import SettingScreen from "../screens/SettingScreen";
 import HomeScreen from "../screens/HomeScreen";
 import SvgIcon, { SvgLabelType } from "../components/SvgIcon";
 import RoutePath from "./routePath";
+import { useTheme } from "../styles/@hooks/useTheme";
+import Colors from "../styles/colors";
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs({ navigation }) {
-  navigation;
+  const { primaryColor } = useTheme();
+
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: Colors.backgroundColor,
+        },
+        headerTintColor: primaryColor,
+      }}
+    >
       <Tab.Screen
         name={RoutePath.HomeScreen}
         component={HomeScreen}
         options={{
           headerTitle: "Today",
-          tabBarIcon: (props) => <SvgIcon label={SvgLabelType.Home} {...props} />,
+          tabBarIcon: ({ focused }) => (
+            <SvgIcon label={SvgLabelType.Home} fill={focused ? primaryColor : Colors.darkGray} />
+          ),
         }}
       />
       <Tab.Screen
@@ -30,16 +42,13 @@ export default function Tabs({ navigation }) {
         name={RoutePath.SettingScreen}
         component={SettingScreen}
         options={{
-          headerTitle: "설정",
-          tabBarIcon: (props) => <SvgIcon label={SvgLabelType.Theme} {...props} />,
+          tabBarIcon: ({ focused }) => (
+            <SvgIcon label={SvgLabelType.Theme} fill={focused ? primaryColor : Colors.darkGray} />
+          ),
         }}
       />
     </Tab.Navigator>
   );
 }
 
-const CannotEnterThisPage = () => (
-  <View>
-    <Text>temp</Text>
-  </View>
-);
+const CannotEnterThisPage = () => <View />;
