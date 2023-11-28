@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
+import Container from "../components/Container";
 
 export default function CreateTodoScreen({ navigation }) {
   return (
-    <View>
+    <Container>
       <Text>Create Screen</Text>
-    </View>
+    </Container>
   );
 }
