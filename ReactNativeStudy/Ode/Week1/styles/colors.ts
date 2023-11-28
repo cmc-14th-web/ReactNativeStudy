@@ -1,4 +1,6 @@
 const Colors = {
+  backgroundColor: "#F5FEFF",
+
   white: "#ffffff",
   gray: "#F5F5F5",
   darkGray: "#888888",
@@ -12,3 +14,5 @@ const Colors = {
 };
 
 export default Colors;
+
+export type ColorCodes = keyof typeof Colors;
