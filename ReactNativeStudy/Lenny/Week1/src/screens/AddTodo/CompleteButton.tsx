@@ -14,7 +14,7 @@ export default function CompleteButton() {
       return;
     }
     Alert.alert('할일이 추가되었습니다!');
-    setTodos({prevTodos: todos, todo: todoText, isDone: false});
+    setTodos([...todos, {todo: todoText, isDone: false}]);
     setTodoText('');
     navigation.goBack();
   };

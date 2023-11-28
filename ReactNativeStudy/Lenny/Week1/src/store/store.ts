@@ -2,7 +2,6 @@ import {create} from 'zustand';
 import colors from '../styles/color';
 
 interface TodoProps {
-  prevTodos: TodoProps[];
   todo: string;
   isDone: boolean;
 }
@@ -15,8 +14,8 @@ interface StoreState {
 
 interface StoreAction {
   setColor: (color: string) => void;
-  setTodos: (todo: TodoProps) => void;
   setTodoText: (todoText: string) => void;
+  setTodos: (todo: TodoProps[]) => void;
 }
 
 export const useStore = create<StoreState & StoreAction>(set => ({
@@ -24,6 +23,6 @@ export const useStore = create<StoreState & StoreAction>(set => ({
   todos: [],
   todoText: '',
   setColor: (state: string) => set({color: state}),
-  setTodos: (state: TodoProps) => set({todos: [...state.prevTodos, state]}),
   setTodoText: (state: string) => set({todoText: state}),
+  setTodos: (state: TodoProps[]) => set({todos: [...state]}),
 }));
