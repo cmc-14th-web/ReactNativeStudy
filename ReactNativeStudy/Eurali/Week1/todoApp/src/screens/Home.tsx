@@ -6,7 +6,7 @@ import ScreenLayout from '../layout/screenLayout';
 import Check from '../assets/check.svg';
 import Trash from '../assets/trash.svg';
 import Circle from '../assets/circle.svg';
-import { itemComplete } from '../store/itemSlice';
+import { itemComplete, itemDelete } from '../store/itemSlice';
 
 const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
   const mainColor = useSelector((state: RootState) => state.color.mainColor);
@@ -17,6 +17,9 @@ const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
   };
   const handlePressCircle = () => {
     dispatch(itemComplete({title: title, completed: true}));
+  };
+  const handleDelete = () => {
+    dispatch(itemDelete({title: title}));
   };
   return (
     <View
@@ -46,7 +49,9 @@ const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
         )}
         <Text style={{color: completed ? 'white' : mainColor}}>{title}</Text>
       </View>
-      <Trash color={completed ? 'white' : mainColor} />
+      <TouchableOpacity onPress={handleDelete}>
+        <Trash color={completed ? 'white' : mainColor} />
+      </TouchableOpacity>
     </View>
   );
 };
