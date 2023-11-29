@@ -1,9 +1,10 @@
 import {Path, Svg} from 'react-native-svg';
 import {KeyOfPalette, theme} from 'styles';
 import {TouchableOpacity} from 'react-native';
-import {useRecoilState} from 'recoil';
+import {useRecoilValue} from 'recoil';
 
 import {todoListState} from 'libs/store/todoList';
+import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 
 const CircleIcon = ({
   fill = 'orange',
@@ -12,7 +13,8 @@ const CircleIcon = ({
   fill?: KeyOfPalette;
   id: number;
 }) => {
-  const [todoListData, setTodoListData] = useRecoilState(todoListState);
+  const todoListData = useRecoilValue(todoListState);
+  const {updateTodoList} = useSetTodoListData();
 
   const handlePressCircleIcon = () => {
     const updatedTodoList = Array.isArray(todoListData.todo)
@@ -21,7 +23,7 @@ const CircleIcon = ({
         )
       : [];
 
-    setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
+    updateTodoList(updatedTodoList);
   };
 
   return (

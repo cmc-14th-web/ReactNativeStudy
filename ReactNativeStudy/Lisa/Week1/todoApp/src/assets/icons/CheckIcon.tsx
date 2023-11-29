@@ -1,11 +1,13 @@
 import {Path, Svg} from 'react-native-svg';
 import {TouchableOpacity} from 'react-native';
-import {useRecoilState} from 'recoil';
+import {useRecoilValue} from 'recoil';
 
 import {todoListState} from 'libs/store/todoList';
+import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 
 const CheckIcon = ({id}: {id: number}) => {
-  const [todoListData, setTodoListData] = useRecoilState(todoListState);
+  const todoListData = useRecoilValue(todoListState);
+  const {updateTodoList} = useSetTodoListData();
 
   const handlePressCheckIcon = () => {
     const updatedTodoList = Array.isArray(todoListData.todo)
@@ -14,7 +16,7 @@ const CheckIcon = ({id}: {id: number}) => {
         )
       : [];
 
-    setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
+    updateTodoList(updatedTodoList);
   };
 
   return (

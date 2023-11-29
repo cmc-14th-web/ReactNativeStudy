@@ -20,11 +20,18 @@ const useSetTodoListData = () => {
     }));
   };
 
+  const setRemoveTodoId = (removeTodoId: number) => {
+    setTodoListData(prevState => ({
+      ...prevState,
+      removeTodo: removeTodoId,
+    }));
+  };
+
   const updateTodoList = (updatedTodoList: TodoItemPropsType[]) => {
     setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
   };
 
-  return {addNewTodoTitle, addNewTodo, updateTodoList};
+  return {addNewTodoTitle, addNewTodo, setRemoveTodoId, updateTodoList};
 };
 
 export default useSetTodoListData;
