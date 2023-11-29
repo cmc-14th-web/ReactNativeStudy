@@ -21,8 +21,14 @@ const BottomTabNavigation = ({
   navigation: TabsNavigationProps;
 }) => {
   const handleClick = () => navigation.navigate('AddTodo');
+  const screenOptions = {
+    headerStyle: {
+      backgroundColor: 'transparent',
+    },
+    headerTintColor: '#000',
+  };
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen
         name="AddTodoBtn"
