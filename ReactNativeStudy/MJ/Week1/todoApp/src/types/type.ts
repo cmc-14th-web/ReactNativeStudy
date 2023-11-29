@@ -1,5 +1,10 @@
 export type RootStackParamList = {
-  Home: undefined;
-  Setting: undefined;
   BottomTabNavigation: undefined;
+  AddTodo: undefined;
+};
+
+export type RootTabParamList = {
+  Home: undefined;
+  AddTodoBtn: undefined;
+  Setting: undefined;
 };
