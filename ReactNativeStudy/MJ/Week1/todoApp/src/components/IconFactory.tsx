@@ -15,11 +15,7 @@ const IconFactory = ({
   ...prop
 }: IconFactoryProps) => {
   return (
-    <Svg
-      {...prop}
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width / 2} ${height / 2}`}>
+    <Svg {...prop} width={width} height={height} viewBox="0 0 24 24">
       <Path d={IconPath[icon]} fill={fill} />
     </Svg>
   );
