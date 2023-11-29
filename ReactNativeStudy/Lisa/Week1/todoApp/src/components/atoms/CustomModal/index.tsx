@@ -6,6 +6,7 @@ import {todoListState} from 'libs/store/todoList';
 import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 import useSetModalData from 'libs/hooks/useSetModalData';
 import useNavigator from 'libs/hooks/useNavigator';
+import useSetButtonData from 'libs/hooks/useSetButtonData';
 
 type CustomModalVariant = 'removeTodo' | 'addTodo';
 
@@ -18,10 +19,12 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
   const todoListData = useRecoilValue(todoListState);
   const {addNewTodo, updateTodoList} = useSetTodoListData();
   const {setAddTodoModalVisible, setRemoveTodoModalVisible} = useSetModalData();
+  const {setBottomTabFloatingButtonVisible} = useSetButtonData();
 
   const handlePressAddTodoConfirm = () => {
     addNewTodo();
     setAddTodoModalVisible(false);
+    setBottomTabFloatingButtonVisible(true);
     stackNavigation.navigate('Home');
   };
 

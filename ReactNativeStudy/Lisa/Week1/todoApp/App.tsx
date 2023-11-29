@@ -5,7 +5,6 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import StackNavigator from 'navigator/StackNavigator';
 import BottomTabFloatingButton from 'components/atoms/BottomTabFloatingButton';
-
 function App(): JSX.Element {
   return (
     <ThemeProvider theme={theme}>

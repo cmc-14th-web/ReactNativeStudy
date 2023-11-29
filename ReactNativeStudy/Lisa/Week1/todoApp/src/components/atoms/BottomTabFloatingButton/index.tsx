@@ -5,20 +5,22 @@ import {useRecoilValue} from 'recoil';
 import AddIcon from 'assets/icons/AddIcon';
 import {colorState} from 'libs/store/color';
 import useNavigator from 'libs/hooks/useNavigator';
+import {buttonState} from 'libs/store/button';
 
 const BottomTabFloatingButton = () => {
   const {stackNavigation} = useNavigator();
   const colorData = useRecoilValue(colorState);
+  const buttonStateData = useRecoilValue(buttonState);
 
   const handlePress = () => {
     stackNavigation.navigate('AddTodo');
   };
 
-  return (
+  return buttonStateData.isBottomTabFloatingButtonVisible ? (
     <StyledButtonWrapper onPress={handlePress}>
       <AddIcon fill={colorData.color} />
     </StyledButtonWrapper>
-  );
+  ) : null;
 };
 
 export default BottomTabFloatingButton;

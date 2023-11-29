@@ -7,10 +7,14 @@ import TodoItem from 'components/atoms/TodoItem';
 import {todoListState} from 'libs/store/todoList';
 import Modal from 'components/atoms/CustomModal';
 import {modalState} from 'libs/store/modal';
+import useSetButtonData from 'libs/hooks/useSetButtonData';
 
 const Home = () => {
   const todoListData = useRecoilValue(todoListState);
   const modalData = useRecoilValue(modalState);
+  const {useSetBottomTabFloatingButtonVisible} = useSetButtonData();
+
+  useSetBottomTabFloatingButtonVisible(true);
 
   return (
     <HomeWrapper>
