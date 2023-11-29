@@ -1,12 +1,11 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {View, Modal, Text, TouchableOpacity} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 
 import {todoListState} from 'libs/store/todoList';
-import {RootStackParamList} from 'navigator/StackNavigator';
 import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 import useSetModalData from 'libs/hooks/useSetModalData';
+import useNavigator from 'libs/hooks/useNavigator';
 
 type CustomModalVariant = 'removeTodo' | 'addTodo';
 
@@ -15,7 +14,7 @@ type CustomModalPropsType = {
 };
 
 const CustomModal = ({variant}: CustomModalPropsType) => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const {stackNavigation} = useNavigator();
   const todoListData = useRecoilValue(todoListState);
   const {addNewTodo, updateTodoList} = useSetTodoListData();
   const {setAddTodoModalVisible, setRemoveTodoModalVisible} = useSetModalData();
@@ -23,7 +22,7 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
   const handlePressAddTodoConfirm = () => {
     addNewTodo();
     setAddTodoModalVisible(false);
-    navigation.navigate('Home');
+    stackNavigation.navigate('Home');
   };
 
   const handlePressRemoveTodoConfirm = () => {
@@ -33,7 +32,7 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
 
     updateTodoList(updatedTodoListData);
     setRemoveTodoModalVisible(false);
-    navigation.navigate('Home');
+    stackNavigation.navigate('Home');
   };
 
   const handlePressRemoveTodoCancel = () => {

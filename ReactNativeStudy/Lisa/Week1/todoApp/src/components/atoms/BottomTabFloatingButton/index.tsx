@@ -1,18 +1,17 @@
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components';
 import {useRecoilValue} from 'recoil';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 import AddIcon from 'assets/icons/AddIcon';
 import {colorState} from 'libs/store/color';
-import {RootStackParamList} from 'navigator/StackNavigator';
+import useNavigator from 'libs/hooks/useNavigator';
 
 const BottomTabFloatingButton = () => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const {stackNavigation} = useNavigator();
   const colorData = useRecoilValue(colorState);
 
   const handlePress = () => {
-    navigation.navigate('AddTodo');
+    stackNavigation.navigate('AddTodo');
   };
 
   return (

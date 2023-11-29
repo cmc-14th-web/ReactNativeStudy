@@ -1,7 +1,6 @@
 import {createStackNavigator} from '@react-navigation/stack';
 import {KeyOfPalette, theme} from 'styles';
 import {Text} from 'react-native';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigator from './BottomTabNavigator';
 import styled from 'styled-components/native';
@@ -11,6 +10,7 @@ import AddTodo from 'screens/AddTodo';
 import ArrowBackIcon from 'assets/icons/ArrowBackIcon';
 import {colorState} from 'libs/store/color';
 import useSetModalData from 'libs/hooks/useSetModalData';
+import useNavigator from 'libs/hooks/useNavigator';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -21,7 +21,7 @@ export type RootStackParamList = {
 const Stack = createStackNavigator<RootStackParamList>();
 
 const StackNavigator = () => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const {stackNavigation} = useNavigator();
   const colorData = useRecoilValue(colorState);
   const {setAddTodoModalVisible} = useSetModalData();
 
@@ -45,7 +45,7 @@ const StackNavigator = () => {
   });
 
   const headerLeftChildren = () => (
-    <StyledIconButton onPress={() => navigation.navigate('Home')}>
+    <StyledIconButton onPress={() => stackNavigation.navigate('Home')}>
       <ArrowBackIcon fill={colorData.color} />
     </StyledIconButton>
   );
