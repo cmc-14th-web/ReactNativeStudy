@@ -5,11 +5,13 @@ import color from '../constants/color';
 import {useDispatch} from 'react-redux';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {colorChange} from '../store/colorSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ColorPick = ({color}: {color: string}) => {
   const dispatch = useDispatch();
-  const handlePress = () => {
+  const handlePress = async () => {
     dispatch(colorChange(color));
+    await AsyncStorage.setItem('color', JSON.stringify(color));
   };
   return (
     <TouchableOpacity onPress={handlePress}>

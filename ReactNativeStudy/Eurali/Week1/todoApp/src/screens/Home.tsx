@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Alert, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
@@ -7,6 +7,8 @@ import Check from '../assets/check.svg';
 import Trash from '../assets/trash.svg';
 import Circle from '../assets/circle.svg';
 import {itemComplete, itemDelete} from '../store/itemSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { colorChange } from '../store/colorSlice';
 
 const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
   const mainColor = useSelector((state: RootState) => state.color.mainColor);
@@ -68,12 +70,28 @@ const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
 
 const Home = () => {
   const items = useSelector((state: RootState) => state.item.todoItems);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getColor = async () => {
+      let storageColor = await AsyncStorage.getItem('color');
+      if (storageColor) {
+        dispatch(colorChange(JSON.parse(storageColor)));
+      }
+    };
+
+    getColor();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <ScreenLayout>
       <View style={{gap: 16}}>
         {items &&
           items.map(item => (
-            <ItemBox title={item.title} completed={item.completed} />
+            <ItemBox
+              key={item.title}
+              title={item.title}
+              completed={item.completed}
+            />
           ))}
       </View>
     </ScreenLayout>
