@@ -1,11 +1,14 @@
 import React from 'react';
 
+import {RecoilRoot} from 'recoil';
 import Navigation from './components/navigation/Navigation';
 
 function App() {
   return (
     <>
-      <Navigation />
+      <RecoilRoot>
+        <Navigation />
+      </RecoilRoot>
     </>
   );
 }
