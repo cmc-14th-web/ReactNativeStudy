@@ -13,10 +13,6 @@ const AddTodoInput = () => {
   const {addNewTodoTitle} = useSetTodoListData();
 
   const handleChangeTodoText = (newTodoData: string) => {
-    if (!newTodoData.length) {
-      return;
-    }
-
     addNewTodoTitle(newTodoData);
   };
 

@@ -11,6 +11,7 @@ import ArrowBackIcon from 'assets/icons/ArrowBackIcon';
 import {colorState} from 'libs/store/color';
 import useSetModalData from 'libs/hooks/useSetModalData';
 import useNavigator from 'libs/hooks/useNavigator';
+import {todoListState} from 'libs/store/todoList';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -24,8 +25,13 @@ const StackNavigator = () => {
   const {stackNavigation} = useNavigator();
   const colorData = useRecoilValue(colorState);
   const {setAddTodoModalVisible} = useSetModalData();
+  const todoListData = useRecoilValue(todoListState);
 
   const handlePressCompleteButton = () => {
+    if (!todoListData.newTodo.length) {
+      return;
+    }
+
     setAddTodoModalVisible(true);
   };
 
