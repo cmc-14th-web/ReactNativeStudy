@@ -3,25 +3,33 @@ import TodoList from './TodoList';
 
 import * as Style from '../../styles/Home/Home.style';
 import {useStore} from '../../store/store';
-import {Text} from 'react-native';
+import {FlatList, StyleSheet, Text} from 'react-native';
+import {TodoProps} from '../../types/Home/Home';
 
 export default function Home() {
   const {todos} = useStore();
 
   return (
-    // any Type 알아봐야함
     <Style.Container>
       {todos.length === 0 ? (
         <Text>할일이 없습니다.</Text>
       ) : (
-        <Style.FlatList
+        <FlatList<TodoProps>
+          style={styles.flatList}
           data={todos}
-          renderItem={({item}: any) => {
-            return <TodoList todo={item.todo} isDone={item.isDone} />;
-          }}
-          keyExtractor={(item: any) => item.todo}
+          renderItem={({item}: {item: TodoProps}) => (
+            <TodoList todo={item.todo} isDone={item.isDone} />
+          )}
+          keyExtractor={item => item.todo}
         />
       )}
     </Style.Container>
   );
 }
+
+const styles = StyleSheet.create({
+  flatList: {
+    width: '100%',
+    paddingHorizontal: 32,
+  },
+});

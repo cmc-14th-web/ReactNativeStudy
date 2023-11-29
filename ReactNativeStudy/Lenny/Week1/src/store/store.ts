@@ -1,10 +1,6 @@
 import {create} from 'zustand';
 import colors from '../styles/color';
-
-interface TodoProps {
-  todo: string;
-  isDone: boolean;
-}
+import {TodoProps} from '../types/Home/Home';
 
 interface StoreState {
   color: string;

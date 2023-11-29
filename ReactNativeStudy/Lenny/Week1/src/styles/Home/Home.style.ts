@@ -7,8 +7,3 @@ export const Container = styled.View`
   background-color: ${colors.gray};
   padding-top: 25;
 `;
-
-export const FlatList = styled.FlatList`
-  width: 100%;
-  padding-horizontal: 32;
-`;
