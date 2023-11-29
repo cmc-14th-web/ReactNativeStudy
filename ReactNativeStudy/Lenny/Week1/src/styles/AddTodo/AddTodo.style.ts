@@ -13,3 +13,9 @@ export const TextInput = styled.TextInput`
   padding-vertical: 16;
   font-size: 18;
 `;
+
+export const AddTodoButton = styled.TouchableOpacity<{bottom: number}>`
+  position: absolute;
+  align-self: center;
+  bottom: ${props => props.bottom};
+`;

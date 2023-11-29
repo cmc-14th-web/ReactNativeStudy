@@ -7,11 +7,13 @@ import {useStore} from '../store/store';
 import BackButton from '../screens/AddTodo/BackButton';
 import CompleteButton from '../screens/AddTodo/CompleteButton';
 import colors from '../styles/color';
+import {RootStackList} from '../types/BottomTabNavigator';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackList>();
 
 const StackNavigator = () => {
   const {color} = useStore();
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -27,6 +29,7 @@ const StackNavigator = () => {
         options={{
           headerTitle: '할일을 추가해주세요!',
           headerTitleStyle: {color: color, fontSize: 18},
+          headerTitleAlign: 'center',
           headerBackTitleVisible: false,
           headerStyle: {backgroundColor: colors.gray},
           headerShadowVisible: false,

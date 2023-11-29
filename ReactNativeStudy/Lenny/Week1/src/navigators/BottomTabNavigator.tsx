@@ -11,13 +11,18 @@ import Setting from '../screens/Setting/Setting';
 import HomeSvg from '../assets/icons/home.svg';
 import SettingSvg from '../assets/icons/setting.svg';
 import {useStore} from '../store/store';
-import {StyleSheet, TouchableOpacity} from 'react-native';
 import Add from '../assets/icons/add.svg';
+import {BottomTabNavigatorProps} from '../types/BottomTabNavigator';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import * as Style from '../styles/AddTodo/AddTodo.style';
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = ({navigation}: any) => {
+const BottomTabNavigator: React.FC<BottomTabNavigatorProps> = ({
+  navigation,
+}) => {
   const {color} = useStore();
+  const {bottom} = useSafeAreaInsets();
 
   return (
     <>
@@ -51,21 +56,13 @@ const BottomTabNavigator = ({navigation}: any) => {
         />
       </Tab.Navigator>
       {/* AddTodo로 이동하는 버튼 */}
-      <TouchableOpacity
-        style={styles.addTodoButton}
+      <Style.AddTodoButton
+        bottom={bottom}
         onPress={() => navigation.push('AddTodo')}>
         <Add width={50} height={50} color={color} />
-      </TouchableOpacity>
+      </Style.AddTodoButton>
     </>
   );
 };
 
 export default BottomTabNavigator;
-
-const styles = StyleSheet.create({
-  addTodoButton: {
-    position: 'absolute',
-    alignSelf: 'center',
-    bottom: 25,
-  },
-});
