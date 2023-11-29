@@ -1,13 +1,15 @@
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import React from 'react';
 
-function App(): JSX.Element {
+import Navigation from './components/wrapper/Navigation';
+
+function App() {
   return (
-    <SafeAreaView>
-      <Text>hello</Text>
-    </SafeAreaView>
+    <>
+      <Navigation />
+    </>
   );
 }
 
-const styles = StyleSheet.create({});
+// const styles = StyleSheet.create({});
 
 export default App;
