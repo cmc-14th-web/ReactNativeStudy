@@ -10,4 +10,6 @@ const palette = {
   Pink: '#FF7474',
 } as const;
 
+export type KeyofPalette = keyof typeof palette;
+
 export default palette;
