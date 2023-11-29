@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const StackNavigation = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator>
       <Stack.Screen
         name="BottomTabNavigation"
         component={BottomTabNavigation}
