@@ -1,29 +1,22 @@
-import {
-  BottomTabNavigationProp,
-  createBottomTabNavigator,
-} from '@react-navigation/bottom-tabs';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {TouchableOpacity, View} from 'react-native';
 
 import {useRecoilValue} from 'recoil';
+import useNavigator from '../../hooks/useNavigation';
 import Home from '../../screens/Home';
 import Setting from '../../screens/Setting';
 import colorState from '../../store/color';
 import palette from '../../styles/palette';
-import {RootStackParamList, RootTabParamList} from '../../types/type';
+import {RootTabParamList} from '../../types/type';
 import IconFactory from '../IconFactory';
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
-type TabsNavigationProps = BottomTabNavigationProp<RootStackParamList>;
-
-const BottomTabNavigation = ({
-  navigation,
-}: {
-  navigation: TabsNavigationProps;
-}) => {
+const BottomTabNavigation = () => {
+  const stackNavigation = useNavigator();
   const color = useRecoilValue(colorState);
-  const handleClick = () => navigation.navigate('AddTodo');
+  const handleClick = () => stackNavigation.navigate('AddTodo');
   const screenOptions = {
     headerStyle: {
       backgroundColor: 'transparent',
