@@ -2,7 +2,7 @@ import React from "react";
 import Container from "../components/Container";
 import { Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
-import useTodoStorage from "../@hooks/useAsyncStorage";
+import useTodoStorage from "../@hooks/useTodoStorage";
 import { todoStyles } from "./CreateTodoScreen";
 import SvgIcon, { SvgLabelType } from "../components/SvgIcon";
 import { useTheme } from "../styles/@hooks/useTheme";
