@@ -1,17 +1,24 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { BottomTabNavigationProp, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View } from "react-native";
 import CreateTodoButton from "../components/CreateTodoButton";
 import SettingScreen from "../screens/SettingScreen";
 import HomeScreen from "../screens/HomeScreen";
 import SvgIcon, { SvgLabelType } from "../components/SvgIcon";
-import RoutePath from "./routePath";
 import { useTheme } from "../styles/@hooks/useTheme";
 import Colors from "../styles/colors";
 
-const Tab = createBottomTabNavigator();
+type TabNavigatorParamList = {
+  HomeScreen: undefined;
+  CreateButton: undefined;
+  SettingScreen: undefined;
+};
 
-export default function Tabs({ navigation }) {
+type TabsNavigationProps = BottomTabNavigationProp<TabNavigatorParamList>;
+
+const Tab = createBottomTabNavigator<TabNavigatorParamList>();
+
+export default function Tabs({ navigation }: { navigation: TabsNavigationProps }) {
   const { primaryColor } = useTheme();
 
   return (
@@ -25,10 +32,11 @@ export default function Tabs({ navigation }) {
       }}
     >
       <Tab.Screen
-        name={RoutePath.HomeScreen}
+        name={"HomeScreen"}
         component={HomeScreen}
         options={{
           headerTitle: "Today",
+          tabBarLabel: "홈",
           tabBarIcon: ({ focused }) => (
             <SvgIcon label={SvgLabelType.Home} fill={focused ? primaryColor : Colors.darkGray} />
           ),
@@ -40,9 +48,10 @@ export default function Tabs({ navigation }) {
         options={{ tabBarButton: () => <CreateTodoButton navigation={navigation} /> }}
       />
       <Tab.Screen
-        name={RoutePath.SettingScreen}
+        name={"SettingScreen"}
         component={SettingScreen}
         options={{
+          tabBarLabel: "설정",
           tabBarIcon: ({ focused }) => (
             <SvgIcon label={SvgLabelType.Theme} fill={focused ? primaryColor : Colors.darkGray} />
           ),

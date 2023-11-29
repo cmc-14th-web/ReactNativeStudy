@@ -1,14 +1,13 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
 import SvgIcon, { SvgLabelType } from "./SvgIcon";
-import RoutePath from "../navigators/routePath";
 import { useTheme } from "../styles/@hooks/useTheme";
 
 export default function CreateTodoButton({ navigation }) {
   const { primaryColor } = useTheme();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(RoutePath.CreateTodoScreen)}
+      onPress={() => navigation.navigate("CreateTodoScreen")}
       style={{
         top: 5,
       }}
