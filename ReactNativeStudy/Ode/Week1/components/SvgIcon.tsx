@@ -1,5 +1,6 @@
 import React from "react";
 import Svg, { Path, SvgProps } from "react-native-svg";
+import { useTheme } from "../styles/@hooks/useTheme";
 
 type SvgIconProps = {
   label: SvgLabelType;
@@ -7,6 +8,9 @@ type SvgIconProps = {
 } & SvgProps;
 
 export default function SvgIcon({ label, size, ...props }: SvgIconProps) {
+  const { primaryColor } = useTheme();
+  const { fill = primaryColor } = props;
+
   return (
     <Svg
       {...props}
@@ -15,7 +19,7 @@ export default function SvgIcon({ label, size, ...props }: SvgIconProps) {
       viewBox="0 0 24 24"
       // xmlns="http://www.w3.org/2000/svg"
     >
-      <Path d={getSvgPath(label)} fill={props.fill} />
+      <Path d={getSvgPath(label)} fill={fill} />
     </Svg>
   );
 }
