@@ -1,4 +1,5 @@
 export type RootStackParamList = {
+  Home: undefined;
   BottomTabNavigation: undefined;
   AddTodo: undefined;
 };
