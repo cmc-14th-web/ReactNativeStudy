@@ -1,6 +1,7 @@
 import {atom} from 'recoil';
 
 export type todoStateType = {
+  id: number;
   content: string;
   done: boolean;
 };

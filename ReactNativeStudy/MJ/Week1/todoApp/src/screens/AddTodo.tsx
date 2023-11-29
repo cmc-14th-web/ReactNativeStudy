@@ -31,7 +31,7 @@ const AddTodo = () => {
       Alert.alert('할 일을 먼저 입력해주세요.');
       return;
     }
-    setTodo(prev => [...prev, {content: text, done: false}]);
+    setTodo(prev => [...prev, {id: prev.length, content: text, done: false}]);
     Alert.alert('할 일이 추가되었습니다.', undefined, [
       {
         text: '확인',
