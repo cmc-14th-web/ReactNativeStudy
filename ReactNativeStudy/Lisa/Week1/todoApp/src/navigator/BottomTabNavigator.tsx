@@ -17,14 +17,12 @@ const BottomTabNavigator = () => {
   const getTabBarIcon = (routeName: string, focused: boolean) => {
     const iconColor = focused ? colorData.color : 'dark_gray';
 
-    switch (routeName) {
-      case 'Home':
-        return <HomeIcon fill={iconColor} />;
-      case 'Settings':
-        return <ThemeIcon fill={iconColor} />;
-      default:
-        return null;
-    }
+    return (
+      <>
+        {routeName === 'Home' && <HomeIcon fill={iconColor} />}
+        {routeName === 'Settings' && <ThemeIcon fill={iconColor} />}
+      </>
+    );
   };
 
   const screenOptions = ({
@@ -34,7 +32,6 @@ const BottomTabNavigator = () => {
   }) => ({
     tabBarIcon: ({focused}: {focused: boolean}) =>
       getTabBarIcon(route.name, focused),
-
     tabBarActiveTintColor: theme.palette[colorData.color],
     tabBarInactiveTintColor: theme.palette.dark_gray,
     tabBarStyle: {
