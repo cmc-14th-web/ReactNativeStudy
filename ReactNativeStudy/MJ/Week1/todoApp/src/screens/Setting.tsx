@@ -1,10 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {useSetRecoilState} from 'recoil';
+import ColorItem from '../components/ColorItem';
 import colorState from '../store/color';
-import palette, {KeyofPalette} from '../styles/palette';
+import {KeyofPalette} from '../styles/palette';
 
-type themeType = Extract<
+export type themeType = Extract<
   KeyofPalette,
   'Orange' | 'Green' | 'Blue' | 'Purple' | 'Pink'
 >;
@@ -22,14 +23,7 @@ const Setting = () => {
       <Text>색상을 선택해주세요</Text>
       <View style={styles.PaletteContainer}>
         {theme.map(color => (
-          <TouchableOpacity
-            key={color}
-            onPress={() => handlePressColor(color)}
-            style={{
-              ...styles.PaletteItem,
-              backgroundColor: palette[color],
-            }}
-          />
+          <ColorItem color={color} handlePressColor={handlePressColor} />
         ))}
       </View>
     </View>
