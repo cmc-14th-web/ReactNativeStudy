@@ -1,16 +1,20 @@
-import { Text, View } from 'react-native'
-import { HomeIcon } from '../components/Icon'
+import { StyleSheet, Text, View } from 'react-native';
+import TodoList from '../components/TodoList';
+import React from 'react';
 
 function Home() {
     return (
-        <View>
-            <Text>Home</Text>
-            <HomeIcon fill='red' style={{
-                width: '14px',
-                height: '16px',
-            }} />
+        <View style={style.container}>
+            <Text>Today</Text>
+            <TodoList />
         </View>
-    )
+    );
 }
 
-export default Home
+const style = StyleSheet.create({
+    container: {
+        alignItems: 'center',
+    },
+});
+
+export default Home;
