@@ -1,4 +1,5 @@
 import {atom, useRecoilState} from 'recoil';
+
 import {TTodo} from '../components/TodoList';
 
 const taskState = atom({
@@ -29,6 +30,9 @@ export function useTodos() {
           task.id === id ? {...task, isDone: !task.isDone} : task,
         ),
       );
+    },
+    isTodoExist() {
+      return todos.length > 0;
     },
   };
 }
