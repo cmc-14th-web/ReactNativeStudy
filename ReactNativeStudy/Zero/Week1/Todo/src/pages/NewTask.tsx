@@ -5,6 +5,7 @@ import { useTodos } from '../store/todosState';
 import PageTitle from '../components/PageTitle';
 import Icon from '../components/Icon';
 import { useColor } from '../store/colorState';
+import { useNavigation } from '@react-navigation/native';
 
 function NewTask() {
     const [value, setValue] = useState('');
@@ -16,10 +17,15 @@ function NewTask() {
         Alert.alert('할 일이 추가되었습니다!');
         clearValue();
     };
+    const navigation = useNavigation();
+    const goBack = () => {
+        navigation.goBack();
+        console.log('clicked');
+    }
 
     function BackButton() {
         return (
-            <Icon width="24" height="24" type='arrowBack' fill={selectedColor} onPress={() => { }} />
+            <Icon width="24" height="24" type='arrowBack' fill={selectedColor} onPress={() => navigation.goBack()} />
         )
     }
 

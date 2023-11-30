@@ -1,7 +1,6 @@
 import React from 'react';
 import Home from '../pages/Home';
 import NewTask from '../pages/NewTask';
-// import { NavigationContainer } from '@react-navigation/native';
 import Icon from '../components/Icon';
 import { theme } from '../constants';
 import Setting from '../pages/Setting';
@@ -13,7 +12,7 @@ const Tab = createBottomTabNavigator();
 function Routing() {
     const selectedColor = useColor().getColorCode();
     return (
-        <Tab.Navigator>
+        <Tab.Navigator backBehavior="order">
             <Tab.Screen name="홈" component={Home}
                 options={{
                     headerShown: false,
@@ -29,7 +28,7 @@ function Routing() {
                 }}
             />
             < Tab.Screen name="할 일을 추가해주세요" component={NewTask} options={{
-                tabBarStyle: { display: 'none' },
+                tabBarStyle: { display: 'flex' },
                 headerShown: false,
                 tabBarIcon: () => <Icon width="50" height="50" type="add" fill={selectedColor} />,
                 tabBarLabel: () => null,
