@@ -11,17 +11,22 @@ import Home from './src/pages/Home';
 import Setting from './src/pages/Setting';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import NewTask from './src/pages/NewTask';
+import { RecoilRoot } from 'recoil';
 
 const Tab = createBottomTabNavigator();
 
 function App(): JSX.Element {
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="홈" component={Home} />
-        <Tab.Screen name="설정" component={Setting} />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <RecoilRoot>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="홈" component={Home} />
+          <Tab.Screen name="할 일을 추가해주세요" component={NewTask} />
+          <Tab.Screen name="설정" component={Setting} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </RecoilRoot>
   );
 }
 
