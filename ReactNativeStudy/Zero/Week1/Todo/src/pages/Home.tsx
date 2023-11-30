@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import TodoList from '../components/TodoList';
 import React from 'react';
+import PageTitle from '../components/PageTitle';
 
 function Home() {
     return (
         <View style={style.container}>
-            <Text>Today</Text>
+            <PageTitle title="Today" />
             <TodoList />
         </View>
     );

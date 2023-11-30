@@ -3,6 +3,7 @@ import { theme } from '../constants';
 import Icon from '../components/Icon';
 import React from 'react';
 import { useColor } from '../store/colorState';
+import PageTitle from '../components/PageTitle';
 
 const colors: (keyof typeof theme.color)[] = ['Orange', 'Green', 'Blue', 'Purple', 'Pink'];
 
@@ -12,6 +13,7 @@ function Setting() {
 
     return (
         <View style={style.container}>
+            <PageTitle title="설정" />
             <Text style={style.text}>색상을 선택해주세요.</Text>
             <View style={style.colorWrapper}>
                 {colors.map((color) => (

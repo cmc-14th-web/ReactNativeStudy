@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { theme } from '../constants';
 import { useTodos } from '../store/todosState';
+import PageTitle from '../components/PageTitle';
+import Icon from '../components/Icon';
+import { useColor } from '../store/colorState';
 
 function NewTask() {
     const [value, setValue] = useState('');
+    const selectedColor = useColor().getColorCode();
     const addTask = useTodos().addTodos;
     const clearValue = () => setValue('');
     const handleSubmit = () => {
@@ -13,10 +17,24 @@ function NewTask() {
         clearValue();
     };
 
+    function BackButton() {
+        return (
+            <Icon width="24" height="24" type='arrowBack' fill={selectedColor} onPress={() => { }} />
+        )
+    }
+
+    function SubmitButton() {
+        return (
+            <Text onPress={handleSubmit} style={{ ...style.button, color: selectedColor }}>완료</Text>
+        )
+    }
+
     return (
         <View>
-            <Text>할 일을 추가해주세요!</Text>
-            <Button title="완료" onPress={handleSubmit} />
+            <PageTitle title='할 일을 추가해주세요!'
+                leftButton={<BackButton />}
+                rightButton={<SubmitButton />}
+            />
             <View style={style.container}>
                 <TextInput style={style.textInput} placeholder="할 일을 입력해주세요" onChangeText={setValue} value={value} />
             </View>
@@ -29,7 +47,8 @@ const style = StyleSheet.create({
         paddingHorizontal: 31,
     },
     button: {
-
+        fontSize: 16,
+        fontWeight: '500',
     },
     textInput: {
         borderRadius: 20,
