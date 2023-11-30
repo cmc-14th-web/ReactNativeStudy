@@ -1,20 +1,12 @@
 import React, {useState} from 'react';
-import {
-  Alert,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Alert, SafeAreaView, StyleSheet, TextInput} from 'react-native';
 
 import {useRecoilValue, useSetRecoilState} from 'recoil';
-import IconFactory from '../components/IconFactory';
-import useNavigator from '../hooks/useNavigation';
-import colorState from '../store/color';
-import todoState from '../store/todo';
-import palette from '../styles/palette';
+import useNavigator from '../../hooks/useNavigation';
+import colorState from '../../store/color';
+import todoState from '../../store/todo';
+import palette from '../../styles/palette';
+import {AddTodoHeader} from './Header';
 
 const AddTodo = () => {
   const color = useRecoilValue(colorState);
@@ -43,18 +35,12 @@ const AddTodo = () => {
   };
 
   return (
-    <SafeAreaView style={{marginTop: 60}}>
-      <View style={styles.Header}>
-        <TouchableOpacity onPress={() => stackNavigation.navigate('Home')}>
-          <IconFactory icon="ArrowBack" fill={palette[color]} />
-        </TouchableOpacity>
-        <View>
-          <Text style={{color: palette[color]}}>할 일을 추가해주세요!</Text>
-        </View>
-        <TouchableOpacity onPress={handleComplete}>
-          <Text style={{color: palette[color]}}>완료!</Text>
-        </TouchableOpacity>
-      </View>
+    <SafeAreaView style={styles.Container}>
+      <AddTodoHeader
+        color={color}
+        stackNavigation={stackNavigation}
+        handleComplete={handleComplete}
+      />
       <TextInput
         value={text}
         onChangeText={newText => handleChangeText(newText)}
@@ -66,6 +52,9 @@ const AddTodo = () => {
 };
 
 const styles = StyleSheet.create({
+  Container: {
+    marginTop: 60,
+  },
   Header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
