@@ -5,6 +5,8 @@ import {
 import React from "react";
 import CreateTodoScreen from "../screens/CreateTodoScreen";
 import Tabs from "./TabNavigator";
+import Colors from "../styles/colors";
+import { useTheme } from "../styles/@hooks/useTheme";
 
 export type RootStackParamList = {
   MainTab: { screen: "HomeScreen" | "CreateButton" | "SettingScreen" };
@@ -16,10 +18,23 @@ export type RootNavigatorNavigationProp = NativeStackNavigationProp<RootStackPar
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootNavigator() {
+  const { primaryColor } = useTheme();
+
   return (
-    <RootStack.Navigator screenOptions={{ headerShown: false }}>
-      <RootStack.Screen name={"MainTab"} component={Tabs} />
-      <RootStack.Screen name={"CreateTodoScreen"} component={CreateTodoScreen} />
+    <RootStack.Navigator>
+      <RootStack.Screen name={"MainTab"} component={Tabs} options={{ headerShown: false }} />
+      <RootStack.Screen
+        name={"CreateTodoScreen"}
+        component={CreateTodoScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: Colors.backgroundColor,
+          },
+          headerBackTitleVisible: false,
+          headerTintColor: primaryColor,
+          title: "할일을 추가해주세요!",
+        }}
+      />
     </RootStack.Navigator>
   );
 }

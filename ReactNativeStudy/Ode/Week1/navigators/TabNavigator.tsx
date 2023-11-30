@@ -52,6 +52,7 @@ export default function Tabs({ navigation }: { navigation: TabsNavigationProps }
         component={SettingScreen}
         options={{
           tabBarLabel: "설정",
+          headerTitle: "설정",
           tabBarIcon: ({ focused }) => (
             <SvgIcon label={SvgLabelType.Theme} fill={focused ? primaryColor : Colors.darkGray} />
           ),
