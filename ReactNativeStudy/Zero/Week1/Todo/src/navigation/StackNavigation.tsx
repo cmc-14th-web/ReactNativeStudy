@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Routing from '../utility/Routing';
+import Routing from '../utility/BottomTabNavigation';
 import NewTask from '../pages/NewTask';
 
 const Stack = createStackNavigator();

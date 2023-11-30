@@ -10,7 +10,7 @@ import NewTask from '../pages/NewTask';
 import Setting from '../pages/Setting';
 
 const Tab = createBottomTabNavigator();
-function Routing() {
+function BottomTabNavigation() {
     const selectedColor = useColor().getColorCode();
     return (
         <Tab.Navigator backBehavior="order">
@@ -46,4 +46,4 @@ function Routing() {
     );
 }
 
-export default Routing;
+export default BottomTabNavigation;
