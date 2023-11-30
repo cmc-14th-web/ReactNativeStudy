@@ -2,15 +2,23 @@ import { StyleSheet, Text, View } from 'react-native';
 import { theme } from '../constants';
 import Icon from './Icon';
 import React from 'react';
+import { useTodos } from '../store/todosState';
 
 interface TodoProps {
     isDone: boolean;
     task: string;
+    id: number;
 }
 
-function Todo({ isDone, task }: TodoProps) {
+function Todo({ isDone, task, id }: TodoProps) {
+    const toggleTodo = useTodos().toggleTask;
+    const handlePress = (id: number) => {
+        toggleTodo(id);
+    }
     return (
-        <View style={{ ...style.container, backgroundColor: isDone ? theme.color.Pink : theme.color.White }}>
+        <View style={{ ...style.container, backgroundColor: isDone ? theme.color.Pink : theme.color.White }}
+            onTouchEnd={() => handlePress(id)}
+        >
             <Icon width="24" height="24"
                 fill={isDone ? theme.color.White : theme.color.Pink}
                 type={isDone ? 'check' : 'circle'} />

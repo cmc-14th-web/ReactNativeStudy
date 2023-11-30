@@ -1,23 +1,24 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Todo from './Todo';
+import { useTodos } from '../store/todosState';
 
-export type Todo = {
+export type TTodo = {
     id: number;
     task: string;
     isDone: boolean;
 }
 
-interface TodoListProps {
-    data: Todo[];
-}
+function TodoList() {
+    const todosState = useTodos();
 
-function TodoList({ data }: TodoListProps) {
     return (
         <View style={style.container}>
-            {data.map((todo) => (
-                <Todo key={todo.id} isDone={todo.isDone} task={todo.task} />
-            ))}
+            {todosState.todos.length > 0 ? todosState.todos.map((todo) => (
+                <Todo task={todo.task} isDone={todo.isDone} key={todo.id} id={todo.id} />
+            ))
+                : <Text>할 일이 없어요!</Text>
+            }
         </View>
     )
 }
