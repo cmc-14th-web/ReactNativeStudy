@@ -67,11 +67,7 @@ const BottomTabNavigation = () => {
 const AddTodoBtn = ({handleClick}: {handleClick: () => void}) => {
   const color = useRecoilValue(colorState);
   return (
-    <TouchableOpacity
-      onPress={handleClick}
-      style={{
-        top: 5,
-      }}>
+    <TouchableOpacity onPress={handleClick}>
       <IconFactory icon="Add" width={50} height={50} fill={palette[color]} />
     </TouchableOpacity>
   );
