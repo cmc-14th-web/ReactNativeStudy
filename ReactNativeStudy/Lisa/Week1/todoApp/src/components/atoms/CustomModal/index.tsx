@@ -1,14 +1,14 @@
-import {View, Modal, Text, TouchableOpacity} from 'react-native';
-import {useRecoilValue} from 'recoil';
+import {View, Modal, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
-import {todoListState} from 'libs/store/todoList';
 import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 import useSetModalData from 'libs/hooks/useSetModalData';
 import useNavigator from 'libs/hooks/useNavigator';
 import useSetButtonData from 'libs/hooks/useSetButtonData';
+import ModalTopText from './ModalTopText';
+import ModalBottomText from './ModalBottomText';
 
-type CustomModalVariant = 'removeTodo' | 'addTodo';
+export type CustomModalVariant = 'removeTodo' | 'addTodo';
 
 type CustomModalPropsType = {
   variant: CustomModalVariant;
@@ -16,8 +16,7 @@ type CustomModalPropsType = {
 
 const CustomModal = ({variant}: CustomModalPropsType) => {
   const {stackNavigation} = useNavigator();
-  const todoListData = useRecoilValue(todoListState);
-  const {addNewTodo, updateTodoList} = useSetTodoListData();
+  const {addNewTodo} = useSetTodoListData();
   const {setAddTodoModalVisible, setRemoveTodoModalVisible} = useSetModalData();
   const {setBottomTabFloatingButtonVisible} = useSetButtonData();
 
@@ -26,20 +25,6 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
     setAddTodoModalVisible(false);
     setBottomTabFloatingButtonVisible(true);
     stackNavigation.navigate('Home');
-  };
-
-  const handlePressRemoveTodoConfirm = () => {
-    const updatedTodoListData = Array.isArray(todoListData.todo)
-      ? todoListData.todo.filter(todo => todo.id !== todoListData.removeTodo)
-      : [];
-
-    updateTodoList(updatedTodoListData);
-    setRemoveTodoModalVisible(false);
-    stackNavigation.navigate('Home');
-  };
-
-  const handlePressRemoveTodoCancel = () => {
-    setRemoveTodoModalVisible(false);
   };
 
   const handleCloseModal = () => {
@@ -51,35 +36,6 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
     }
   };
 
-  const renderTopText = () => {
-    if (variant === 'addTodo') {
-      return <StyledText>할일이 추가되었습니다!</StyledText>;
-    } else {
-      return <StyledText>정말 삭제하시겠습니까?</StyledText>;
-    }
-  };
-
-  const renderBottomText = () => {
-    if (variant === 'addTodo') {
-      return (
-        <TouchableOpacity onPress={handlePressAddTodoConfirm}>
-          <StyledText>확인</StyledText>
-        </TouchableOpacity>
-      );
-    } else {
-      return (
-        <>
-          <StyledButton onPress={handlePressRemoveTodoCancel}>
-            <StyledButtonText isCancel={true}>취소</StyledButtonText>
-          </StyledButton>
-          <StyledButton onPress={handlePressRemoveTodoConfirm}>
-            <StyledButtonText>확인</StyledButtonText>
-          </StyledButton>
-        </>
-      );
-    }
-  };
-
   return (
     <CustomModalWrapper>
       <Modal
@@ -88,9 +44,14 @@ const CustomModal = ({variant}: CustomModalPropsType) => {
         onRequestClose={handleCloseModal}>
         <StyledView onPress={handleCloseModal}>
           <ModalWrapper>
-            <ModalTopWrapper>{renderTopText()}</ModalTopWrapper>
+            <ModalTopWrapper>
+              <ModalTopText variant={variant} />
+            </ModalTopWrapper>
             <ModalBottomWrapper variant={variant}>
-              {renderBottomText()}
+              <ModalBottomText
+                variant={variant}
+                handlePressAddTodoConfirm={handlePressAddTodoConfirm}
+              />
             </ModalBottomWrapper>
           </ModalWrapper>
         </StyledView>
@@ -142,23 +103,4 @@ const ModalBottomWrapper = styled(View)<{variant: CustomModalVariant}>`
     variant === 'removeTodo' ? 'row' : 'column'};
   justify-content: center;
   align-items: center;
-`;
-
-const StyledText = styled(Text)`
-  color: #fafafa;
-  font-family: Pretendard;
-  font-size: 14px;
-  font-weight: 300;
-`;
-
-const StyledButton = styled(TouchableOpacity)`
-  flex: 1;
-`;
-
-const StyledButtonText = styled(StyledText)<{isCancel?: boolean}>`
-  text-align: center;
-  border-right-width: ${({isCancel}) => (isCancel ? '0.5px' : '0')};
-  border-right-color: #fafafa;
-  height: 100%;
-  line-height: 33px;
 `;
