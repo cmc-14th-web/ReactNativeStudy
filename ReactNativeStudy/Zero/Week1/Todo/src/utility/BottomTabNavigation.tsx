@@ -18,11 +18,7 @@ function BottomTabNavigation() {
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ focused }) => (
-                        <View
-                            style={{ justifyContent: 'center', alignItems: 'center' }}
-                        >
-                            <Icon width="28" height="28" type="home" fill={focused ? selectedColor : theme.color.DarkGray} />
-                        </View>
+                        <Icon width="28" height="28" type="home" fill={focused ? selectedColor : theme.color.DarkGray} />
                     ),
                     tabBarActiveTintColor: selectedColor,
                     tabBarInactiveTintColor: theme.color.DarkGray,
