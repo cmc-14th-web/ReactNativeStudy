@@ -3,10 +3,10 @@ import {useRecoilValue} from 'recoil';
 import styled from 'styled-components/native';
 import {KeyOfPalette, theme} from 'styles';
 
-import CheckIcon from 'assets/icons/CheckIcon';
-import CircleIcon from 'assets/icons/CircleIcon';
-import TrashIcon from 'assets/icons/TrashIcon';
 import {colorState} from 'libs/store/color';
+import Check from './Check';
+import Circle from './Circle';
+import Trash from './Trash';
 
 export type TodoItemPropsType = {
   id: number;
@@ -18,18 +18,14 @@ const TodoItem = ({todo, done, id}: TodoItemPropsType) => {
   const colorData = useRecoilValue(colorState);
 
   const renderIcon = () => {
-    if (done) {
-      return <CheckIcon id={id} />;
-    } else {
-      return <CircleIcon fill={colorData.color} id={id} />;
-    }
+    return done ? <Check id={id} /> : <Circle id={id} />;
   };
 
   return (
     <TodoItemWrapper done={done} color={colorData.color}>
       {renderIcon()}
       <StyledText done={done}>{todo}</StyledText>
-      <TrashIcon fill={done ? 'white' : colorData.color} id={id} />
+      <Trash done={done} id={id} />
     </TodoItemWrapper>
   );
 };
