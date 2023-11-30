@@ -35,22 +35,27 @@ function Setting() {
 const style = StyleSheet.create({
     container: {
         paddingHorizontal: 32,
+        alignItems: 'center',
     },
     text: {
         fontSize: 18,
         fontWeight: '400',
         color: theme.color.Black,
+        marginBottom: 32,
+        width: '100%',
     },
     colorWrapper: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        paddingHorizontal: 66,
+        width: '100%',
     },
     selectedColor: {
         width: 24,
         height: 24,
         borderRadius: 100,
-    }
+    },
 });
 
 export default Setting;
