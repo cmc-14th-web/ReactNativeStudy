@@ -1,11 +1,11 @@
 import React from 'react';
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 
 import {useRecoilState, useRecoilValue} from 'recoil';
-import IconFactory from '../components/IconFactory';
+import EmptyTodoList from '../components/EmptyTodoList';
+import TodoItem from '../components/TodoItem';
 import colorState from '../store/color';
 import todoState from '../store/todo';
-import palette from '../styles/palette';
 
 const Home = () => {
   const color = useRecoilValue(colorState);
@@ -30,38 +30,15 @@ const Home = () => {
 
   return (
     <View style={styles.Container}>
-      {todos.length === 0 && (
-        <View style={styles.TodoList}>
-          <Text>Todo가 없어요 ㅠ</Text>
-        </View>
-      )}
-      {todos.map((todo, index) => (
-        <View
-          key={index}
-          style={{
-            ...styles.TodoItem,
-            backgroundColor: todo.done ? palette[color] : palette.White,
-          }}>
-          <TouchableOpacity onPress={() => handlePressDone(todo.id)}>
-            <IconFactory
-              icon={todo.done ? 'Check' : 'Circle'}
-              fill={todo.done ? palette.White : palette[color]}
-            />
-          </TouchableOpacity>
-          <Text
-            style={{
-              ...styles.TodoContent,
-              color: todo.done ? palette.White : palette.Black,
-            }}>
-            {todo.content}
-          </Text>
-          <TouchableOpacity onPress={() => handlePressDelete(todo.id)}>
-            <IconFactory
-              icon="Trash"
-              fill={todo.done ? palette.White : palette[color]}
-            />
-          </TouchableOpacity>
-        </View>
+      {todos.length === 0 && <EmptyTodoList />}
+      {todos.map(todo => (
+        <TodoItem
+          key={todo.id}
+          {...todo}
+          color={color}
+          handlePressDone={handlePressDone}
+          handlePressDelete={handlePressDelete}
+        />
       ))}
     </View>
   );
@@ -71,25 +48,6 @@ const styles = StyleSheet.create({
   Container: {
     flex: 1,
     gap: 20,
-  },
-  TodoList: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  TodoItem: {
-    height: 60,
-    paddingHorizontal: 30,
-    marginHorizontal: 30,
-    borderRadius: 5,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  TodoContent: {
-    width: '75%',
-    fontSize: 16,
-    textAlign: 'left',
   },
 });
 
