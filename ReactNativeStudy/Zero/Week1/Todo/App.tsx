@@ -7,8 +7,8 @@
 
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import Home from './android/app/src/pages/Home';
-import Setting from './android/app/src/pages/Setting';
+import Home from './src/pages/Home';
+import Setting from './src/pages/Setting';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
