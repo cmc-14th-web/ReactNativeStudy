@@ -21,6 +21,11 @@ function NewTask() {
     const addTask = useTodos().addTodos;
     const clearValue = () => setValue('');
     const handleSubmit = () => {
+        if (!value) {
+            Alert.alert('할 일을 입력해주세요!');
+            return;
+        }
+
         addTask(value);
         Alert.alert('할 일이 추가되었습니다!');
         clearValue();
