@@ -1,43 +1,47 @@
 import React, { useState } from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 import { theme } from '../constants';
 import { useTodos } from '../store/todosState';
+import { useColor } from '../store/colorState';
 import PageTitle from '../components/PageTitle';
 import Icon from '../components/Icon';
-import { useColor } from '../store/colorState';
-import { useNavigation } from '@react-navigation/native';
 
 function NewTask() {
     const [value, setValue] = useState('');
     const selectedColor = useColor().getColorCode();
+
+    const navigation = useNavigation();
+    const goBack = () => {
+        navigation.goBack();
+        clearValue();
+    };
+
     const addTask = useTodos().addTodos;
     const clearValue = () => setValue('');
     const handleSubmit = () => {
         addTask(value);
         Alert.alert('할 일이 추가되었습니다!');
         clearValue();
+        goBack();
     };
-    const navigation = useNavigation();
-    const goBack = () => {
-        navigation.goBack();
-        console.log('clicked');
-    }
 
     function BackButton() {
         return (
-            <Icon width="24" height="24" type='arrowBack' fill={selectedColor} onPress={() => navigation.goBack()} />
-        )
+            <Icon width="24" height="24" type="arrowBack" fill={selectedColor} onPress={goBack} />
+        );
     }
 
     function SubmitButton() {
         return (
             <Text onPress={handleSubmit} style={{ ...style.button, color: selectedColor }}>완료</Text>
-        )
+        );
     }
 
     return (
         <View>
-            <PageTitle title='할 일을 추가해주세요!'
+            <PageTitle title="할 일을 추가해주세요!"
                 leftButton={<BackButton />}
                 rightButton={<SubmitButton />}
             />
