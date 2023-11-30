@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import { theme } from '../constants';
 import { useTodos } from '../store/todosState';
 
 function NewTask() {
     const [value, setValue] = useState('');
     const addTask = useTodos().addTodos;
+    const clearValue = () => setValue('');
     const handleSubmit = () => {
         addTask(value);
+        Alert.alert('할 일이 추가되었습니다!');
+        clearValue();
     };
 
     return (
