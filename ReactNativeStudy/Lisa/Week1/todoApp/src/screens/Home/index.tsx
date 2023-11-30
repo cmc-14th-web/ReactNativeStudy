@@ -6,13 +6,10 @@ import {useEffect} from 'react';
 import Spacing from 'components/atoms/Spacing';
 import TodoItem from 'components/atoms/TodoItem';
 import {todoState} from 'libs/store/todo';
-import Modal from 'components/atoms/CustomModal';
-import {modalState} from 'libs/store/modal';
 import useSetButtonData from 'libs/hooks/useSetButtonData';
 
 const Home = () => {
   const todoData = useRecoilValue(todoState);
-  const modalData = useRecoilValue(modalState);
   const {setBottomTabFloatingButtonVisible} = useSetButtonData();
 
   useEffect(() => {
@@ -29,8 +26,6 @@ const Home = () => {
         )}
         ItemSeparatorComponent={() => <Spacing />}
       />
-      {modalData.isRemoveTodoVisible && <Modal variant={'removeTodo'} />}
-      {modalData.isAddTodoVisible && <Modal variant={'addTodo'} />}
     </HomeWrapper>
   );
 };
