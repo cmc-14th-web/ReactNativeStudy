@@ -1,4 +1,4 @@
-import {todoListState} from 'libs/store/todoList';
+import {todoState} from 'libs/store/todo';
 import {useRecoilValue} from 'recoil';
 import {Text, TouchableOpacity} from 'react-native';
 
@@ -15,14 +15,14 @@ const ModalBottomText = ({
   variant: CustomModalVariant;
   handlePressAddTodoConfirm: () => void;
 }) => {
-  const todoListData = useRecoilValue(todoListState);
+  const todoData = useRecoilValue(todoState);
   const {updateTodoList} = useSetTodoListData();
   const {setRemoveTodoModalVisible} = useSetModalData();
   const {stackNavigation} = useNavigator();
 
   const handlePressRemoveTodoConfirm = () => {
-    const updatedTodoListData = Array.isArray(todoListData.todo)
-      ? todoListData.todo.filter(todo => todo.id !== todoListData.removeTodo)
+    const updatedTodoListData = Array.isArray(todoData.todo)
+      ? todoData.todo.filter(todo => todo.id !== todoData.removeTodo)
       : [];
 
     updateTodoList(updatedTodoListData);

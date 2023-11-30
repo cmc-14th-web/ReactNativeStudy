@@ -5,13 +5,13 @@ import {useEffect} from 'react';
 
 import Spacing from 'components/atoms/Spacing';
 import TodoItem from 'components/atoms/TodoItem';
-import {todoListState} from 'libs/store/todoList';
+import {todoState} from 'libs/store/todo';
 import Modal from 'components/atoms/CustomModal';
 import {modalState} from 'libs/store/modal';
 import useSetButtonData from 'libs/hooks/useSetButtonData';
 
 const Home = () => {
-  const todoListData = useRecoilValue(todoListState);
+  const todoData = useRecoilValue(todoState);
   const modalData = useRecoilValue(modalState);
   const {setBottomTabFloatingButtonVisible} = useSetButtonData();
 
@@ -23,7 +23,7 @@ const Home = () => {
     <HomeWrapper>
       <FlatList
         keyExtractor={item => String(item.id)}
-        data={todoListData.todo}
+        data={todoData.todo}
         renderItem={({item}) => (
           <TodoItem id={item.id} todo={item.todo} done={item.done} />
         )}

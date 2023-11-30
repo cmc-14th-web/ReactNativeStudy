@@ -4,11 +4,11 @@ import {TextInput} from 'react-native';
 import styled from 'styled-components';
 import {theme} from 'styles/theme';
 
-import {todoListState} from 'libs/store/todoList';
+import {todoState} from 'libs/store/todo';
 import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 
 const AddTodoInput = () => {
-  const todoListData = useRecoilValue(todoListState);
+  const todoData = useRecoilValue(todoState);
 
   const {addNewTodoTitle} = useSetTodoListData();
 
@@ -22,7 +22,7 @@ const AddTodoInput = () => {
 
   return (
     <StyledTextInput
-      value={todoListData.newTodo}
+      value={todoData.newTodo}
       onChangeText={handleChangeTodoText}
     />
   );

@@ -1,19 +1,19 @@
 import {TouchableOpacity} from 'react-native';
 import {useRecoilValue} from 'recoil';
 
-import {todoListState} from 'libs/store/todoList';
+import {todoState} from 'libs/store/todo';
 import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 import CircleIcon from 'assets/icons/CircleIcon';
 import {colorState} from 'libs/store/color';
 
 const Circle = ({id}: {id: number}) => {
-  const todoListData = useRecoilValue(todoListState);
+  const todoData = useRecoilValue(todoState);
   const {updateTodoList} = useSetTodoListData();
   const colorData = useRecoilValue(colorState);
 
   const handlePressCircleIcon = () => {
-    const updatedTodoList = Array.isArray(todoListData.todo)
-      ? todoListData.todo.map(todo =>
+    const updatedTodoList = Array.isArray(todoData.todo)
+      ? todoData.todo.map(todo =>
           todo.id === id ? {...todo, done: true} : todo,
         )
       : [];

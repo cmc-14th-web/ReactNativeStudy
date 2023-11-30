@@ -1,17 +1,17 @@
 import {TouchableOpacity} from 'react-native';
 import {useRecoilValue} from 'recoil';
 
-import {todoListState} from 'libs/store/todoList';
+import {todoState} from 'libs/store/todo';
 import useSetTodoListData from 'libs/hooks/useSetTodoListData';
 import CheckIcon from 'assets/icons/CheckIcon';
 
 const Check = ({id}: {id: number}) => {
-  const todoListData = useRecoilValue(todoListState);
+  const todoData = useRecoilValue(todoState);
   const {updateTodoList} = useSetTodoListData();
 
   const handlePressCheckIcon = () => {
-    const updatedTodoList = Array.isArray(todoListData.todo)
-      ? todoListData.todo.map(todo =>
+    const updatedTodoList = Array.isArray(todoData.todo)
+      ? todoData.todo.map(todo =>
           todo.id === id ? {...todo, done: false} : todo,
         )
       : [];

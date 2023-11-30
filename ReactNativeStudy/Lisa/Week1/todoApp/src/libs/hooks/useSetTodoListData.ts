@@ -1,17 +1,17 @@
 import {useSetRecoilState} from 'recoil';
 
-import {todoListState} from 'libs/store/todoList';
+import {todoState} from 'libs/store/todo';
 import {TodoItemPropsType} from 'components/atoms/TodoItem';
 
 const useSetTodoListData = () => {
-  const setTodoListData = useSetRecoilState(todoListState);
+  const setTodoData = useSetRecoilState(todoState);
 
   const addNewTodoTitle = (newTodoData: string) => {
-    setTodoListData(prevState => ({...prevState, newTodo: newTodoData}));
+    setTodoData(prevState => ({...prevState, newTodo: newTodoData}));
   };
 
   const addNewTodo = () => {
-    setTodoListData(prevState => ({
+    setTodoData(prevState => ({
       ...prevState,
       todo: [
         ...prevState.todo,
@@ -21,14 +21,14 @@ const useSetTodoListData = () => {
   };
 
   const setRemoveTodoId = (removeTodoId: number) => {
-    setTodoListData(prevState => ({
+    setTodoData(prevState => ({
       ...prevState,
       removeTodo: removeTodoId,
     }));
   };
 
   const updateTodoList = (updatedTodoList: TodoItemPropsType[]) => {
-    setTodoListData(prevState => ({...prevState, todo: updatedTodoList}));
+    setTodoData(prevState => ({...prevState, todo: updatedTodoList}));
   };
 
   return {addNewTodoTitle, addNewTodo, setRemoveTodoId, updateTodoList};
