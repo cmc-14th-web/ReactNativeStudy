@@ -21,7 +21,7 @@ const svgPaths = {
 
 export default function Icon({ fill, width, height, type, onPress }: IconProps) {
     return (
-        <Svg width={width} height={height} viewBox="0 0 28 28" onPress={onPress}>
+        <Svg width={width} height={height} onPress={onPress} viewBox='0 0 24 24'>
             <Path d={svgPaths[type]} fill={fill} />
         </Svg>
     );
