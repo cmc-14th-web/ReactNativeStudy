@@ -1,6 +1,7 @@
 import {FlatList, View} from 'react-native';
 import styled from 'styled-components';
 import {useRecoilValue} from 'recoil';
+import {useEffect} from 'react';
 
 import Spacing from 'components/atoms/Spacing';
 import TodoItem from 'components/atoms/TodoItem';
@@ -12,9 +13,11 @@ import useSetButtonData from 'libs/hooks/useSetButtonData';
 const Home = () => {
   const todoListData = useRecoilValue(todoListState);
   const modalData = useRecoilValue(modalState);
-  const {useSetBottomTabFloatingButtonVisible} = useSetButtonData();
+  const {setBottomTabFloatingButtonVisible} = useSetButtonData();
 
-  useSetBottomTabFloatingButtonVisible(true);
+  useEffect(() => {
+    setBottomTabFloatingButtonVisible(true);
+  }, []);
 
   return (
     <HomeWrapper>

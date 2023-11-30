@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import {useSetRecoilState} from 'recoil';
 
 import {buttonState} from 'libs/store/button';
@@ -15,17 +14,8 @@ const useSetButtonData = () => {
     }));
   };
 
-  const useSetBottomTabFloatingButtonVisible = (
-    bottomTabFloatingButtonVisibleData: boolean,
-  ) => {
-    useEffect(() => {
-      setBottomTabFloatingButtonVisible(bottomTabFloatingButtonVisibleData);
-    }, []);
-  };
-
   return {
     setBottomTabFloatingButtonVisible,
-    useSetBottomTabFloatingButtonVisible,
   };
 };
 
