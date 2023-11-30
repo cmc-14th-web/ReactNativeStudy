@@ -9,7 +9,7 @@ const AddTodo = () => {
   const {setBottomTabFloatingButtonVisible} = useSetButtonData();
 
   useEffect(() => {
-    setBottomTabFloatingButtonVisible(true);
+    setBottomTabFloatingButtonVisible(false);
   }, []);
 
   return (
