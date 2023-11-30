@@ -56,11 +56,12 @@ const style = StyleSheet.create({
         borderRadius: 20,
         paddingVertical: 16,
         paddingHorizontal: 20,
-
     },
     text: {
         fontSize: 18,
         fontWeight: '400',
+        flex: 1,
+        paddingLeft: 10,
     },
 });
 
