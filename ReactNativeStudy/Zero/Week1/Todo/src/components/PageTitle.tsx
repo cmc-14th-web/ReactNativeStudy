@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+
 import { useColor } from '../store/colorState';
 
 interface PageTitleProps {

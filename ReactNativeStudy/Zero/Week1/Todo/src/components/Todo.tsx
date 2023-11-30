@@ -1,7 +1,8 @@
+import React from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
+
 import { theme } from '../constants';
 import Icon from './Icon';
-import React from 'react';
 import { useTodos } from '../store/todosState';
 import { useColor } from '../store/colorState';
 
@@ -14,11 +15,11 @@ interface TodoProps {
 function Todo({ isDone, task, id }: TodoProps) {
     const selectedColor = useColor().getColorCode();
     const toggleTodo = useTodos().toggleTask;
+    const deleteTodo = useTodos().removeTask;
+
     const handlePress = (id: number) => {
         toggleTodo(id);
     };
-
-    const deleteTodo = useTodos().removeTask;
     const handleDelete = (id: number) => {
         Alert.alert('삭제하시겠습니까?', '', [
             {

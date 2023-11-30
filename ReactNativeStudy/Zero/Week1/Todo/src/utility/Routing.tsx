@@ -1,12 +1,13 @@
 import React from 'react';
+import { View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { theme } from '../constants';
+import { useColor } from '../store/colorState';
+import Icon from '../components/Icon';
 import Home from '../pages/Home';
 import NewTask from '../pages/NewTask';
-import Icon from '../components/Icon';
-import { theme } from '../constants';
 import Setting from '../pages/Setting';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useColor } from '../store/colorState';
-import { View } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 function Routing() {

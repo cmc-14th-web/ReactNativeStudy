@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
+
 import { theme } from '../constants';
 import Icon from './Icon';
 import { useColor } from '../store/colorState';
@@ -33,6 +34,6 @@ const style = StyleSheet.create({
         height: 24,
         borderRadius: 100,
     },
-})
+});
 
 export default ColorSelector;

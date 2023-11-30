@@ -1,4 +1,5 @@
 import {atom, useRecoilState} from 'recoil';
+
 import {theme} from '../constants';
 
 const colorState = atom({

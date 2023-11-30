@@ -1,6 +1,7 @@
-import { StyleSheet, View } from 'react-native';
-import TodoList from '../components/TodoList';
 import React from 'react';
+import { StyleSheet, View } from 'react-native';
+
+import TodoList from '../components/TodoList';
 import PageTitle from '../components/PageTitle';
 
 function Home() {

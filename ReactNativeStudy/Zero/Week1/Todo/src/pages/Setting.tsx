@@ -1,14 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { theme } from '../constants';
 import React from 'react';
+
+import { theme } from '../constants';
 import PageTitle from '../components/PageTitle';
 import ColorSelector from '../components/ColorSelector';
 
 const colors: (keyof typeof theme.color)[] = ['Orange', 'Green', 'Blue', 'Purple', 'Pink'];
 
 function Setting() {
-
-
     return (
         <View style={style.container}>
             <PageTitle title="설정" />
