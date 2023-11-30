@@ -26,24 +26,29 @@ export default function CreateTodoScreen({ navigation }: CreateTodoScreenProps) 
   const onChangeText = (updatedText: string) => setText(updatedText);
 
   const onSubmitText = async () => {
-    if (text.length > 0) {
-      await addTodo(text);
-      setText("");
-
-      Alert.alert("할일이 추가되었습니다.");
-    }
+    await addTodo(text);
+    setText("");
+    Alert.alert("할일이 추가되었습니다.");
     navigation.navigate("MainTab", { screen: "HomeScreen" });
   };
 
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <TouchableOpacity onPress={() => onSubmitText()}>
-          <Text style={{ fontSize: 18, fontWeight: "700", color: primaryColor }}>완료</Text>
+        <TouchableOpacity disabled={text.length === 0} onPress={() => onSubmitText()}>
+          <Text
+            style={{
+              fontSize: 17,
+              fontWeight: "600",
+              color: text.length === 0 ? Colors.darkGray : primaryColor,
+            }}
+          >
+            완료
+          </Text>
         </TouchableOpacity>
       ),
     });
-  }, []);
+  }, [text.length]);
 
   return (
     <Container>
