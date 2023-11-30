@@ -3,6 +3,7 @@ import { theme } from '../constants';
 import Icon from './Icon';
 import React from 'react';
 import { useTodos } from '../store/todosState';
+import { useColor } from '../store/colorState';
 
 interface TodoProps {
     isDone: boolean;
@@ -11,6 +12,7 @@ interface TodoProps {
 }
 
 function Todo({ isDone, task, id }: TodoProps) {
+    const selectedColor = useColor().getColorCode();
     const toggleTodo = useTodos().toggleTask;
     const handlePress = (id: number) => {
         toggleTodo(id);
@@ -31,10 +33,10 @@ function Todo({ isDone, task, id }: TodoProps) {
     };
 
     return (
-        <View style={{ ...style.container, backgroundColor: isDone ? theme.color.Pink : theme.color.White }}
+        <View style={{ ...style.container, backgroundColor: isDone ? selectedColor : theme.color.White }}
         >
             <Icon width="24" height="24"
-                fill={isDone ? theme.color.White : theme.color.Pink}
+                fill={isDone ? theme.color.White : selectedColor}
                 type={isDone ? 'check' : 'circle'}
                 onPress={() => handlePress(id)}
             />
@@ -42,7 +44,7 @@ function Todo({ isDone, task, id }: TodoProps) {
                 style={{ ...style.text, color: isDone ? theme.color.White : theme.color.Black }}
             >{task}</Text>
             <Icon width="24" height="24"
-                fill={isDone ? theme.color.White : theme.color.Pink}
+                fill={isDone ? theme.color.White : selectedColor}
                 type="trash" onPress={() => handleDelete(id)} />
         </View >
     );
