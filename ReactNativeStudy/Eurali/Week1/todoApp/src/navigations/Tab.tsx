@@ -8,6 +8,7 @@ import Add from '../assets/add.svg';
 import Set from '../assets/set.svg';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
+import color from '../constants/color';
 
 const Tab = createBottomTabNavigator();
 
@@ -20,14 +21,14 @@ const TabNavigation = () => {
       initialRouteName="홈"
       screenOptions={{
         tabBarActiveTintColor: mainColor,
-        tabBarInactiveTintColor: '#888888',
+        tabBarInactiveTintColor: color.inactiveGrey,
       }}>
       <Tab.Screen
         name="홈"
         component={HomeStackNavigation}
         options={{
           headerShown: false,
-          tabBarIcon: ({color}) => <Home color={color} />,
+          tabBarIcon: ({color: tabColor}) => <Home color={tabColor} />,
         }}
       />
       <Tab.Screen
@@ -47,7 +48,7 @@ const TabNavigation = () => {
         component={SetStackNavigation}
         options={{
           headerShown: false,
-          tabBarIcon: ({color}) => <Set color={color} />,
+          tabBarIcon: ({color: tabColor}) => <Set color={tabColor} />,
         }}
       />
     </Tab.Navigator>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import {Alert, Text, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../store';
@@ -8,7 +8,7 @@ import Trash from '../assets/trash.svg';
 import Circle from '../assets/circle.svg';
 import {itemComplete, itemDelete} from '../store/itemSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { colorChange } from '../store/colorSlice';
+import {colorChange} from '../store/colorSlice';
 
 const ItemBox = ({title, completed}: {title: string; completed: boolean}) => {
   const mainColor = useSelector((state: RootState) => state.color.mainColor);
@@ -73,9 +73,13 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const getColor = async () => {
-      let storageColor = await AsyncStorage.getItem('color');
-      if (storageColor) {
-        dispatch(colorChange(JSON.parse(storageColor)));
+      try {
+        let storageColor = await AsyncStorage.getItem('color');
+        if (storageColor) {
+          dispatch(colorChange(JSON.parse(storageColor)));
+        }
+      } catch (error) {
+        console.error('Error fetching color from AsyncStorage:', error);
       }
     };
 

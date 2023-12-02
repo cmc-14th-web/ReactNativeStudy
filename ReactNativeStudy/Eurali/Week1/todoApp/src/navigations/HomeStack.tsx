@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../screens/Home';
 import {useSelector} from 'react-redux';
 import {RootState} from '../store';
+import color from '../constants/color';
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,7 @@ const HomeStackNavigation = () => {
         options={{
           title: 'Today',
           headerStyle: {
-            backgroundColor: 'var(--Gray, #F5F5F5)',
+            backgroundColor: color.grey,
           },
           headerTintColor: mainColor,
           headerTitleStyle: {

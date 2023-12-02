@@ -8,6 +8,7 @@ import Add from '../screens/Add';
 import {useNavigation} from '@react-navigation/native';
 import {itemAdd} from '../store/itemSlice';
 import {textChange} from '../store/textSlice';
+import color from '../constants/color';
 
 const Stack = createStackNavigator();
 
@@ -41,7 +42,7 @@ const AddStackNavigation = () => {
         options={{
           title: '할일을 추가해주세요!',
           headerStyle: {
-            backgroundColor: 'var(--Gray, #F5F5F5)',
+            backgroundColor: color.grey,
           },
           headerTintColor: mainColor,
           headerTitleStyle: {
