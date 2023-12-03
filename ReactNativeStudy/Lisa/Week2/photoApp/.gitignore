@@ -1,0 +1,12 @@
+__tests__
+.bundle
+.yarn
+android
+ios
+node_modules
+.watchmanconfig
+app.json
+Gemfile
+jest.config.json
+metro.config.json
+
