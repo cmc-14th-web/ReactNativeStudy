@@ -1,7 +1,11 @@
-import {View} from 'react-native';
+import Navigation from 'navigators/Navigation';
 
 function App(): JSX.Element {
-  return <View></View>;
+  return (
+    <>
+      <Navigation />
+    </>
+  );
 }
 
 export default App;
