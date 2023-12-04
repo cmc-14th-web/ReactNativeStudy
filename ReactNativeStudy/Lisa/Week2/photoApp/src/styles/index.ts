@@ -1,3 +1,3 @@
 export * from './palette';
-export * from './theme';
+export * from '../types/styles/theme';
 export * from './typo';
