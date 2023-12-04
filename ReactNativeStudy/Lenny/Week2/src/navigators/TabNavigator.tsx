@@ -1,42 +1,45 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import HomeScreen from '../screens/HomeScreen';
-import SettingScreen from '../screens/SettingScreen';
+import HomeScreen from '../screens/home/HomeScreen';
+import SettingScreen from '../screens/setting/SettingScreen';
 import {colors} from '../styles/colors';
 import {HomeTabIcon, SettingTabIcon} from '../components/TabBarIcon';
 import {StyleSheet} from 'react-native';
+import AddPhotoButton from '../components/AddPhotoButton';
 
 export default function TabNavigator() {
   const Tab = createBottomTabNavigator();
-
   return (
-    <Tab.Navigator
-      initialRouteName="홈"
-      screenOptions={{
-        tabBarStyle: styles.tabBarStyle,
-        headerStyle: styles.headerStyle,
-        headerTitleStyle: styles.headerTitleStyle,
-        headerShadowVisible: false,
-        headerTitleAlign: 'left',
-      }}>
-      <Tab.Screen
-        name="홈"
-        component={HomeScreen}
-        options={{
-          tabBarIcon: HomeTabIcon,
-          headerTitle: 'LANY님의 사진첩',
-          ...screenOptions,
-        }}
-      />
-      <Tab.Screen
-        name="설정"
-        component={SettingScreen}
-        options={{
-          tabBarIcon: SettingTabIcon,
-          ...screenOptions,
-        }}
-      />
-    </Tab.Navigator>
+    <>
+      <Tab.Navigator
+        initialRouteName="홈"
+        screenOptions={{
+          tabBarStyle: styles.tabBarStyle,
+          headerStyle: styles.headerStyle,
+          headerTitleStyle: styles.headerTitleStyle,
+          headerShadowVisible: false,
+          headerTitleAlign: 'left',
+        }}>
+        <Tab.Screen
+          name="홈"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: HomeTabIcon,
+            headerTitle: 'LANY님의 사진첩',
+            ...screenOptions,
+          }}
+        />
+        <Tab.Screen
+          name="설정"
+          component={SettingScreen}
+          options={{
+            tabBarIcon: SettingTabIcon,
+            ...screenOptions,
+          }}
+        />
+      </Tab.Navigator>
+      <AddPhotoButton />
+    </>
   );
 }
 
