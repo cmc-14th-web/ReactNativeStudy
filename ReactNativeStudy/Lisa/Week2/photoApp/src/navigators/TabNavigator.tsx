@@ -4,7 +4,7 @@ import SvgIcons from 'assets/icons/SvgIcons';
 import AddPhotoButton from 'components/atoms/AddPhotoButton';
 import {TabMenu} from 'constants/navigator/menu';
 import {TabBarLabel, TabTitle} from 'constants/navigator/title';
-import EmptyPage from 'screens/EmptyPage';
+import AddPhoto from 'screens/AddPhoto';
 import Home from 'screens/Home';
 import Settings from 'screens/Settings';
 import {theme} from 'styles/theme';
@@ -14,7 +14,7 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   const getTabBarIcon = (routeName: string, focused: boolean) => {
-    const iconColor = focused ? 'pink' : 'gray_400';
+    const iconColor = focused ? 'gradient_100' : 'gray_400';
 
     return (
       <>
@@ -31,7 +31,7 @@ const TabNavigator = () => {
   }) => ({
     tabBarIcon: ({focused}: {focused: boolean}) =>
       getTabBarIcon(route.name, focused),
-    tabBarActiveTintColor: theme.palette.pink,
+    tabBarActiveTintColor: theme.palette.gradient_100,
     tabBarInactiveTintColor: theme.palette.gray_400,
     tabBarStyle: {
       display:
@@ -51,7 +51,7 @@ const TabNavigator = () => {
     headerTitleStyle: {
       fontSize: typoStyles.typo.heading.fontSize,
       lineHeight: typoStyles.typo.heading.lineHeight,
-      color: theme.palette.pink,
+      color: theme.palette.gradient_100,
     },
     headerTitleContainerStyle: {
       paddingVertical: 20,
@@ -72,7 +72,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name={TabMenu.AddPhoto}
-        component={EmptyPage}
+        component={AddPhoto}
         options={{
           title: TabTitle.AddPhoto,
           headerShadowVisible: false,

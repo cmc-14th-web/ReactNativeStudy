@@ -11,7 +11,7 @@ const AddPhotoButton = () => {
       style={{
         bottom: 37,
       }}>
-      <SvgIcons.AddIcon fill={'pink'} />
+      <SvgIcons.AddIcon fill={'gradient_100'} />
     </TouchableOpacity>
   );
 };
