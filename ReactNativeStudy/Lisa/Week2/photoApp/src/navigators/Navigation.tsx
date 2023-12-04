@@ -1,6 +1,6 @@
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import StackNavigator from './StackNavigator';
-import {theme} from 'styles';
+import {theme} from 'styles/theme';
 
 const Theme = {
   ...DefaultTheme,

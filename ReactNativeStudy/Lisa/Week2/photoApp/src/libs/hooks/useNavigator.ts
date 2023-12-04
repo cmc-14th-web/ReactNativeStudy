@@ -1,8 +1,9 @@
-import {useNavigation} from '@react-navigation/native';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList, TabParamList} from 'types/navigator';
 
 const useNavigator = () => {
-  const stackNavigation = useNavigation();
-  const tabNavigation = useNavigation();
+  const stackNavigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const tabNavigation = useNavigation<NavigationProp<TabParamList>>();
 
   return {stackNavigation, tabNavigation};
 };

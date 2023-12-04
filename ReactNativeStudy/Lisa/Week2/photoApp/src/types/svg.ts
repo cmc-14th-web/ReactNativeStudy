@@ -1,4 +1,4 @@
-import {KeyOfPalette} from 'types/styles/theme';
+import {KeyOfPalette} from 'styles/theme';
 
 export type SvgPropsType = {
   width?: number;
