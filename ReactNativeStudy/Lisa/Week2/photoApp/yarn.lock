@@ -2834,6 +2834,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-native-linear-gradient@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "@types/react-native-linear-gradient@npm:2.4.0"
+  dependencies:
+    react-native-linear-gradient: "*"
+  checksum: 7ccaa5c0fd7c2667f467f3e589c61b4d6ee38a1475fab9e39c251ac403742f3e282bd89458e348ea9f721c92b02649f3dc1e947c89c96d4689f554004c636db6
+  languageName: node
+  linkType: hard
+
 "@types/react-native@npm:^0.72.8":
   version: 0.72.8
   resolution: "@types/react-native@npm:0.72.8"
@@ -8304,6 +8313,7 @@ __metadata:
     "@tsconfig/react-native": ^3.0.0
     "@types/react": ^18.2.41
     "@types/react-native": ^0.72.8
+    "@types/react-native-linear-gradient": ^2.4.0
     "@types/react-test-renderer": ^18.0.0
     babel-jest: ^29.2.1
     babel-plugin-module-resolver: ^5.0.0
@@ -8316,6 +8326,7 @@ __metadata:
     react: 18.2.0
     react-native: 0.72.7
     react-native-gesture-handler: ^2.14.0
+    react-native-linear-gradient: ^2.8.3
     react-native-safe-area-context: ^4.7.4
     react-native-screens: ^3.27.0
     react-native-svg: ^14.0.0
@@ -8594,6 +8605,16 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 8227d3f66f2f41932d3b7d12cc029d4ff1f57ba93249d71844cb1b75bae887cc50f9df516da52863746a2df8af4da013c1eb28b484caf181f782bcfe35bc59b0
+  languageName: node
+  linkType: hard
+
+"react-native-linear-gradient@npm:*, react-native-linear-gradient@npm:^2.8.3":
+  version: 2.8.3
+  resolution: "react-native-linear-gradient@npm:2.8.3"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: f980d324e551bbc475c6406bdc5250a08242020cbe653412fa169bbdf51e28a502e225de105b4d696d6a1a1b733d44782469020f4936d8b3ce0e2c78e51cf58f
   languageName: node
   linkType: hard
 
