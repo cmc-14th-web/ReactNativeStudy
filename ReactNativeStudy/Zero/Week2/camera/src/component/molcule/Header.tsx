@@ -24,6 +24,10 @@ const styles = StyleSheet.create({
     container: {
         paddingHorizontal: 18,
         paddingVertical: 20,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
     },
     title: {
         fontSize: 24,
