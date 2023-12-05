@@ -11,3 +11,10 @@ export const COLOR = {
 export const GRADIENT = {
   Gradient100: `linear-gradient(90deg, ${COLOR.Pink} 0%, ${COLOR.Purple} 100%)`,
 };
+
+export type ColorName = keyof typeof COLOR;
+export type GradientName = keyof typeof GRADIENT;
+export type ColorValue = (typeof COLOR)[ColorName];
+export type GradientValue = (typeof GRADIENT)[GradientName];
+
+export type Color = ColorValue | GradientValue;
