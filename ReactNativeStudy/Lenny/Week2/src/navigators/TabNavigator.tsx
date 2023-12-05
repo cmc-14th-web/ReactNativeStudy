@@ -5,7 +5,7 @@ import SettingScreen from '../screens/setting/SettingScreen';
 import {colors} from '../styles/colors';
 import {HomeTabIcon, SettingTabIcon} from '../components/TabBarIcon';
 import {StyleSheet} from 'react-native';
-import AddPhotoButton from '../components/AddPhotoButton';
+import AddImageButton from '../components/AddImageButton';
 
 export default function TabNavigator() {
   const Tab = createBottomTabNavigator();
@@ -38,7 +38,7 @@ export default function TabNavigator() {
           }}
         />
       </Tab.Navigator>
-      <AddPhotoButton />
+      <AddImageButton />
     </>
   );
 }

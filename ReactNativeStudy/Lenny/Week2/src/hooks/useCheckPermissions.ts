@@ -59,7 +59,6 @@ const useCheckPermissions = () => {
         if (photoLibraryPermissionStatus === 'blocked') {
           Alert.alert('갤러리 권한을 허용해주세요.');
         }
-        console.log(result);
       })
       .catch(error => {
         console.log(error);

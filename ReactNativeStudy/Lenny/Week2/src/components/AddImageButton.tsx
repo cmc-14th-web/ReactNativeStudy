@@ -11,13 +11,16 @@ import CameraSvg from '../assets/camera.svg';
 import GallerySvg from '../assets/gallery.svg';
 import AddSvg from '../assets/add.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
+import ImagePicker from 'react-native-image-crop-picker';
+import {useStore} from '../store/store';
 
 const deviceHeight = Dimensions.get('screen').height;
 const deviceWidth = Dimensions.get('screen').width;
 
-export default function AddPhotoButton() {
+export default function AddImageButton() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {bottom} = useSafeAreaInsets();
+  const {images, setImages} = useStore();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -71,7 +74,31 @@ export default function AddPhotoButton() {
               카메라로 촬영하기
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.bottomSheetButtonStyle}>
+          <TouchableOpacity
+            style={styles.bottomSheetButtonStyle}
+            onPress={() =>
+              ImagePicker.openPicker({
+                width: (deviceWidth - 32) / 3,
+                height: (deviceWidth - 32) / 3,
+                cropping: true,
+              })
+                .then(image => {
+                  console.log(image);
+                  handleCloseButton();
+                  setImages([
+                    ...images,
+                    {
+                      creationDate: image.creationDate,
+                      path: image.path,
+                      height: image.height,
+                      width: image.width,
+                    },
+                  ]);
+                })
+                .catch(e => {
+                  console.log(e);
+                })
+            }>
             <GallerySvg
               style={styles.bottomSheetButtonSvgStyle}
               color="black"
