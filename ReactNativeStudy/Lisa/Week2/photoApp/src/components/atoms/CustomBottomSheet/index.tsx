@@ -16,6 +16,7 @@ const CustomBottomSheet = ({
 }) => {
   const bottomSheetRef = useRef<RBSheet>(null);
   const {selectPhotosFromGallery} = useImage();
+  const {tabNavigation} = useNavigator();
 
   useEffect(() => {
     isBottomSheetOpen
@@ -29,6 +30,7 @@ const CustomBottomSheet = ({
 
   const handleCloseBottomSheet = () => {
     setIsBottomSheetOpen(false);
+    tabNavigation.navigate('Home');
   };
 
   const handlePressGalleryButton = () => {
