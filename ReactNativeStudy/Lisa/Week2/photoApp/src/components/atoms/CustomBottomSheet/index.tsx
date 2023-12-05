@@ -1,4 +1,6 @@
 import SvgIcons from 'assets/icons/SvgIcons';
+import {useImage} from 'libs/hooks/useImage';
+import useNavigator from 'libs/hooks/useNavigator';
 import {Dispatch, SetStateAction, useEffect, useRef} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
@@ -13,6 +15,7 @@ const CustomBottomSheet = ({
   setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const bottomSheetRef = useRef<RBSheet>(null);
+  const {selectPhotosFromGallery} = useImage();
 
   useEffect(() => {
     isBottomSheetOpen
@@ -28,6 +31,11 @@ const CustomBottomSheet = ({
     setIsBottomSheetOpen(false);
   };
 
+  const handlePressGalleryButton = () => {
+    selectPhotosFromGallery();
+    setIsBottomSheetOpen(false);
+  };
+
   return (
     <RBSheet
       ref={bottomSheetRef}
@@ -40,7 +48,9 @@ const CustomBottomSheet = ({
           <SvgIcons.CameraIcon fill={'white'} />
           <Text style={bottomSheetStyles.text}>카메라로 촬영하기</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={bottomSheetStyles.galleryButton}>
+        <TouchableOpacity
+          style={bottomSheetStyles.galleryButton}
+          onPress={handlePressGalleryButton}>
           <SvgIcons.GalleryIcon fill={'white'} />
           <Text style={bottomSheetStyles.text}>갤러리에서 선택하기</Text>
         </TouchableOpacity>

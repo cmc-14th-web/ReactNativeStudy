@@ -8811,6 +8811,8 @@ __metadata:
     react: 18.2.0
     react-native: 0.72.7
     react-native-gesture-handler: ^2.14.0
+    react-native-image-crop-picker: ^0.40.2
+    react-native-image-resizer: ^1.4.5
     react-native-linear-gradient: ^2.8.3
     react-native-permissions: ^3.10.1
     react-native-raw-bottom-sheet: ^2.2.0
@@ -9154,6 +9156,24 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 8227d3f66f2f41932d3b7d12cc029d4ff1f57ba93249d71844cb1b75bae887cc50f9df516da52863746a2df8af4da013c1eb28b484caf181f782bcfe35bc59b0
+  languageName: node
+  linkType: hard
+
+"react-native-image-crop-picker@npm:^0.40.2":
+  version: 0.40.2
+  resolution: "react-native-image-crop-picker@npm:0.40.2"
+  peerDependencies:
+    react-native: ">=0.40.0"
+  checksum: d4e994a6bfcd6f3c6afd49788bbafe2ff14395531d499fefbdbffae9d59b3248a0326a1727d274ba4e3da42fe8486f1c42b4c845acace41a8794e0c50513936b
+  languageName: node
+  linkType: hard
+
+"react-native-image-resizer@npm:^1.4.5":
+  version: 1.4.5
+  resolution: "react-native-image-resizer@npm:1.4.5"
+  peerDependencies:
+    react-native: ">=v0.40.0"
+  checksum: c530b119f25c27b669148461554440acd05fb37f0a24a1afc3d58c861e426551c70c679983c0399034fd54ca3575c89d0863778c49295721cb33b65bbf3f0f37
   languageName: node
   linkType: hard
 
