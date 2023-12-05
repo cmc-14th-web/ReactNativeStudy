@@ -1,10 +1,7 @@
 import Navigation from 'navigators/Navigation';
 import {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {
-  checkCameraPermission,
-  checkExternalStoragePermission,
-} from 'utils/checkPermission';
+import {checkCameraAndGalleryPermission} from 'utils/checkPermission';
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -14,8 +11,7 @@ function App(): JSX.Element {
   });
 
   useEffect(() => {
-    checkCameraPermission();
-    checkExternalStoragePermission();
+    checkCameraAndGalleryPermission();
   }, []);
 
   return (

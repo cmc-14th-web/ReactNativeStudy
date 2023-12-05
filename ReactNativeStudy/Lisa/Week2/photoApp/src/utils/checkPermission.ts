@@ -1,32 +1,26 @@
-import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import {requestMultiple, PERMISSIONS, RESULTS} from 'react-native-permissions';
 import {Alert} from 'react-native';
 
-export const checkCameraPermission = async () => {
+export const checkCameraAndGalleryPermission = async () => {
   try {
-    const cameraPermissionStatus = await request(PERMISSIONS.ANDROID.CAMERA);
-
-    if (cameraPermissionStatus === RESULTS.GRANTED) {
-      // 권한이 허용된 경우에 실행되는 로직
-    } else {
-      // 권한이 거부된 경우에 실행되는 로직
-      Alert.alert('카메라 권한이 거부되었습니다.');
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const checkExternalStoragePermission = async () => {
-  try {
-    const readExternalStoragePermissionStatus = await request(
+    const PermissionStatus = await requestMultiple([
+      PERMISSIONS.ANDROID.CAMERA,
       PERMISSIONS.ANDROID.READ_MEDIA_IMAGES,
-    );
+    ]);
 
-    if (readExternalStoragePermissionStatus === RESULTS.GRANTED) {
-      // 권한이 허용된 경우에 실행되는 로직
-    } else {
-      // 권한이 거부된 경우에 실행되는 로직
-      Alert.alert('갤러리 읽기 권한이 거부되었습니다.');
+    if (
+      PermissionStatus[PERMISSIONS.ANDROID.CAMERA] === RESULTS.GRANTED &&
+      PermissionStatus[PERMISSIONS.ANDROID.READ_MEDIA_IMAGES]
+    ) {
+    } else if (
+      PermissionStatus[PERMISSIONS.ANDROID.CAMERA] !== RESULTS.GRANTED
+    ) {
+      Alert.alert('카메라 권한이 거부되었습니다.');
+    } else if (
+      PermissionStatus[PERMISSIONS.ANDROID.READ_MEDIA_IMAGES] !==
+      RESULTS.GRANTED
+    ) {
+      Alert.alert('갤러리 권한이 거부되었습니다.');
     }
   } catch (error) {
     console.log(error);
