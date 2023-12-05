@@ -16,7 +16,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import SplashScreen from 'react-native-splash-screen';
-import EmptyGalleryTemplates from './src/component/templates/EmptyGalleryTemplates';
+import EmptyGalleryTemplates from './src/component/templates/EmptyGalleryTemplate';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabNavigation from './src/navigation/BottomTabNavigation';
 
