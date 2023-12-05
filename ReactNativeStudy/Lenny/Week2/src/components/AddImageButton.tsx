@@ -1,30 +1,52 @@
 import React, {useMemo, useRef, useState} from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import CameraSvg from '../assets/camera.svg';
 import GallerySvg from '../assets/gallery.svg';
 import AddSvg from '../assets/add.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
 import {useStore} from '../store/store';
-
-const deviceHeight = Dimensions.get('screen').height;
-const deviceWidth = Dimensions.get('screen').width;
+import {ImageDataType, SelectedImageDataType} from '../types/ImageType';
+import {deviceWidth, deviceHight} from '../constants/device';
 
 export default function AddImageButton() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {bottom} = useSafeAreaInsets();
-  const {images, setImages} = useStore();
+  const {setImages} = useStore();
+  const currentImages = useRef<SelectedImageDataType[]>([]);
+  let selectedImagesCount = 1;
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const snapPoints = useMemo(() => ['20%'], []);
+
+  const openEdit = async (selectedImages: ImageOrVideo[] | ImageDataType[]) => {
+    const selectedImagesLength = selectedImages.length;
+    // 1개씩 순서대로 자르기 위해 async await와 재귀함수 사용
+    await ImagePicker.openCropper({
+      path: selectedImages[selectedImagesLength - selectedImagesCount].path,
+      mediaType: 'photo',
+      width: (deviceWidth - 32) / 3,
+      height: (deviceWidth - 32) / 3,
+    })
+      .then(async image => {
+        selectedImagesCount++;
+        currentImages.current = [
+          ...currentImages.current,
+          {
+            creationDate: new Date(),
+            path: image.path,
+            height: image.height,
+            width: image.width,
+          },
+        ];
+        if (selectedImagesCount <= selectedImagesLength) {
+          await openEdit(selectedImages);
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
   const handleCloseButton = () => {
     bottomSheetRef.current?.close();
@@ -77,24 +99,19 @@ export default function AddImageButton() {
           <TouchableOpacity
             style={styles.bottomSheetButtonStyle}
             onPress={() =>
+              // 다수 선택 모드로 갤러리 열기
               ImagePicker.openPicker({
-                width: (deviceWidth - 32) / 3,
-                height: (deviceWidth - 32) / 3,
-                cropping: true,
+                multiple: true,
               })
-                .then(image => {
-                  console.log(image);
-                  handleCloseButton();
-                  setImages([
-                    ...images,
-                    {
-                      creationDate: image.creationDate,
-                      path: image.path,
-                      height: image.height,
-                      width: image.width,
-                    },
-                  ]);
-                })
+                .then(
+                  async (selectedImages: ImageOrVideo[] | ImageDataType[]) => {
+                    // 선택을 완료했다면 갤러리 닫기
+                    handleCloseButton();
+                    // 자르기 모드로 진입
+                    await openEdit(selectedImages);
+                    setImages(currentImages.current);
+                  },
+                )
                 .catch(e => {
                   console.log(e);
                 })
@@ -117,7 +134,7 @@ const styles = StyleSheet.create({
   bottomSheetBackgroundStyle: {
     position: 'absolute',
     flex: 1,
-    height: deviceHeight,
+    height: deviceHight,
     width: deviceWidth,
     backgroundColor: 'black',
     opacity: 0.5,

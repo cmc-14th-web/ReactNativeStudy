@@ -1,19 +1,19 @@
 import {create} from 'zustand';
-import {ImageDataType} from '../types/ImageType';
+import {SelectedImageDataType} from '../types/ImageType';
 
 interface StoreState {
-  images: ImageDataType[];
+  images: SelectedImageDataType[];
   savedDate: string;
 }
 
 interface StoreAction {
-  setImages: (todo: ImageDataType[]) => void;
+  setImages: (todo: SelectedImageDataType[]) => void;
   setSavedDate: (savedDate: string) => void;
 }
 
 export const useStore = create<StoreState & StoreAction>(set => ({
   images: [],
   savedDate: '',
-  setImages: (state: ImageDataType[]) => set({images: [...state]}),
+  setImages: (state: SelectedImageDataType[]) => set({images: [...state]}),
   setSavedDate: (state: string) => set({savedDate: state}),
 }));

@@ -1,10 +1,10 @@
 import React from 'react';
-import {SafeAreaView, Image, Dimensions, StyleSheet} from 'react-native';
+import {SafeAreaView, Image, StyleSheet} from 'react-native';
 import {colors} from '../styles/colors';
+import {deviceWidth} from '../constants/device';
 
 export default function DetailImage({route}: any) {
   const {path} = route.params;
-  const deviceWidth = Dimensions.get('screen').width;
   return (
     <SafeAreaView style={styles.detailImageContainer}>
       <Image source={{uri: path}} width={deviceWidth} height={deviceWidth} />

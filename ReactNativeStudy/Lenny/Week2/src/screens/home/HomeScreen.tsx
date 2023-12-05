@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-  Dimensions,
-  FlatList,
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {FlatList, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../styles/colors';
 import {useStore} from '../../store/store';
-import {ImageDataType} from '../../types/ImageType';
+import {SelectedImageDataType} from '../../types/ImageType';
+import {deviceWidth} from '../../constants/device';
 
 export default function HomeScreen({navigation}: any) {
   const {images, setSavedDate} = useStore();
-  const {width: deviceWidth} = Dimensions.get('window');
 
   const updateDetailImageData = (creationDate: Date) => {
     const imageCreationDate = creationDate;
@@ -22,10 +14,15 @@ export default function HomeScreen({navigation}: any) {
       .toISOString()
       .split('T')[0]
       .replaceAll('-', '.');
-    const hour = imageCreationDate.getHours();
-    const minute = imageCreationDate.getMinutes();
 
-    setSavedDate(`${yearMonthDay} ${hour}:${minute}`);
+    // 00~09시 일 때 getHours()를 하게 되면 1자리만 가져오게 됨
+    // 따라서 해당 1자리가 아닌 2자리를 만들어주는 로직, 시간과 분 모두 해당
+    const hour = imageCreationDate.getHours();
+    const hourToString = hour / 10 < 1 ? `0${hour}` : hour;
+    const minute = imageCreationDate.getMinutes();
+    const minuteToString = minute / 10 < 1 ? `0${minute}` : minute;
+
+    setSavedDate(`${yearMonthDay} ${hourToString}:${minuteToString}`);
   };
 
   return (
@@ -47,7 +44,7 @@ export default function HomeScreen({navigation}: any) {
           <FlatList
             contentContainerStyle={styles.imageListContainerStyle}
             data={images}
-            renderItem={({item}: {item: ImageDataType}) => {
+            renderItem={({item}: {item: SelectedImageDataType}) => {
               return (
                 <Pressable
                   onPress={() => {
