@@ -1,11 +1,26 @@
-import { Text, View } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
+import BackgroundContainer from '../component/atom/BackgroundContainer';
+import { COLOR } from '../constants/color';
 
 function Setting() {
     return (
-        <View>
-            <Text>Setting</Text>
-        </View>
+        <BackgroundContainer style={styles.container}>
+            <Text style={styles.title}>아직 준비되지 않은 페이지입니다!</Text>
+        </BackgroundContainer>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: '500',
+        color: COLOR.Gray400,
+    }
+});
 
 export default Setting;

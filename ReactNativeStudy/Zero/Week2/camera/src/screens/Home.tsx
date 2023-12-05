@@ -1,10 +1,13 @@
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
+import BackgroundContainer from '../component/atom/BackgroundContainer';
+import Header from '../component/molcule/Header';
 
 function Home() {
     return (
-        <View>
+        <BackgroundContainer>
+            <Header title="Home" />
             <Text>Home</Text>
-        </View>
+        </BackgroundContainer>
     );
 }
 

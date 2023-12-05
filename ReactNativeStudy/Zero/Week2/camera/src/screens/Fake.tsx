@@ -1,10 +1,11 @@
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
+import BackgroundContainer from '../component/atom/BackgroundContainer';
 
 function Fake() {
     return (
-        <View>
+        <BackgroundContainer>
             <Text>Fake</Text>
-        </View>
+        </BackgroundContainer>
     );
 }
 
