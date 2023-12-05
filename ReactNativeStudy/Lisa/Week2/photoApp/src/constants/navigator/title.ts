@@ -1,7 +1,7 @@
 export const enum TabTitle {
-  Home = 'CMC님의 사진첩',
+  Home = 'Lisa님의 사진첩',
   Settings = '설정',
-  AddPhoto = 'CMC님의 사진첩',
+  AddPhoto = 'Lisa님의 사진첩',
 }
 
 export const enum TabBarLabel {

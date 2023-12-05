@@ -6,7 +6,11 @@ export const typoStyles = {
       fontSize: 24,
       lineHeight: 33,
     },
-    body: {
+    body_1: {
+      fontSize: 16,
+      fontWeight: '500',
+    },
+    body_2: {
       fontSize: 16,
       fontWeight: '500',
     },

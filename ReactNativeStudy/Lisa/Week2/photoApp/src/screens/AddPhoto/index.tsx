@@ -1,9 +1,23 @@
-import {View, Text} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
+import CustomBottomSheet from 'components/atoms/CustomBottomSheet';
+import {useCallback, useState} from 'react';
+import {View} from 'react-native';
 
 const AddPhoto = () => {
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(true);
+
+  useFocusEffect(
+    useCallback(() => {
+      setIsBottomSheetOpen(true);
+    }, []),
+  );
+
   return (
     <View>
-      <Text style={{color: 'white'}}>사진 추가</Text>
+      <CustomBottomSheet
+        isBottomSheetOpen={isBottomSheetOpen}
+        setIsBottomSheetOpen={setIsBottomSheetOpen}
+      />
     </View>
   );
 };

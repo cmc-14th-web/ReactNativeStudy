@@ -3,11 +3,11 @@ import useNavigator from 'libs/hooks/useNavigator';
 import {TouchableOpacity} from 'react-native';
 
 const AddPhotoButton = () => {
-  const {stackNavigation} = useNavigator();
+  const {tabNavigation} = useNavigator();
 
   return (
     <TouchableOpacity
-      onPress={() => stackNavigation.navigate('AddPhoto')}
+      onPress={() => tabNavigation.navigate('AddPhoto')}
       style={{
         bottom: 37,
       }}>
