@@ -5,7 +5,7 @@ import Header from '../component/molcule/Header';
 function Home() {
     return (
         <BackgroundContainer>
-            <Header title="Home" />
+            <Header title="CMC님의 사진첩" />
             <Text>Home</Text>
         </BackgroundContainer>
     );

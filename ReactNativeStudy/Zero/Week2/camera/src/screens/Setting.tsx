@@ -1,10 +1,12 @@
 import { StyleSheet, Text } from 'react-native';
 import BackgroundContainer from '../component/atom/BackgroundContainer';
 import { COLOR } from '../constants/color';
+import Header from '../component/molcule/Header';
 
 function Setting() {
     return (
         <BackgroundContainer style={styles.container}>
+            <Header title="설정" />
             <Text style={styles.title}>아직 준비되지 않은 페이지입니다!</Text>
         </BackgroundContainer>
     );
