@@ -10,11 +10,23 @@ import {
 } from 'react-native';
 import {colors} from '../../styles/colors';
 import {useStore} from '../../store/store';
-import {ImageType} from '../../types/ImageType';
+import {ImageDataType} from '../../types/ImageType';
 
-export default function HomeScreen() {
-  const {images} = useStore();
+export default function HomeScreen({navigation}: any) {
+  const {images, setSavedDate} = useStore();
   const {width: deviceWidth} = Dimensions.get('window');
+
+  const updateDetailImageData = (creationDate: Date) => {
+    const imageCreationDate = creationDate;
+    const yearMonthDay = imageCreationDate
+      .toISOString()
+      .split('T')[0]
+      .replaceAll('-', '.');
+    const hour = imageCreationDate.getHours();
+    const minute = imageCreationDate.getMinutes();
+
+    setSavedDate(`${yearMonthDay} ${hour}:${minute}`);
+  };
 
   return (
     <View style={styles.homeScreenContainer}>
@@ -35,16 +47,27 @@ export default function HomeScreen() {
           <FlatList
             contentContainerStyle={styles.imageListContainerStyle}
             data={images}
-            renderItem={({item}: {item: ImageType}) => (
-              <Pressable onPress={() => {}}>
-                <Image
-                  source={{uri: item.path}}
-                  width={(deviceWidth - 32) / 3}
-                  height={(deviceWidth - 32) / 3}
-                />
-              </Pressable>
-            )}
-            keyExtractor={item => item.creationDate!}
+            renderItem={({item}: {item: ImageDataType}) => {
+              return (
+                <Pressable
+                  onPress={() => {
+                    updateDetailImageData(item.creationDate);
+                    navigation.navigate({
+                      name: 'DetailImage',
+                      params: {
+                        path: item.path,
+                      },
+                    });
+                  }}>
+                  <Image
+                    source={{uri: item.path}}
+                    width={(deviceWidth - 32) / 3}
+                    height={(deviceWidth - 32) / 3}
+                  />
+                </Pressable>
+              );
+            }}
+            keyExtractor={item => item.creationDate.toISOString()}
           />
         </View>
       )}
