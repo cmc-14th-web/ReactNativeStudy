@@ -16,6 +16,9 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 import SplashScreen from 'react-native-splash-screen';
+import EmptyGalleryTemplates from './src/component/templates/EmptyGalleryTemplates';
+import { NavigationContainer } from '@react-navigation/native';
+import BottomTabNavigation from './src/navigation/BottomTabNavigation';
 
 function App(): JSX.Element {
   useEffect(() => {
@@ -23,13 +26,9 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <SafeAreaView>
-      <StatusBar
-        barStyle={'light-content'}
-        backgroundColor={Colors.darker}
-      />
-
-    </SafeAreaView>
+    <NavigationContainer>
+      <BottomTabNavigation />
+    </NavigationContainer>
   );
 }
 
