@@ -2,10 +2,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Fake from "../screens/Fake";
 import Setting from "../screens/Setting";
-import { Icon } from "../component/atom/Icon";
-import { COLOR, GRADIENT } from "../constants/color";
+import { COLOR } from "../constants/color";
 import CustomTabBarButton from "../component/molcule/CustomTabBarButton";
-import { View } from "react-native";
+import BottomContextMenu from "../component/molcule/BottomContextMenu";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,16 +30,7 @@ function BottomTabNavigation() {
             />
             <Tab.Screen name="Add" component={Fake}
                 options={{
-                    tabBarIcon: () => (
-                        <View
-                            style={{
-                                position: 'absolute',
-                                bottom: 30,
-                            }}
-                        >
-                            <Icon name="Plus" size={60} fill={GRADIENT.Gradient100} />
-                        </View>
-                    ),
+                    tabBarButton: () => (<BottomContextMenu />),
                 }}
             />
             <Tab.Screen name="Settings" component={Setting}
