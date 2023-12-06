@@ -12,10 +12,12 @@ function BottomContextMenu() {
     const [modalVisible, setModalVisible] = useState(false);
     const { createImage } = useImages();
 
+    const CROP_SIZE = 367;
+
     const handleCamera = () => {
         ImagePicker.openCamera({
-            width: 300,
-            height: 400,
+            width: CROP_SIZE,
+            height: CROP_SIZE,
             cropping: true,
         }).then(image => {
             createImage(image.path);
@@ -24,8 +26,8 @@ function BottomContextMenu() {
 
     const handleGallery = () => {
         ImagePicker.openPicker({
-            width: 300,
-            height: 400,
+            width: CROP_SIZE,
+            height: CROP_SIZE,
             multiple: true,
             compressImageQuality: 0.5,
         }).then(async images => {
@@ -33,8 +35,8 @@ function BottomContextMenu() {
                 const croppedImage = await ImagePicker.openCropper({
                     mediaType: 'photo',
                     path: image.path,
-                    width: 300,
-                    height: 400,
+                    width: CROP_SIZE,
+                    height: CROP_SIZE,
                 });
                 createImage(croppedImage.path);
             }
