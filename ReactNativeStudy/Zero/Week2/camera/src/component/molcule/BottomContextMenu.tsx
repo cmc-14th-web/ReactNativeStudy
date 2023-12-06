@@ -26,12 +26,18 @@ function BottomContextMenu() {
         ImagePicker.openPicker({
             width: 300,
             height: 400,
-            cropping: true,
             multiple: true,
-        }).then(images => {
-            images.forEach(image => {
-                createImage(image.path);
-            });
+            compressImageQuality: 0.5,
+        }).then(async images => {
+            for await (const image of images) {
+                const croppedImage = await ImagePicker.openCropper({
+                    mediaType: 'photo',
+                    path: image.path,
+                    width: 300,
+                    height: 400,
+                });
+                createImage(croppedImage.path);
+            }
         }).finally(() => setModalVisible(false));
     }
 
