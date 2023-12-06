@@ -1,14 +1,16 @@
-import { StackScreenProps, createStackNavigator } from "@react-navigation/stack";
-import Home from "../screens/Home";
-import ImageDetail from "../screens/ImageDetail";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import { Image } from "../type/image";
 
-const Stack = createStackNavigator();
+import ImageDetail from "../screens/ImageDetail";
+import Home from "../screens/Home";
 
 export type HomeStackParamList = {
     Home: undefined;
     ImageDetail: { image: Image };
 };
+
+const Stack = createStackNavigator<HomeStackParamList>();
 
 export default function HomeStack() {
     return (

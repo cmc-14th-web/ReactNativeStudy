@@ -1,9 +1,13 @@
-import BackgroundContainer from "../component/atom/BackgroundContainer";
-import Header from "../component/molcule/Header";
-import { Image as ImageData } from "../type/image";
 import { Image, View } from "react-native";
 
-function ImageDetail({ route }) {
+import BackgroundContainer from "../component/atom/BackgroundContainer";
+import Header from "../component/molcule/Header";
+import { StackScreenProps } from "@react-navigation/stack";
+import { HomeStackParamList } from "../navigation/HomeStack";
+
+type ImageDetailProps = StackScreenProps<HomeStackParamList, 'ImageDetail'>;
+
+function ImageDetail({ route }: ImageDetailProps) {
     const { image } = route.params;
 
     return (
