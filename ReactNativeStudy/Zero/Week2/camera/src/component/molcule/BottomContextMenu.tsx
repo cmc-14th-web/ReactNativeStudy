@@ -1,73 +1,38 @@
 import React, { useState } from 'react'
-import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
-import ImagePicker from 'react-native-image-crop-picker';
 
 import { COLOR, GRADIENT } from '../../constants/color';
-import { useImages } from '../../hooks/useImages';
 
 import { Icon } from '../atom/Icon';
+import ImageUploadByCameraButton from './ImageUploadByCameraButton';
+import ImageUploadByGalleryButton from './ImageUploadByGalleryButton';
 
 function BottomContextMenu() {
     const [modalVisible, setModalVisible] = useState(false);
-    const { createImage } = useImages();
 
-    const CROP_SIZE = 367;
-
-    const handleCamera = () => {
-        ImagePicker.openCamera({
-            width: CROP_SIZE,
-            height: CROP_SIZE,
-            cropping: true,
-        }).then(image => {
-            createImage(image.path);
-        }).finally(() => setModalVisible(false));
-    }
-
-    const handleGallery = () => {
-        ImagePicker.openPicker({
-            width: CROP_SIZE,
-            height: CROP_SIZE,
-            multiple: true,
-            compressImageQuality: 0.5,
-        }).then(async images => {
-            for await (const image of images) {
-                const croppedImage = await ImagePicker.openCropper({
-                    mediaType: 'photo',
-                    path: image.path,
-                    width: CROP_SIZE,
-                    height: CROP_SIZE,
-                });
-                createImage(croppedImage.path);
-            }
-        }).finally(() => setModalVisible(false));
-    }
+    const showModal = () => setModalVisible(true);
+    const hideModal = () => setModalVisible(false);
 
     return (
         <View>
             <TouchableOpacity
-                onPress={() => setModalVisible(true)}
+                onPress={showModal}
                 style={styles.button}
             >
                 <Icon name="Plus" size={60} fill={GRADIENT.Gradient100} />
             </TouchableOpacity>
             <Modal
                 isVisible={modalVisible}
-                onBackdropPress={() => setModalVisible(false)}
-                onBackButtonPress={() => setModalVisible(false)}
+                onBackdropPress={hideModal}
+                onBackButtonPress={hideModal}
                 backdropOpacity={0.6}
             >
                 <SafeAreaView
                     style={styles.modal}
                 >
-                    <TouchableOpacity style={styles.modalButton} onPress={handleCamera}>
-                        <Icon name="Camera" size={24} fill={COLOR.White} />
-                        <Text style={styles.text}>카메라로 촬영하기</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.modalButton} onPress={handleGallery}>
-                        <Icon name="Gallery" size={16} fill={COLOR.White} />
-                        <Text style={styles.text}>갤러리에서 선택하기</Text>
-                    </TouchableOpacity>
+                    <ImageUploadByCameraButton styles={styles} hideModal={hideModal} />
+                    <ImageUploadByGalleryButton styles={styles} hideModal={hideModal} />
                 </SafeAreaView>
             </Modal>
         </View>
