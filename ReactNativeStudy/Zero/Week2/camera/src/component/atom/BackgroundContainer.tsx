@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { StyleSheet, View } from "react-native";
+
 import { COLOR } from "../../constants/color";
 
 interface BackgroundContainerProps {

@@ -1,11 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "../screens/Home";
-import Fake from "../screens/Fake";
-import Setting from "../screens/Setting";
+
 import { COLOR } from "../constants/color";
+
 import CustomTabBarButton from "../component/molcule/CustomTabBarButton";
 import BottomContextMenu from "../component/molcule/BottomContextMenu";
 import HomeStack from "./HomeStack";
+import Fake from "../screens/Fake";
+import Setting from "../screens/Setting";
 
 const Tab = createBottomTabNavigator();
 

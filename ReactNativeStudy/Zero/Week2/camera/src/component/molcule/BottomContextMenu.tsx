@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Icon } from '../atom/Icon';
-import { COLOR, GRADIENT } from '../../constants/color';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Modal from 'react-native-modal';
 import ImagePicker from 'react-native-image-crop-picker';
+
+import { COLOR, GRADIENT } from '../../constants/color';
 import { useImages } from '../../hooks/useImages';
-import { storage } from '../../utils/storage';
+
+import { Icon } from '../atom/Icon';
 
 function BottomContextMenu() {
     const [modalVisible, setModalVisible] = useState(false);

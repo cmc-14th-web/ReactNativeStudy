@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
-import { COLOR, GRADIENT } from "../../constants/color";
+import { StyleSheet, View } from "react-native";
 import { LinearGradientText } from "react-native-linear-gradient-text";
-import IconButton from "./IconButton";
 import { useNavigation } from "@react-navigation/native";
+
+import { COLOR, GRADIENT } from "../../constants/color";
+
+import IconButton from "./IconButton";
 
 interface HeaderProps {
     title: string;

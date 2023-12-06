@@ -1,7 +1,9 @@
 import { FlatList, SafeAreaView } from "react-native";
-import { Image } from "../../type/image";
-import ImageItem from "../molcule/ImageItem";
 import { useState } from "react";
+
+import { Image } from "../../type/image";
+
+import ImageItem from "../molcule/ImageItem";
 
 interface ImageGalleryTemplateProps {
     images: Image[];

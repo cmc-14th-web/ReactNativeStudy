@@ -1,6 +1,8 @@
 import { StyleSheet, Text } from 'react-native';
-import BackgroundContainer from '../component/atom/BackgroundContainer';
+
 import { COLOR } from '../constants/color';
+
+import BackgroundContainer from '../component/atom/BackgroundContainer';
 import Header from '../component/molcule/Header';
 
 function Setting() {

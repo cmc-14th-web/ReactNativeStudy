@@ -1,8 +1,10 @@
 import { LinearGradientText } from "react-native-linear-gradient-text"
-import { Icon } from "../atom/Icon"
 import { StyleSheet, View, Text } from "react-native"
+
 import { GRADIENT, COLOR } from "../../constants/color"
 import { IconName } from "../../constants/icons"
+
+import { Icon } from "../atom/Icon"
 
 interface CustomTabBarButtonProps {
     name: IconName;
