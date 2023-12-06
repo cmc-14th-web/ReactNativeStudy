@@ -17,7 +17,7 @@ function ImageItem({ image, width }: ImageItemProps) {
     return (
         <Pressable
             onPress={() => {
-                navigation.navigate('ImageDetail', { image: image });
+                navigation.navigate('ImageDetailStackScreen', { image: image });
             }}>
             <Image source={{ uri: image.uri }} style={{ width: width, aspectRatio: 1 / 1 }} />
         </Pressable>
