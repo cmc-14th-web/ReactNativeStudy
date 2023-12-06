@@ -2,7 +2,7 @@ import { Defs, LinearGradient, Path, Stop, Svg } from "react-native-svg";
 import { ICONS, IconName } from "../../constants/icons";
 import { COLOR, Color, GRADIENT } from "../../constants/color";
 
-interface IconProps {
+export interface IconProps {
     name: IconName;
     size: number;
     fill: Color;
