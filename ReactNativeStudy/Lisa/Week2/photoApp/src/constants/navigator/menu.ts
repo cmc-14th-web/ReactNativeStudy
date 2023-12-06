@@ -1,6 +1,6 @@
 export const enum StackMenu {
   TabNavigator = 'TabNavigator',
-  AddPhoto = 'AddPhoto',
+  PhotoDetail = 'PhotoDetail',
 }
 
 export const enum TabMenu {

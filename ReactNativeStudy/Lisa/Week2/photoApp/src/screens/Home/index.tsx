@@ -1,6 +1,14 @@
+import {StackMenu} from 'constants/navigator/menu';
+import useNavigator from 'libs/hooks/useNavigator';
 import {imageStore} from 'libs/store/images';
-import {useEffect} from 'react';
-import {Image, StyleSheet, Text, View, FlatList} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import {theme} from 'styles/theme';
 import {typoStyles} from 'styles/typo';
 import {getScreenSize} from 'utils/getScreenSize';
@@ -9,10 +17,14 @@ const Home = () => {
   const {images} = imageStore();
   const {screenWidth} = getScreenSize();
   const imageSize = (screenWidth - 32) / 3;
+  const {stackNavigation} = useNavigator();
 
-  useEffect(() => {
-    console.log(images);
-  }, [images]);
+  const handlePressImage = (imagePath: string, imageDate: string) => {
+    stackNavigation.navigate(StackMenu.PhotoDetail, {
+      path: imagePath,
+      date: imageDate,
+    });
+  };
 
   return (
     <View>
@@ -22,11 +34,14 @@ const Home = () => {
           <FlatList
             data={images}
             renderItem={({item}) => (
-              <Image
-                source={{uri: item.path}}
-                width={imageSize}
-                height={imageSize}
-              />
+              <TouchableOpacity
+                onPress={() => handlePressImage(item.path, item.date)}>
+                <Image
+                  source={{uri: item.path}}
+                  width={imageSize}
+                  height={imageSize}
+                />
+              </TouchableOpacity>
             )}
             numColumns={3}
             style={imageContainerStyles.list}

@@ -1,6 +1,9 @@
 export type RootStackParamList = {
   TabNavigator: undefined;
-  AddPhoto: undefined;
+  PhotoDetail: {
+    path: string;
+    date: string;
+  };
 };
 
 export type TabParamList = {

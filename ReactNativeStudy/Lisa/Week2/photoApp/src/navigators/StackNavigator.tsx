@@ -1,8 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {StackMenu} from 'constants/navigator/menu';
 import TabNavigator from './TabNavigator';
+import PhotoDetail from 'screens/PhotoDetail';
+import {RootStackParamList} from 'types/navigator';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const StackNavigator = () => {
   return (
@@ -12,6 +14,7 @@ const StackNavigator = () => {
         component={TabNavigator}
         options={{headerShown: false}}
       />
+      <Stack.Screen name={StackMenu.PhotoDetail} component={PhotoDetail} />
     </Stack.Navigator>
   );
 };
