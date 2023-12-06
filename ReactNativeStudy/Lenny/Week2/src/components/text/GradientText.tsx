@@ -2,7 +2,7 @@ import React from 'react';
 import {Text} from 'react-native';
 import MaskedView from '@react-native-masked-view/masked-view';
 import LinearGradient from 'react-native-linear-gradient';
-import {colors} from '../styles/colors';
+import {colors} from '../../styles/colors';
 
 interface GradientTextProps {
   gradientColors: string[];
@@ -15,7 +15,7 @@ const GradientText = ({
   isHome,
   ...rest
 }: GradientTextProps) => {
-  // mode가 0이면 Title에 쓰이는 GradienText
+  // mode가 0이면 Header에 쓰이는 GradienText
   // 1이면 TabBar에 쓰이는 GradienText
   const fontSize = mode === 0 ? 24 : 12;
   const inActivatedColor = [colors.lightGray, colors.lightGray];

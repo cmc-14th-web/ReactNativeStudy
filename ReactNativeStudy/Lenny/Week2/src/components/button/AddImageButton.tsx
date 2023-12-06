@@ -1,14 +1,14 @@
 import React, {useMemo, useRef, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import CameraSvg from '../assets/camera.svg';
-import GallerySvg from '../assets/gallery.svg';
-import AddSvg from '../assets/add.svg';
+import CameraSvg from '../../assets/camera.svg';
+import GallerySvg from '../../assets/gallery.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
 import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
-import {useStore} from '../store/store';
-import {ImageDataType, SelectedImageDataType} from '../types/ImageType';
-import {deviceWidth, deviceHight} from '../constants/device';
+import {useStore} from '../../store/store';
+import {ImageDataType, SelectedImageDataType} from '../../types/ImageType';
+import {deviceWidth, deviceHight} from '../../constants/device';
+import AddSvg from '../AddSvg';
 
 export default function AddImageButton() {
   const [isOpen, setIsOpen] = useState<boolean>(false);

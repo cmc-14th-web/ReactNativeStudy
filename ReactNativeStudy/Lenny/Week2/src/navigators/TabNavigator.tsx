@@ -5,11 +5,13 @@ import SettingScreen from '../screens/setting/SettingScreen';
 import {colors} from '../styles/colors';
 import {HomeTabIcon, SettingTabIcon} from '../components/TabBarIcon';
 import {StyleSheet} from 'react-native';
-import AddImageButton from '../components/AddImageButton';
-import GradientText from '../components/GradientText';
+import AddImageButton from '../components/button/AddImageButton';
+import Title from '../components/text/Header';
+import TabBar from '../components/text/TabBar';
 
 export default function TabNavigator() {
   const Tab = createBottomTabNavigator();
+
   return (
     <>
       <Tab.Navigator
@@ -71,21 +73,3 @@ const screenOptions = {
   tabBarActiveTintColor: colors.gradient,
   headerTintColor: colors.gradient,
 };
-
-const Title = ({children}: {children: string}) => (
-  <GradientText
-    gradientColors={[colors.gradientStart, colors.gradientEnd]}
-    mode={0}
-    isHome={null}>
-    {children === '홈' ? 'LANY님의 사진첩' : '설정'}
-  </GradientText>
-);
-
-const TabBar = ({children, focused}: {children: string; focused: boolean}) => (
-  <GradientText
-    gradientColors={[colors.gradientStart, colors.gradientEnd]}
-    mode={1}
-    isHome={focused}>
-    {children}
-  </GradientText>
-);

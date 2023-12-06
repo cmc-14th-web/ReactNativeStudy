@@ -4,7 +4,7 @@ import TabNavigator from './TabNavigator';
 import DetailImage from '../components/DetailImage';
 import {StyleSheet} from 'react-native';
 import {colors} from '../styles/colors';
-import BackButton from '../components/BackButton';
+import BackButton from '../components/button/BackButton';
 import {useStore} from '../store/store';
 
 export default function StackNavigator() {
