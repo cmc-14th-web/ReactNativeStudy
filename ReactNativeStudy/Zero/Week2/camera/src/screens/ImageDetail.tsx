@@ -5,7 +5,7 @@ import Header from "../component/molcule/Header";
 import { StackScreenProps } from "@react-navigation/stack";
 import { HomeStackParamList } from "../navigation/HomeStack";
 
-type ImageDetailProps = StackScreenProps<HomeStackParamList, 'ImageDetail'>;
+type ImageDetailProps = StackScreenProps<HomeStackParamList, 'ImageDetailStackScreen'>;
 
 function ImageDetail({ route }: ImageDetailProps) {
     const { image } = route.params;
