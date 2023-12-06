@@ -25,10 +25,8 @@ function ImageGalleryTemplate({ images }: ImageGalleryTemplateProps) {
                 key={'#'}
                 data={images}
                 onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
-                renderItem={({ item }) => <ImageItem image={item}
-                    width={calculateWidth()}
-                />}
-                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => <ImageItem image={item} width={calculateWidth()} />}
+                keyExtractor={(_, index) => index.toString()}
                 numColumns={3}
             />
         </SafeAreaView>
