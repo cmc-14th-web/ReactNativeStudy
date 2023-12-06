@@ -1,18 +1,22 @@
 import { Image, View } from "react-native";
+import { StackScreenProps } from "@react-navigation/stack";
+
+import { useDate } from "../hooks/useDate";
 
 import BackgroundContainer from "../component/atom/BackgroundContainer";
 import Header from "../component/molcule/Header";
-import { StackScreenProps } from "@react-navigation/stack";
 import { HomeStackParamList } from "../navigation/HomeStack";
 
 type ImageDetailProps = StackScreenProps<HomeStackParamList, 'ImageDetailStackScreen'>;
 
 function ImageDetail({ route }: ImageDetailProps) {
     const { image } = route.params;
+    const { getDateFormat } = useDate();
+    const title = getDateFormat(image.date);
 
     return (
         <BackgroundContainer>
-            <Header title={image.date} isBackButton />
+            <Header title={title} isBackButton />
             <View
                 style={{
                     flex: 1,

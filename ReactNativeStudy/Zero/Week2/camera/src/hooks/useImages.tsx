@@ -1,4 +1,6 @@
+import dayjs from "dayjs";
 import { storage } from "../utils/storage"
+import { Image } from "../type/image";
 
 export function useImages() {
     const getImages = () => {
@@ -12,30 +14,29 @@ export function useImages() {
 
     const isImageExist = () => {
         const images = getImages();
-        return images && images.length > 0;
+        return images.length > 0;
     }
 
-    const getDateFormat = () => {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1;
-        const date = currentDate.getDate();
-        const hour = currentDate.getHours();
-        const minute = currentDate.getMinutes();
-        return `${year}.${month}.${date} ${hour}:${minute}`;
+    const getLastId = () => {
+        const images = getImages();
+        return images.length > 0 ? images[images.length - 1].id : 0;
+    }
+
+    const generateId = () => {
+        return getLastId() + 1;
     }
 
     const createImage = (uri: string) => {
-        const currentDate = getDateFormat();
+        const currentDate = dayjs().unix();
+        const id = generateId();
         const images = getImages();
-        const newImages = images ? [...images, { uri, date: currentDate }] : [{ uri, date: currentDate }];
+        const newImages = images ? [...images, { uri, date: currentDate, id }] : [{ uri, date: currentDate, id }];
         storage.set("images", JSON.stringify(newImages));
     }
 
-    const getImage = (date: string) => {
+    const getImage = (id: number) => {
         const images = getImages();
-        console.log(images);
-        return images.find((image: any) => image.date === date);
+        return images.find((image: Image) => image.id === id);
     }
 
     const deleteStorage = () => {
