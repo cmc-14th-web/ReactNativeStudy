@@ -5,6 +5,7 @@ import Setting from "../screens/Setting";
 import { COLOR } from "../constants/color";
 import CustomTabBarButton from "../component/molcule/CustomTabBarButton";
 import BottomContextMenu from "../component/molcule/BottomContextMenu";
+import HomeStack from "./HomeStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -21,7 +22,7 @@ function BottomTabNavigation() {
                 headerShown: false,
             }}
         >
-            <Tab.Screen name="Home" component={Home}
+            <Tab.Screen name="Home" component={HomeStack}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <CustomTabBarButton name="Home" focused={focused} title='홈' />
