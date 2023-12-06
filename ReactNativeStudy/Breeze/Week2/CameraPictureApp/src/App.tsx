@@ -1,9 +1,15 @@
+import {useEffect} from 'react';
+import SplashScreen from 'react-native-splash-screen';
+
 import Navigation from './navigation';
 
 function App() {
-  return (
-    <Navigation />
-  );
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000); //스플래시 활성화 시간
+  });
+  return <Navigation />;
 }
 
 //const styles = StyleSheet.create({
