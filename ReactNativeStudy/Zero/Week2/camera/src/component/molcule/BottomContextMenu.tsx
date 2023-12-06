@@ -4,21 +4,22 @@ import { Icon } from '../atom/Icon';
 import { COLOR, GRADIENT } from '../../constants/color';
 import Modal from 'react-native-modal';
 import ImagePicker from 'react-native-image-crop-picker';
+import { useImages } from '../../hooks/useImages';
+import { storage } from '../../utils/storage';
 
 function BottomContextMenu() {
     const [modalVisible, setModalVisible] = useState(false);
-    const [uri, setUri] = useState<string>();
 
     const handleCamera = () => {
         ImagePicker.openCamera({
             width: 300,
             height: 400,
             cropping: true,
-        })
-            .then(image => {
-                setUri(image.path);
-            })
-            .finally(() => setModalVisible(false));
+        }).then(image => {
+            const { createImage } = useImages();
+            createImage(image.path);
+
+        }).finally(() => setModalVisible(false));
     }
 
     const handleGallery = () => {
@@ -26,11 +27,10 @@ function BottomContextMenu() {
             width: 300,
             height: 400,
             cropping: true,
-        })
-            .then(image => {
-                setUri(image.path);
-            })
-            .finally(() => setModalVisible(false));
+        }).then(image => {
+            const { createImage } = useImages();
+            createImage(image.path);
+        }).finally(() => setModalVisible(false));
     }
 
     return (
@@ -43,7 +43,6 @@ function BottomContextMenu() {
             </TouchableOpacity>
             <View
             >
-                {uri && <Image source={{ uri }} style={{ width: 100, height: 100 }} />}
                 <Modal
                     isVisible={modalVisible}
                     onBackdropPress={() => setModalVisible(false)}
