@@ -34,13 +34,19 @@ export function useImages() {
 
     const getImage = (date: string) => {
         const images = getImages();
+        console.log(images);
         return images.find((image: any) => image.date === date);
+    }
+
+    const deleteStorage = () => {
+        storage.clearAll();
     }
 
     return {
         getImages,
         isImageExist,
         createImage,
-        getImage
+        getImage,
+        deleteStorage,
     }
 }
