@@ -38,19 +38,14 @@ function Header({ title, isBackButton }: HeaderProps) {
     }
 
     return (
-        <View style={{
-            ...styles.container,
-            justifyContent: 'space-between',
-        }}>
+        <View style={styles.container}>
             {isBackButton && <IconButton name="ArrowBack" size={24} fill={GRADIENT.Gradient100} onPress={handleBackButton} />}
             <LinearGradientText
                 colors={[COLOR.Pink, COLOR.Purple]}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 text={title}
-                textStyle={{
-                    ...styles.title,
-                }}
+                textStyle={styles.title}
             />
             {renderRightButton()}
         </View>
@@ -66,6 +61,7 @@ const styles = StyleSheet.create({
         left: 0,
         width: '100%',
         flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     title: {
         fontSize: 24,

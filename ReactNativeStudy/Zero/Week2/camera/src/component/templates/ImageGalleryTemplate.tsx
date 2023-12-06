@@ -1,4 +1,4 @@
-import { FlatList, SafeAreaView } from "react-native";
+import { FlatList, SafeAreaView, StyleSheet } from "react-native";
 import { useState } from "react";
 
 import { Image } from "../../type/image";
@@ -19,12 +19,7 @@ function ImageGalleryTemplate({ images }: ImageGalleryTemplateProps) {
 
     return (
         <SafeAreaView
-            style={{
-                marginTop: 74,
-                marginHorizontal: 16,
-                flex: 1,
-                width: '100%'
-            }}
+            style={style.container}
         >
             <FlatList
                 key={'#'}
@@ -39,5 +34,14 @@ function ImageGalleryTemplate({ images }: ImageGalleryTemplateProps) {
         </SafeAreaView>
     )
 }
+
+const style = StyleSheet.create({
+    container: {
+        marginTop: 74,
+        marginHorizontal: 16,
+        flex: 1,
+        width: '100%'
+    }
+})
 
 export default ImageGalleryTemplate;
