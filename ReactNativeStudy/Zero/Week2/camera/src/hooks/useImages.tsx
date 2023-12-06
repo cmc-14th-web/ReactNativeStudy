@@ -15,8 +15,18 @@ export function useImages() {
         return images && images.length > 0;
     }
 
+    const getDateFormat = () => {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth() + 1;
+        const date = currentDate.getDate();
+        const hour = currentDate.getHours();
+        const minute = currentDate.getMinutes();
+        return `${year}.${month}.${date} ${hour}:${minute}`;
+    }
+
     const createImage = (uri: string) => {
-        const currentDate = new Date().toString();
+        const currentDate = getDateFormat();
         const images = getImages();
         const newImages = images ? [...images, { uri, date: currentDate }] : [{ uri, date: currentDate }];
         storage.set("images", JSON.stringify(newImages));
