@@ -2,6 +2,7 @@ import { FlatList, SafeAreaView, StyleSheet } from "react-native";
 import { useState } from "react";
 
 import { Image } from "../../type/image";
+import { IMAGE_GALLERY_COLUMN, IMAGE_GALLERY_MARGIN } from "../../constants/size";
 
 import ImageItem from "../molcule/ImageItem";
 
@@ -11,10 +12,9 @@ interface ImageGalleryTemplateProps {
 
 function ImageGalleryTemplate({ images }: ImageGalleryTemplateProps) {
     const [width, setWidth] = useState(0);
-    const MARGIN = 16;
-    const COLUMN = 3;
+
     const calculateWidth = () => {
-        return (width - MARGIN * 2) / COLUMN;
+        return (width - IMAGE_GALLERY_MARGIN * 2) / IMAGE_GALLERY_COLUMN;
     }
 
     return (
@@ -27,7 +27,7 @@ function ImageGalleryTemplate({ images }: ImageGalleryTemplateProps) {
                 onLayout={(event) => setWidth(event.nativeEvent.layout.width)}
                 renderItem={({ item }) => <ImageItem image={item} width={calculateWidth()} />}
                 keyExtractor={(_, index) => index.toString()}
-                numColumns={3}
+                numColumns={IMAGE_GALLERY_COLUMN}
             />
         </SafeAreaView>
     )
@@ -36,7 +36,7 @@ function ImageGalleryTemplate({ images }: ImageGalleryTemplateProps) {
 const style = StyleSheet.create({
     container: {
         marginTop: 74,
-        marginHorizontal: 16,
+        marginHorizontal: IMAGE_GALLERY_MARGIN,
         flex: 1,
         width: '100%'
     }
