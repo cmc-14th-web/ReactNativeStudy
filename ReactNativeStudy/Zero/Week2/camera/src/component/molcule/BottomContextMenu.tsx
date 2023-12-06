@@ -18,7 +18,6 @@ function BottomContextMenu() {
         }).then(image => {
             const { createImage } = useImages();
             createImage(image.path);
-
         }).finally(() => setModalVisible(false));
     }
 
@@ -41,27 +40,25 @@ function BottomContextMenu() {
             >
                 <Icon name="Plus" size={60} fill={GRADIENT.Gradient100} />
             </TouchableOpacity>
-            <View
+            <Modal
+                isVisible={modalVisible}
+                onBackdropPress={() => setModalVisible(false)}
+                onBackButtonPress={() => setModalVisible(false)}
+                backdropOpacity={0.6}
             >
-                <Modal
-                    isVisible={modalVisible}
-                    onBackdropPress={() => setModalVisible(false)}
-                    onBackButtonPress={() => setModalVisible(false)}
-                    backdropOpacity={0.3}
+                <SafeAreaView
                     style={styles.modal}
                 >
-                    <SafeAreaView>
-                        <TouchableOpacity style={styles.modalButton} onPress={handleCamera}>
-                            <Icon name="Camera" size={24} fill={COLOR.White} />
-                            <Text style={styles.text}>카메라로 촬영하기</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.modalButton} onPress={handleGallery}>
-                            <Icon name="Gallery" size={16} fill={COLOR.White} />
-                            <Text style={styles.text}>갤러리에서 선택하기</Text>
-                        </TouchableOpacity>
-                    </SafeAreaView>
-                </Modal>
-            </View>
+                    <TouchableOpacity style={styles.modalButton} onPress={handleCamera}>
+                        <Icon name="Camera" size={24} fill={COLOR.White} />
+                        <Text style={styles.text}>카메라로 촬영하기</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.modalButton} onPress={handleGallery}>
+                        <Icon name="Gallery" size={16} fill={COLOR.White} />
+                        <Text style={styles.text}>갤러리에서 선택하기</Text>
+                    </TouchableOpacity>
+                </SafeAreaView>
+            </Modal>
         </View>
     )
 }
@@ -74,7 +71,13 @@ const styles = StyleSheet.create({
         boxShadow: '0px 0px 10px 0px rgba(0, 0, 0, 0.20)',
         justifyContent: 'flex-end',
         margin: 0,
-        height: 200,
+        height: 170,
+        width: '100%',
+        paddingHorizontal: 24,
+        paddingVertical: 40,
+        gap: 30,
+        position: 'absolute',
+        bottom: 0,
     },
     button: {
         position: 'absolute',
@@ -83,9 +86,11 @@ const styles = StyleSheet.create({
     },
     text: {
         color: COLOR.White,
+        fontSize: 16,
     },
     modalButton: {
         flexDirection: 'row',
+        gap: 4,
     }
 });
 
