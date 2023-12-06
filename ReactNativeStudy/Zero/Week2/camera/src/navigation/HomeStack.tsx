@@ -5,12 +5,10 @@ import { Image } from "../type/image";
 
 const Stack = createStackNavigator();
 
-// export type HomeStackParamList = {
-//     Home: undefined;
-//     ImageDetail: { image: Image };
-// };
-
-// type ImageDetailScreenProps = StackScreenProps<HomeStackParamList, 'ImageDetail'>;
+export type HomeStackParamList = {
+    Home: undefined;
+    ImageDetail: { image: Image };
+};
 
 export default function HomeStack() {
     return (
