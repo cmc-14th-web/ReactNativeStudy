@@ -3,6 +3,7 @@ import { LinearGradientText } from "react-native-linear-gradient-text";
 import { useNavigation } from "@react-navigation/native";
 
 import { COLOR, GRADIENT } from "../../constants/color";
+import { useImages } from "../../hooks/useImages";
 
 import IconButton from "./IconButton";
 
@@ -17,10 +18,29 @@ function Header({ title, isBackButton }: HeaderProps) {
         navigation.goBack();
     }
 
+    const { deleteStorage } = useImages();
+    const handleDeleteListButton = () => {
+        deleteStorage();
+    }
+
+    const isHomeScreen = () => {
+        return title === 'CMC님의 사진첩'
+    }
+
+    const renderRightButton = () => {
+        if (isHomeScreen()) {
+            return <IconButton name='Trash' size={24} fill={GRADIENT.Gradient100} onPress={handleDeleteListButton} />
+        }
+
+        if (isBackButton) {
+            return <View />
+        }
+    }
+
     return (
         <View style={{
             ...styles.container,
-            justifyContent: isBackButton ? 'space-between' : 'flex-start',
+            justifyContent: 'space-between',
         }}>
             {isBackButton && <IconButton name="ArrowBack" size={24} fill={GRADIENT.Gradient100} onPress={handleBackButton} />}
             <LinearGradientText
@@ -32,7 +52,7 @@ function Header({ title, isBackButton }: HeaderProps) {
                     ...styles.title,
                 }}
             />
-            {isBackButton && <View style={{ width: 24 }} />}
+            {renderRightButton()}
         </View>
     )
 }
