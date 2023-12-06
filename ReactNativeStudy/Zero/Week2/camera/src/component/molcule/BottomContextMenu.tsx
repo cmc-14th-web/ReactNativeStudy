@@ -9,6 +9,7 @@ import { storage } from '../../utils/storage';
 
 function BottomContextMenu() {
     const [modalVisible, setModalVisible] = useState(false);
+    const { createImage } = useImages();
 
     const handleCamera = () => {
         ImagePicker.openCamera({
@@ -16,7 +17,6 @@ function BottomContextMenu() {
             height: 400,
             cropping: true,
         }).then(image => {
-            const { createImage } = useImages();
             createImage(image.path);
         }).finally(() => setModalVisible(false));
     }
@@ -26,9 +26,11 @@ function BottomContextMenu() {
             width: 300,
             height: 400,
             cropping: true,
-        }).then(image => {
-            const { createImage } = useImages();
-            createImage(image.path);
+            multiple: true,
+        }).then(images => {
+            images.forEach(image => {
+                createImage(image.path);
+            });
         }).finally(() => setModalVisible(false));
     }
 
