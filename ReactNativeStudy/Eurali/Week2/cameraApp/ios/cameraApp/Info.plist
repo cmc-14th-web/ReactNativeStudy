@@ -55,5 +55,7 @@
   <string>We need access to your camera to take photos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
   <string>We need access to your library to upload photos</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your Microphone.</string>
 </dict>
 </plist>
