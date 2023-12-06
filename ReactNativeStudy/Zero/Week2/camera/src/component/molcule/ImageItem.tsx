@@ -13,12 +13,13 @@ interface ImageItemProps {
 
 function ImageItem({ image, width }: ImageItemProps) {
     const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>();
+    const handleShowImageDetail = () => {
+        navigation.navigate('ImageDetailStackScreen', { image: image });
+    }
 
     return (
         <Pressable
-            onPress={() => {
-                navigation.navigate('ImageDetailStackScreen', { image: image });
-            }}>
+            onPress={handleShowImageDetail}>
             <Image source={{ uri: image.uri }} style={{ width: width, aspectRatio: 1 / 1 }} />
         </Pressable>
     )
