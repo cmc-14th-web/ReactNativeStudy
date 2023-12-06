@@ -1,28 +1,17 @@
-import {NavigationProp, RouteProp} from '@react-navigation/native';
-import SvgIcons from 'assets/icons/SvgIcons';
-import {StackMenu, TabMenu} from 'constants/navigator/menu';
-import {useDate} from 'libs/hooks/useDate';
-import useNavigator from 'libs/hooks/useNavigator';
 import {useLayoutEffect} from 'react';
 import {ScrollView, StyleSheet, Image, TouchableOpacity} from 'react-native';
+
+import SvgIcons from 'assets/icons/SvgIcons';
+import {TabMenu} from 'constants/navigator/menu';
+import {useDate} from 'libs/hooks/useDate';
+import useNavigator from 'libs/hooks/useNavigator';
 import {theme} from 'styles/theme';
-import {RootStackParamList} from 'types/navigator';
 import {getScreenSize} from 'utils/getScreenSize';
+import {PhotoDetailPropsType} from 'types/PhotoDetail';
 
 const {screenWidth} = getScreenSize();
 
-export type PhotoDetailRouteProp = RouteProp<
-  RootStackParamList,
-  StackMenu.PhotoDetail
->;
-
-const PhotoDetail = ({
-  navigation,
-  route,
-}: {
-  navigation: NavigationProp<RootStackParamList>;
-  route: PhotoDetailRouteProp;
-}) => {
+const PhotoDetail = ({navigation, route}: PhotoDetailPropsType) => {
   const {tabNavigation} = useNavigator();
   const {formatDate} = useDate(route.params.date);
 

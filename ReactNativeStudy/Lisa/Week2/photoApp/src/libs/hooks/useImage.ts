@@ -1,7 +1,9 @@
 import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
 import {Dimensions} from 'react-native';
+
 import {imageStore} from 'libs/store/images';
 import useNavigator from './useNavigator';
+import {TabMenu} from 'constants/navigator/menu';
 
 export const useImage = () => {
   const deviceWidth = Dimensions.get('screen').width;
@@ -26,7 +28,7 @@ export const useImage = () => {
             path: image.path,
           });
         });
-      tabNavigation.navigate('Home');
+      tabNavigation.navigate(TabMenu.Home);
     });
   };
 

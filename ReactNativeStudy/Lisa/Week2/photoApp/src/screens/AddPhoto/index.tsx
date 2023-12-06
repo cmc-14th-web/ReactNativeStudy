@@ -1,8 +1,9 @@
 import {useFocusEffect} from '@react-navigation/native';
-import CustomBottomSheet from 'components/atoms/CustomBottomSheet';
 import {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+
 import Home from 'screens/Home';
+import CustomBottomSheet from 'components/atoms/CustomBottomSheet';
 import {getScreenSize} from 'utils/getScreenSize';
 
 const {screenHeight} = getScreenSize();

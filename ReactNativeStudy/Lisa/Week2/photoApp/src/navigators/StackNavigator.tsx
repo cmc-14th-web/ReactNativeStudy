@@ -1,7 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {StackMenu} from 'constants/navigator/menu';
+
 import TabNavigator from './TabNavigator';
 import PhotoDetail from 'screens/PhotoDetail';
+import {StackMenu} from 'constants/navigator/menu';
 import {RootStackParamList} from 'types/navigator';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

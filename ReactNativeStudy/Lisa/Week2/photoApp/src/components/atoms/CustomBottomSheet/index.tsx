@@ -1,11 +1,13 @@
-import SvgIcons from 'assets/icons/SvgIcons';
-import {useImage} from 'libs/hooks/useImage';
-import useNavigator from 'libs/hooks/useNavigator';
 import {Dispatch, SetStateAction, useEffect, useRef} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
+
+import SvgIcons from 'assets/icons/SvgIcons';
+import {useImage} from 'libs/hooks/useImage';
+import useNavigator from 'libs/hooks/useNavigator';
 import {theme} from 'styles/theme';
 import {typoStyles} from 'styles/typo';
+import { TabMenu } from 'constants/navigator/menu';
 
 const CustomBottomSheet = ({
   isBottomSheetOpen,
@@ -30,7 +32,7 @@ const CustomBottomSheet = ({
 
   const handleCloseBottomSheet = () => {
     setIsBottomSheetOpen(false);
-    tabNavigation.navigate('Home');
+    tabNavigation.navigate(TabMenu.Home);
   };
 
   const handlePressGalleryButton = () => {

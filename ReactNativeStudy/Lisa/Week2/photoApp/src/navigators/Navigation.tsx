@@ -1,4 +1,5 @@
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+
 import StackNavigator from './StackNavigator';
 import {theme} from 'styles/theme';
 

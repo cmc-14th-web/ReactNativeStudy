@@ -1,4 +1,5 @@
 import Svg, {Defs, LinearGradient, Path, Stop} from 'react-native-svg';
+
 import {theme} from 'styles/theme';
 import {SvgPropsType} from 'types/svg';
 

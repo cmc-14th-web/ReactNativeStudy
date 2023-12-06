@@ -1,4 +1,5 @@
 import {RouteProp, useRoute} from '@react-navigation/native';
+
 import {RootStackParamList, TabParamList} from 'types/navigator';
 
 type ScreenName = keyof RootStackParamList;
