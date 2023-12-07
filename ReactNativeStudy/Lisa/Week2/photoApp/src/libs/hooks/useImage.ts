@@ -21,11 +21,17 @@ export const useImage = () => {
     }).then(images => {
       images.length &&
         images.map((image: ImageOrVideo) => {
-          setImages({
-            date: (image.creationDate ?? image.modificationDate) as string,
-            width: image.width,
-            height: image.height,
+          ImagePicker.openCropper({
             path: image.path,
+            mediaType: 'photo',
+          }).then(croppedImage => {
+            setImages({
+              date: (croppedImage.creationDate ??
+                croppedImage.modificationDate) as string,
+              width: croppedImage.width,
+              height: croppedImage.height,
+              path: croppedImage.path,
+            });
           });
         });
       tabNavigation.navigate(TabMenu.Home);
