@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import useImagesStorage from '../hooks/useImagesStorage';
 import {Image as ImageType} from '../types/image';
+import {SCREEN_WIDTH} from '@gorhom/bottom-sheet';
 
 export default function HomeScreen({navigation}: {navigation: any}) {
   const {images} = useImagesStorage();
@@ -27,9 +28,13 @@ export default function HomeScreen({navigation}: {navigation: any}) {
               renderItem={({item: image}: {item: ImageType}) => (
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('DetailPictureScreen', {params: image})
+                    navigation.navigate('DetailPhotoScreen', {params: image})
                   }>
-                  <Image source={{uri: image.url}} />
+                  <Image
+                    source={{uri: image.path}}
+                    width={SCREEN_WIDTH / 3}
+                    height={SCREEN_WIDTH / 3}
+                  />
                 </TouchableOpacity>
               )}
             />
