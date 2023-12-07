@@ -4,7 +4,7 @@ import BottomSheet from '../components/BottomSheet';
 import {useFocusEffect} from '@react-navigation/native';
 import Icon from '../components/Icon';
 import Gallery from '../assets/Gallery';
-import {launchImageLibrary} from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../type/rootStack';
 
@@ -22,6 +22,7 @@ function AddPictureScreen({
 
   const [response, setResponse] = useState('');
   const [imageFile, setImageFile] = useState('');
+  const [photoInfo, setPhotoInfo] = useState('');
 
   useFocusEffect(
     useCallback(() => {
@@ -34,7 +35,7 @@ function AddPictureScreen({
   const getPictures = () => {
     launchImageLibrary(
       {
-        madiaType: 'photo',
+        mediaType: 'photo',
         maxWidth: 512,
         maxHeight: 512,
         includeBase64: true,
@@ -54,6 +55,20 @@ function AddPictureScreen({
     navigation.navigate('Home');
   };
 
+  const openCamera = async () => {
+    try {
+      const result = await launchCamera({
+        mediaType: 'photo',
+        includeBase64: true,
+      });
+      const results: any = result.assets;
+      setPhotoInfo(results);
+    } catch (err) {
+      console.log(err);
+    }
+    navigation.navigate('Home');
+  };
+
   return (
     <View style={{flex: 1}}>
       <Text>사진 추가페이지</Text>
@@ -61,7 +76,7 @@ function AddPictureScreen({
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}>
         <View style={styles.wrapper}>
-          <Pressable style={styles.content}>
+          <Pressable style={styles.content} onPress={openCamera}>
             <Icon icon="Camera" fill="white" />
             <Text style={styles.text}>카메라로 촬영하기</Text>
           </Pressable>
