@@ -7,7 +7,9 @@ import {useImage} from 'libs/hooks/useImage';
 import useNavigator from 'libs/hooks/useNavigator';
 import {theme} from 'styles/theme';
 import {typoStyles} from 'styles/typo';
-import { TabMenu } from 'constants/navigator/menu';
+import {TabMenu} from 'constants/navigator/menu';
+import {useStore} from 'zustand';
+import {imageStore} from 'libs/store/images';
 
 const CustomBottomSheet = ({
   isBottomSheetOpen,
@@ -17,7 +19,7 @@ const CustomBottomSheet = ({
   setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const bottomSheetRef = useRef<RBSheet>(null);
-  const {selectPhotosFromGallery} = useImage();
+  const {selectImagesFromGallery, takePhotos} = useImage();
   const {tabNavigation} = useNavigator();
 
   useEffect(() => {
@@ -35,8 +37,13 @@ const CustomBottomSheet = ({
     tabNavigation.navigate(TabMenu.Home);
   };
 
+  const handlePressTakePhotoButton = () => {
+    takePhotos();
+    setIsBottomSheetOpen(false);
+  };
+
   const handlePressGalleryButton = () => {
-    selectPhotosFromGallery();
+    selectImagesFromGallery();
     setIsBottomSheetOpen(false);
   };
 
@@ -48,7 +55,9 @@ const CustomBottomSheet = ({
       height={166}
       customStyles={customBottomSheetStyles}>
       <View style={bottomSheetStyles.buttonContainer}>
-        <TouchableOpacity style={bottomSheetStyles.button}>
+        <TouchableOpacity
+          style={bottomSheetStyles.button}
+          onPress={handlePressTakePhotoButton}>
           <SvgIcons.CameraIcon fill={'white'} />
           <Text style={bottomSheetStyles.text}>카메라로 촬영하기</Text>
         </TouchableOpacity>

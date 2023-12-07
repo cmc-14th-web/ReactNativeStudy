@@ -1,4 +1,4 @@
-import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 import {Dimensions} from 'react-native';
 
 import {imageStore} from 'libs/store/images';
@@ -12,31 +12,58 @@ export const useImage = () => {
   const {setImages} = imageStore();
   const {tabNavigation} = useNavigator();
 
-  const selectPhotosFromGallery = () => {
-    ImagePicker.openPicker({
+  const selectImagesFromGallery = async () => {
+    const images = await ImagePicker.openPicker({
       width: pictureSize,
       height: pictureSize,
       multiple: true,
       cropping: true,
-    }).then(images => {
-      images.length &&
-        images.map((image: ImageOrVideo) => {
-          ImagePicker.openCropper({
-            path: image.path,
-            mediaType: 'photo',
-          }).then(croppedImage => {
-            setImages({
-              date: (croppedImage.creationDate ??
-                croppedImage.modificationDate) as string,
-              width: croppedImage.width,
-              height: croppedImage.height,
-              path: croppedImage.path,
-            });
-          });
-        });
-      tabNavigation.navigate(TabMenu.Home);
     });
+
+    if (images.length) {
+      const newImages = [];
+
+      for (const image of images) {
+        const croppedImage = await ImagePicker.openCropper({
+          path: image.path,
+          mediaType: 'photo',
+        });
+
+        const newImage = {
+          date: (croppedImage.creationDate ??
+            croppedImage.modificationDate) as string,
+          width: croppedImage.width,
+          height: croppedImage.height,
+          path: croppedImage.path,
+        };
+
+        newImages.push(newImage);
+      }
+
+      newImages.map(newImage => setImages(newImage));
+      tabNavigation.navigate(TabMenu.Home);
+    }
   };
 
-  return {selectPhotosFromGallery};
+  const takePhotos = async () => {
+    const image = await ImagePicker.openCamera({
+      width: pictureSize,
+      height: pictureSize,
+      cropping: true,
+    });
+
+    if (image) {
+      const newImage = {
+        date: (image.creationDate ?? image.modificationDate) as string,
+        width: image.width,
+        height: image.height,
+        path: image.path,
+      };
+
+      setImages(newImage);
+      tabNavigation.navigate(TabMenu.Home);
+    }
+  };
+
+  return {selectImagesFromGallery, takePhotos};
 };
