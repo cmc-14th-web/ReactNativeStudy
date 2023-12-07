@@ -1,10 +1,10 @@
-import { Text, View } from "react-native";
+import {Text, View} from 'react-native';
 
-function SettingScreen(){
+function SettingScreen() {
   return (
     <View>
-      <Text>설정 페이지</Text>
+      <Text>설정 fff페이지</Text>
     </View>
   );
 }
-export default SettingScreen
+export default SettingScreen;

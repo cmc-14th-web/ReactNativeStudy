@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator();
 
 function HomeScreen() {
   return (
-    <Stack.Navigator initialRouteName="Detail">
+    <Stack.Navigator initialRouteName="Picture">
       <Stack.Screen
         name="Picture"
         component={PictureScreen}

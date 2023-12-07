@@ -4,6 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screen/HomeScreen';
 import SettingScreen from '../screen/SettingScreen';
 import Icon from '../components/Icon';
+import AddPictureScreen from '../screen/AddPictureScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +31,7 @@ function BottomTab() {
       />
       <Tab.Screen
         name="Picture"
-        component={HomeScreen}
+        component={AddPictureScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({focused}) => (
