@@ -19,9 +19,11 @@ import SplashScreen from 'react-native-splash-screen';
 import EmptyGalleryTemplates from './src/component/templates/EmptyGalleryTemplate';
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabNavigation from './src/navigation/BottomTabNavigation';
+import usePermissions from './src/hooks/usePermissions';
 
 function App(): JSX.Element {
   useEffect(() => {
+    usePermissions();
     SplashScreen.hide();
   }, []);
 
