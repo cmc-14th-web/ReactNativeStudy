@@ -5,6 +5,7 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Navigation} from './navigation';
 import PermissionUtil from './util/PermissionUtil';
 import {APP_PERMISSION_CODE} from './constants/PermissionCode';
+import {RecoilRoot} from 'recoil';
 
 function App() {
   useEffect(() => {
@@ -18,9 +19,11 @@ function App() {
   }, []);
 
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <Navigation />
-    </GestureHandlerRootView>
+    <RecoilRoot>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <Navigation />
+      </GestureHandlerRootView>
+    </RecoilRoot>
   );
 }
 

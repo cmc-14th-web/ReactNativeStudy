@@ -1,4 +1,5 @@
 import React, {useState, useCallback} from 'react';
+import {useSetRecoilState} from 'recoil';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import BottomSheet from '../components/BottomSheet';
 import {useFocusEffect} from '@react-navigation/native';
@@ -7,6 +8,7 @@ import Gallery from '../assets/Gallery';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../type/rootStack';
+import {pictureState} from '../recoil/atom';
 
 type AddPictureScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -19,10 +21,7 @@ function AddPictureScreen({
   navigation: AddPictureScreenNavigationProp;
 }) {
   const [modalVisible, setModalVisible] = useState(false);
-
-  const [response, setResponse] = useState('');
-  const [imageFile, setImageFile] = useState('');
-  const [photoInfo, setPhotoInfo] = useState('');
+  const setPicture = useSetRecoilState(pictureState);
 
   useFocusEffect(
     useCallback(() => {
@@ -40,16 +39,17 @@ function AddPictureScreen({
         maxHeight: 512,
         includeBase64: true,
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (response: any) => {
-        // console.log(response.assets[0].base64)
         if (response.didCancel) {
           return;
         } else if (response.errorCode) {
           console.log('Image Error : ' + response.errorCode);
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const base64Images = response.assets.map((asset: any) => asset.base64);
 
-        setResponse(response);
-        setImageFile(response.assets[0].base64);
+        setPicture(prevPictures => [...prevPictures, ...base64Images]);
       },
     );
     navigation.navigate('Home');
@@ -61,8 +61,13 @@ function AddPictureScreen({
         mediaType: 'photo',
         includeBase64: true,
       });
-      const results: any = result.assets;
-      setPhotoInfo(results);
+      if (result.assets && result.assets.length > 0) {
+        const base64Image = result.assets[0]?.base64;
+
+        if (base64Image) {
+          setPicture(prevPictures => [...prevPictures, base64Image]);
+        }
+      }
     } catch (err) {
       console.log(err);
     }
@@ -71,7 +76,6 @@ function AddPictureScreen({
 
   return (
     <View style={{flex: 1}}>
-      <Text>사진 추가페이지</Text>
       <BottomSheet
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}>

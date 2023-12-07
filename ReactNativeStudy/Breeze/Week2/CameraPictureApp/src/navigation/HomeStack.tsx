@@ -1,12 +1,12 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import PictureScreen from './PictureScreen';
-import DetailScreen from './DetailScreen';
+import PictureScreen from '../screen/PictureScreen';
+import DetailScreen from '../screen/DetailScreen';
 
 import {palette} from '../styles/ColorPalette';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen() {
+function HomeStack() {
   return (
     <Stack.Navigator initialRouteName="Picture">
       <Stack.Screen
@@ -34,4 +34,4 @@ function HomeScreen() {
     </Stack.Navigator>
   );
 }
-export default HomeScreen;
+export default HomeStack;

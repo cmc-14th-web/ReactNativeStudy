@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import HomeScreen from '../screen/HomeScreen';
+import HomeStack from './HomeStack';
 import SettingScreen from '../screen/SettingScreen';
 import Icon from '../components/Icon';
 import AddPictureScreen from '../screen/AddPictureScreen';
@@ -21,7 +21,7 @@ function BottomTab() {
       }}>
       <Tab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeStack}
         options={{
           headerShown: false,
           tabBarLabel: '홈',
