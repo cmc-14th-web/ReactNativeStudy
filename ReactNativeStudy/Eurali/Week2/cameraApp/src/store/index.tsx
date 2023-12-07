@@ -7,13 +7,11 @@ export type imageType = {
 };
 
 type StoreStates = {
-  chk: boolean;
   isClosed: boolean;
   images: imageType[];
   curImageInfo: imageType | null;
   isHome: boolean;
 
-  changeChk: (value: boolean) => void;
   setIsClosed: (value: boolean) => void;
   addImage: (value: imageType) => void;
   setCurImageInfo: (value: imageType) => void;
@@ -21,13 +19,11 @@ type StoreStates = {
 };
 
 const useStore = create<StoreStates>(set => ({
-  chk: false,
   isClosed: true,
   images: [],
   curImageInfo: null,
   isHome: true,
 
-  changeChk: (value: boolean) => set({chk: value}),
   setIsClosed: (value: boolean) => set({isClosed: value}),
   addImage: (value: imageType) =>
     set(state => ({images: [...state.images, value]})),
