@@ -13,3 +13,14 @@ build/
 .gradle/
 .idea/
 gradle/
+
+# custom
+*test*
+android
+ios
+.*
+Gem*
+*config*
+README*
+yarn*
+index.js
