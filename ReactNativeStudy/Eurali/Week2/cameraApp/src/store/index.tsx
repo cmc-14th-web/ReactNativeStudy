@@ -26,7 +26,7 @@ const useStore = create<StoreStates>(set => ({
 
   setIsClosed: (value: boolean) => set({isClosed: value}),
   addImage: (value: imageType) =>
-    set(state => ({images: [...state.images, value]})),
+    set(state => ({images: [value, ...state.images]})),
   setCurImageInfo: (value: imageType) => set({curImageInfo: value}),
   setIsHome: (value: boolean) => set({isHome: value}),
 }));
