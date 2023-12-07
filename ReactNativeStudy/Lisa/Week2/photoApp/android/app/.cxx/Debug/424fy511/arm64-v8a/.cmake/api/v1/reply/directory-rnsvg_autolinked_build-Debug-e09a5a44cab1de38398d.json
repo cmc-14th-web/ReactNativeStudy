@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "rnsvg_autolinked_build",
+		"source" : "C:/Users/user/Desktop/photo-app/ReactNativeStudy/ReactNativeStudy/Lisa/Week2/photoApp/node_modules/react-native-svg/android/build/generated/source/codegen/jni"
+	}
+}
