@@ -1,0 +1,16 @@
+__tests__
+.bundle
+.yarn
+android
+ios
+node_modules
+.eslintrc.js
+.prettierrc.js
+.watchmanconfig
+app.json
+Gemfile
+index.js
+jest.config.json
+metro.config.json
+package.json
+yarn.lock
