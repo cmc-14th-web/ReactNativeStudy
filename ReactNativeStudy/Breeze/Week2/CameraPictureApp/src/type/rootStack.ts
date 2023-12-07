@@ -1,5 +1,5 @@
 export type RootStackParamList = {
-  Detail: undefined;
+  Detail: {img: string};
   Home: undefined;
   Picture: undefined;
   Setting: undefined;

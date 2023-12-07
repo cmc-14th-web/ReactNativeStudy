@@ -25,11 +25,23 @@ function HomeStack() {
       <Stack.Screen
         name="Detail"
         component={DetailScreen}
-        options={{
-          title: '2023.10.12',
+        //options={{
+        //  title: '2023.10.12',
+        //  headerTitleAlign: 'center',
+        //  headerTitleStyle: {},
+        //}}
+        options={({route}) => ({
+          //route.params?.date ||
+          title: 'Default Title',
           headerTitleAlign: 'center',
-          headerTitleStyle: {},
-        }}
+          headerTitleStyle: {
+            color: palette.purple, // Set the color as needed
+          },
+          headerStyle: {
+            backgroundColor: palette.gray[900],
+          },
+          headerTintColor: palette.purple,
+        })}
       />
     </Stack.Navigator>
   );

@@ -1,17 +1,18 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {Pressable, Image, StyleSheet} from 'react-native';
 
 interface ImageItemProp {
   base64Image: string;
+  onPress: () => void;
 }
-function ImageItem({base64Image}: ImageItemProp) {
+function ImageItem({base64Image, onPress}: ImageItemProp) {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={onPress}>
       <Image
         style={styles.image}
         source={{uri: `data:image/jpeg;base64,${base64Image}`}}
       />
-    </View>
+    </Pressable>
   );
 }
 

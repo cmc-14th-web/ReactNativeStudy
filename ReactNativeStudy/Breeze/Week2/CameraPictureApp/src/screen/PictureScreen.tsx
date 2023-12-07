@@ -1,18 +1,32 @@
 import React from 'react';
 import {FlatList, View, Text, StyleSheet} from 'react-native';
-
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useRecoilValue} from 'recoil';
 
 import ImageItem from '../components/ImageItem';
 import {pictureState} from '../recoil/atom';
 import {palette} from '../styles/ColorPalette';
+import {RootStackParamList} from '../type/rootStack';
 
-function PictureScreen() {
+type PictureScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Picture'
+>;
+
+interface PictureScreenProps {
+  navigation: PictureScreenNavigationProp;
+}
+
+function PictureScreen({navigation}: PictureScreenProps) {
   const pictures = useRecoilValue(pictureState);
 
+  const gobackDetail = (img: string) => {
+    navigation.navigate('Detail', {img});
+  };
   const renderImageItem = ({item}: {item: string}) => (
-    <ImageItem base64Image={item} />
+    <ImageItem base64Image={item} onPress={() => gobackDetail(item)} />
   );
+
   return (
     <View>
       {pictures.length === 0 && (
