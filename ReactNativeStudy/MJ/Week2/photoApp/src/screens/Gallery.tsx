@@ -13,13 +13,10 @@ const Gallery: React.FC = () => {
   const detailImage = useRecoilValue(detailImageState);
   const stackNavigation = useNavigator();
   function formatTimestamp(timestamp: number) {
-    // UNIX 타임스탬프를 밀리초 단위로 변환
     const milliseconds = timestamp * 1000;
 
-    // Date 객체 생성
     const date = new Date(milliseconds);
 
-    // 원하는 포맷으로 날짜와 시간을 문자열로 반환
     const formattedDate = `${date.getFullYear()}.${padZero(
       date.getMonth() + 1,
     )}.${padZero(date.getDate())} ${padZero(date.getHours())}:${padZero(
