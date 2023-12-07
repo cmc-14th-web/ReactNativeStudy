@@ -1,69 +1,21 @@
 import React, {useMemo, useRef, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import CameraSvg from '../../assets/camera.svg';
 import GallerySvg from '../../assets/gallery.svg';
 import BottomSheet from '@gorhom/bottom-sheet';
-import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
-import {useStore} from '../../store/store';
-import {ImageDataType, SelectedImageDataType} from '../../types/ImageType';
 import {deviceWidth, deviceHight} from '../../constants/device';
 import AddSvg from '../AddSvg';
+import {useUploadImage} from '../../hooks/useUploadImage';
 
 export default function AddImageButton() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const {bottom} = useSafeAreaInsets();
-  const {setImages} = useStore();
-  const currentImages = useRef<SelectedImageDataType[]>([]);
-  let selectedImagesCount = 1;
+  const {uploadByCamera, uploadByGallery} = useUploadImage();
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const snapPoints = useMemo(() => ['20%'], []);
-
-  const openEdit = async (selectedImages: ImageOrVideo[] | ImageDataType[]) => {
-    const selectedImagesLength = selectedImages.length;
-    // 1개씩 순서대로 자르기 위해 async await와 재귀함수 사용
-    await ImagePicker.openCropper({
-      path: selectedImages[selectedImagesLength - selectedImagesCount].path,
-      mediaType: 'photo',
-      width: (deviceWidth - 32) / 3,
-      height: (deviceWidth - 32) / 3,
-    })
-      .then(async image => {
-        selectedImagesCount++;
-        currentImages.current = [
-          ...currentImages.current,
-          {
-            creationDate: new Date(),
-            path: image.path,
-            height: image.height,
-            width: image.width,
-          },
-        ];
-        if (selectedImagesCount <= selectedImagesLength) {
-          await openEdit(selectedImages);
-        }
-      })
-      .catch(err => console.log(err));
-  };
-
-  const selectOnGallery = () => {
-    // 다수 선택 모드로 갤러리 열기
-    ImagePicker.openPicker({
-      multiple: true,
-    })
-      .then(async (selectedImages: ImageOrVideo[] | ImageDataType[]) => {
-        // 선택을 완료했다면 갤러리 닫기
-        handleCloseButton();
-        // 자르기 모드로 진입
-        await openEdit(selectedImages);
-        setImages(currentImages.current);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
 
   const handleCloseButton = () => {
     bottomSheetRef.current?.close();
@@ -107,7 +59,9 @@ export default function AddImageButton() {
         snapPoints={snapPoints}
         onChange={handleSheetChanges}>
         <View style={styles.bottomSheetWrapStyle}>
-          <TouchableOpacity style={styles.bottomSheetButtonStyle}>
+          <TouchableOpacity
+            style={styles.bottomSheetButtonStyle}
+            onPress={uploadByCamera}>
             <CameraSvg style={styles.bottomSheetButtonSvgStyle} color="black" />
             <Text style={styles.bottomSheetButtonTextStyle}>
               카메라로 촬영하기
@@ -115,7 +69,7 @@ export default function AddImageButton() {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.bottomSheetButtonStyle}
-            onPress={selectOnGallery}>
+            onPress={uploadByGallery}>
             <GallerySvg
               style={styles.bottomSheetButtonSvgStyle}
               color="black"
