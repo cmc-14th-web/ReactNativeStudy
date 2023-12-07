@@ -1,12 +1,27 @@
 import React, {useState, useCallback} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View} from 'react-native';
 import BottomSheet from '../components/BottomSheet';
 import {useFocusEffect} from '@react-navigation/native';
 import Icon from '../components/Icon';
 import Gallery from '../assets/Gallery';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../type/rootStack';
 
-function AddPictureScreen() {
+type AddPictureScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'Picture'
+>;
+
+function AddPictureScreen({
+  navigation,
+}: {
+  navigation: AddPictureScreenNavigationProp;
+}) {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const [response, setResponse] = useState('');
+  const [imageFile, setImageFile] = useState('');
 
   useFocusEffect(
     useCallback(() => {
@@ -15,6 +30,30 @@ function AddPictureScreen() {
     }, []),
   );
 
+  // 이미지 가져오기
+  const getPictures = () => {
+    launchImageLibrary(
+      {
+        madiaType: 'photo',
+        maxWidth: 512,
+        maxHeight: 512,
+        includeBase64: true,
+      },
+      (response: any) => {
+        // console.log(response.assets[0].base64)
+        if (response.didCancel) {
+          return;
+        } else if (response.errorCode) {
+          console.log('Image Error : ' + response.errorCode);
+        }
+
+        setResponse(response);
+        setImageFile(response.assets[0].base64);
+      },
+    );
+    navigation.navigate('Home');
+  };
+
   return (
     <View style={{flex: 1}}>
       <Text>사진 추가페이지</Text>
@@ -22,14 +61,14 @@ function AddPictureScreen() {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}>
         <View style={styles.wrapper}>
-          <View style={styles.content}>
+          <Pressable style={styles.content}>
             <Icon icon="Camera" fill="white" />
             <Text style={styles.text}>카메라로 촬영하기</Text>
-          </View>
-          <View style={styles.content}>
+          </Pressable>
+          <Pressable style={styles.content} onPress={getPictures}>
             <Gallery />
             <Text style={styles.text}>갤러리에서 선택하기</Text>
-          </View>
+          </Pressable>
         </View>
       </BottomSheet>
     </View>
