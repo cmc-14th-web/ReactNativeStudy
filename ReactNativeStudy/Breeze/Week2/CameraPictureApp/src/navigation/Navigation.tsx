@@ -15,10 +15,10 @@ function Navigation() {
       background: palette.gray[900],
     },
   };
+
   return (
     <NavigationContainer theme={navTheme}>
       <Stack.Navigator initialRouteName={'BottomTab'}>
-        {/*하단 바 컴포넌트*/}
         <Stack.Screen
           name="BottomTab"
           component={BottomTab}
@@ -26,7 +26,6 @@ function Navigation() {
             headerShown: false,
           }}
         />
-        {/*사진 디테일 페이지*/}
         <Stack.Screen name="Detail" component={DetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -3,25 +3,25 @@ import SplashScreen from 'react-native-splash-screen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {Navigation} from './navigation';
+import PermissionUtil from './util/PermissionUtil';
+import {APP_PERMISSION_CODE} from './constants/PermissionCode';
 
 function App() {
   useEffect(() => {
-    setTimeout(() => {
+    setTimeout(async () => {
       SplashScreen.hide();
-    }, 1000); //스플래시 활성화 시간
-  });
+      await PermissionUtil.cmmReqPermis([
+        ...APP_PERMISSION_CODE.camera,
+        ...APP_PERMISSION_CODE.picture,
+      ]);
+    }, 1000);
+  }, []);
+
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <Navigation />
     </GestureHandlerRootView>
   );
 }
-
-//const styles = StyleSheet.create({
-//  sectionContainer: {
-//    marginTop: 32,
-//    paddingHorizontal: 24,
-//  },
-//});
 
 export default App;

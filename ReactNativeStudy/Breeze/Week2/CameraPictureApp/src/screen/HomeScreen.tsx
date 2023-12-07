@@ -1,9 +1,7 @@
-import {Pressable, Text} from 'react-native';
-
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PictureScreen from './PictureScreen';
 import DetailScreen from './DetailScreen';
-import Icon from '../components/Icon';
+
 import {palette} from '../styles/ColorPalette';
 
 const Stack = createNativeStackNavigator();
