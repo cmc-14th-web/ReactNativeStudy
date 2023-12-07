@@ -8,8 +8,6 @@ import useNavigator from 'libs/hooks/useNavigator';
 import {theme} from 'styles/theme';
 import {typoStyles} from 'styles/typo';
 import {TabMenu} from 'constants/navigator/menu';
-import {useStore} from 'zustand';
-import {imageStore} from 'libs/store/images';
 
 const CustomBottomSheet = ({
   isBottomSheetOpen,
