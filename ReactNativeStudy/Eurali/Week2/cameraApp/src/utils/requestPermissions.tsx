@@ -20,7 +20,6 @@ export const requestPermissions = async (os: any) => {
       PERMISSIONS.IOS.PHOTO_LIBRARY,
     ]));
   }
-  console.log(cameraPermission);
   if (cameraPermission !== 'granted') {
     await requestCameraPermission(os);
   }
@@ -35,8 +34,7 @@ const requestCameraPermission = async (os: any) => {
     if (os === 'android') {
       await request(PERMISSIONS.ANDROID.CAMERA);
     } else if (os === 'ios') {
-      const requested = await request(PERMISSIONS.IOS.CAMERA);
-      console.log('ios camera:', requested);
+      await request(PERMISSIONS.IOS.CAMERA);
     }
   } catch (error) {
     console.error('Error requesting camera permission:', error);
@@ -44,10 +42,13 @@ const requestCameraPermission = async (os: any) => {
 };
 
 const requestStoragePermission = async (os: any) => {
-  if (os === 'android') {
-    await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
-  } else if (os === 'ios') {
-    const requested = await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
-    console.log('ios library:', requested);
+  try {
+    if (os === 'android') {
+      await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE);
+    } else if (os === 'ios') {
+      await request(PERMISSIONS.IOS.PHOTO_LIBRARY);
+    }
+  } catch (error) {
+    console.error('Error requesting gallery permission:', error);
   }
 };
