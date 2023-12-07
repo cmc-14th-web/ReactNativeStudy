@@ -4,19 +4,19 @@ import {SCREEN_WIDTH} from '@gorhom/bottom-sheet';
 
 export default function DetailPhotoScreen({
   navigation: {setOptions},
-  route: {params: images},
+  route: {params},
 }: any) {
+  const {params: image} = params;
   useEffect(() => {
     setOptions({
-      title: images.creationDate,
+      title: image.creationDate,
     });
-  }, [images, setOptions]);
+  }, [image, setOptions]);
 
-  console.log('params', images);
   return (
     <View>
       <Image
-        source={{uri: images.path}}
+        source={{uri: image.path}}
         width={SCREEN_WIDTH}
         height={SCREEN_WIDTH}
       />
