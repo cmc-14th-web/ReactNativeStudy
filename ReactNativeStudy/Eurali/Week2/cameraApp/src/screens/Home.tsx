@@ -1,5 +1,12 @@
 import React from 'react';
-import {Dimensions, FlatList, Image, Text, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import colors from '../styles/colors';
 import useStore, {imageType} from '../store';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -25,24 +32,12 @@ const Home = ({navigation}: {navigation: any}) => {
   );
 
   return (
-    <View
-      style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: colors.DeepDarkGrey,
-        padding: imageSetPadding,
-      }}>
+    <View style={{...styles.container, padding: imageSetPadding}}>
       {images.length > 0 && (
         <Text style={{color: colors.lightGrey}}>Today</Text>
       )}
       {images.length === 0 && (
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <View style={styles.noItem}>
           <Text
             style={{
               color: colors.lightGrey,
@@ -55,5 +50,19 @@ const Home = ({navigation}: {navigation: any}) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    width: '100%',
+    height: '100%',
+    backgroundColor: colors.DeepDarkGrey,
+  },
+  noItem: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default Home;

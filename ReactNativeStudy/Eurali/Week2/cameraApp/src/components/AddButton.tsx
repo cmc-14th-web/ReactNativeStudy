@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Dimensions} from 'react-native';
+import {TouchableOpacity, Dimensions, StyleSheet} from 'react-native';
 import AddIcon from '../assets/icons/add.svg';
 import useStore from '../store';
 
@@ -9,16 +9,21 @@ const AddButton = () => {
   const setIsClosed = useStore(state => state.setIsClosed);
 
   const handleClickAdd = () => {
-    console.log('clicked');
     setIsClosed(false);
   };
   return (
-    <TouchableOpacity
-      style={{position: 'absolute', bottom: 20, left: (width - 50) / 2}}
-      onPress={handleClickAdd}>
+    <TouchableOpacity style={styles.addButton} onPress={handleClickAdd}>
       <AddIcon />
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  addButton: {
+    position: 'absolute',
+    bottom: 20,
+    left: (width - 50) / 2,
+  },
+});
 
 export default AddButton;

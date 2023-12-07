@@ -41,7 +41,7 @@ const TabNavigation = () => {
 };
 
 const Set = () => {
-  return <View></View>;
+  return <View />;
 };
 
 export default TabNavigation;

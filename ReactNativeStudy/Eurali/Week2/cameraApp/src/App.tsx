@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
-import {Platform} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {requestPermissions} from './utils/requestPermissions';
 import AddButton from './components/AddButton';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -19,7 +19,7 @@ function App(): JSX.Element {
     }, 1000);
   });
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={styles.container}>
       <NavigationContainer>
         <BottomSheetComp />
         {/* <TabNavigation /> */}
@@ -29,5 +29,11 @@ function App(): JSX.Element {
     </GestureHandlerRootView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default App;

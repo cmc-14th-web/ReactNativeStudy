@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useRef} from 'react';
 import {View, Text, StyleSheet, Platform} from 'react-native';
-import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
+import BottomSheet from '@gorhom/bottom-sheet';
 import useStore from '../store';
 import CameraIcon from '../assets/icons/camera.svg';
 import GalleryIcon from '../assets/icons/gallery.svg';
@@ -9,18 +9,14 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
 const BottomSheetComp = () => {
-  // ref
   const bottomSheetRef = useRef<BottomSheet>(null);
   const isClosed = useStore(state => state.isClosed);
   const setIsClosed = useStore(state => state.setIsClosed);
   const addImage = useStore(state => state.addImage);
 
-  // variables
   const snapPoints = useMemo(() => ['1%', '20%'], []);
 
-  // callbacks
   const handleSheetChanges = (index: number) => {
-    console.log(index);
     if (index === 0) {
       setIsClosed(true);
     }
@@ -34,94 +30,56 @@ const BottomSheetComp = () => {
     }
   }, [isClosed]);
 
-  // const renderBackdrop = useCallback((props: any) => {
-  //   setIsClosed(true);
-  //   return <BottomSheetBackdrop {...props} pressBehavior="close" />;
-  // }, []);
+  const imageCropInfo = {
+    width: 300,
+    height: 400,
+    cropping: true,
+  };
 
-  // const renderBackdrop = useCallback(
-  //   (props: any) => <BottomSheetBackdrop {...props} pressBehavior="close" />,
-  //   [],
-  // );
+  const storeImage = (image: any) => {
+    if (Platform.OS === 'android') {
+      const {mime, modificationDate, path} = image;
+      addImage({mime, modificationDate, path});
+    } else {
+      const {mime, creationDate: modificationDate, sourceURL: path} = image;
+      addImage({mime, modificationDate, path});
+    }
+  };
 
   const handleClickCamera = () => {
-    // console.log('camera clicked');
-    // navigation.push('Camera');
     setIsClosed(true);
-    ImageCropPicker.openCamera({
-      width: 300,
-      height: 400,
-      cropping: true,
-    }).then(image => {
-      if (Platform.OS === 'android') {
-        const {mime, modificationDate, path} = image;
-        addImage({mime, modificationDate, path});
-      } else {
-        const {mime, creationDate: modificationDate, sourceURL: path} = image;
-        addImage({mime, modificationDate, path});
-      }
+    ImageCropPicker.openCamera(imageCropInfo).then(image => {
+      storeImage(image);
     });
   };
 
   const handleClickGallery = () => {
     setIsClosed(true);
-    ImageCropPicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-    }).then(image => {
-      if (Platform.OS === 'android') {
-        const {mime, modificationDate, path} = image;
-        addImage({mime, modificationDate, path});
-      } else {
-        const {mime, creationDate: modificationDate, sourceURL: path} = image;
-        addImage({mime, modificationDate, path});
-      }
+    ImageCropPicker.openPicker(imageCropInfo).then(image => {
+      storeImage(image);
     });
   };
 
-  // renders
   return (
-    <View style={{...styles.container, display: isClosed ? 'none' : undefined}}>
+    <View style={isClosed ? styles.hiddenContainer : styles.container}>
       <BottomSheet
         ref={bottomSheetRef}
         index={1}
-        // backdropComponent={renderBackdrop}
         snapPoints={snapPoints}
         onChange={handleSheetChanges}
-        handleStyle={{
-          backgroundColor: colors.DarkGrey,
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
-        }}
-        handleIndicatorStyle={{backgroundColor: colors.lightGrey}}>
+        handleStyle={styles.handle}
+        handleIndicatorStyle={styles.handleIndicator}>
         <View style={styles.contentContainer}>
           <TouchableOpacity onPress={handleClickCamera}>
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 5,
-                paddingHorizontal: 20,
-                paddingVertical: 10,
-              }}>
+            <View style={styles.camera}>
               <CameraIcon />
-              <Text style={{color: colors.white}}> 카메라로 촬영하기 </Text>
+              <Text style={styles.text}> 카메라로 촬영하기 </Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleClickGallery}>
-            <View
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 7,
-                paddingHorizontal: 23,
-                paddingVertical: 10,
-              }}>
+            <View style={styles.gallery}>
               <GalleryIcon />
-              <Text style={{color: colors.white}}> 갤러리에서 선택하기 </Text>
+              <Text style={styles.text}> 갤러리에서 선택하기 </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -140,10 +98,40 @@ const styles = StyleSheet.create({
     padding: 24,
     backgroundColor: 'transparent',
   },
+  hiddenContainer: {
+    display: 'none',
+  },
   contentContainer: {
     flex: 1,
     backgroundColor: colors.DarkGrey,
     paddingVertical: 10,
+  },
+  handle: {
+    backgroundColor: colors.DarkGrey,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+  },
+  handleIndicator: {
+    backgroundColor: colors.lightGrey,
+  },
+  camera: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  gallery: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 7,
+    paddingHorizontal: 23,
+    paddingVertical: 10,
+  },
+  text: {
+    color: colors.white,
   },
 });
 

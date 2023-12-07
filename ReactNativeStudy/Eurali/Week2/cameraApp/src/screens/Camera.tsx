@@ -9,7 +9,7 @@ const CameraScreen = () => {
     return <Text>No Camera Device</Text>;
   }
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       <Camera
         style={StyleSheet.absoluteFill}
         device={device}
@@ -19,5 +19,11 @@ const CameraScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default CameraScreen;

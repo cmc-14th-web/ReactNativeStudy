@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import TabNavigation from './Tab';
 import Camera from '../screens/Camera';
 import DetailImage from '../screens/DetailImage';
 import BackIcon from '../assets/icons/arrow-back.svg';
-import {TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import colors from '../styles/colors';
 import {useNavigation} from '@react-navigation/native';
 import useStore from '../store';
@@ -54,7 +54,7 @@ const StackNavigation = () => {
                 setIsHome(true);
                 navigation.goBack();
               }}
-              style={{marginLeft: 20}}>
+              style={styles.backButton}>
               <BackIcon />
             </TouchableOpacity>
           ),
@@ -63,5 +63,11 @@ const StackNavigation = () => {
     </Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  backButton: {
+    marginLeft: 20,
+  },
+});
 
 export default StackNavigation;
