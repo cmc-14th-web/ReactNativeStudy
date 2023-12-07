@@ -3,34 +3,30 @@ import {Button, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import getCameraImage from '../utils/getCameraImage';
 import useImagesStorage from '../hooks/useImagesStorage';
-import moment from 'moment';
+import getSelectedImage from '../utils/getSelectedImage';
 
 export default function CameraButton() {
-  // const navigation = useNavigation();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const handleOpen = useCallback(() => {
     bottomSheetRef.current?.expand();
   }, []);
 
   const {appendImage} = useImagesStorage();
+
   const handleTakePhoto = async () => {
     bottomSheetRef.current?.close();
     const photo = await getCameraImage();
     if (photo) {
-      const {width, height, path} = photo;
-      appendImage({
-        width,
-        height,
-        path,
-        creationDate: moment(photo.creationDate ?? undefined).format(
-          'YYYY.MM.DD HH:mm',
-        ),
-      });
+      appendImage(photo);
     }
   };
 
-  const handleChooseFromLibrary = () => {
+  const handleChooseFromLibrary = async () => {
     bottomSheetRef.current?.close();
+    const photo = await getSelectedImage();
+    if (photo) {
+      appendImage(photo);
+    }
   };
 
   const snapPoints = useMemo(() => ['25%'], []);

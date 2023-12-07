@@ -1,19 +1,31 @@
 import {SCREEN_WIDTH} from '@gorhom/bottom-sheet';
-import {Alert} from 'react-native';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import getFormattedDate from './getFormattedDate';
 import {Image} from '../types/image';
+import {Alert} from 'react-native';
 
-export default async function getCameraImage(): Promise<Image | undefined> {
+export default async function getSelectedImage(): Promise<Image | undefined> {
   try {
-    const photo = await ImageCropPicker.openCamera({
+    const selectedImage = await ImageCropPicker.openPicker({
       width: SCREEN_WIDTH,
       height: SCREEN_WIDTH,
       cropping: true,
     });
 
-    const {width, height, path, creationDate} = photo;
+    if (!selectedImage) {
+      return undefined;
+    }
 
+    const croppedImage = await ImageCropPicker.openCropper({
+      path: selectedImage.path,
+      mediaType: 'photo',
+    });
+
+    if (!croppedImage) {
+      return undefined;
+    }
+
+    const {width, height, path, creationDate} = croppedImage;
     return {
       width,
       height,
