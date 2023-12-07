@@ -9,4 +9,8 @@ app.json
 Gemfile
 jest.config.json
 metro.config.json
-
+.gitignore
+.eslintrc.js
+.prettierrc.js
+index.js
+yarn.lock
