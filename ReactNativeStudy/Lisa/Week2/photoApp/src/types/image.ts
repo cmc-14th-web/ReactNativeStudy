@@ -7,5 +7,5 @@ export type ImageType = {
 
 export type ImageStateType = {
   images: ImageType[];
-  setImages: (newImage: ImageType) => void;
+  setImages: (newImage: ImageType[]) => void;
 };

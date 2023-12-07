@@ -40,7 +40,7 @@ export const useImage = () => {
         newImages.push(newImage);
       }
 
-      newImages.map(newImage => setImages(newImage));
+      setImages(newImages);
       tabNavigation.navigate(TabMenu.Home);
     }
   };
@@ -53,12 +53,14 @@ export const useImage = () => {
     });
 
     if (image) {
-      const newImage = {
-        date: (image.creationDate ?? image.modificationDate) as string,
-        width: image.width,
-        height: image.height,
-        path: image.path,
-      };
+      const newImage = [
+        {
+          date: (image.creationDate ?? image.modificationDate) as string,
+          width: image.width,
+          height: image.height,
+          path: image.path,
+        },
+      ];
 
       setImages(newImage);
       tabNavigation.navigate(TabMenu.Home);
