@@ -1,14 +1,33 @@
 import React, {useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import SplashScreen from 'react-native-splash-screen';
-import {Text} from 'react-native';
+import {Platform} from 'react-native';
+import {requestPermissions} from './utils/requestPermissions';
+import AddButton from './components/AddButton';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import BottomSheetComp from './components/BottomSheet';
+import StackNavigation from './navigators/Stack';
+import useStore from './store';
 
 function App(): JSX.Element {
+  const isHome = useStore(state => state.isHome);
+
   useEffect(() => {
-    setTimeout(() => {
+    setTimeout(async () => {
       SplashScreen.hide();
-    }, 2000); //스플래시 활성화 시간
+      await requestPermissions(Platform.OS);
+    }, 1000);
   });
-  return <Text>haha</Text>;
+  return (
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer>
+        <BottomSheetComp />
+        {/* <TabNavigation /> */}
+        <StackNavigation />
+      </NavigationContainer>
+      {isHome && <AddButton />}
+    </GestureHandlerRootView>
+  );
 }
 
 export default App;

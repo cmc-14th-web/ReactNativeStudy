@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useRef} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Platform} from 'react-native';
 import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 import useStore from '../store';
 import CameraIcon from '../assets/icons/camera.svg';
@@ -16,7 +16,7 @@ const BottomSheetComp = () => {
   const addImage = useStore(state => state.addImage);
 
   // variables
-  const snapPoints = useMemo(() => ['10%', '20%'], []);
+  const snapPoints = useMemo(() => ['1%', '20%'], []);
 
   // callbacks
   const handleSheetChanges = (index: number) => {
@@ -53,8 +53,13 @@ const BottomSheetComp = () => {
       height: 400,
       cropping: true,
     }).then(image => {
-      const {mime, modificationDate, path} = image;
-      addImage({mime, modificationDate, path});
+      if (Platform.OS === 'android') {
+        const {mime, modificationDate, path} = image;
+        addImage({mime, modificationDate, path});
+      } else {
+        const {mime, creationDate: modificationDate, sourceURL: path} = image;
+        addImage({mime, modificationDate, path});
+      }
     });
   };
 
@@ -65,7 +70,13 @@ const BottomSheetComp = () => {
       height: 400,
       cropping: true,
     }).then(image => {
-      console.log(image);
+      if (Platform.OS === 'android') {
+        const {mime, modificationDate, path} = image;
+        addImage({mime, modificationDate, path});
+      } else {
+        const {mime, creationDate: modificationDate, sourceURL: path} = image;
+        addImage({mime, modificationDate, path});
+      }
     });
   };
 
