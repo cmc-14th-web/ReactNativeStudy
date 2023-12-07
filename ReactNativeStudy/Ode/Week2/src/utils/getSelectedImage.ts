@@ -25,12 +25,12 @@ export default async function getSelectedImage(): Promise<Image | undefined> {
       return undefined;
     }
 
-    const {width, height, path, creationDate} = croppedImage;
+    const {width, height, path, modificationDate} = croppedImage;
     return {
       width,
       height,
       path,
-      creationDate: getFormattedDate(creationDate),
+      creationDate: getFormattedDate(modificationDate),
     };
   } catch (error) {
     console.error(error);
