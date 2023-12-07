@@ -41,7 +41,7 @@ const BottomSheetComp = () => {
       const {mime, modificationDate, path} = image;
       addImage({mime, modificationDate, path});
     } else {
-      const {mime, creationDate: modificationDate, sourceURL: path} = image;
+      const {mime, creationDate: modificationDate, path} = image;
       addImage({mime, modificationDate, path});
     }
   };
