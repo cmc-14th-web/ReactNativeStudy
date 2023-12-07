@@ -5,6 +5,7 @@ import HomeScreen from '../screen/HomeScreen';
 import SettingScreen from '../screen/SettingScreen';
 import Icon from '../components/Icon';
 import AddPictureScreen from '../screen/AddPictureScreen';
+import {palette} from '../styles/ColorPalette';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,8 +15,8 @@ function BottomTab() {
       screenOptions={{
         tabBarStyle: styles.tabBar,
         tabBarIconStyle: styles.tabBarIcon,
-        tabBarInactiveTintColor: 'gray',
-        tabBarActiveTintColor: 'red',
+        tabBarInactiveTintColor: palette.gray[400],
+        tabBarActiveTintColor: palette.purple,
         tabBarLabelStyle: styles.tabBarLabel,
       }}>
       <Tab.Screen
@@ -25,7 +26,10 @@ function BottomTab() {
           headerShown: false,
           tabBarLabel: '홈',
           tabBarIcon: ({focused}) => (
-            <Icon fill={focused ? 'red' : 'gray'} icon="Home" />
+            <Icon
+              fill={focused ? palette.purple : palette.gray[400]}
+              icon="Home"
+            />
           ),
         }}
       />
@@ -36,9 +40,9 @@ function BottomTab() {
           headerShown: false,
           tabBarIcon: ({focused}) => (
             <Icon
-              fill={focused ? 'red' : 'gray'}
-              width={50}
-              height={50}
+              fill={focused ? palette.purple : palette.gray[400]}
+              width={60}
+              height={60}
               icon="Add"
             />
           ),
@@ -50,10 +54,19 @@ function BottomTab() {
         name="Setting"
         component={SettingScreen}
         options={{
-          tabBarLabel: '설정',
+          title: '설정',
           tabBarIcon: ({focused}) => (
-            <Icon fill={focused ? 'red' : 'gray'} icon="Theme" />
+            <Icon
+              fill={focused ? palette.purple : palette.gray[400]}
+              icon="Theme"
+            />
           ),
+          headerStyle: {
+            backgroundColor: palette.gray[900],
+          },
+          headerTitleStyle: {
+            color: palette.purple,
+          },
         }}
       />
     </Tab.Navigator>
@@ -66,6 +79,7 @@ const styles = StyleSheet.create({
     height: 60,
     elevation: 5,
     paddingHorizontal: 11,
+    backgroundColor: palette.gray[900],
   },
   tabBarIcon: {
     justifyContent: 'space-between',

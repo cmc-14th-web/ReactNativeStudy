@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PictureScreen from './PictureScreen';
 import DetailScreen from './DetailScreen';
 import Icon from '../components/Icon';
+import {palette} from '../styles/ColorPalette';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,7 +16,12 @@ function HomeScreen() {
         component={PictureScreen}
         options={{
           title: 'CMC의 사진첩',
-          headerTitleStyle: {},
+          headerTitleStyle: {
+            color: palette.purple,
+          },
+          headerStyle: {
+            backgroundColor: palette.gray[900],
+          },
         }}
       />
       <Stack.Screen

@@ -3,7 +3,6 @@ import SplashScreen from 'react-native-splash-screen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {Navigation} from './navigation';
-import {BottomSheetModalProvider} from '@gorhom/bottom-sheet/lib/typescript/contexts';
 
 function App() {
   useEffect(() => {

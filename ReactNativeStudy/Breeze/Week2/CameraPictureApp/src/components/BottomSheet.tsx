@@ -2,19 +2,24 @@ import React, {useEffect, useRef} from 'react';
 import {
   View,
   StyleSheet,
-  Text,
   Modal,
   Animated,
   TouchableWithoutFeedback,
   Dimensions,
   PanResponder,
 } from 'react-native';
+import {palette} from '../styles/ColorPalette';
 
 interface BottomSheetProps {
   modalVisible: boolean;
   setModalVisible: (value: boolean) => void;
+  children?: React.ReactNode;
 }
-const BottomSheet = ({modalVisible, setModalVisible}: BottomSheetProps) => {
+const BottomSheet = ({
+  modalVisible,
+  setModalVisible,
+  children,
+}: BottomSheetProps) => {
   const screenHeight = Dimensions.get('screen').height;
   const panY = useRef(new Animated.Value(screenHeight)).current;
   const translateY = panY.interpolate({
@@ -79,7 +84,10 @@ const BottomSheet = ({modalVisible, setModalVisible}: BottomSheetProps) => {
             transform: [{translateY: translateY}],
           }}
           {...panResponders.panHandlers}>
-          <Text>This is BottomSheet</Text>
+          <View style={styles.tapWrapper}>
+            <View style={styles.top} />
+          </View>
+          {children}
         </Animated.View>
       </View>
     </Modal>
@@ -95,11 +103,23 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
   },
-  bottomSheetContainer: {
-    height: 300,
-    justifyContent: 'center',
+  top: {
+    width: 50,
+    height: 4,
+    backgroundColor: 'rgba(250, 250, 250, 0.4)',
+    borderRadius: 15,
+  },
+  tapWrapper: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    position: 'absolute',
+    top: 15,
+    justifyContent: 'center',
+    width: '100%',
+  },
+  bottomSheetContainer: {
+    height: 150,
+    justifyContent: 'center',
+    backgroundColor: palette.gray[600],
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
   },
