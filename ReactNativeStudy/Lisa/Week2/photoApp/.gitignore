@@ -9,9 +9,10 @@ node_modules
 .watchmanconfig
 app.json
 Gemfile
-index.js
 jest.config.json
 metro.config.json
-package.json
+.gitignore
+.eslintrc.js
+.prettierrc.js
+index.js
 yarn.lock
-
