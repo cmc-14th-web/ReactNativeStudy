@@ -48,6 +48,23 @@ export default function AddImageButton() {
       .catch(err => console.log(err));
   };
 
+  const selectOnGallery = () => {
+    // 다수 선택 모드로 갤러리 열기
+    ImagePicker.openPicker({
+      multiple: true,
+    })
+      .then(async (selectedImages: ImageOrVideo[] | ImageDataType[]) => {
+        // 선택을 완료했다면 갤러리 닫기
+        handleCloseButton();
+        // 자르기 모드로 진입
+        await openEdit(selectedImages);
+        setImages(currentImages.current);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
   const handleCloseButton = () => {
     bottomSheetRef.current?.close();
     setIsOpen(false);
@@ -98,24 +115,7 @@ export default function AddImageButton() {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.bottomSheetButtonStyle}
-            onPress={() =>
-              // 다수 선택 모드로 갤러리 열기
-              ImagePicker.openPicker({
-                multiple: true,
-              })
-                .then(
-                  async (selectedImages: ImageOrVideo[] | ImageDataType[]) => {
-                    // 선택을 완료했다면 갤러리 닫기
-                    handleCloseButton();
-                    // 자르기 모드로 진입
-                    await openEdit(selectedImages);
-                    setImages(currentImages.current);
-                  },
-                )
-                .catch(e => {
-                  console.log(e);
-                })
-            }>
+            onPress={selectOnGallery}>
             <GallerySvg
               style={styles.bottomSheetButtonSvgStyle}
               color="black"
