@@ -1,11 +1,11 @@
 import React, {useState, useCallback} from 'react';
 import {useSetRecoilState} from 'recoil';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 import BottomSheet from '../components/BottomSheet';
 import {useFocusEffect} from '@react-navigation/native';
 import Icon from '../components/Icon';
 import Gallery from '../assets/Gallery';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../type/rootStack';
 import {pictureState} from '../recoil/atom';
@@ -30,49 +30,53 @@ function AddPictureScreen({
     }, []),
   );
 
-  // 이미지 가져오기
-  const getPictures = () => {
-    launchImageLibrary(
-      {
-        mediaType: 'photo',
-        maxWidth: 512,
-        maxHeight: 512,
-        includeBase64: true,
-      },
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      (response: any) => {
-        if (response.didCancel) {
-          return;
-        } else if (response.errorCode) {
-          console.log('Image Error : ' + response.errorCode);
-        }
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const base64Images = response.assets.map((asset: any) => asset.base64);
-
-        setPicture(prevPictures => [...prevPictures, ...base64Images]);
-      },
-    );
-    navigation.navigate('Home');
-  };
-
-  const openCamera = async () => {
+  // 갤러리에서 이미지 가져오기
+  const getPictures = useCallback(async () => {
     try {
-      const result = await launchCamera({
+      const image = await ImagePicker.openPicker({
         mediaType: 'photo',
         includeBase64: true,
+        width: 512,
+        height: 512,
       });
-      if (result.assets && result.assets.length > 0) {
-        const base64Image = result.assets[0]?.base64;
 
-        if (base64Image) {
-          setPicture(prevPictures => [...prevPictures, base64Image]);
+      if (image?.path) {
+        setPicture(prevPictures => [...prevPictures, image.path]);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    navigation.navigate('Home');
+  }, [navigation, setPicture]);
+
+  // 카메라 사진 찍기
+  const openCamera = useCallback(async () => {
+    try {
+      const image = await ImagePicker.openCamera({
+        mediaType: 'photo',
+        includeBase64: true,
+        width: 512,
+        height: 512,
+        cropping: true,
+      });
+
+      if (image?.path) {
+        const croppedImage = await ImagePicker.openCropper({
+          path: image.path,
+          width: 512,
+          height: 512,
+          mediaType: 'photo',
+        });
+
+        if (croppedImage) {
+          setPicture(prevPictures => [...prevPictures, croppedImage.path]);
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
     navigation.navigate('Home');
-  };
+  }, [navigation, setPicture]);
 
   return (
     <View style={{flex: 1}}>

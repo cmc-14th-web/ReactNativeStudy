@@ -2,16 +2,13 @@ import React from 'react';
 import {Pressable, Image, StyleSheet} from 'react-native';
 
 interface ImageItemProp {
-  base64Image: string;
+  image: string;
   onPress: () => void;
 }
-function ImageItem({base64Image, onPress}: ImageItemProp) {
+function ImageItem({image, onPress}: ImageItemProp) {
   return (
     <Pressable style={styles.container} onPress={onPress}>
-      <Image
-        style={styles.image}
-        source={{uri: `data:image/jpeg;base64,${base64Image}`}}
-      />
+      <Image style={styles.image} source={{uri: image}} />
     </Pressable>
   );
 }

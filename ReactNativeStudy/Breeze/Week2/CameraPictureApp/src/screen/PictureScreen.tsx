@@ -24,7 +24,7 @@ function PictureScreen({navigation}: PictureScreenProps) {
     navigation.navigate('Detail', {img});
   };
   const renderImageItem = ({item}: {item: string}) => (
-    <ImageItem base64Image={item} onPress={() => gobackDetail(item)} />
+    <ImageItem image={item} onPress={() => gobackDetail(item)} />
   );
 
   return (
