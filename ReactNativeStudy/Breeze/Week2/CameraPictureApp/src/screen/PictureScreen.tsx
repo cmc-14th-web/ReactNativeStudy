@@ -6,7 +6,7 @@ import {useRecoilValue} from 'recoil';
 import ImageItem from '../components/ImageItem';
 import {pictureState} from '../recoil/atom';
 import {palette} from '../styles/ColorPalette';
-import {RootStackParamList} from '../type/rootStack';
+import {RootStackParamList} from '../type/navigator';
 
 type PictureScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,

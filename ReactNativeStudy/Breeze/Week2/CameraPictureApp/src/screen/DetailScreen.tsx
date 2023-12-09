@@ -1,6 +1,6 @@
 import {RouteProp} from '@react-navigation/native';
 import {View, Image, StyleSheet} from 'react-native';
-import {RootStackParamList} from '../type/rootStack';
+import {RootStackParamList} from '../type/navigator';
 
 type DetailScreenRouteProp = RouteProp<RootStackParamList, 'Detail'>;
 

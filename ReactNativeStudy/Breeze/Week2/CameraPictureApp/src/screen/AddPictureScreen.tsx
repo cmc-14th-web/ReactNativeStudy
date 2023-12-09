@@ -7,7 +7,7 @@ import {useFocusEffect} from '@react-navigation/native';
 import Icon from '../components/Icon';
 import Gallery from '../assets/Gallery';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../type/rootStack';
+import {RootStackParamList} from '../type/navigator';
 import {pictureState} from '../recoil/atom';
 
 type AddPictureScreenNavigationProp = NativeStackNavigationProp<
