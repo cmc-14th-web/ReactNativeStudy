@@ -13,8 +13,15 @@
 
 ## 🎁 과제 요구사항
 
-- 1주차 과제: [TODO 앱 만들기](https://www.figma.com/file/nWK5hwJfj70Su98vJrVRws/CMC-14th-Team-Web?type=design&node-id=0%3A1&mode=design&t=1TMCspkqHMmUtZJH-1)
-- 2주차 과제: [사진첩 앱 만들기](https://www.figma.com/file/nWK5hwJfj70Su98vJrVRws/CMC-14th-Team-Web?type=design&node-id=0%3A1&mode=design&t=1TMCspkqHMmUtZJH-1)
+- 🎄 [Figma 참고](https://www.figma.com/file/nWK5hwJfj70Su98vJrVRws/CMC-14th-Team-Web?type=design&node-id=0%3A1&mode=design&t=1TMCspkqHMmUtZJH-1)
+
+- 1주차 과제: TODO 앱 만들기
+- 2주차 과제: 사진첩 앱 만들기
+- 3주차 과제: Youtube 앱 만들기
+
+## 🎁 트러블 슈팅 문서
+
+- 🎄 [노션 참고](https://cmc-14th-web.notion.site/164c81629f3141f4b2c6175ae3fb6c56?v=3f421ecd7095432c87bae5d67ce19ff2&pvs=4)
 
 ## 🎁 스터디 진행 방식
 
@@ -72,15 +79,15 @@ ex) [1주차] 제인 과제 제출합니다
 | 주차  | 날짜     | Breeze | Eurali | Lany | Lisa | MJ  | Od  | Sarah | Zero |
 | ----- | -------- | ------ | ------ | ---- | ---- | --- | --- | ----- | ---- |
 | Week1 | 23.12.02 | ☑️     | ☑️     | ☑️   | ☑️   | ☑️  | ☑️  | ☑️    | ☑️   |
-| Week2 | 23.12.09 |        |        |      |      |     |     |       |      |
+| Week2 | 23.12.09 | ☑️     | ☑️     | ☑️   | ☑️   | ☑️  | ☑️  | △     | ☑️   |
 | Week3 | 23.12.16 |        |        |      |      |     |     |       |      |
 | Week4 | 23.12.30 |        |        |      |      |     |     |       |      |
 
 ## 🎁 코드리뷰 파트너
 
-| 주차  | TeamA         | TeamB          | TeamC     | TeamD        |
-| ----- | ------------- | -------------- | --------- | ------------ |
-| Week1 | Breeze & Lany | Eurali & Sarah | MJ & Lisa | Od & Zero    |
-| Week2 | Breeze & Lisa | Eurali & Od    | MJ & Lany | Sarah & Zero |
-| Week3 |               |                |           |              |
-| Week4 |               |                |           |              |
+| 주차  | TeamA         | TeamB          | TeamC        | TeamD        |
+| ----- | ------------- | -------------- | ------------ | ------------ |
+| Week1 | Breeze & Lany | Eurali & Sarah | MJ & Lisa    | Od & Zero    |
+| Week2 | Breeze & Lisa | Eurali & Od    | MJ & Lany    | Sarah & Zero |
+| Week3 | Breeze & Od   | Eurali & Lany  | Lisa & Sarah | MJ & Zero    |
+| Week4 |               |                |              |              |
