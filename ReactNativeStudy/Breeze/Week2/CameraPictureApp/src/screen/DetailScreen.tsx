@@ -12,10 +12,7 @@ function DetailScreen({route}: DetailScreenProps) {
   const {img} = route.params;
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{uri: `data:image/jpeg;base64,${img}`}}
-      />
+      <Image style={styles.image} source={{uri: `${img}`}} />
     </View>
   );
 }

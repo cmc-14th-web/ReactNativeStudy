@@ -1,11 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
-import HomeStack from './HomeStack';
 import SettingScreen from '../screen/SettingScreen';
 import Icon from '../components/Icon';
 import AddPictureScreen from '../screen/AddPictureScreen';
 import {palette} from '../styles/ColorPalette';
+import HomeScreen from '../screen/HomeScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,10 +20,16 @@ function BottomTab() {
       }}>
       <Tab.Screen
         name="Home"
-        component={HomeStack}
+        component={HomeScreen}
         options={{
-          headerShown: false,
-          tabBarLabel: '홈',
+          title: '홈',
+          headerTitle: 'CMC 사진첩',
+          headerTitleStyle: {
+            color: palette.purple,
+          },
+          headerStyle: {
+            backgroundColor: palette.gray[900],
+          },
           tabBarIcon: ({focused}) => (
             <Icon
               fill={focused ? palette.purple : palette.gray[400]}

@@ -1,27 +1,18 @@
-import React from 'react';
-import {FlatList, View, Text, StyleSheet} from 'react-native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {useRecoilValue} from 'recoil';
-
-import ImageItem from '../components/ImageItem';
-import {pictureState} from '../recoil/atom';
+import {StyleSheet, View} from 'react-native';
 import {palette} from '../styles/ColorPalette';
-import {RootStackParamList} from '../type/navigator';
+import {useRecoilValue} from 'recoil';
+import {pictureState} from '../recoil/atom';
+import ImageItem from '../components/ImageItem';
+import {Text} from 'react-native-svg';
+import {FlatList} from 'react-native-gesture-handler';
+import useNavigator from '../hook/useNavigator';
 
-type PictureScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'Picture'
->;
-
-interface PictureScreenProps {
-  navigation: PictureScreenNavigationProp;
-}
-
-function PictureScreen({navigation}: PictureScreenProps) {
+function HomeScreen() {
   const pictures = useRecoilValue(pictureState);
+  const {stackNavigation} = useNavigator();
 
   const gobackDetail = (img: string) => {
-    navigation.navigate('Detail', {img});
+    stackNavigation.navigate('Detail', {img});
   };
   const renderImageItem = ({item}: {item: string}) => (
     <ImageItem image={item} onPress={() => gobackDetail(item)} />
@@ -31,7 +22,7 @@ function PictureScreen({navigation}: PictureScreenProps) {
     <View>
       {pictures.length === 0 && (
         <View style={styles.wrapper}>
-          <Text style={styles.text}>아직 업로드된 사진이 없습니다.</Text>
+          <Text>아직 업로드된 사진이 없습니다.</Text>
         </View>
       )}
       <FlatList
@@ -43,6 +34,7 @@ function PictureScreen({navigation}: PictureScreenProps) {
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
@@ -53,4 +45,5 @@ const styles = StyleSheet.create({
     color: palette.gray[400],
   },
 });
-export default PictureScreen;
+
+export default HomeScreen;

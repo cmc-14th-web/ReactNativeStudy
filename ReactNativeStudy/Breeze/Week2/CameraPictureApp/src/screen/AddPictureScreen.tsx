@@ -6,22 +6,13 @@ import BottomSheet from '../components/BottomSheet';
 import {useFocusEffect} from '@react-navigation/native';
 import Icon from '../components/Icon';
 import Gallery from '../assets/Gallery';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../type/navigator';
 import {pictureState} from '../recoil/atom';
+import useNavigator from '../hook/useNavigator';
 
-type AddPictureScreenNavigationProp = NativeStackNavigationProp<
-  RootStackParamList,
-  'Picture'
->;
-
-function AddPictureScreen({
-  navigation,
-}: {
-  navigation: AddPictureScreenNavigationProp;
-}) {
+function AddPictureScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const setPicture = useSetRecoilState(pictureState);
+  const {tabNavigation} = useNavigator();
 
   useFocusEffect(
     useCallback(() => {
@@ -46,8 +37,8 @@ function AddPictureScreen({
     } catch (err) {
       console.error(err);
     }
-    navigation.navigate('Home');
-  }, [navigation, setPicture]);
+    tabNavigation.navigate('Home');
+  }, [setPicture]);
 
   // 카메라 사진 찍기
   const openCamera = useCallback(async () => {
@@ -57,7 +48,6 @@ function AddPictureScreen({
         includeBase64: true,
         width: 512,
         height: 512,
-        cropping: true,
       });
 
       if (image?.path) {
@@ -75,8 +65,8 @@ function AddPictureScreen({
     } catch (err) {
       console.error(err);
     }
-    navigation.navigate('Home');
-  }, [navigation, setPicture]);
+    tabNavigation.navigate('Home');
+  }, [setPicture]);
 
   return (
     <View style={{flex: 1}}>
