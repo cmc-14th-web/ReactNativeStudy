@@ -1,0 +1,106 @@
+# OSX
+#
+.DS_Store
+
+# Xcode
+#
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+*.moved-aside
+DerivedData
+*.hmap
+*.ipa
+*.xcuserstate
+ios/.xcode.env.local
+
+# Android/IntelliJ
+#
+build/
+.idea
+.gradle
+local.properties
+*.iml
+*.hprof
+.cxx/
+*.keystore
+!debug.keystore
+
+# node.js
+#
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://docs.fastlane.tools/best-practices/source-control/
+
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+
+# Bundle artifact
+*.jsbundle
+
+# Ruby / CocoaPods
+/ios/Pods/
+/vendor/bundle/
+
+# Temporary files created by Metro to check the health of the file watcher
+.metro-health-check*
+
+# testing
+/coverage
+
+# gitignore에 추가해본 설정
+__tests__/
+ios
+.watchmanconfig
+app.json
+babel.config.js
+Gemfile
+jest.config.js
+README.md
+
+# android 폴더 내에서 변경된 파일들을 무시하지 않도록 설정
+android/*
+!android/app
+android/app/*
+!android/app/src
+android/app/src/*
+!android/app/src/main
+android/app/src/main/*
+!android/app/src/main/res
+android/app/src/main/res/*
+
+!android/app/src/main/res/values
+android/app/src/main/res/values/*
+!android/app/src/main/res/values/strings.xml
+
+!android/app/src/main/res/drawable-hdpi
+!android/app/src/main/res/drawable-mdpi
+!android/app/src/main/res/drawable-xhdpi
+!android/app/src/main/res/drawable-xxhdpi
+!android/app/src/main/res/drawable-xxxhdpi
+!android/app/src/main/res/layout
+
+!android/app/src/main/java
+android/app/src/main/java/*
+!android/app/src/main/java/com
+android/app/src/main/java/com/*
+!android/app/src/main/java/com/camera
+android/app/src/main/java/com/camera/*
+!android/app/src/main/java/com/camera/MainActivity.java
