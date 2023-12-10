@@ -31,7 +31,11 @@ const SvgIcons = {
       />
     </Svg>
   ),
-  ThemeIcon: ({width = 24, height = 24, fill = 'white'}: SvgIconPropsType) => (
+  ThemeIcon: ({
+    width = 24,
+    height = 24,
+    fill = 'gray_600',
+  }: SvgIconPropsType) => (
     <Svg
       width={width}
       height={height}
