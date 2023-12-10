@@ -83,6 +83,6 @@ package-lock.json
 react-native.config.js
 README.md
 tsconfig.json
-
+.env
 
 
