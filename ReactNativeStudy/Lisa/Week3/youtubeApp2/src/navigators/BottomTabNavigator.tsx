@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {BottomTabBarLabel, BottomTabMenu} from 'constants/navigator/menu';
+import {BottomTabBarLabel, BottomTabMenu} from 'constants/menu';
 import {BottomTabParamList, RoutePropsType} from 'types/navigator';
 import {theme} from 'styles/theme';
 import Home from 'screens/Home';
