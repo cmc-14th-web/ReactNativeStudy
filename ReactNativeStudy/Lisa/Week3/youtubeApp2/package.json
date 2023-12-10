@@ -1,13 +1,13 @@
 {
-  "name": "youtubeApp2",
+  "name": "youtubeApp",
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android --no-packager",
-    "ios": "react-native run-ios --no-packager",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
     "format": "prettier --cache --write .",
     "lint": "eslint --cache .",
-    "start": "react-native esbuild-start",
     "test": "jest"
   },
   "dependencies": {
@@ -16,10 +16,9 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "@types/react-native": "^0.72.8",
-    "esbuild": "^0.19.9",
+    "babel-plugin-module-resolver": "^5.0.0",
     "react": "18.2.0",
     "react-native": "0.72.7",
-    "react-native-esbuild": "^0.6.0",
     "react-native-gesture-handler": "^2.14.0",
     "react-native-safe-area-context": "^4.8.0",
     "react-native-screens": "^3.29.0",
