@@ -4,8 +4,15 @@ import SvgIcons from '../assets/icons/SvgIcons';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import colors from '../constants/color';
 import Home from '../screens/Home';
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList, TabParamList} from '../types/navigators';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabParamList>();
+
+type TabNavigationProps = NativeStackScreenProps<
+  RootStackParamList,
+  'TabNavigator'
+>;
 
 const SearchIcon = ({onPress}: {onPress: () => void}) => (
   <TouchableOpacity onPress={onPress} style={styles.icon}>
@@ -13,7 +20,7 @@ const SearchIcon = ({onPress}: {onPress: () => void}) => (
   </TouchableOpacity>
 );
 
-const TabNavigation = ({navigation}: {navigation: any}) => {
+const TabNavigation = ({navigation}: TabNavigationProps) => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -33,7 +40,7 @@ const TabNavigation = ({navigation}: {navigation: any}) => {
         name="홈"
         component={Home}
         options={{
-          title: 'Youtube',
+          headerTitle: 'Youtube',
           tabBarIcon: ({focused}) => <SvgIcons.HomeIcon focused={focused} />,
           headerRight: () => (
             <SearchIcon onPress={() => navigation.navigate('Search')} />

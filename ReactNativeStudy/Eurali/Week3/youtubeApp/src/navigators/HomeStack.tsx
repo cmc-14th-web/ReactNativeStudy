@@ -3,8 +3,9 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import colors from '../constants/color';
 import Search from '../screens/Search';
 import TabNavigation from './Tab';
+import {RootStackParamList} from '../types/navigators';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const HomeStack = () => {
   return (
