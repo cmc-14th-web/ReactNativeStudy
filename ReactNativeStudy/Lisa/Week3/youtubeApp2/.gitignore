@@ -84,5 +84,6 @@ react-native.config.js
 README.md
 tsconfig.json
 .env
-
+main.js
+storybook.requires.js
 

@@ -14,3 +14,7 @@ const App = () => {
 };
 
 export default App;
+
+/* 스토리북 실행 원할 시 주석 제거
+export {default} from './.storybook';
+*/
