@@ -15,7 +15,7 @@ export default function BottomTabNavigator() {
         tabBarStyle: {backgroundColor: palette.Gray900},
       }}>
       <Tab.Screen
-        name="홈"
+        name="Home"
         component={HomeScreen}
         options={{
           tabBarIcon: SvgIcons.HomeIcon,
@@ -24,7 +24,7 @@ export default function BottomTabNavigator() {
         }}
       />
       <Tab.Screen
-        name="설정"
+        name="Setting"
         component={SettingScreen}
         options={{
           tabBarIcon: SvgIcons.SettingIcon,
