@@ -82,3 +82,5 @@ tsconfig.json
 yarn.lock
 package-lock.json
 declarations.d.ts
+.env
+env.d.ts

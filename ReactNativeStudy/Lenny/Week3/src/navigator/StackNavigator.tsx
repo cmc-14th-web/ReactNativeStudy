@@ -4,7 +4,6 @@ import BottomTabNavigator from './BottomTabNavigator';
 
 export default function StackNavigator() {
   const Stack = createNativeStackNavigator();
-
   return (
     <Stack.Navigator>
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />

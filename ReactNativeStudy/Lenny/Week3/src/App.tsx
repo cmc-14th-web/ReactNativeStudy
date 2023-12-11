@@ -1,14 +1,13 @@
 import {NavigationContainer} from '@react-navigation/native';
-import React, {useEffect} from 'react';
-import Navigator from './navigators/Navigator';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
+import React from 'react';
+import Navigator from './navigator/Navigator';
 
-export default function App(): JSX.Element {
+function App(): JSX.Element {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Navigator />
-      </NavigationContainer>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Navigator />
+    </NavigationContainer>
   );
 }
+
+export default App;
