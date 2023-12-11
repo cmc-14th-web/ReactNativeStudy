@@ -1,5 +1,5 @@
 import {youtubeApiClient} from '.';
-import {VideosResponse} from '../videoResponse';
+import {VideosResponse} from '../types/videoResponse';
 
 type GetSearchResultVideosProps = {
   pageToken?: string;

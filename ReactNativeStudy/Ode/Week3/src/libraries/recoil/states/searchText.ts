@@ -1,6 +1,6 @@
 import {atom} from 'recoil';
 
-const SearchTextStateKey = 'searchText';
+const SearchTextStateKey = 'searchTextState';
 
 const searchState = atom<string>({
   key: SearchTextStateKey,

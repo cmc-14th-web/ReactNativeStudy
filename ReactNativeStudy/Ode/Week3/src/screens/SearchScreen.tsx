@@ -1,11 +1,12 @@
 import React from 'react';
 import Container from '../components/common/Container';
-import {FlatList, Text, View} from 'react-native';
+import {FlatList, Text} from 'react-native';
 import useGetSearchResultVideosQuery from '../hooks/useGetSearchResultVideosQuery';
-import {Video} from '../video';
+import {Video} from '../types/video';
 import LoadingMoreIndicator from '../components/common/LoadingMoreIndicator';
 import EmptyComponent from '../components/common/EmptyComponent';
 import Colors from '../styles/colors';
+import VideoItem from '../components/common/VideoItem';
 
 export default function SearchScreen() {
   const {
@@ -37,9 +38,7 @@ export default function SearchScreen() {
             data={videos}
             keyExtractor={(item: Video, index: number) => `${item.id}-${index}`}
             renderItem={({item: video}: {item: Video}) => (
-              <View>
-                <Text style={{color: Colors.White}}>{video.snippet.title}</Text>
-              </View>
+              <VideoItem video={video} />
             )}
             onEndReached={() => fetchNextPage()}
             onEndReachedThreshold={0.5}

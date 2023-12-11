@@ -1,6 +1,6 @@
 import {QueryFunctionContext} from '@tanstack/react-query';
 import {youtubeApiClient} from '.';
-import {VideosResponse} from '../videoResponse';
+import {VideosResponse} from '../types/videoResponse';
 
 export default async function getPopularVideos({
   queryKey,
@@ -10,6 +10,5 @@ export default async function getPopularVideos({
   const {data} = await youtubeApiClient.get('/videos?&chart=mostPopular', {
     params: {maxResults},
   });
-
   return data;
 }

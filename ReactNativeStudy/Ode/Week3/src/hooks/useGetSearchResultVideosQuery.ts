@@ -23,7 +23,7 @@ export default function useGetSearchResultVideosQuery() {
       }),
     getNextPageParam: lastPage => lastPage?.nextPageToken || undefined,
     initialPageParam: '',
-    enabled: Boolean(searchText) && searchText.length > 0,
+    enabled: searchText.length > 0,
   });
 
   return {
