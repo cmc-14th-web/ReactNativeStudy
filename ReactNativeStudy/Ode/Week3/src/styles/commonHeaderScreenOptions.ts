@@ -8,18 +8,14 @@ const commonHeaderScreenOptions: StackNavigationOptions &
   headerStyle: {
     backgroundColor: Colors.Black,
     borderBottomColor: Colors.Black,
+    height: 74,
   },
   headerTitleStyle: {
     fontSize: 24,
     color: Colors.White,
   },
-  headerRightContainerStyle: {
-    paddingHorizontal: 18,
-  },
+
   headerShadowVisible: false,
-  headerBackgroundContainerStyle: {
-    borderColor: Colors.Black,
-  },
   headerBackTitleVisible: false,
   headerTintColor: Colors.White,
 };

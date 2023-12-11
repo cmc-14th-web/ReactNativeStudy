@@ -16,6 +16,9 @@ export default function TabNavigator() {
         screenOptions={{
           ...commonHeaderScreenOptions,
           headerRight: SearchButton,
+          headerRightContainerStyle: {
+            paddingRight: 10,
+          },
           tabBarActiveTintColor: Colors.Red,
           tabBarStyle: {
             borderTopColor: Colors.Black,
