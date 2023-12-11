@@ -1,5 +1,5 @@
 import {NavigationContainer} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import Navigator from './navigator/Navigator';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
