@@ -12,7 +12,7 @@ const Home = () => {
       `${Config.YOUTUBE_API}/videos?part=snippet&chart=mostPopular&maxResults=25&key=${Config.YOUTUBE_API_KEY}`,
     [],
   );
-  const {data, isLoading, error} = useFetchGET({url: apiUrl});
+  const {data, isLoading, error} = useFetchGET({url: apiUrl, firstGet: true});
 
   return (
     <Container>

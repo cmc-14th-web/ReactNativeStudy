@@ -3,9 +3,10 @@ import {YoutubeVideoList} from '../types/YoutubeVideoList';
 
 interface IUseFetchProps {
   url: RequestInfo;
+  firstGet: boolean;
 }
 
-const useFetchGET = ({url}: IUseFetchProps) => {
+const useFetchGET = ({url, firstGet}: IUseFetchProps) => {
   const [data, setData] = useState<YoutubeVideoList | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<{message: string} | null>(null);
@@ -30,11 +31,13 @@ const useFetchGET = ({url}: IUseFetchProps) => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (firstGet) {
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
-  return {data, isLoading, error};
+  return {data, isLoading, error, fetchData};
 };
 
 export default useFetchGET;
