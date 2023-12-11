@@ -16,6 +16,7 @@ const useFetchGET = ({url, firstGet}: IUseFetchProps) => {
       const response = await fetch(url);
 
       if (response.ok) {
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         const data = await response.json();
         setData(data);
       } else {

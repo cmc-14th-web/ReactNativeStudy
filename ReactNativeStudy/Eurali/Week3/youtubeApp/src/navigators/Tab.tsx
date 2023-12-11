@@ -1,14 +1,14 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import SvgIcons from '../assets/icons/SvgIcons';
-import {TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import colors from '../constants/color';
 import Home from '../screens/Home';
 
 const Tab = createBottomTabNavigator();
 
 const SearchIcon = ({onPress}: {onPress: () => void}) => (
-  <TouchableOpacity onPress={onPress}>
+  <TouchableOpacity onPress={onPress} style={styles.icon}>
     <SvgIcons.SearchIcon />
   </TouchableOpacity>
 );
@@ -34,7 +34,7 @@ const TabNavigation = ({navigation}: {navigation: any}) => {
         component={Home}
         options={{
           title: 'Youtube',
-          tabBarIcon: ({focused}) => <SvgIcons.HomeIcon focused={focused}/>,
+          tabBarIcon: ({focused}) => <SvgIcons.HomeIcon focused={focused} />,
           headerRight: () => (
             <SearchIcon onPress={() => navigation.navigate('Search')} />
           ),
@@ -45,7 +45,7 @@ const TabNavigation = ({navigation}: {navigation: any}) => {
         component={Setting}
         options={{
           headerShown: false,
-          tabBarIcon: ({focused}) => <SvgIcons.SettingIcon focused={focused}/>,
+          tabBarIcon: ({focused}) => <SvgIcons.SettingIcon focused={focused} />,
         }}
       />
     </Tab.Navigator>
@@ -55,5 +55,11 @@ const TabNavigation = ({navigation}: {navigation: any}) => {
 const Setting = () => {
   return <View />;
 };
+
+const styles = StyleSheet.create({
+  icon: {
+    paddingRight: 10,
+  },
+});
 
 export default TabNavigation;

@@ -14,11 +14,15 @@ const VideoItem = ({item}: {item: YoutubeVideo}) => {
         height={screenInfo.height / 3.5}
       />
       <View style={styles.videoInfoContainer}>
-        <Text style={styles.videoTitle}>{item.snippet.title}</Text>
+        <Text style={styles.videoTitle}>
+          {item.snippet.title.replaceAll('&#39;', '')}
+        </Text>
         <View style={styles.videoInfo}>
           <Text style={styles.infoText}>{item.snippet.channelTitle}</Text>
           <Text style={styles.infoText}>·</Text>
-          <Text style={styles.infoText}>{item.snippet.publishedAt}</Text>
+          <Text style={styles.infoText}>
+            {item.snippet.publishedAt.split('T')[0]}
+          </Text>
         </View>
       </View>
     </View>

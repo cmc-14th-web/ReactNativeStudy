@@ -32,8 +32,6 @@ const Search = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log(data.nextPageToken);
-          console.log(data.items);
           if (first) {
             setVideoList(data.items);
           } else {
