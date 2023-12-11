@@ -3,20 +3,14 @@ import {StyleSheet, TextInput, View, TouchableOpacity} from 'react-native';
 import Colors from '../styles/colors';
 import SvgIcon from './common/SvgIcon';
 import useSearchTextStorage from '../hooks/useSearchText';
-import {useNavigation} from '@react-navigation/native';
 
 export default function SearchBar() {
-  const navigation = useNavigation();
-
   const {onSearch} = useSearchTextStorage();
 
   const [text, setText] = useState<string>('');
 
   const handleSubmit = () => {
     onSearch(text);
-    handleReset();
-    // Todo: as never 진짜 싫다
-    navigation.navigate('HomeScreen' as never);
   };
 
   const handleReset = () => setText('');

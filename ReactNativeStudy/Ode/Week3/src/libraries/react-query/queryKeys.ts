@@ -1,5 +1,6 @@
 const enum QueryKeys {
-  Videos = 'VIDEOS',
+  PopularVideos = 'POPULAR_VIDEOS',
+  SearchResultVideos = 'SEARCH_RESULT_VIDEOS',
 }
 
 export default QueryKeys;
