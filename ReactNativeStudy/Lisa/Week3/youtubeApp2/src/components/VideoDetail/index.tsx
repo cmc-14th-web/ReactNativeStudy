@@ -21,7 +21,7 @@ const VideoDetail = ({
         />
       </View>
       <View style={viewDetailStyles.textContainer}>
-        <Text style={viewDetailStyles.headingText}>{sliceText(title, 45)}</Text>
+        <Text style={viewDetailStyles.headingText}>{sliceText(title, 42)}</Text>
         <View style={viewDetailStyles.bodyTextContainer}>
           <Text style={viewDetailStyles.bodyText}>{channelTitle}</Text>
           <Text style={viewDetailStyles.bodyText}>{' · '}</Text>
