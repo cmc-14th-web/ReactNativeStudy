@@ -3,20 +3,19 @@ import Svg, {Path} from 'react-native-svg';
 
 import Colors from '../../styles/colors';
 
-export type SvgPropsType = {
+type SvgPropsType = {
   icon: Icon;
   configs?: {
-    width?: number;
-    height?: number;
+    size?: number;
     fill?: string;
   };
 };
 
 export default function SvgIcon({icon, configs = {}}: SvgPropsType) {
-  const {width = 24, height = 24, fill = Colors.White} = configs;
+  const {size = 24, fill = Colors.White} = configs;
 
   return (
-    <Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
+    <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       <Path d={IconPath[icon]} fill={fill} />
     </Svg>
   );

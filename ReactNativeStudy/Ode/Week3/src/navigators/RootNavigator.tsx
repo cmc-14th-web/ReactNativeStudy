@@ -2,33 +2,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {View} from 'react-native';
 import TabNavigator from './TabNavigator';
-import Colors from '../styles/colors';
+import commonHeaderScreenOptions from '../styles/commonHeaderScreenOptions';
 
 const Stack = createStackNavigator();
 
 export default function RootNavigator() {
   return (
-    <Stack.Navigator
-      screenOptions={{
-        headerTitleAlign: 'left',
-        headerStyle: {
-          backgroundColor: Colors.Black,
-          borderBottomColor: Colors.Black,
-        },
-        headerTitleStyle: {
-          fontSize: 24,
-          color: Colors.White,
-        },
-        headerRightContainerStyle: {
-          paddingHorizontal: 18,
-        },
-        headerShadowVisible: false,
-        headerBackgroundContainerStyle: {
-          borderColor: Colors.Black,
-        },
-        headerBackTitleVisible: false,
-        headerTintColor: Colors.White,
-      }}>
+    <Stack.Navigator screenOptions={commonHeaderScreenOptions}>
       <Stack.Screen
         name="BottomTabNavigator"
         component={TabNavigator}

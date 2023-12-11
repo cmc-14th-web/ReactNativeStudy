@@ -5,6 +5,7 @@ import Colors from '../styles/colors';
 import Container from '../components/common/Container';
 import SearchButton from '../components/common/SearchButton';
 import SvgIcon from '../components/common/SvgIcon';
+import commonHeaderScreenOptions from '../styles/commonHeaderScreenOptions';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -13,25 +14,8 @@ export default function TabNavigator() {
     <>
       <BottomTab.Navigator
         screenOptions={{
-          headerTitleAlign: 'left',
-          headerStyle: {
-            backgroundColor: Colors.Black,
-            borderBottomColor: Colors.Black,
-          },
-          headerTitleStyle: {
-            fontSize: 24,
-            color: Colors.White,
-          },
-          headerRightContainerStyle: {
-            paddingHorizontal: 18,
-          },
-          headerShadowVisible: false,
-          headerBackgroundContainerStyle: {
-            borderColor: Colors.Black,
-          },
+          ...commonHeaderScreenOptions,
           headerRight: SearchButton,
-          // tabBarIcon: ({focused}: {focused: boolean}) =>
-          //   getTabBarIcon(route.name, focused),
           tabBarActiveTintColor: Colors.Red,
           tabBarStyle: {
             borderTopColor: Colors.Black,
@@ -44,9 +28,7 @@ export default function TabNavigator() {
           options={{
             headerTitle: 'Youtube',
             tabBarLabel: '홈',
-            tabBarIcon: ({color}) => (
-              <SvgIcon icon="Home" configs={{fill: color}} />
-            ),
+            tabBarIcon: HomeSvgIcon,
           }}
         />
         <BottomTab.Screen
@@ -55,9 +37,7 @@ export default function TabNavigator() {
           options={{
             headerTitle: '설정',
             tabBarLabel: '설정',
-            tabBarIcon: ({color}) => (
-              <SvgIcon icon="Setting" configs={{fill: color}} />
-            ),
+            tabBarIcon: SettingSvgIcon,
           }}
         />
       </BottomTab.Navigator>
@@ -70,4 +50,18 @@ const Hi = () => {
       <Text>hi</Text>
     </Container>
   );
+};
+
+function HomeSvgIcon({size, color}: EachSvgIconProps) {
+  return <SvgIcon icon="Home" configs={{fill: color, size}} />;
+}
+
+function SettingSvgIcon({size, color}: EachSvgIconProps) {
+  return <SvgIcon icon="Setting" configs={{fill: color, size}} />;
+}
+
+type EachSvgIconProps = {
+  // focused: boolean;
+  color: string;
+  size: number;
 };
