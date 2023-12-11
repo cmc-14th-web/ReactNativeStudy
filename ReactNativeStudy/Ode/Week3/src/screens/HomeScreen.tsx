@@ -1,20 +1,13 @@
 import React from 'react';
 import Container from '../components/common/Container';
 import {FlatList, Text, View} from 'react-native';
-import useGetSearchResultVideosQuery from '../hooks/useGetSearchResultVideosQuery';
-import {Video} from '../video';
-import LoadingMoreIndicator from '../components/common/LoadingMoreIndicator';
+import useGetPopularVideosQuery from '../hooks/useGetPopularVideosQuery';
 import EmptyComponent from '../components/common/EmptyComponent';
 import Colors from '../styles/colors';
+import {Video} from '../video';
 
-export default function SearchScreen() {
-  const {
-    videosResponse,
-    isLoading,
-    isError,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useGetSearchResultVideosQuery();
+export default function HomeScreen() {
+  const {videosResponse, isLoading, isError} = useGetPopularVideosQuery();
 
   return (
     <Container>
@@ -23,29 +16,21 @@ export default function SearchScreen() {
           return <Text style={{color: Colors.White}}>불러오는 중...</Text>;
         }
 
-        if (isError) {
+        if (!videosResponse || isError) {
           return (
             <Text style={{color: Colors.White}}>문제가 발생했습니다.</Text>
           );
         }
 
-        const videos: Video[] =
-          videosResponse?.pages.flatMap(page => page.items) || [];
-
         return (
           <FlatList
-            data={videos}
+            data={videosResponse.items}
             keyExtractor={(item: Video, index: number) => `${item.id}-${index}`}
             renderItem={({item: video}: {item: Video}) => (
               <View>
                 <Text style={{color: Colors.White}}>{video.snippet.title}</Text>
               </View>
             )}
-            onEndReached={() => fetchNextPage()}
-            onEndReachedThreshold={0.5}
-            ListFooterComponent={
-              isFetchingNextPage ? LoadingMoreIndicator : null
-            }
             ListEmptyComponent={EmptyComponent}
           />
         );

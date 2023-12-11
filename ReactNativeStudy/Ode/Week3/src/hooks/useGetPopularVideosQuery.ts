@@ -6,7 +6,7 @@ const maxResults = 25;
 
 export default function useGetPopularVideosQuery() {
   const {
-    data: videos,
+    data: videosResponse,
     isLoading,
     isError,
   } = useQuery({
@@ -14,5 +14,5 @@ export default function useGetPopularVideosQuery() {
     queryFn: getPopularVideos,
   });
 
-  return {videos, isLoading, isError};
+  return {videosResponse, isLoading, isError};
 }

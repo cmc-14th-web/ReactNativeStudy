@@ -1,11 +1,11 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text} from 'react-native';
 import Colors from '../styles/colors';
-import Container from '../components/common/Container';
 import SearchButton from '../components/common/SearchButton';
 import SvgIcon from '../components/common/SvgIcon';
 import commonHeaderScreenOptions from '../styles/commonHeaderScreenOptions';
+import HomeScreen from '../screens/HomeScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const BottomTab = createBottomTabNavigator();
 
@@ -27,7 +27,7 @@ export default function TabNavigator() {
         }}>
         <BottomTab.Screen
           name="HomeScreen"
-          component={Hi}
+          component={HomeScreen}
           options={{
             headerTitle: 'Youtube',
             tabBarLabel: '홈',
@@ -36,7 +36,7 @@ export default function TabNavigator() {
         />
         <BottomTab.Screen
           name="SettingsScreen"
-          component={Hi}
+          component={SettingsScreen}
           options={{
             headerTitle: '설정',
             tabBarLabel: '설정',
@@ -47,13 +47,6 @@ export default function TabNavigator() {
     </>
   );
 }
-const Hi = () => {
-  return (
-    <Container>
-      <Text>hi</Text>
-    </Container>
-  );
-};
 
 function HomeSvgIcon({size, color}: EachSvgIconProps) {
   return <SvgIcon icon="Home" configs={{fill: color, size}} />;

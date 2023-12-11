@@ -8,7 +8,7 @@ const maxResults = 5;
 export default function useGetSearchResultVideosQuery() {
   const {searchText} = useSearchTextStorage();
   const {
-    data: videoResponse,
+    data: videosResponse,
     isLoading,
     isError,
     fetchNextPage,
@@ -23,8 +23,14 @@ export default function useGetSearchResultVideosQuery() {
       }),
     getNextPageParam: lastPage => lastPage?.nextPageToken || undefined,
     initialPageParam: '',
-    enabled: searchText.length > 0,
+    enabled: Boolean(searchText) && searchText.length > 0,
   });
 
-  return {videoResponse, isLoading, isError, fetchNextPage, isFetchingNextPage};
+  return {
+    videosResponse,
+    isLoading,
+    isError,
+    fetchNextPage,
+    isFetchingNextPage,
+  };
 }
