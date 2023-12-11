@@ -10,17 +10,16 @@ const getTrendingVideos = async () => {
 export const useGetTrendingVideos = () => {
   const {
     isSuccess: isGetTrendingVideosSuccess,
-    isError: isGetTrendingVideosError,
     isLoading: isGetTrendingVideosLoading,
-    data: trendingVideos,
+    data,
   } = useQuery({
     queryKey: ['trending'],
     queryFn: getTrendingVideos,
   });
+
   return {
     isGetTrendingVideosSuccess,
-    isGetTrendingVideosError,
     isGetTrendingVideosLoading,
-    trendingVideos,
+    data,
   };
 };

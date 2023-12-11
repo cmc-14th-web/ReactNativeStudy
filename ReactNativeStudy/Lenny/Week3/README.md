@@ -14,3 +14,10 @@
 - CSS
 
   - styleSheet
+
+- 그 외
+  - [react-native-svg](https://github.com/software-mansion/react-native-svg)
+  - [react-native-svg-transformer](https://github.com/kristerkari/react-native-svg-transformer)
+  - [date-fns](https://github.com/date-fns/date-fns)
+  - [react-query](https://tanstack.com/query/latest)
+  - [react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv)
