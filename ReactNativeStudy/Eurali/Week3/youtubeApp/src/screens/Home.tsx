@@ -1,8 +1,9 @@
 import React, {useMemo} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import useFetchGET from '../hooks/useFetchGet';
 import Config from 'react-native-config';
 import colors from '../constants/color';
+import VideoItem from '../components/VideoItem';
 
 const Home = () => {
   const apiUrl = useMemo(
@@ -14,10 +15,14 @@ const Home = () => {
 
   return (
     <View>
-      <Text style={styles.popularVideo}>인기 동영상</Text>
-      {isLoading && <Text>로딩중</Text>}
-      {!isLoading && data && <Text>haha</Text>}
-      {error && <Text>에러 발생</Text>}
+      <ScrollView>
+        <Text style={styles.popularVideo}>인기 동영상</Text>
+        {isLoading && <Text>로딩중</Text>}
+        {!isLoading &&
+          data &&
+          data.items.map(item => <VideoItem item={item} />)}
+        {error && <Text>에러 발생</Text>}
+      </ScrollView>
     </View>
   );
 };

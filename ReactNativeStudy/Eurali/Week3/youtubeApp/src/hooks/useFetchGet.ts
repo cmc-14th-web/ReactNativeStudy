@@ -1,11 +1,12 @@
 import {useEffect, useState} from 'react';
+import {YoutubeVideoList} from '../types/YoutubeVideoList';
 
 interface IUseFetchProps {
   url: RequestInfo;
 }
 
 const useFetchGET = ({url}: IUseFetchProps) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<YoutubeVideoList | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<{message: string} | null>(null);
 
@@ -20,10 +21,11 @@ const useFetchGET = ({url}: IUseFetchProps) => {
         const {message} = await response.json();
         setError({message});
       }
-      setIsLoading(false);
     } catch (e) {
       console.log(e);
       setError({message: 'API 요청에 실패하였습니다.'});
+    } finally {
+      setIsLoading(false);
     }
   };
 

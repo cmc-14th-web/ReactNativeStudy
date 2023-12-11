@@ -2,9 +2,8 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './HomeStack';
 import SvgIcons from '../assets/icons/SvgIcons';
-import { View } from 'react-native';
+import {View} from 'react-native';
 import colors from '../constants/color';
-//import HomeIcon from '../assets/icons/home.svg';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,7 +34,7 @@ const TabNavigation = () => {
 };
 
 const Setting = () => {
-  return <View />
-}
+  return <View />;
+};
 
 export default TabNavigation;
