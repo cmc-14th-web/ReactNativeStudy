@@ -8,19 +8,28 @@ const Tab = createBottomTabNavigator();
 
 function BottomTabNavigation() {
     return (
-        <Tab.Navigator>
+        <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+                tabBarStyle: {
+                    backgroundColor: COLOR.Gray900,
+                },
+                tabBarActiveTintColor: COLOR.Red,
+                tabBarInactiveTintColor: COLOR.DarkGray,
+            }}
+        >
             <Tab.Screen name="Home" component={Home}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Icon id="Home" width={28} height={28} fill={focused ? COLOR.Red : COLOR.DarkGray} />
-                    )
+                    ),
                 }}
             />
             <Tab.Screen name="Settings" component={Setting}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Icon id="Theme" width={28} height={28} fill={focused ? COLOR.Red : COLOR.DarkGray} />
-                    )
+                    ),
                 }}
             />
         </Tab.Navigator>
