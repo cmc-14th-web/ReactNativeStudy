@@ -3,10 +3,11 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomTabBarLabel, BottomTabMenu} from 'constants/menu';
 import {BottomTabParamList, RoutePropsType} from 'types/navigator';
 import {theme} from 'styles/theme';
+import {typoStyles} from 'styles/typo';
 import Home from 'screens/Home';
 import Setting from 'screens/Setting';
 import SvgIcons from 'assets/icons/SvgIcons';
-import {typoStyles} from 'styles/typo';
+import HeaderRightElement from 'components/Home/HeaderRightElement';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -66,7 +67,7 @@ const BottomTabNavigator = () => {
         component={Home}
         options={{
           tabBarLabel: BottomTabBarLabel.Home,
-          headerRight: () => <SvgIcons.SearchIcon />,
+          headerRight: () => <HeaderRightElement />,
           headerShadowVisible: false,
         }}
       />

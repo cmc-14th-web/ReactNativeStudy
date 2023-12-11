@@ -1,8 +1,10 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {StackMenu} from 'constants/menu';
-import BottomTabNavigator from './BottomTabNavigator';
 import {RootStackParamList} from 'types/navigator';
+import BottomTabNavigator from './BottomTabNavigator';
+import SearchVideo from 'screens/SearchVideo';
+import SearchVideoHeader from 'components/SearchVideo/SearchVideoHeader';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -16,6 +18,12 @@ const StackNavigator = () => {
           headerShown: false,
         }}
       />
+      <Stack.Group
+        screenOptions={{
+          header: () => <SearchVideoHeader />,
+        }}>
+        <Stack.Screen name={StackMenu.SearchVideo} component={SearchVideo} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };

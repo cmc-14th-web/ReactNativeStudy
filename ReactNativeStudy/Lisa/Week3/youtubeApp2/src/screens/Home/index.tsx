@@ -5,9 +5,10 @@ import {VideoApi} from 'apis/VideoApi';
 import {typoStyles} from 'styles/typo';
 import {theme} from 'styles/theme';
 import VideoListItem from 'components/VideoListItem';
+import {queryKey} from 'constants/api';
 
 const Home = () => {
-  const {data: videoList} = useQuery(['VIDEOLIST'], () =>
+  const {data: videoList} = useQuery([queryKey.VIDEOLIST], () =>
     VideoApi.GET_POPULAR_VIDEOS(),
   );
 
