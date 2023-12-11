@@ -14,6 +14,10 @@ const TabNavigation = () => {
         headerShown: false,
         tabBarActiveTintColor: colors.red,
         tabBarInactiveTintColor: colors.grey600,
+        tabBarStyle: {
+          backgroundColor: colors.grey900,
+          borderTopColor: colors.grey900,
+        },
       }}>
       <Tab.Screen
         name="홈"

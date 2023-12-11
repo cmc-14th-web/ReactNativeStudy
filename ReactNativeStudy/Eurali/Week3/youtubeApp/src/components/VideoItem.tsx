@@ -16,9 +16,9 @@ const VideoItem = ({item}: {item: YoutubeVideo}) => {
       <View style={styles.videoInfoContainer}>
         <Text style={styles.videoTitle}>{item.snippet.title}</Text>
         <View style={styles.videoInfo}>
-          <Text>{item.snippet.channelTitle}</Text>
-          <Text>·</Text>
-          <Text>{item.snippet.publishedAt}</Text>
+          <Text style={styles.infoText}>{item.snippet.channelTitle}</Text>
+          <Text style={styles.infoText}>·</Text>
+          <Text style={styles.infoText}>{item.snippet.publishedAt}</Text>
         </View>
       </View>
     </View>
@@ -33,15 +33,17 @@ const styles = StyleSheet.create({
   videoTitle: {
     fontSize: 15,
     fontWeight: '500',
-    color: colors.black,
+    color: colors.grey100,
   },
   videoInfo: {
     display: 'flex',
     flexDirection: 'row',
-    fontSize: 10,
+    gap: 5,
+  },
+  infoText: {
+    fontSize: 12,
     fontWeight: '500',
     color: colors.grey600,
-    gap: 2,
   },
 });
 

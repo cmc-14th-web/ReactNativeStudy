@@ -4,26 +4,31 @@ import useFetchGET from '../hooks/useFetchGet';
 import Config from 'react-native-config';
 import colors from '../constants/color';
 import VideoItem from '../components/VideoItem';
+import Container from '../layout/Container';
 
 const Home = () => {
   const apiUrl = useMemo(
     () =>
-      `${Config.YOUTUBE_API}//videos?part=snippet&chart=mostPopular&maxResults=25&key=${Config.YOUTUBE_API_KEY}`,
+      `${Config.YOUTUBE_API}/videos?part=snippet&chart=mostPopular&maxResults=25&key=${Config.YOUTUBE_API_KEY}`,
     [],
   );
   const {data, isLoading, error} = useFetchGET({url: apiUrl});
 
   return (
-    <View>
+    <Container>
       <ScrollView>
         <Text style={styles.popularVideo}>인기 동영상</Text>
         {isLoading && <Text>로딩중</Text>}
         {!isLoading &&
           data &&
-          data.items.map(item => <VideoItem item={item} />)}
+          data.items.map(item => (
+            <View key={item.id}>
+              <VideoItem item={item} />
+            </View>
+          ))}
         {error && <Text>에러 발생</Text>}
       </ScrollView>
-    </View>
+    </Container>
   );
 };
 
