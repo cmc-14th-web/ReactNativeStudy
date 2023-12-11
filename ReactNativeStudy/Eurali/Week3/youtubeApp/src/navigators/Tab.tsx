@@ -1,35 +1,50 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeStack from './HomeStack';
 import SvgIcons from '../assets/icons/SvgIcons';
-import {View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import colors from '../constants/color';
+import Home from '../screens/Home';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigation = () => {
+const SearchIcon = ({onPress}: {onPress: () => void}) => (
+  <TouchableOpacity onPress={onPress}>
+    <SvgIcons.SearchIcon />
+  </TouchableOpacity>
+);
+
+const TabNavigation = ({navigation}: {navigation: any}) => {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
         tabBarActiveTintColor: colors.red,
         tabBarInactiveTintColor: colors.grey600,
         tabBarStyle: {
           backgroundColor: colors.grey900,
           borderTopColor: colors.grey900,
         },
+        headerStyle: {
+          backgroundColor: colors.grey900,
+        },
+        headerTintColor: colors.white,
+        headerShadowVisible: false,
       }}>
       <Tab.Screen
         name="홈"
-        component={HomeStack}
+        component={Home}
         options={{
+          title: 'Youtube',
           tabBarIcon: ({focused}) => <SvgIcons.HomeIcon focused={focused}/>,
+          headerRight: () => (
+            <SearchIcon onPress={() => navigation.navigate('Search')} />
+          ),
         }}
       />
       <Tab.Screen
         name="설정"
         component={Setting}
         options={{
+          headerShown: false,
           tabBarIcon: ({focused}) => <SvgIcons.SettingIcon focused={focused}/>,
         }}
       />

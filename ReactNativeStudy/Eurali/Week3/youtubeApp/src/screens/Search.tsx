@@ -64,9 +64,9 @@ const Search = () => {
   };
 
   const onEndReached = async () => {
-    // if (!isLoading && videoList && videoList.length >= 1) {
-    //   await fetchData(text, pageToken);
-    // }
+    if (!isLoading && videoList && videoList.length >= 1) {
+      await fetchData(text, pageToken, false);
+    }
   };
 
   return (
@@ -107,7 +107,7 @@ const Search = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: screenInfo.height,
+    height: screenInfo.height - 70,
     paddingHorizontal: 10,
     paddingVertical: 15,
   },
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingBottom: 12,
   },
   input: {
     width: (screenInfo.width * 5) / 6,

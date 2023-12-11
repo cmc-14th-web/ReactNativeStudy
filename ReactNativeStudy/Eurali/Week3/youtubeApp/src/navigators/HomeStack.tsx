@@ -6,6 +6,7 @@ import SvgIcons from '../assets/icons/SvgIcons';
 import {TouchableOpacity} from 'react-native';
 import Search from '../screens/Search';
 import {useNavigation} from '@react-navigation/core';
+import TabNavigation from './Tab';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,7 +17,6 @@ const SearchIcon = ({onPress}: {onPress: () => void}) => (
 );
 
 const HomeStack = () => {
-  const navigation = useNavigation();
 
   return (
     <Stack.Navigator
@@ -25,23 +25,10 @@ const HomeStack = () => {
         headerStyle: {
           backgroundColor: colors.grey900,
         },
+        headerShown: false,
       }}>
-      <Stack.Screen
-        name="Youtube"
-        component={Home}
-        options={{
-          headerRight: () => (
-            <SearchIcon onPress={() => navigation.navigate('Search')} />
-          ),
-        }}
-      />
-      <Stack.Screen
-        name="Search"
-        component={Search}
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name="TabNavigator" component={TabNavigation} />
+      <Stack.Screen name="Search" component={Search} />
     </Stack.Navigator>
   );
 };

@@ -6,13 +6,22 @@
  */
 
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import TabNavigation from './src/navigators/Tab';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+import HomeStack from './src/navigators/HomeStack';
+import colors from './src/constants/color';
+
+const customTheme = {
+  ...DefaultTheme,
+  color: {
+    ...DefaultTheme.colors,
+    background: colors.grey900,
+  },
+};
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <TabNavigation />
+    <NavigationContainer theme={customTheme}>
+      <HomeStack />
     </NavigationContainer>
   );
 }
