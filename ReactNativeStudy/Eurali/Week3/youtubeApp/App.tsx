@@ -6,22 +6,14 @@
  */
 
 import React from 'react';
-import {SafeAreaView, useColorScheme} from 'react-native';
-
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Home from './src/screens/Home';
+import {NavigationContainer} from '@react-navigation/native';
+import TabNavigation from './src/navigators/Tab';
 
 function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <Home />
-    </SafeAreaView>
+    <NavigationContainer>
+      <TabNavigation />
+    </NavigationContainer>
   );
 }
 
