@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import TabNavigator from './TabNavigator';
 import commonHeaderScreenOptions from '../styles/commonHeaderScreenOptions';
 import SearchBar from '../components/SearchBar';
-import Container from '../components/common/Container';
+import SearchScreen from '../screens/SearchScreen';
 
 const Stack = createStackNavigator();
 
@@ -27,7 +27,7 @@ export default function RootNavigator() {
       />
       <Stack.Screen
         name="SearchScreen"
-        component={Container}
+        component={SearchScreen}
         options={{
           headerTitle: SearchBar,
         }}

@@ -2,13 +2,13 @@ import {youtubeApiClient} from '.';
 import {VideosResponse} from '../videoResponse';
 
 type GetSearchResultVideosProps = {
-  pageParam?: string;
+  pageToken?: string;
   searchText: string;
   maxResults?: number;
 };
 
 export default async function getSearchResultVideos({
-  pageParam = '',
+  pageToken = '',
   searchText,
   maxResults = 5,
 }: GetSearchResultVideosProps): Promise<VideosResponse> {
@@ -16,9 +16,8 @@ export default async function getSearchResultVideos({
     params: {
       maxResults,
       q: searchText,
-      pageToken: pageParam,
+      pageToken,
     },
   });
-
   return data;
 }

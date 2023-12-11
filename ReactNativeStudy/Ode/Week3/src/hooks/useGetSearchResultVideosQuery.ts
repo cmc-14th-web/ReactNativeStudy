@@ -11,13 +11,20 @@ export default function useGetSearchResultVideosQuery() {
     data: videoResponse,
     isLoading,
     isError,
+    fetchNextPage,
+    isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: [QueryKeys.SearchResultVideos, searchText, maxResults],
-    queryFn: ({pageParam = ''}) =>
-      getSearchResultVideos({pageParam, searchText, maxResults}),
+    queryFn: ({pageParam}) =>
+      getSearchResultVideos({
+        pageToken: pageParam,
+        searchText,
+        maxResults,
+      }),
     getNextPageParam: lastPage => lastPage?.nextPageToken || undefined,
     initialPageParam: '',
+    enabled: searchText.length > 0,
   });
 
-  return {videoResponse, isLoading, isError};
+  return {videoResponse, isLoading, isError, fetchNextPage, isFetchingNextPage};
 }
