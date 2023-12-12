@@ -3,7 +3,7 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import SvgIcons from '../SvgIcons';
 import useNavigator from '../../hooks/useNavigator';
 
-export default function Header() {
+export default function HomeHeader() {
   const stackNavigation = useNavigator();
   return (
     <View style={styles.container}>

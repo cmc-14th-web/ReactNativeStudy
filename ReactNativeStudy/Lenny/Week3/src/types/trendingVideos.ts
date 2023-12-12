@@ -4,7 +4,7 @@ type thumbnailsType = {
   height: number;
 };
 
-export type snippetTrendingVideosType = {
+export type snippetVideosType = {
   viewCount: string;
   channelTitle: string;
   title: string;
@@ -22,7 +22,7 @@ type statisticsTrendingVideosType = {
   viewCount: string;
 };
 
-export type trendingVideosType = {
-  snippet: snippetTrendingVideosType;
+export type videosType = {
+  snippet: snippetVideosType;
   statistics: statisticsTrendingVideosType;
 };

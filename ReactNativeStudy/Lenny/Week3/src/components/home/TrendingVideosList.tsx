@@ -1,13 +1,9 @@
 import React from 'react';
 import {View, Image, Text, Dimensions, StyleSheet} from 'react-native';
 import palette from '../../styles/palette';
-import {snippetTrendingVideosType} from '../../types/trendingVideos';
+import {snippetVideosType} from '../../types/trendingVideos';
 
-export default function TrendingVideosList({
-  item,
-}: {
-  item: snippetTrendingVideosType;
-}) {
+export default function TrendingVideosList({item}: {item: snippetVideosType}) {
   const {width: deviceWidth} = Dimensions.get('screen');
   return (
     <View style={styles.container}>

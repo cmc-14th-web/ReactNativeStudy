@@ -3,10 +3,16 @@ import {Keyboard, Pressable, StyleSheet, TextInput, View} from 'react-native';
 import SvgIcons from '../SvgIcons';
 import useNavigator from '../../hooks/useNavigator';
 import palette from '../../styles/palette';
+import {useGetSearchResult} from '../../hooks/useGetSearchResult';
 
-export default function Header() {
+export default function SearchHeader() {
   const [searchContent, setSearchContent] = useState<string>('');
   const stackNavigation = useNavigator();
+  const {searchContentMutation} = useGetSearchResult();
+
+  const handleGetSearchResults = () => {
+    searchContentMutation(searchContent);
+  };
   return (
     <View style={styles.container}>
       <Pressable onPress={() => stackNavigation.goBack()}>
@@ -20,7 +26,7 @@ export default function Header() {
           placeholderTextColor={palette.Gray600}
           returnKeyType="search"
           enablesReturnKeyAutomatically
-          onSubmitEditing={() => {}}
+          onSubmitEditing={handleGetSearchResults}
           style={styles.contentStyle}
         />
         <Pressable

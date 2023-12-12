@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, StyleSheet, Text} from 'react-native';
 import {useGetTrendingVideos} from '../hooks/useGetTrendingVideos';
 import Container from '../components/Container';
-import Header from '../components/home/Header';
+import Header from '../components/home/HomeHeader';
 import palette from '../styles/palette';
 import {calculatePublishedTime} from '../utils/calculatePublishedTime';
 import {
