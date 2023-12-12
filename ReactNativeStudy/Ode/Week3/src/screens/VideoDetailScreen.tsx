@@ -3,7 +3,8 @@ import Container from '../components/common/Container';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootStackParamList} from '../navigators/RootNavigator';
-import VideoSummary from '../components/video/VideoSummary';
+import VideoInfo from '../components/video/VideoInfo';
+import VideoPlayer from '../components/video/VideoPlayer';
 
 type VideoDetailScreenRouteProp = RouteProp<
   RootStackParamList,
@@ -24,7 +25,8 @@ export default function VideoDetailScreen({route}: VideoDetailScreenProps) {
 
   return (
     <Container>
-      <VideoSummary video={video} />
+      <VideoPlayer video={video} height={300} />
+      <VideoInfo video={video} />
     </Container>
   );
 }
