@@ -1,9 +1,9 @@
-import {API_YOUTUBE_TRENDING} from '@env';
+import {YOUTUBE_TRENDING_API} from '@env';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 
 const getTrendingVideos = async () => {
-  const response = await axios.get(API_YOUTUBE_TRENDING);
+  const response = await axios.get(YOUTUBE_TRENDING_API);
   return response.data;
 };
 
