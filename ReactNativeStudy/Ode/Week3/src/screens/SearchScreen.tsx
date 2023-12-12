@@ -6,7 +6,7 @@ import {Video} from '../types/video';
 import LoadingMoreIndicator from '../components/common/LoadingMoreIndicator';
 import EmptyComponent from '../components/common/EmptyComponent';
 import Colors from '../styles/colors';
-import VideoItem from '../components/video/VideoItem';
+import VideoDetailButton from '../components/video/VideoDetailButton';
 
 export default function SearchScreen() {
   const {
@@ -44,7 +44,7 @@ export default function SearchScreen() {
             data={videos}
             keyExtractor={(item: Video, index: number) => `${item.id}-${index}`}
             renderItem={({item: video}: {item: Video}) => (
-              <VideoItem video={video} />
+              <VideoDetailButton video={video} />
             )}
             onEndReached={() => fetchNextPage()}
             onEndReachedThreshold={0.5}

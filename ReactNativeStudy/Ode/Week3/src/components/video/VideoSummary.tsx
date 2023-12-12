@@ -1,16 +1,16 @@
 import React from 'react';
 import {Video} from '../../types/video';
 import {StyleSheet, View} from 'react-native';
-import VideoItemInfo from './VideoItemInfo';
-import VideoItemThumbnail from './VideoItemThumbnail';
+import VideoInfo from './VideoInfo';
+import VideoThumbnail from './VideoThumbnail';
 
 type VideoProps = {video: Video};
 
-export default function VideoItem({video}: VideoProps) {
+export default function VideoSummary({video}: VideoProps) {
   return (
     <View style={styles.layout}>
-      <VideoItemThumbnail video={video} />
-      <VideoItemInfo video={video} />
+      <VideoThumbnail video={video} />
+      <VideoInfo video={video} />
     </View>
   );
 }

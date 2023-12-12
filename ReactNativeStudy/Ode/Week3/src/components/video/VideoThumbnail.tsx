@@ -2,11 +2,11 @@ import React from 'react';
 import {Video} from '../../types/video';
 import {Image, StyleSheet} from 'react-native';
 
-type VideoItemThumbnailProps = {
+type VideoThumbnailProps = {
   video: Video;
 };
 
-export default function VideoItemThumbnail({video}: VideoItemThumbnailProps) {
+export default function VideoThumbnail({video}: VideoThumbnailProps) {
   return (
     <Image
       style={styles.image}

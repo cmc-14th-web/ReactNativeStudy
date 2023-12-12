@@ -1,7 +1,7 @@
 import React from 'react';
 import {Video} from '../../types/video';
 import {TouchableOpacity} from 'react-native';
-import VideoItem from './VideoItem';
+import VideoSummary from './VideoSummary';
 import {useNavigation} from '@react-navigation/native';
 import {VideoDetailScreenNavigationProp} from '../../screens/VideoDetailScreen';
 
@@ -15,7 +15,7 @@ export default function VideoDetailButton({video}: VideoDetailButtonProps) {
 
   return (
     <TouchableOpacity onPress={handleClick}>
-      <VideoItem video={video} />
+      <VideoSummary video={video} />
     </TouchableOpacity>
   );
 }

@@ -5,7 +5,7 @@ import useGetPopularVideosQuery from '../hooks/useGetPopularVideosQuery';
 import EmptyComponent from '../components/common/EmptyComponent';
 import Colors from '../styles/colors';
 import {Video} from '../types/video';
-import VideoItem from '../components/video/VideoItem';
+import VideoDetailButton from '../components/video/VideoDetailButton';
 
 export default function HomeScreen() {
   const {videosResponse, isLoading, isError} = useGetPopularVideosQuery();
@@ -27,7 +27,7 @@ export default function HomeScreen() {
             data={videosResponse.items}
             keyExtractor={(item: Video, index: number) => `${item.id}-${index}`}
             renderItem={({item: video}: {item: Video}) => (
-              <VideoItem video={video} />
+              <VideoDetailButton video={video} />
             )}
             ListEmptyComponent={EmptyComponent}
           />
