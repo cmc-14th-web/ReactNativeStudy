@@ -6,9 +6,7 @@ const commonHeaderScreenOptions: StackNavigationOptions &
   BottomTabNavigationOptions = {
   headerTitleAlign: 'left',
   headerStyle: {
-    backgroundColor: Colors.Black,
-    borderBottomColor: Colors.Black,
-    height: 74,
+    backgroundColor: Colors.Red,
   },
   headerTitleStyle: {
     fontSize: 24,

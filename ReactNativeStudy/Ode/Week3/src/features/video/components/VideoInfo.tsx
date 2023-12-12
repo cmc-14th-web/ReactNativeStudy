@@ -1,7 +1,7 @@
 import React from 'react';
 import {Video} from '../types/video';
 import {StyleSheet, Text, View} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Colors from '../../../styles/colors';
 import formatRelativeTime from '../utils/formatRelative';
 
 type VideoInfoProps = {
@@ -9,13 +9,15 @@ type VideoInfoProps = {
 };
 
 export default function VideoInfo({video}: VideoInfoProps) {
+  const {title, channelTitle, publishedAt} = video.snippet;
+
   return (
     <View style={styles.info}>
-      <Text style={styles.title}>{video.snippet.title}</Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.detail}>
-        <Text style={styles.subTitle}>{video.snippet.channelTitle}</Text>
+        <Text style={styles.subTitle}>{channelTitle}</Text>
         <Text style={styles.subTitle}>
-          &nbsp;· {formatRelativeTime(video.snippet.publishedAt)}
+          &nbsp;· {formatRelativeTime(publishedAt)}
         </Text>
       </View>
     </View>

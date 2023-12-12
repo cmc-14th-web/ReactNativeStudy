@@ -11,5 +11,10 @@ export default function Container({children}: ContainerProps) {
 }
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: Colors.Black, flex: 1},
+  container: {
+    backgroundColor: Colors.Black,
+    flex: 1,
+    paddingVertical: 30,
+    paddingHorizontal: 10,
+  },
 });

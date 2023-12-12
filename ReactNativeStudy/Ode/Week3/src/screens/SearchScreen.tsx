@@ -3,10 +3,12 @@ import Container from '../components/Container';
 import {FlatList, Text} from 'react-native';
 import useGetSearchResultVideosQuery from '../features/video/hooks/useGetSearchResultVideosQuery';
 import {Video} from '../features/video/types/video';
-import EmptyComponent from '../components/EmptyComponent';
 import Colors from '../styles/colors';
 import VideoDetailButton from '../features/video/components/VideoDetailButton';
-import LoadingMoreIndicator from '../components/LoadingMoreIndicator';
+import LoadingMoreText from '../components/text/LoadingMoreText';
+import EmptyText from '../components/text/EmptyText';
+import ErrorText from '../components/text/ErrorText';
+import LoadingText from '../components/text/LoadingText';
 
 export default function SearchScreen() {
   const {
@@ -27,13 +29,11 @@ export default function SearchScreen() {
           );
         }
         if (isLoading) {
-          return <Text style={{color: Colors.White}}>불러오는 중...</Text>;
+          return <LoadingText />;
         }
 
         if (isError) {
-          return (
-            <Text style={{color: Colors.White}}>문제가 발생했습니다.</Text>
-          );
+          return <ErrorText />;
         }
 
         const videos: Video[] =
@@ -48,10 +48,8 @@ export default function SearchScreen() {
             )}
             onEndReached={() => fetchNextPage()}
             onEndReachedThreshold={0.5}
-            ListFooterComponent={
-              isFetchingNextPage ? LoadingMoreIndicator : null
-            }
-            ListEmptyComponent={EmptyComponent}
+            ListFooterComponent={isFetchingNextPage ? LoadingMoreText : null}
+            ListEmptyComponent={EmptyText}
           />
         );
       })()}

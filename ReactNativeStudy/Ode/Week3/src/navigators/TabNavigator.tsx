@@ -2,10 +2,10 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Colors from '../styles/colors';
 import SearchButton from '../features/search/components/SearchButton';
-import SvgIcon from '../components/common/SvgIcon';
 import commonHeaderScreenOptions from '../styles/commonHeaderScreenOptions';
 import HomeScreen from '../screens/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import SvgIcon from '../components/SvgIcon';
 
 const BottomTab = createBottomTabNavigator();
 
