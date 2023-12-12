@@ -1,5 +1,5 @@
 import React from 'react';
-import {Video} from '../../types/video';
+import {Video} from '../types/video';
 import {Image, StyleSheet} from 'react-native';
 
 type VideoThumbnailProps = {

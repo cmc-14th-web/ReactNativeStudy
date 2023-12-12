@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
-import Colors from '../../styles/colors';
+import Colors from '../styles/colors';
 
 type ContainerProps = {
   children?: ReactNode;

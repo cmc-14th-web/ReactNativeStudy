@@ -1,5 +1,5 @@
 import React from 'react';
-import {Video} from '../../types/video';
+import {Video} from '../types/video';
 import {StyleSheet, View} from 'react-native';
 import VideoInfo from './VideoInfo';
 import VideoThumbnail from './VideoThumbnail';

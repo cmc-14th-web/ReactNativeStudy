@@ -1,11 +1,11 @@
 import React from 'react';
-import Container from '../components/common/Container';
+import Container from '../components/Container';
 import {FlatList, Text} from 'react-native';
-import useGetPopularVideosQuery from '../hooks/useGetPopularVideosQuery';
-import EmptyComponent from '../components/common/EmptyComponent';
+import useGetPopularVideosQuery from '../features/video/hooks/useGetPopularVideosQuery';
+import EmptyComponent from '../components/EmptyComponent';
 import Colors from '../styles/colors';
-import {Video} from '../types/video';
-import VideoDetailButton from '../components/video/VideoDetailButton';
+import {Video} from '../features/video/types/video';
+import VideoDetailButton from '../features/video/components/VideoDetailButton';
 
 export default function HomeScreen() {
   const {videosResponse, isLoading, isError} = useGetPopularVideosQuery();

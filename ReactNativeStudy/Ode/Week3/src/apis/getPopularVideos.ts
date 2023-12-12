@@ -1,6 +1,6 @@
 import {QueryFunctionContext} from '@tanstack/react-query';
 import {youtubeApiClient} from '.';
-import {VideosResponse} from '../types/videoResponse';
+import {VideosResponse} from '../features/video/types/videoResponse';
 
 export default async function getPopularVideos({
   queryKey,

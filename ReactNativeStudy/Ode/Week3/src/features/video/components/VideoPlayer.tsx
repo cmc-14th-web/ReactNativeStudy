@@ -1,6 +1,6 @@
 import React from 'react';
 import YoutubePlayer, {YoutubeIframeProps} from 'react-native-youtube-iframe';
-import {Video} from '../../types/video';
+import {Video} from '../types/video';
 
 type VideoPlayerProps = {
   video: Video;

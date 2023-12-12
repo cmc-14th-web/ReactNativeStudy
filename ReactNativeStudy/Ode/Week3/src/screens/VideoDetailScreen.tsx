@@ -1,23 +1,11 @@
 import React from 'react';
-import Container from '../components/common/Container';
-import {RouteProp} from '@react-navigation/native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../navigators/RootNavigator';
-import VideoInfo from '../components/video/VideoInfo';
-import VideoPlayer from '../components/video/VideoPlayer';
-
-type VideoDetailScreenRouteProp = RouteProp<
-  RootStackParamList,
-  'VideoDetailScreen'
->;
-
-export type VideoDetailScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  'VideoDetailScreen'
->;
+import Container from '../components/Container';
+import VideoInfo from '../features/video/components/VideoInfo';
+import VideoPlayer from '../features/video/components/VideoPlayer';
+import {ScreenRouteProp} from '../navigators/types';
 
 type VideoDetailScreenProps = {
-  route: VideoDetailScreenRouteProp;
+  route: ScreenRouteProp<'VideoDetailScreen'>;
 };
 
 export default function VideoDetailScreen({route}: VideoDetailScreenProps) {

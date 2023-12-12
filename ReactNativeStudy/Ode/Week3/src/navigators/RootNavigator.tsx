@@ -2,18 +2,10 @@ import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import TabNavigator from './TabNavigator';
 import commonHeaderScreenOptions from '../styles/commonHeaderScreenOptions';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../features/search/components/SearchBar';
 import SearchScreen from '../screens/SearchScreen';
 import VideoDetailScreen from '../screens/VideoDetailScreen';
-import {Video} from '../types/video';
-
-export type RootStackParamList = {
-  BottomTabNavigator: undefined;
-  SearchScreen: undefined;
-  VideoDetailScreen: {video: Video};
-};
-
-const Stack = createStackNavigator<RootStackParamList>();
+import {RootStackParamList} from './types';
 
 export default function RootNavigator() {
   return (
@@ -43,3 +35,5 @@ export default function RootNavigator() {
     </Stack.Navigator>
   );
 }
+
+const Stack = createStackNavigator<RootStackParamList>();

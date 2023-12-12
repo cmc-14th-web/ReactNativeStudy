@@ -1,6 +1,6 @@
-import QueryKeys from '../libraries/react-query/queryKeys';
-import getSearchResultVideos from '../apis/getSearchResultVideos';
-import useSearchTextStorage from './useSearchText';
+import QueryKeys from '../../../libraries/react-query/queryKeys';
+import getSearchResultVideos from '../../../apis/getSearchResultVideos';
+import useSearchTextStorage from '../../search/hooks/useSearchText';
 import {useInfiniteQuery} from '@tanstack/react-query';
 
 const maxResults = 5;

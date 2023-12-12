@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-import Colors from '../../styles/colors';
+import Colors from '../styles/colors';
 
 type SvgPropsType = {
   icon: Icon;

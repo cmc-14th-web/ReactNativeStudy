@@ -1,12 +1,12 @@
 import React from 'react';
-import Container from '../components/common/Container';
+import Container from '../components/Container';
 import {FlatList, Text} from 'react-native';
-import useGetSearchResultVideosQuery from '../hooks/useGetSearchResultVideosQuery';
-import {Video} from '../types/video';
-import LoadingMoreIndicator from '../components/common/LoadingMoreIndicator';
-import EmptyComponent from '../components/common/EmptyComponent';
+import useGetSearchResultVideosQuery from '../features/video/hooks/useGetSearchResultVideosQuery';
+import {Video} from '../features/video/types/video';
+import EmptyComponent from '../components/EmptyComponent';
 import Colors from '../styles/colors';
-import VideoDetailButton from '../components/video/VideoDetailButton';
+import VideoDetailButton from '../features/video/components/VideoDetailButton';
+import LoadingMoreIndicator from '../components/LoadingMoreIndicator';
 
 export default function SearchScreen() {
   const {

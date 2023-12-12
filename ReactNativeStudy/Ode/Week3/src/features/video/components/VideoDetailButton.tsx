@@ -1,16 +1,16 @@
 import React from 'react';
-import {Video} from '../../types/video';
+import {Video} from '../types/video';
 import {TouchableOpacity} from 'react-native';
 import VideoSummary from './VideoSummary';
 import {useNavigation} from '@react-navigation/native';
-import {VideoDetailScreenNavigationProp} from '../../screens/VideoDetailScreen';
+import {ScreenNavigationProp} from '../../../navigators/types';
 
 type VideoDetailButtonProps = {
   video: Video;
 };
 
 export default function VideoDetailButton({video}: VideoDetailButtonProps) {
-  const navigation = useNavigation<VideoDetailScreenNavigationProp>();
+  const navigation = useNavigation<ScreenNavigationProp<'VideoDetailScreen'>>();
   const handleClick = () => navigation.navigate('VideoDetailScreen', {video});
 
   return (

@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
-import QueryKeys from '../libraries/react-query/queryKeys';
-import getPopularVideos from '../apis/getPopularVideos';
+import QueryKeys from '../../../libraries/react-query/queryKeys';
+import getPopularVideos from '../../../apis/getPopularVideos';
 
 const maxResults = 25;
 

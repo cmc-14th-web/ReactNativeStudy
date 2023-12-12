@@ -1,5 +1,5 @@
 import {useRecoilState} from 'recoil';
-import searchState from '../libraries/recoil/states/searchText';
+import searchState from '../../../libraries/recoil/states/searchText';
 
 export default function useSearchTextStorage() {
   const [searchText, setSearchText] = useRecoilState(searchState);

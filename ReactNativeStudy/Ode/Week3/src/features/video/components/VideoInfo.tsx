@@ -1,8 +1,8 @@
 import React from 'react';
-import {Video} from '../../types/video';
+import {Video} from '../types/video';
 import {StyleSheet, Text, View} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import formatRelativeTime from '../../utils/formatRelative';
+import formatRelativeTime from '../utils/formatRelative';
 
 type VideoInfoProps = {
   video: Video;

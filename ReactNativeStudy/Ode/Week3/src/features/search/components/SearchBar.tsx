@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, TextInput, View, TouchableOpacity} from 'react-native';
-import Colors from '../styles/colors';
-import SvgIcon from './common/SvgIcon';
+import Colors from '../../../styles/colors';
 import useSearchTextStorage from '../hooks/useSearchText';
+import SvgIcon from '../../../components/SvgIcon';
 
 export default function SearchBar() {
   const {onSearch} = useSearchTextStorage();
