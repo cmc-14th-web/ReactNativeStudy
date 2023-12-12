@@ -6,7 +6,7 @@ import {Video} from '../types/video';
 import LoadingMoreIndicator from '../components/common/LoadingMoreIndicator';
 import EmptyComponent from '../components/common/EmptyComponent';
 import Colors from '../styles/colors';
-import VideoItem from '../components/common/VideoItem';
+import VideoItem from '../components/video/VideoItem';
 
 export default function SearchScreen() {
   const {
@@ -15,11 +15,17 @@ export default function SearchScreen() {
     isError,
     fetchNextPage,
     isFetchingNextPage,
+    searchText,
   } = useGetSearchResultVideosQuery();
 
   return (
     <Container>
       {(() => {
+        if (searchText.length === 0) {
+          return (
+            <Text style={{color: Colors.White}}>검색어를 입력해주세요</Text>
+          );
+        }
         if (isLoading) {
           return <Text style={{color: Colors.White}}>불러오는 중...</Text>;
         }

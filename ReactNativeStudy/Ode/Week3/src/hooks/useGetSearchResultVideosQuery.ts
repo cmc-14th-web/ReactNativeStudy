@@ -32,5 +32,6 @@ export default function useGetSearchResultVideosQuery() {
     isError,
     fetchNextPage,
     isFetchingNextPage,
+    searchText,
   };
 }

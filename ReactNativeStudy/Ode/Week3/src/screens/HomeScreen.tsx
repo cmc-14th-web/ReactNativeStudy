@@ -5,7 +5,7 @@ import useGetPopularVideosQuery from '../hooks/useGetPopularVideosQuery';
 import EmptyComponent from '../components/common/EmptyComponent';
 import Colors from '../styles/colors';
 import {Video} from '../types/video';
-import VideoItem from '../components/common/VideoItem';
+import VideoItem from '../components/video/VideoItem';
 
 export default function HomeScreen() {
   const {videosResponse, isLoading, isError} = useGetPopularVideosQuery();
