@@ -5,9 +5,12 @@ import { useGetSearchResults } from "../api/search";
 import { useSearchStore } from "../store/searchStore";
 
 import VideoItem from "./VideoItem";
+import { useEffect } from "react";
 
 function SearchResultList() {
     const query = useSearchStore(state => state.search);
+    const deleteSearch = useSearchStore(state => state.deleteSearch);
+
     const { searchResults,
         isLoading,
         error,
@@ -20,6 +23,10 @@ function SearchResultList() {
             fetchNextPage();
         }
     }
+
+    useEffect(() => {
+        return deleteSearch;
+    }, []);
 
     if (isLoading) {
         return <Text>로딩중</Text>
