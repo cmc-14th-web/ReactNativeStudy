@@ -4,6 +4,7 @@ import Search from "../screen/Search";
 import Detail from "../screen/Detail";
 import { COLOR } from "../constant/color";
 import SearchBar from "../component/SearchBar";
+import GoBackButton from "../component/GoBackButton";
 
 const Stack = createStackNavigator();
 
@@ -15,12 +16,17 @@ function HomeStackNavigation() {
                     backgroundColor: COLOR.Gray900,
                 },
                 headerTintColor: COLOR.White,
-                // headerShown: false,
+                headerShown: false,
             }}
         >
             <Stack.Screen name="HomeStack" component={Home} />
             <Stack.Screen name="SearchStack" component={Search} />
-            <Stack.Screen name="DetailStack" component={Detail} />
+            <Stack.Screen name="DetailStack" component={Detail}
+                options={{
+                    headerShown: true,
+                    headerTitle: () => null,
+                }}
+            />
         </Stack.Navigator>
     );
 }
