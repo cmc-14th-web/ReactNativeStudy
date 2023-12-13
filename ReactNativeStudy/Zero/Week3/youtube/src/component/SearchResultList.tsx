@@ -1,8 +1,10 @@
-import { FlatList, View } from "react-native";
-import { useGetSearchResults } from "../api/search";
-import VideoItem from "./VideoItem";
+import { FlatList } from "react-native";
 import { Text } from "react-native-svg";
+
+import { useGetSearchResults } from "../api/search";
 import { useSearchStore } from "../store/searchStore";
+
+import VideoItem from "./VideoItem";
 
 function SearchResultList() {
     const query = useSearchStore(state => state.search);

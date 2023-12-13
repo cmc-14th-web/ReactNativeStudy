@@ -1,4 +1,5 @@
 import { Svg, Path } from "react-native-svg";
+
 import { ICON, IconType } from "../constant/icon";
 
 export interface IconProps {

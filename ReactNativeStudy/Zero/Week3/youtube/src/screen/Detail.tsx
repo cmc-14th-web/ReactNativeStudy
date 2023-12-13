@@ -1,7 +1,9 @@
 import { StyleSheet, View } from "react-native";
+
 import { COLOR } from "../constant/color";
-import VideoItem from "../component/VideoItem";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
+
+import VideoItem from "../component/VideoItem";
 
 function Detail() {
     const selectedVideo = useSelectedVideoStore(state => state.selectedVideo);

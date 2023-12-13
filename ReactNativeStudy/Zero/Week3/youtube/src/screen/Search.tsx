@@ -1,9 +1,10 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import SearchHeader from "../component/SearchHeader";
-import { useGetSearchResults } from "../api/search";
-import SearchResultList from "../component/SearchResultList";
+import { StyleSheet, View } from "react-native";
+
 import { COLOR } from "../constant/color";
 import { useSearchStore } from "../store/searchStore";
+
+import SearchHeader from "../component/SearchHeader";
+import SearchResultList from "../component/SearchResultList";
 import EmptySearchResult from "../component/EmptySearchResult";
 
 function Search() {

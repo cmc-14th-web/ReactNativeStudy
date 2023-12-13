@@ -1,10 +1,11 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import VideoItem from "../component/VideoItem";
+import { StyleSheet, Text, View } from "react-native";
+
 import { COLOR } from "../constant/color";
 import { useGetMostPopularVideoList } from "../api/mostPopularVideo";
 import { videoInfo } from "../type/videoInfo";
+
+import VideoItem from "../component/VideoItem";
 import Header from "../component/Header";
-import SearchBar from "../component/SearchBar";
 
 function Home() {
     const { mostPopularVideoList, isLoading, error } = useGetMostPopularVideoList();

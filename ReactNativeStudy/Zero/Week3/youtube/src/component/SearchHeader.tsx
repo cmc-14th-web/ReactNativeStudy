@@ -1,6 +1,8 @@
 import { StyleSheet, View } from "react-native";
-import GoBackButton from "./GoBackButton";
+
 import { COLOR } from "../constant/color";
+
+import GoBackButton from "./GoBackButton";
 import SearchBar from "./SearchBar";
 
 function SearchHeader() {

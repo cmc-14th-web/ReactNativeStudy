@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
-import { COLOR } from "../constant/color";
-import IconButton from "./IconButton";
 import { useNavigation } from "@react-navigation/native";
+
+import { COLOR } from "../constant/color";
+
+import IconButton from "./IconButton";
 
 function Header() {
     const navigation = useNavigation();

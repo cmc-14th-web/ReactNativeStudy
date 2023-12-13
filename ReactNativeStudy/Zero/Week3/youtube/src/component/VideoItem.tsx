@@ -1,11 +1,13 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { COLOR } from "../constant/color";
-import { videoInfo } from "../type/videoInfo";
 import { useNavigation } from "@react-navigation/native";
+
+import { COLOR } from "../constant/color";
+import { mediaAspectRatio } from "../constant/screen";
+import { videoInfo } from "../type/videoInfo";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
 import { getFormattedDate, getFormattedViewCount } from "../util/formatVideoData";
+
 import VideoPlayer from "./VideoPlayer";
-import { mediaAspectRatio } from "../constant/screen";
 
 interface VideoItemProps {
     isVideo?: boolean;

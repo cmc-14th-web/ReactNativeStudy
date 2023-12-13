@@ -1,6 +1,7 @@
+import YoutubePlayer from 'react-native-youtube-iframe';
+
 import { mediaAspectRatio, windowWidth } from "../constant/screen";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
-import YoutubePlayer from 'react-native-youtube-iframe';
 
 function VideoPlayer() {
     const selectedVideo = useSelectedVideoStore(state => state.selectedVideo);

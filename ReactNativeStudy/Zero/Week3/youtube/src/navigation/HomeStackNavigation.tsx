@@ -1,10 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
+
+import { COLOR } from "../constant/color";
+
 import Home from "../screen/Home";
 import Search from "../screen/Search";
 import Detail from "../screen/Detail";
-import { COLOR } from "../constant/color";
-import SearchBar from "../component/SearchBar";
-import GoBackButton from "../component/GoBackButton";
 
 const Stack = createStackNavigator();
 

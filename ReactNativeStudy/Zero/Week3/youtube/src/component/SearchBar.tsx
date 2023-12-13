@@ -1,8 +1,10 @@
 import { TextInput, StyleSheet, View } from "react-native";
-import { COLOR } from "../constant/color";
 import { useState } from "react";
-import IconButton from "./IconButton";
+
+import { COLOR } from "../constant/color";
 import { useSearchStore } from "../store/searchStore";
+
+import IconButton from "./IconButton";
 
 function SearchBar() {
     const [searchText, setSearchText] = useState('');
