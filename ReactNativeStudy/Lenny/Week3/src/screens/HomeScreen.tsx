@@ -1,28 +1,35 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, StyleSheet, Text} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {useGetTrendingVideos} from '../hooks/useGetTrendingVideos';
 import Container from '../components/Container';
 import Header from '../components/home/HomeHeader';
 import palette from '../styles/palette';
 import {calculatePublishedTime} from '../utils/calculatePublishedTime';
-import {
-  snippetTrendingVideosType,
-  trendingVideosType,
-} from '../types/trendingVideos';
+import {snippetVideosType, videosType} from '../types/trendingVideos';
 import TrendingVideosList from '../components/home/TrendingVideosList';
 
 export default function HomeScreen() {
   const [trendingVideos, setTrendingVideos] = useState<
-    ArrayLike<snippetTrendingVideosType> | null | undefined
+    ArrayLike<snippetVideosType> | null | undefined
   >([]);
-  const {isGetTrendingVideosSuccess, isGetTrendingVideosLoading, data} =
-    useGetTrendingVideos();
+  const {
+    isGetTrendingVideosSuccess,
+    isGetTrendingVideosLoading,
+    isGetTrendingVideosError,
+    data,
+  } = useGetTrendingVideos();
 
   useEffect(() => {
     if (isGetTrendingVideosSuccess) {
       const {items} = data;
-      const trendingVideosValues: snippetTrendingVideosType[] = items.map(
-        (item: trendingVideosType) => {
+      const trendingVideosValues: snippetVideosType[] = items.map(
+        (item: videosType) => {
           return {
             viewCount: item.statistics.viewCount, // 조회수
             channelTitle: item.snippet.channelTitle, // 채널 이름
@@ -36,20 +43,26 @@ export default function HomeScreen() {
     }
   }, [data, isGetTrendingVideosSuccess, setTrendingVideos]);
 
-  if (isGetTrendingVideosLoading) {
-    return <ActivityIndicator />;
-  }
-
   return (
     <Container>
       <Header />
-      <Text style={styles.trendingVideos}>인기 동영상</Text>
-      <FlatList
-        data={trendingVideos}
-        renderItem={({item}: {item: snippetTrendingVideosType}) => (
-          <TrendingVideosList item={item} />
+      <View style={styles.beforeSuccessWrapStyle}>
+        {isGetTrendingVideosLoading && <ActivityIndicator />}
+        {isGetTrendingVideosError && (
+          <Text style={styles.errorTextStyle}>불러오지 못 했습니다.</Text>
         )}
-      />
+      </View>
+      {isGetTrendingVideosSuccess && (
+        <>
+          <Text style={styles.trendingVideos}>인기 동영상</Text>
+          <FlatList
+            data={trendingVideos}
+            renderItem={({item}: {item: snippetVideosType}) => (
+              <TrendingVideosList item={item} />
+            )}
+          />
+        </>
+      )}
     </Container>
   );
 }
@@ -61,5 +74,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     fontSize: 18,
     fontWeight: '600',
+  },
+  beforeSuccessWrapStyle: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorTextStyle: {
+    color: palette.White,
   },
 });

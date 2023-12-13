@@ -1,18 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Keyboard, Pressable, StyleSheet, TextInput, View} from 'react-native';
 import SvgIcons from '../SvgIcons';
 import useNavigator from '../../hooks/useNavigator';
 import palette from '../../styles/palette';
-import {useGetSearchResult} from '../../hooks/useGetSearchResult';
+import {useStore} from '../../store/store';
 
-export default function SearchHeader() {
-  const [searchContent, setSearchContent] = useState<string>('');
+interface SearchHeaderProp {
+  handleGetSearchResults: () => void;
+}
+
+export default function SearchHeader({
+  handleGetSearchResults,
+}: SearchHeaderProp) {
   const stackNavigation = useNavigator();
-  const {searchContentMutation} = useGetSearchResult();
+  const {searchContent, setSearchContent} = useStore();
 
-  const handleGetSearchResults = () => {
-    searchContentMutation(searchContent);
-  };
   return (
     <View style={styles.container}>
       <Pressable onPress={() => stackNavigation.goBack()}>
@@ -21,7 +23,7 @@ export default function SearchHeader() {
       <View style={styles.contentWrapStyle}>
         <TextInput
           value={searchContent}
-          onChangeText={e => setSearchContent(e)}
+          onChangeText={(e: string) => setSearchContent(e)}
           placeholder="Youtube 검색"
           placeholderTextColor={palette.Gray600}
           returnKeyType="search"
