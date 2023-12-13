@@ -1,7 +1,8 @@
 import {create} from 'zustand';
 import {SelectedVideo} from '../type/selectedVideo';
+import {VideoInfo} from '../type/videoInfo';
 
 export const useSelectedVideoStore = create<SelectedVideo>(set => ({
-  selectedVideo: null,
-  setSelectedVideo: video => set({selectedVideo: video}),
+  selectedVideo: {} as VideoInfo,
+  setSelectedVideo: selectedVideo => set({selectedVideo}),
 }));
