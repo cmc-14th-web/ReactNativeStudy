@@ -6,6 +6,7 @@ export type BottomTabScreenName = keyof BottomTabParamList;
 export type RootStackParamList = {
   BottomTabNavigator: undefined;
   SearchVideo: undefined;
+  PlayVideo: undefined;
 };
 
 export type BottomTabParamList = {

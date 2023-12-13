@@ -1,6 +1,7 @@
 export const enum StackMenu {
   BottomTabNavigator = 'BottomTabNavigator',
   SearchVideo = 'SearchVideo',
+  PlayVideo = 'PlayVideo',
 }
 
 export const enum BottomTabMenu {

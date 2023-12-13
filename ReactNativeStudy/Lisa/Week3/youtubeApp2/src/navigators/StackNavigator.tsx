@@ -5,6 +5,7 @@ import {RootStackParamList} from 'types/navigator';
 import BottomTabNavigator from './BottomTabNavigator';
 import SearchVideo from 'screens/SearchVideo';
 import SearchVideoHeader from 'components/SearchVideo/SearchVideoHeader';
+import PlayVideo from 'screens/PlayVideo';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -24,6 +25,7 @@ const StackNavigator = () => {
         }}>
         <Stack.Screen name={StackMenu.SearchVideo} component={SearchVideo} />
       </Stack.Group>
+      <Stack.Screen name={StackMenu.PlayVideo} component={PlayVideo} />
     </Stack.Navigator>
   );
 };

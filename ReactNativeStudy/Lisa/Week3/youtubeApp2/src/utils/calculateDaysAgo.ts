@@ -1,9 +1,16 @@
-export const calculateDaysAgo = (dateString: string) => {
-  const currentTime = new Date().getTime();
-  const givenTime = new Date(dateString).getTime();
+import {format, formatDistanceToNow} from 'date-fns';
+import {ko} from 'date-fns/locale';
 
-  const timeDiff = currentTime - givenTime;
-  const daysAgo = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+export const calculateDaysAgo = (date: string) => {
+  const d = new Date(date);
+  const now = Date.now();
+  const diff = (now - d.getTime()) / 1000;
 
-  return daysAgo ? `${daysAgo}일 전` : '오늘';
+  if (diff < 60 * 1) {
+    return '방금 전';
+  }
+  if (diff < 60 * 60 * 24 * 3) {
+    return formatDistanceToNow(d, {addSuffix: true, locale: ko});
+  }
+  return format(d, 'PPP EEE p', {locale: ko});
 };
