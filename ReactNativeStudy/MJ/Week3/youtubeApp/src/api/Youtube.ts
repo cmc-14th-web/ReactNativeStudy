@@ -1,5 +1,5 @@
 import Config from 'react-native-config';
-import { YoutubeVideoList } from '../type';
+import {YoutubeVideoList} from '../type';
 const getVideos = async () => {
   const response: YoutubeVideoList = await fetch(
     `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&maxResults=10&key=${Config.YOUTUBE_V3_API_KEY}`,
