@@ -1,4 +1,4 @@
-import { TextInput, StyleSheet, View } from "react-native";
+import { TextInput, StyleSheet, View, Alert } from "react-native";
 import { useState } from "react";
 
 import { COLOR } from "../constant/color";
@@ -28,6 +28,11 @@ function SearchBar() {
     const setSearch = useSearchStore(state => state.setSearch)
     const setIsSearched = useSearchStore(state => state.setIsSearched)
     const handleSearch = () => {
+        if (searchText.length === 0) {
+            Alert.alert('검색어를 입력해주세요.');
+            return;
+        }
+
         setSearch(searchText);
         setIsSearched(true);
     }
