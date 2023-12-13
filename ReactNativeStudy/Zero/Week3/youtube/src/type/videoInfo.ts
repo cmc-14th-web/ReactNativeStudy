@@ -10,7 +10,7 @@ export type videoInfo = {
       };
     };
   };
-  statistics: {
-    viewCount: string;
+  statistics?: {
+    viewCount?: string;
   };
 };
