@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import Container from '../layout/Container';
 import SvgIcons from '../assets/icons/SvgIcons';
 import {
@@ -24,6 +24,7 @@ const Search = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [videoList, setVideoList] = useState<SearchedYoutubeVideo[]>([]);
   const [pageToken, setPageToken] = useState<string>('');
+  const textInputRef = useRef<TextInput | null>(null);
 
   const fetchData = useCallback(
     async (searchText: string, nextPageToken: string, first: boolean) => {
@@ -59,6 +60,12 @@ const Search = () => {
     [videoList],
   );
 
+  useEffect(() => {
+    if (textInputRef) {
+      textInputRef.current?.focus();
+    }
+  }, [textInputRef]);
+
   const handleClickSubmit = async () => {
     await fetchData(text, pageToken, true);
   };
@@ -83,6 +90,7 @@ const Search = () => {
           <TextInput
             value={text}
             onChangeText={onChangeText}
+            ref={textInputRef}
             style={styles.input}
             placeholder="Youtube 검색"
             placeholderTextColor={colors.grey600}
