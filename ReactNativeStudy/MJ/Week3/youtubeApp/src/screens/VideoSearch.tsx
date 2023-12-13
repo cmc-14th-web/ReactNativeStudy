@@ -25,11 +25,10 @@ const VideoSearch = () => {
   const pageToken = useRecoilValue(pageTokenState);
 
   const {data, isLoading, error, refetch} = useQuery({
-    queryKey: ['videos'],
+    queryKey: ['findVideos'],
     queryFn: () => Youtube.findVideos(text, pageToken),
+    enabled: text.length > 0,
   });
-
-  console.log(data?.items, error);
 
   return (
     <SafeAreaView style={styles.screen}>
