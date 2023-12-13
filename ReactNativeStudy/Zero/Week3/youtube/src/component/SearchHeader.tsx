@@ -18,6 +18,8 @@ const style = StyleSheet.create({
         paddingVertical: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: 10,
     }
 })
 

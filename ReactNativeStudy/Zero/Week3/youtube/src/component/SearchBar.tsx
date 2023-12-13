@@ -35,12 +35,15 @@ const style = StyleSheet.create({
         paddingVertical: 6,
         borderRadius: 20,
         flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flex: 1,
     },
     input: {
         color: COLOR.Gray600,
         fontSize: 14,
         fontWeight: '400',
-        flex: 1,
+        padding: 0,
     }
 })
 
