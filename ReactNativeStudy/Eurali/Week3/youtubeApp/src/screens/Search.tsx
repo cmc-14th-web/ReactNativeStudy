@@ -114,7 +114,6 @@ const Search = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: screenInfo.height - 70,
     paddingHorizontal: 10,
     paddingVertical: 15,
   },

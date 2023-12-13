@@ -6,6 +6,7 @@ import colors from '../constants/color';
 import Home from '../screens/Home';
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList, TabParamList} from '../types/navigators';
+import Container from '../layout/Container';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -60,7 +61,11 @@ const TabNavigation = ({navigation}: TabNavigationProps) => {
 };
 
 const Setting = () => {
-  return <View />;
+  return (
+    <Container>
+      <View />
+    </Container>
+  );
 };
 
 const styles = StyleSheet.create({
