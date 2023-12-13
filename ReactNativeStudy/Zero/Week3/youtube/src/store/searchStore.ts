@@ -1,6 +1,7 @@
 import {create} from 'zustand';
+import {Search} from '../type/search';
 
-export const useSearchStore = create(set => ({
+export const useSearchStore = create<Search>(set => ({
   search: '',
   setSearch: (query: string) => set({search: query}),
   isSearched: false,
