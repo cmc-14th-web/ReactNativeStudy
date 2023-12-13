@@ -1,6 +1,6 @@
 import {VideoInfo} from './videoInfo';
 
 export type SelectedVideo = {
-  selectedVideo: null | VideoInfo;
+  selectedVideo: VideoInfo;
   setSelectedVideo: (video: VideoInfo) => void;
 };

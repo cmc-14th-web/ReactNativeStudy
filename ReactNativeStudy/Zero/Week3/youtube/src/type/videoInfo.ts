@@ -1,5 +1,9 @@
 export type VideoInfo = {
-  id: string;
+  id:
+    | {
+        videoId: string;
+      }
+    | string;
   snippet: {
     title: string;
     channelTitle: string;
