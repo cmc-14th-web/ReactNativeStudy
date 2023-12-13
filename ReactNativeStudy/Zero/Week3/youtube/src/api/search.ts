@@ -15,7 +15,6 @@ const getSearchResults = async ({query, nextPageToken}) => {
   };
   const response = await fetch(url, options);
   const data = await response.json();
-  console.log(url);
   return data;
 };
 
