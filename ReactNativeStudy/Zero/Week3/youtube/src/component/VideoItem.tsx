@@ -1,11 +1,11 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import { COLOR } from "../constant/color";
 import { mediaAspectRatio } from "../constant/screen";
 import { VideoInfo } from "../type/videoInfo";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
 import { getFormattedDate, getFormattedViewCount } from "../util/formatVideoData";
+import { useNavigator } from "../hook/useNavigator";
 
 import VideoPlayer from "./VideoPlayer";
 
@@ -22,10 +22,10 @@ function VideoItem({ videoInfo, isVideo }: VideoItemProps) {
     const formattedViewCount = getFormattedViewCount(viewCount);
     const formattedPublishedAt = getFormattedDate(publishedAt);
 
-    const navigation = useNavigation();
     const setSelectedVideo = useSelectedVideoStore(state => state.setSelectedVideo);
+    const { stackNavigator } = useNavigator();
     const handlePress = () => {
-        navigation.navigate('DetailStack')
+        stackNavigator.navigate('DetailStack')
         setSelectedVideo(videoInfo);
     }
 

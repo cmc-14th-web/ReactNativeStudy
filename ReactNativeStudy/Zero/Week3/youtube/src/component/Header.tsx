@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 
 import { COLOR } from "../constant/color";
+import { useNavigator } from "../hook/useNavigator";
 
 import IconButton from "./IconButton";
 
 function Header() {
-    const navigation = useNavigation();
+    const { stackNavigator } = useNavigator();
     const handlePress = () => {
-        navigation.navigate('SearchStack');
+        stackNavigator.navigate('SearchStack');
     }
 
     return (
