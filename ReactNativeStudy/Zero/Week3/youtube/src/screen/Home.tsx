@@ -6,9 +6,29 @@ import { videoInfo } from "../type/videoInfo";
 
 import VideoItem from "../component/VideoItem";
 import Header from "../component/Header";
+import Error from "../component/Error";
 
 function Home() {
     const { mostPopularVideoList, isLoading, error } = useGetMostPopularVideoList();
+
+    if (isLoading) {
+        return <Text>로딩중</Text>
+    }
+
+    const renderVideoListOrError = () => {
+        if (error) {
+            return <Error />
+        }
+
+        return (
+            <FlatList
+                data={mostPopularVideoList}
+                renderItem={({ item }: { item: videoInfo }) => <VideoItem videoInfo={item} />}
+                keyExtractor={(item: videoInfo) => item.id}
+            />
+        )
+    }
+
     return (
         <View style={{
             backgroundColor: COLOR.Gray900,
@@ -18,11 +38,8 @@ function Home() {
             <Text style={style.listTitle}>
                 인기 동영상
             </Text>
-            <FlatList
-                data={mostPopularVideoList}
-                renderItem={({ item }: { item: videoInfo }) => <VideoItem videoInfo={item} />}
-                keyExtractor={(item: videoInfo) => item.id}
-            />
+            {renderVideoListOrError()}
+            <Error />
         </View>
     )
 }
