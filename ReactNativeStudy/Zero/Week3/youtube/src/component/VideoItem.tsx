@@ -4,12 +4,15 @@ import { videoInfo } from "../type/videoInfo";
 import { useNavigation } from "@react-navigation/native";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
 import { getFormattedDate, getFormattedViewCount } from "../util/formatVideoData";
+import VideoPlayer from "./VideoPlayer";
+import { mediaAspectRatio } from "../constant/screen";
 
 interface VideoItemProps {
+    isVideo?: boolean;
     videoInfo: videoInfo;
 }
 
-function VideoItem({ videoInfo }: VideoItemProps) {
+function VideoItem({ videoInfo, isVideo }: VideoItemProps) {
     const { snippet, statistics } = videoInfo;
     const { thumbnails, title, channelTitle, publishedAt } = snippet;
     const { viewCount } = statistics || { viewCount: 0 };
@@ -24,15 +27,18 @@ function VideoItem({ videoInfo }: VideoItemProps) {
         setSelectedVideo(videoInfo);
     }
 
+    const renderVideoOrImage = () => {
+        if (isVideo) {
+            return <VideoPlayer />
+        }
+
+        return <Image source={{ uri: thumbnails.medium.url }} style={style.image} />
+    }
+
     return (
         <Pressable onPress={handlePress}>
             <View style={style.container}>
-                <Image source={{ uri: thumbnails.medium.url }}
-                    style={{
-                        width: '100%',
-                        aspectRatio: '16/9',
-                    }}
-                />
+                {renderVideoOrImage()}
                 <View style={style.textContainer}>
                     <Text style={style.title}>{title}</Text>
                     <Text style={style.detail}>{channelTitle} · 조회수 {formattedViewCount} · {formattedPublishedAt}</Text>
@@ -49,7 +55,7 @@ const style = StyleSheet.create({
     },
     image: {
         width: '100%',
-        aspectRatio: '16/9',
+        aspectRatio: mediaAspectRatio,
     },
     textContainer: {
         paddingHorizontal: 18,
