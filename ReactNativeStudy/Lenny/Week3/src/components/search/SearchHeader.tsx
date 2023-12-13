@@ -4,16 +4,12 @@ import SvgIcons from '../SvgIcons';
 import useNavigator from '../../hooks/useNavigator';
 import palette from '../../styles/palette';
 import {useStore} from '../../store/store';
+import {useGetMoreResults} from '../../hooks/useGetMoreResults';
 
-interface SearchHeaderProp {
-  handleGetSearchResults: () => void;
-}
-
-export default function SearchHeader({
-  handleGetSearchResults,
-}: SearchHeaderProp) {
+export default function SearchHeader() {
   const stackNavigation = useNavigator();
   const {searchContent, setSearchContent} = useStore();
+  const {getMoreResults} = useGetMoreResults();
 
   return (
     <View style={styles.container}>
@@ -28,7 +24,7 @@ export default function SearchHeader({
           placeholderTextColor={palette.Gray600}
           returnKeyType="search"
           enablesReturnKeyAutomatically
-          onSubmitEditing={handleGetSearchResults}
+          onSubmitEditing={getMoreResults}
           style={styles.contentStyle}
         />
         <Pressable

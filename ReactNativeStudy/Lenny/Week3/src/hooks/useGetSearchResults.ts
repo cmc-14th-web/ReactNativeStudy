@@ -2,7 +2,12 @@ import {useInfiniteQuery} from '@tanstack/react-query';
 import {useStore} from '../store/store';
 import getSearchResult from '../apis/getSearchResult';
 
-export const useGetSearchResult = () => {
+interface LastPageProps {
+  nextPageToken: string;
+  searchContent: string;
+}
+
+export const useGetSearchResults = () => {
   const {searchContent} = useStore();
   const {fetchNextPage, error, isError} = useInfiniteQuery({
     queryKey: ['search'],
@@ -11,7 +16,7 @@ export const useGetSearchResult = () => {
       nextPageToken: '',
       searchContent: searchContent,
     },
-    getNextPageParam: (lastPage: any) => {
+    getNextPageParam: (lastPage: LastPageProps) => {
       return lastPage.nextPageToken
         ? {nextPageToken: lastPage.nextPageToken, searchContent: searchContent}
         : undefined;
