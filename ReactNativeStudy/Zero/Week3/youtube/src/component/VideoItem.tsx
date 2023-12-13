@@ -1,6 +1,7 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { COLOR } from "../constant/color";
 import { videoInfo } from "../type/videoInfo";
+import { useNavigation } from "@react-navigation/native";
 
 interface VideoItemProps {
     videoInfo: videoInfo;
@@ -9,10 +10,15 @@ interface VideoItemProps {
 function VideoItem({ videoInfo }: VideoItemProps) {
     const { snippet, statistics } = videoInfo;
     const { thumbnails, title, channelTitle, publishedAt } = snippet;
-    const { viewCount } = statistics;
+    const { viewCount } = statistics || { viewCount: 0 };
+
+    const navigation = useNavigation();
+    const handlePress = () => {
+        navigation.navigate('DetailStack')
+    }
 
     return (
-        <Pressable onPress={() => console.log('press')}>
+        <Pressable onPress={handlePress}>
             <View style={style.container}>
                 <Image source={{ uri: thumbnails.medium.url }}
                     style={{
