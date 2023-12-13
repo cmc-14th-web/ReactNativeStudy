@@ -5107,6 +5107,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"events@npm:^3.2.0":
+  version: 3.3.0
+  resolution: "events@npm:3.3.0"
+  checksum: f6f487ad2198aa41d878fa31452f1a3c00958f46e9019286ff4787c84aac329332ab45c9cdc8c445928fc6d7ded294b9e005a7fce9426488518017831b272780
+  languageName: node
+  linkType: hard
+
 "execa@npm:8.0.1":
   version: 8.0.1
   resolution: "execa@npm:8.0.1"
@@ -8834,6 +8841,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-youtube-iframe@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "react-native-youtube-iframe@npm:2.3.0"
+  dependencies:
+    events: ^3.2.0
+  peerDependencies:
+    react: ">=16.8.6"
+    react-native: ">=0.60"
+    react-native-web-webview: ">=1.0.2"
+    react-native-webview: ">=7.0.0"
+  peerDependenciesMeta:
+    react-native-web-webview:
+      optional: true
+    react-native-webview:
+      optional: true
+  checksum: c549f3557c30fa9236eb7209ad3dac95482e62319350ddcfdfacb7cb10ca50e822c1ae553afd6fc3b22408a9ae14e3119dcd99ae6c73da50cdb286e8c9f5812f
+  languageName: node
+  linkType: hard
+
 "react-native@npm:0.72.7":
   version: 0.72.7
   resolution: "react-native@npm:0.72.7"
@@ -10727,6 +10753,7 @@ __metadata:
     react-native-screens: ^3.29.0
     react-native-svg: ^14.1.0
     react-native-svg-transformer: ^1.1.0
+    react-native-youtube-iframe: ^2.3.0
     react-test-renderer: 18.2.0
     typescript: ^5.3.3
     zustand: ^4.4.7

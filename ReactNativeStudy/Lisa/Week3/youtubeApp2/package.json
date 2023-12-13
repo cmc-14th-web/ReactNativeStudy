@@ -25,6 +25,7 @@
     "react-native-gesture-handler": "^2.14.0",
     "react-native-screens": "^3.29.0",
     "react-native-svg": "^14.1.0",
+    "react-native-youtube-iframe": "^2.3.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {
