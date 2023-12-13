@@ -1,6 +1,6 @@
-import {VideoInfo} from './videoInfo';
+import {FormattedVideoInfo} from './videoInfo';
 
 export type SelectedVideo = {
-  selectedVideo: VideoInfo;
-  setSelectedVideo: (video: VideoInfo) => void;
+  selectedVideo: FormattedVideoInfo;
+  setSelectedVideo: (video: FormattedVideoInfo) => void;
 };

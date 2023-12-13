@@ -1,9 +1,5 @@
 export type VideoInfo = {
-  id:
-    | {
-        videoId: string;
-      }
-    | string;
+  id: string | {videoId: string};
   snippet: {
     title: string;
     channelTitle: string;
@@ -15,6 +11,15 @@ export type VideoInfo = {
     };
   };
   statistics?: {
-    viewCount?: string;
+    viewCount?: number;
   };
+};
+
+export type FormattedVideoInfo = {
+  id: string;
+  title: string;
+  channelTitle: string;
+  publishedAt: string;
+  thumbnail: string;
+  viewCount: string;
 };

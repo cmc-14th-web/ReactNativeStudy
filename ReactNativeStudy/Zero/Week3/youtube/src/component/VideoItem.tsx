@@ -2,7 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { COLOR } from "../constant/color";
 import { mediaAspectRatio } from "../constant/screen";
-import { VideoInfo } from "../type/videoInfo";
+import { FormattedVideoInfo } from "../type/videoInfo";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
 import { getFormattedDate, getFormattedViewCount } from "../util/formatVideoData";
 import { useNavigator } from "../hook/useNavigator";
@@ -11,16 +11,11 @@ import VideoPlayer from "./VideoPlayer";
 
 interface VideoItemProps {
     isVideo?: boolean;
-    videoInfo: VideoInfo;
+    videoInfo: FormattedVideoInfo;
 }
 
 function VideoItem({ videoInfo, isVideo }: VideoItemProps) {
-    const { snippet, statistics } = videoInfo;
-    const { thumbnails, title, channelTitle, publishedAt } = snippet;
-    const { viewCount } = statistics || { viewCount: 0 };
-
-    const formattedViewCount = getFormattedViewCount(viewCount);
-    const formattedPublishedAt = getFormattedDate(publishedAt);
+    const { title, channelTitle, thumbnail, viewCount, publishedAt } = videoInfo;
 
     const setSelectedVideo = useSelectedVideoStore(state => state.setSelectedVideo);
     const { stackNavigator } = useNavigator();
@@ -34,7 +29,7 @@ function VideoItem({ videoInfo, isVideo }: VideoItemProps) {
             return <VideoPlayer />
         }
 
-        return <Image source={{ uri: thumbnails.medium.url }} style={style.image} />
+        return <Image source={{ uri: thumbnail }} style={style.image} />
     }
 
     return (
@@ -43,7 +38,7 @@ function VideoItem({ videoInfo, isVideo }: VideoItemProps) {
                 {renderVideoOrImage()}
                 <View style={style.textContainer}>
                     <Text style={style.title}>{title}</Text>
-                    <Text style={style.detail}>{channelTitle} · 조회수 {formattedViewCount} · {formattedPublishedAt}</Text>
+                    <Text style={style.detail}>{channelTitle} · 조회수 {viewCount} · {publishedAt}</Text>
                 </View>
             </View>
         </Pressable>

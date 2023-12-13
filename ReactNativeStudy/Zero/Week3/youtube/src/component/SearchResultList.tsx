@@ -7,6 +7,7 @@ import { useSearchStore } from "../store/searchStore";
 
 import VideoItem from "./VideoItem";
 import Error from "./Error";
+import { getFormattedVideoDatas } from "../util/formatVideoData";
 
 function SearchResultList() {
     const query = useSearchStore(state => state.search);
@@ -39,7 +40,7 @@ function SearchResultList() {
 
     return (
         <FlatList
-            data={searchResults}
+            data={getFormattedVideoDatas(searchResults)}
             renderItem={({ item }) => <VideoItem videoInfo={item} />}
             keyExtractor={(_, index) => index.toString()}
             onEndReached={loadNextPageData}

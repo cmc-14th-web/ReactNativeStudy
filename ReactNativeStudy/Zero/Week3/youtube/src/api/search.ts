@@ -35,7 +35,7 @@ export const useGetSearchResults = (query: string) => {
   );
 
   return {
-    searchResults: data?.pages?.map(page => page.items).flat(),
+    searchResults: data?.pages?.map(page => page.items).flat() ?? [],
     isLoading,
     error,
     fetchNextPage,

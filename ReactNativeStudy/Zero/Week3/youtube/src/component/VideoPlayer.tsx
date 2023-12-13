@@ -10,7 +10,7 @@ function VideoPlayer() {
     return (
         <YoutubePlayer
             play={true}
-            videoId={selectedVideo?.id.videoId || selectedVideo?.id}
+            videoId={selectedVideo.id}
             height={calculateVideoHeight}
         />
     );
