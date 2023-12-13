@@ -52,7 +52,7 @@ function SearchBar() {
                 returnKeyType="search"
                 onSubmitEditing={handleSearch}
             />
-            {isCloseButtonVisible && <IconButton id="Close" width={22} height={22} fill={COLOR.Gray600} handlePress={clearSearchText} />}
+            {isCloseButtonVisible && <IconButton type="Close" width={22} height={22} fill={COLOR.Gray600} handlePress={clearSearchText} />}
         </View>
     );
 }

@@ -14,7 +14,7 @@ function Header() {
     return (
         <View style={style.container}>
             <Text style={style.title}>Youtube</Text>
-            <IconButton id="Search" width={24} height={24} fill={COLOR.White} handlePress={handlePress} />
+            <IconButton type="Search" width={24} height={24} fill={COLOR.White} handlePress={handlePress} />
         </View>
     )
 }

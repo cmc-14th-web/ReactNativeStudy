@@ -8,7 +8,7 @@ function GoBackButton({ width, height, fill }: Partial<IconProps>) {
     const handleGoBack = () => navigation.goBack();
 
     return (
-        <IconButton id="ArrowBack" width={width} height={height} fill={fill} handlePress={handleGoBack} />
+        <IconButton type="ArrowBack" width={width} height={height} fill={fill} handlePress={handleGoBack} />
     );
 }
 
