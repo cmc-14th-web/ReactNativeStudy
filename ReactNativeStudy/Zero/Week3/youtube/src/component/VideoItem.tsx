@@ -2,6 +2,7 @@ import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { COLOR } from "../constant/color";
 import { videoInfo } from "../type/videoInfo";
 import { useNavigation } from "@react-navigation/native";
+import { useSelectedVideoStore } from "../store/selectedVideoStore";
 
 interface VideoItemProps {
     videoInfo: videoInfo;
@@ -13,8 +14,10 @@ function VideoItem({ videoInfo }: VideoItemProps) {
     const { viewCount } = statistics || { viewCount: 0 };
 
     const navigation = useNavigation();
+    const setSelectedVideo = useSelectedVideoStore(state => state.setSelectedVideo);
     const handlePress = () => {
         navigation.navigate('DetailStack')
+        setSelectedVideo(videoInfo);
     }
 
     return (
