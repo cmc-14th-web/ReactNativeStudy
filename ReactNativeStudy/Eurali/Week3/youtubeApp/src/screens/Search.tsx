@@ -76,8 +76,15 @@ const Search = () => {
     }
   };
 
-  const handleClickVideo = (videoId: string) => {
-    navigation.navigate('VideoPlay', {videoId: videoId});
+  const handleClickVideo = (item: SearchedYoutubeVideo) => {
+    navigation.navigate('VideoPlay', {
+      videoId: item.id.videoId,
+      videoInfo: {
+        title: item.snippet.title,
+        channelTitle: item.snippet.channelTitle,
+        publishedAt: item.snippet.publishedAt,
+      },
+    });
   };
 
   return (
@@ -103,10 +110,7 @@ const Search = () => {
             data={videoList}
             renderItem={({item}) => (
               <View key={item.etag}>
-                <VideoItem
-                  item={item}
-                  onClick={() => handleClickVideo(item.id.videoId)}
-                />
+                <VideoItem item={item} onClick={() => handleClickVideo(item)} />
               </View>
             )}
             keyExtractor={item => item.etag}

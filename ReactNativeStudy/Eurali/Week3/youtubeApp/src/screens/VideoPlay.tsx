@@ -4,6 +4,7 @@ import {Alert} from 'react-native';
 import YoutubeIframe from 'react-native-youtube-iframe';
 import {RootStackParamList} from '../types/navigators';
 import Container from '../layout/Container';
+import VideoInfo from '../components/VideoInfo';
 
 type VideoPlayProps = NativeStackScreenProps<RootStackParamList, 'VideoPlay'>;
 
@@ -20,11 +21,12 @@ const VideoPlay = ({route}: VideoPlayProps) => {
   return (
     <Container>
       <YoutubeIframe
-        height={300}
+        height={230}
         play={playing}
         videoId={route.params.videoId}
         onChangeState={onStateChange}
       />
+      <VideoInfo videoInfo={route.params.videoInfo} />
     </Container>
   );
 };

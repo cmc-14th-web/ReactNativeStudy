@@ -7,6 +7,7 @@ import VideoItem from '../components/VideoItem';
 import Container from '../layout/Container';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../types/navigators';
+import {YoutubeVideo} from '../types/YoutubeVideo';
 
 const Home = () => {
   const navigation: NavigationProp<RootStackParamList> = useNavigation();
@@ -17,8 +18,15 @@ const Home = () => {
   );
   const {data, isLoading, error} = useFetchGET({url: apiUrl, firstGet: true});
 
-  const handleClickVideo = (videoId: string) => {
-    navigation.navigate('VideoPlay', {videoId: videoId});
+  const handleClickVideo = (item: YoutubeVideo) => {
+    navigation.navigate('VideoPlay', {
+      videoId: item.id,
+      videoInfo: {
+        title: item.snippet.title,
+        channelTitle: item.snippet.channelTitle,
+        publishedAt: item.snippet.publishedAt,
+      },
+    });
   };
 
   return (
@@ -30,10 +38,7 @@ const Home = () => {
           data &&
           data.items.map(item => (
             <View key={item.id}>
-              <VideoItem
-                item={item}
-                onClick={() => handleClickVideo(item.id)}
-              />
+              <VideoItem item={item} onClick={() => handleClickVideo(item)} />
             </View>
           ))}
         {error && <Text>에러 발생</Text>}

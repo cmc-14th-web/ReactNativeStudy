@@ -1,8 +1,11 @@
+import {VideoInfoType} from './VideoInfo';
+
 export type RootStackParamList = {
   TabNavigator: undefined;
   Search: undefined;
   VideoPlay: {
     videoId: string;
+    videoInfo: VideoInfoType;
   };
 };
 
