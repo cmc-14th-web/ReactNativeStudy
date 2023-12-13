@@ -3,6 +3,7 @@ import Home from "../screen/Home";
 import Setting from "../screen/Setting";
 import { Icon } from "../component/Icon";
 import { COLOR } from "../constant/color";
+import HomeStackNavigation from "./HomeStackNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -18,7 +19,7 @@ function BottomTabNavigation() {
                 tabBarInactiveTintColor: COLOR.DarkGray,
             }}
         >
-            <Tab.Screen name="Home" component={Home}
+            <Tab.Screen name="Home" component={HomeStackNavigation}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <Icon id="Home" width={28} height={28} fill={focused ? COLOR.Red : COLOR.DarkGray} />
