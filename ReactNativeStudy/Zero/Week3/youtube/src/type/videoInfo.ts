@@ -1,4 +1,4 @@
-export type videoInfo = {
+export type VideoInfo = {
   id: string;
   snippet: {
     title: string;

@@ -2,7 +2,7 @@ import { FlatList, StyleSheet, Text, View } from "react-native";
 
 import { COLOR } from "../constant/color";
 import { useGetMostPopularVideoList } from "../api/mostPopularVideo";
-import { videoInfo } from "../type/videoInfo";
+import { VideoInfo } from "../type/videoInfo";
 
 import VideoItem from "../component/VideoItem";
 import Header from "../component/Header";
@@ -23,8 +23,8 @@ function Home() {
         return (
             <FlatList
                 data={mostPopularVideoList}
-                renderItem={({ item }: { item: videoInfo }) => <VideoItem videoInfo={item} />}
-                keyExtractor={(item: videoInfo) => item.id}
+                renderItem={({ item }: { item: VideoInfo }) => <VideoItem videoInfo={item} />}
+                keyExtractor={(item: VideoInfo) => item.id}
             />
         )
     }

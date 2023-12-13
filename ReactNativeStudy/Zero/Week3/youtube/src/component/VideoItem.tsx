@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { COLOR } from "../constant/color";
 import { mediaAspectRatio } from "../constant/screen";
-import { videoInfo } from "../type/videoInfo";
+import { VideoInfo } from "../type/videoInfo";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
 import { getFormattedDate, getFormattedViewCount } from "../util/formatVideoData";
 
@@ -11,7 +11,7 @@ import VideoPlayer from "./VideoPlayer";
 
 interface VideoItemProps {
     isVideo?: boolean;
-    videoInfo: videoInfo;
+    videoInfo: VideoInfo;
 }
 
 function VideoItem({ videoInfo, isVideo }: VideoItemProps) {
