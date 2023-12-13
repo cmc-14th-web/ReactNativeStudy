@@ -1,7 +1,13 @@
 import Config from 'react-native-config';
 import {useInfiniteQuery} from 'react-query';
 
-const getSearchResults = async ({query, nextPageToken}) => {
+const getSearchResults = async ({
+  query,
+  nextPageToken,
+}: {
+  query: string;
+  nextPageToken?: string;
+}) => {
   const YOUTUBE_API_KEY = Config.YOUTUBE_API_KEY;
   const url =
     `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${query}&key=${YOUTUBE_API_KEY}` +
@@ -18,7 +24,7 @@ const getSearchResults = async ({query, nextPageToken}) => {
   return data;
 };
 
-export const useGetSearchResults = query => {
+export const useGetSearchResults = (query: string) => {
   const {data, isLoading, error, fetchNextPage, hasNextPage} = useInfiniteQuery(
     {
       queryKey: ['searchResults', {query}],
