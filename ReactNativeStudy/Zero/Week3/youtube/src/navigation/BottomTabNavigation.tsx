@@ -30,6 +30,7 @@ function BottomTabNavigation() {
                     tabBarIcon: ({ focused }) => (
                         <Icon type="Home" width={28} height={28} fill={focused ? COLOR.Red : COLOR.DarkGray} />
                     ),
+                    tabBarLabel: '홈',
                 }}
             />
             <Tab.Screen name="Settings" component={Setting}
@@ -37,6 +38,7 @@ function BottomTabNavigation() {
                     tabBarIcon: ({ focused }) => (
                         <Icon type="Theme" width={28} height={28} fill={focused ? COLOR.Red : COLOR.DarkGray} />
                     ),
+                    tabBarLabel: '설정',
                 }}
             />
         </Tab.Navigator>
