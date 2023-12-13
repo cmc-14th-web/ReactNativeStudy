@@ -6,7 +6,13 @@ import Home from "../screen/Home";
 import Search from "../screen/Search";
 import Detail from "../screen/Detail";
 
-const Stack = createStackNavigator();
+export type HomeStackParamList = {
+    HomeStack: undefined;
+    SearchStack: undefined;
+    DetailStack: undefined;
+};
+
+const Stack = createStackNavigator<HomeStackParamList>();
 
 function HomeStackNavigation() {
     return (

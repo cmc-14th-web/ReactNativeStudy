@@ -6,7 +6,12 @@ import { Icon } from "../component/Icon";
 import Setting from "../screen/Setting";
 import HomeStackNavigation from "./HomeStackNavigation";
 
-const Tab = createBottomTabNavigator();
+export type BottomTabParamList = {
+    Home: undefined;
+    Settings: undefined;
+};
+
+const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 function BottomTabNavigation() {
     return (
