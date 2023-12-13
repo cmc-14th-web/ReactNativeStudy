@@ -1,5 +1,5 @@
 import {useQuery} from '@tanstack/react-query';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -7,8 +7,10 @@ import {
   Text,
   View,
 } from 'react-native';
+import {useSetRecoilState} from 'recoil';
 import Youtube from '../api/Youtube';
 import VideoItem from '../components/VideoItem';
+import pageTokenState from '../store/pageToken';
 import palette from '../styles/palette';
 import {YoutubeVideo} from '../type';
 const Home = () => {
@@ -16,6 +18,13 @@ const Home = () => {
     queryKey: ['videos'],
     queryFn: Youtube.getVideos,
   });
+
+  const setPageToken = useSetRecoilState(pageTokenState);
+  useEffect(() => {
+    if (data !== undefined) {
+      setPageToken(data.nextPageToken);
+    }
+  }, [data]);
 
   if (isLoading) {
     return (

@@ -6,18 +6,22 @@ const getVideos = async () => {
     {
       method: 'GET',
     },
-  ).then(res => res.json());
+  )
+    .then(res => res.json())
+    .catch(err => console.log('ERROR: ' + err));
 
   return response;
 };
 
-const findVideos = async (searchKey: string, nextPageToken: string) => {
+const findVideos = async (searchKey: string, nextPageToken: string = '') => {
   const response: YoutubeVideoList = await fetch(
-    `https://www.googleapis.com/youtube/v3/search?part=snippet, statistics&type=video&q=${searchKey}&maxResults=5&key=${Config.YOUTUBE_V3_API_KEY}&pageToken=${nextPageToken}`,
+    `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${searchKey}&maxResults=3&key=${Config.YOUTUBE_V3_API_KEY}&pageToken=${nextPageToken}`,
     {
       method: 'GET',
     },
-  ).then(res => res.json());
+  )
+    .then(res => res.json())
+    .catch(err => console.log('ERROR: ' + err));
 
   return response;
 };

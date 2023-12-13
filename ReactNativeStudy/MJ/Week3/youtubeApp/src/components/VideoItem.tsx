@@ -25,7 +25,7 @@ interface VideoItemProps {
     };
     defaultAudioLanguage: string;
   };
-  statistics: {
+  statistics?: {
     viewCount: string;
   };
 }
@@ -46,10 +46,14 @@ const VideoItem = ({snippet, statistics}: VideoItemProps) => {
           <Text style={styles.videoTitle}>{snippet.title}</Text>
           <View style={styles.videoInfoView}>
             <Text style={styles.videoInfoText}>{snippet.channelTitle}</Text>
-            <Text style={styles.videoInfoText}>{' · '}</Text>
-            <Text style={styles.videoInfoText}>
-              조회수 {Math.ceil(Number(statistics.viewCount) / 100000)}만회
-            </Text>
+            {statistics && (
+              <>
+                <Text style={styles.videoInfoText}>{' · '}</Text>
+                <Text style={styles.videoInfoText}>
+                  조회수 {Math.ceil(Number(statistics.viewCount) / 100000)}만회
+                </Text>
+              </>
+            )}
             <Text style={styles.videoInfoText}>{' · '}</Text>
             <Text style={styles.videoInfoText}>
               {DateUtils.daysAgo(snippet.publishedAt)}일 전
