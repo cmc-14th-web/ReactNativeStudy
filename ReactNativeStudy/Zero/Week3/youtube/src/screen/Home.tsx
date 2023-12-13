@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
 import { COLOR } from "../constant/color";
 import { useGetMostPopularVideoList } from "../api/mostPopularVideo";
@@ -18,9 +18,11 @@ function Home() {
             <Text style={style.listTitle}>
                 인기 동영상
             </Text>
-            {mostPopularVideoList?.map((videoInfo: videoInfo) => {
-                return <VideoItem key={videoInfo.id} videoInfo={videoInfo} />
-            })}
+            <FlatList
+                data={mostPopularVideoList}
+                renderItem={({ item }: { item: videoInfo }) => <VideoItem videoInfo={item} />}
+                keyExtractor={(item: videoInfo) => item.id}
+            />
         </View>
     )
 }
