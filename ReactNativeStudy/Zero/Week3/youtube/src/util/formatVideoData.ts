@@ -9,7 +9,7 @@ const compactNumberFormatter = new Intl.NumberFormat('ko', {
   notation: 'compact',
 });
 
-export const useGetFormattedViewCount = (viewCount: number) => {
+export const getFormattedViewCount = (viewCount: number) => {
   return compactNumberFormatter.format(viewCount) + '회';
 };
 

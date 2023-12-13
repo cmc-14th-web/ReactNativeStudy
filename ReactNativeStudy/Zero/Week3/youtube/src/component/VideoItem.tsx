@@ -3,7 +3,7 @@ import { COLOR } from "../constant/color";
 import { videoInfo } from "../type/videoInfo";
 import { useNavigation } from "@react-navigation/native";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
-import { getFormattedDate, useGetFormattedViewCount } from "../hook/useProcessVideoData";
+import { getFormattedDate, getFormattedViewCount } from "../util/formatVideoData";
 
 interface VideoItemProps {
     videoInfo: videoInfo;
@@ -14,7 +14,7 @@ function VideoItem({ videoInfo }: VideoItemProps) {
     const { thumbnails, title, channelTitle, publishedAt } = snippet;
     const { viewCount } = statistics || { viewCount: 0 };
 
-    const formattedViewCount = useGetFormattedViewCount(viewCount);
+    const formattedViewCount = getFormattedViewCount(viewCount);
     const formattedPublishedAt = getFormattedDate(publishedAt);
 
     const navigation = useNavigation();
