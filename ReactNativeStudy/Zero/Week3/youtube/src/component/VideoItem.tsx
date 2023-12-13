@@ -3,6 +3,7 @@ import { COLOR } from "../constant/color";
 import { videoInfo } from "../type/videoInfo";
 import { useNavigation } from "@react-navigation/native";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
+import { useGetFormattedViewCount } from "../hook/useProcessVideoData";
 
 interface VideoItemProps {
     videoInfo: videoInfo;
@@ -12,6 +13,8 @@ function VideoItem({ videoInfo }: VideoItemProps) {
     const { snippet, statistics } = videoInfo;
     const { thumbnails, title, channelTitle, publishedAt } = snippet;
     const { viewCount } = statistics || { viewCount: 0 };
+
+    const formattedViewCount = useGetFormattedViewCount(viewCount);
 
     const navigation = useNavigation();
     const setSelectedVideo = useSelectedVideoStore(state => state.setSelectedVideo);
@@ -31,7 +34,7 @@ function VideoItem({ videoInfo }: VideoItemProps) {
                 />
                 <View style={style.textContainer}>
                     <Text style={style.title}>{title}</Text>
-                    <Text style={style.detail}>{channelTitle} · 조회수 {viewCount} · {publishedAt}</Text>
+                    <Text style={style.detail}>{channelTitle} · 조회수 {formattedViewCount} · {publishedAt}</Text>
                 </View>
             </View>
         </Pressable>
