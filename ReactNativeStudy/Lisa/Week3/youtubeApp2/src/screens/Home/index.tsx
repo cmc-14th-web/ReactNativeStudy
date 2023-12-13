@@ -25,7 +25,7 @@ const Home = () => {
             <View style={homeStyles.textContainer}>
               <Text style={homeStyles.text}>인기 동영상</Text>
             </View>
-            <VideoListItem videoList={videoList!} />
+            <VideoListItem videoList={videoList} />
           </>
         );
       })()}

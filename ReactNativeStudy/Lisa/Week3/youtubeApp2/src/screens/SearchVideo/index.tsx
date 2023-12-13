@@ -14,6 +14,8 @@ const SearchVideo = () => {
     useGetSearchedVideosInfiniteQuery();
   const {searchText, setIsSearchFinished} = useStore(searchTextStore);
 
+  const filteredVideoList = searchText ? searchedVideoList : [];
+
   useFocusEffect(
     useCallback(() => {
       setIsSearchFinished(false);
@@ -33,7 +35,7 @@ const SearchVideo = () => {
         return (
           <VideoListItem
             variant={'search'}
-            videoList={searchText ? searchedVideoList : []}
+            videoList={filteredVideoList}
             fetchNextPage={fetchNextPage}
           />
         );
