@@ -4,7 +4,6 @@ import { COLOR } from "../constant/color";
 import { mediaAspectRatio } from "../constant/screen";
 import { FormattedVideoInfo } from "../type/videoInfo";
 import { useSelectedVideoStore } from "../store/selectedVideoStore";
-import { getFormattedDate, getFormattedViewCount } from "../util/formatVideoData";
 import { useNavigator } from "../hook/useNavigator";
 
 import VideoPlayer from "./VideoPlayer";

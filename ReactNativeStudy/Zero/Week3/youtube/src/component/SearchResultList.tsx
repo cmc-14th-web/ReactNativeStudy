@@ -4,10 +4,10 @@ import { useEffect } from "react";
 
 import { useGetSearchResults } from "../api/search";
 import { useSearchStore } from "../store/searchStore";
+import { getFormattedVideoDatas } from "../util/formatVideoData";
 
 import VideoItem from "./VideoItem";
 import Error from "./Error";
-import { getFormattedVideoDatas } from "../util/formatVideoData";
 
 function SearchResultList() {
     const query = useSearchStore(state => state.search);
