@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import colors from '../constants/color';
 import {VideoInfoType} from '../types/VideoInfo';
+import {getRelativeDate} from '../utils/getRelativeDate';
 
 const VideoInfo = ({videoInfo}: {videoInfo: VideoInfoType}) => {
   return (
@@ -13,7 +14,7 @@ const VideoInfo = ({videoInfo}: {videoInfo: VideoInfoType}) => {
         <Text style={styles.infoText}>{videoInfo.channelTitle}</Text>
         <Text style={styles.infoText}>·</Text>
         <Text style={styles.infoText}>
-          {videoInfo.publishedAt.split('T')[0]}
+          {getRelativeDate(videoInfo.publishedAt)}
         </Text>
       </View>
     </View>
