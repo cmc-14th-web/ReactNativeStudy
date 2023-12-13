@@ -5,14 +5,21 @@ import Config from 'react-native-config';
 import colors from '../constants/color';
 import VideoItem from '../components/VideoItem';
 import Container from '../layout/Container';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../types/navigators';
 
 const Home = () => {
+  const navigation: NavigationProp<RootStackParamList> = useNavigation();
   const apiUrl = useMemo(
     () =>
       `${Config.YOUTUBE_API}/videos?part=snippet&chart=mostPopular&maxResults=25&key=${Config.YOUTUBE_API_KEY}`,
     [],
   );
   const {data, isLoading, error} = useFetchGET({url: apiUrl, firstGet: true});
+
+  const handleClickVideo = (videoId: string) => {
+    navigation.navigate('VideoPlay', {videoId: videoId});
+  };
 
   return (
     <Container>
@@ -23,7 +30,10 @@ const Home = () => {
           data &&
           data.items.map(item => (
             <View key={item.id}>
-              <VideoItem item={item} />
+              <VideoItem
+                item={item}
+                onClick={() => handleClickVideo(item.id)}
+              />
             </View>
           ))}
         {error && <Text>에러 발생</Text>}

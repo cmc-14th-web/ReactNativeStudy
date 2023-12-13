@@ -1,6 +1,9 @@
 export type RootStackParamList = {
   TabNavigator: undefined;
   Search: undefined;
+  VideoPlay: {
+    videoId: string;
+  };
 };
 
 export type TabParamList = {

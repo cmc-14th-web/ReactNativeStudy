@@ -14,13 +14,15 @@ import {useNavigation} from '@react-navigation/core';
 import colors from '../constants/color';
 import Config from 'react-native-config';
 import VideoItem from '../components/VideoItem';
-import {YoutubeVideo} from '../types/YoutubeVideo';
+import {RootStackParamList} from '../types/navigators';
+import {NavigationProp} from '@react-navigation/native';
+import {SearchedYoutubeVideo} from '../types/SearchedYoutubeVideo';
 
 const Search = () => {
-  const navigation = useNavigation();
+  const navigation: NavigationProp<RootStackParamList> = useNavigation();
   const [text, onChangeText] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [videoList, setVideoList] = useState<YoutubeVideo[]>([]);
+  const [videoList, setVideoList] = useState<SearchedYoutubeVideo[]>([]);
   const [pageToken, setPageToken] = useState<string>('');
 
   const fetchData = useCallback(
@@ -36,7 +38,7 @@ const Search = () => {
             setVideoList(data.items);
           } else {
             const newItems = data.items.filter(
-              (item: YoutubeVideo) =>
+              (item: SearchedYoutubeVideo) =>
                 !videoList.some(
                   existingItem => existingItem.etag === item.etag,
                 ),
@@ -67,6 +69,10 @@ const Search = () => {
     }
   };
 
+  const handleClickVideo = (videoId: string) => {
+    navigation.navigate('VideoPlay', {videoId: videoId});
+  };
+
   return (
     <Container>
       <View style={styles.container}>
@@ -89,7 +95,10 @@ const Search = () => {
             data={videoList}
             renderItem={({item}) => (
               <View key={item.etag}>
-                <VideoItem item={item} />
+                <VideoItem
+                  item={item}
+                  onClick={() => handleClickVideo(item.id.videoId)}
+                />
               </View>
             )}
             keyExtractor={item => item.etag}

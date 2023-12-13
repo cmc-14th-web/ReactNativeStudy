@@ -1,12 +1,19 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {YoutubeVideo} from '../types/YoutubeVideo';
 import colors from '../constants/color';
 import screenInfo from '../constants/screenInfo';
+import {SearchedYoutubeVideo} from '../types/SearchedYoutubeVideo';
 
-const VideoItem = ({item}: {item: YoutubeVideo}) => {
+const VideoItem = ({
+  item,
+  onClick,
+}: {
+  item: YoutubeVideo | SearchedYoutubeVideo;
+  onClick: () => void;
+}) => {
   return (
-    <View>
+    <TouchableOpacity onPress={onClick}>
       <Image
         source={{uri: item.snippet.thumbnails.medium.url}}
         alt="youtube thumbnail"
@@ -25,7 +32,7 @@ const VideoItem = ({item}: {item: YoutubeVideo}) => {
           </Text>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

@@ -8,6 +8,7 @@ const Container = ({children}: {children: ReactElement | ReactElement[]}) => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: colors.grey900,
   },
 });
