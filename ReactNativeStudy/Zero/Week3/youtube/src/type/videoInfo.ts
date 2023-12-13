@@ -11,7 +11,7 @@ export type VideoInfo = {
     };
   };
   statistics?: {
-    viewCount?: number;
+    viewCount: number;
   };
 };
 
