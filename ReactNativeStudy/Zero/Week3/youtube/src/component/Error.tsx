@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+
 import { COLOR } from "../constant/color";
 
 function Error() {
