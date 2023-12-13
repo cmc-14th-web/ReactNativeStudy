@@ -1,3 +1,8 @@
+import {
+  FetchNextPageOptions,
+  InfiniteQueryObserverResult,
+} from '@tanstack/react-query';
+
 export type VideoType = {
   kind: string;
   etag: 'etag';
@@ -23,6 +28,23 @@ export type VideoType = {
   };
 };
 
+export type VideoListType = {
+  kind: string;
+  etag: 'etag';
+  nextPageToken: string;
+  prevPageToken: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
+  items: VideoType[];
+};
+
+export type SearchedVideoListType = {
+  nextPageToken: VideoListType['nextPageToken'];
+  items: VideoListType['items'];
+};
+
 export type VideoDetailPropsType = {
   publishedAt: string;
   title: string;
@@ -30,6 +52,14 @@ export type VideoDetailPropsType = {
   channelTitle: string;
 };
 
-export type VideoListItemPropsType = {
+export type VideoListItemVariant = 'search' | 'popular';
+
+export type VideoListItemPropsType<T extends VideoListItemVariant> = {
   videoList: VideoType[];
+  variant?: T;
+  fetchNextPage?: T extends 'search'
+    ? (
+        options?: FetchNextPageOptions,
+      ) => Promise<InfiniteQueryObserverResult<SearchedVideoListType, unknown>>
+    : undefined;
 };

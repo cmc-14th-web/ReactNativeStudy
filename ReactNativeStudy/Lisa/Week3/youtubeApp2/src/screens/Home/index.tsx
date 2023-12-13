@@ -1,23 +1,34 @@
 import {StyleSheet, Text, View} from 'react-native';
-import {useQuery} from '@tanstack/react-query';
 
-import {VideoApi} from 'apis/VideoApi';
 import {typoStyles} from 'styles/typo';
 import {theme} from 'styles/theme';
+import {useGetPopularVideosQuery} from 'libs/hooks/useGetPopularVideosQuery';
 import VideoListItem from 'components/VideoListItem';
-import {queryKey} from 'constants/api';
+import Loading from 'components/atoms/Loading';
+import Error from 'components/atoms/Error';
 
 const Home = () => {
-  const {data: videoList} = useQuery([queryKey.VIDEOLIST], () =>
-    VideoApi.GET_POPULAR_VIDEOS(),
-  );
+  const {videoList, isLoading, isError} = useGetPopularVideosQuery();
 
   return (
     <View style={homeStyles.container}>
-      <View style={homeStyles.textContainer}>
-        <Text style={homeStyles.text}>인기 동영상</Text>
-      </View>
-      <VideoListItem videoList={videoList!} />
+      {(() => {
+        if (isLoading) {
+          return <Loading />;
+        }
+        if (isError) {
+          return <Error />;
+        }
+
+        return (
+          <>
+            <View style={homeStyles.textContainer}>
+              <Text style={homeStyles.text}>인기 동영상</Text>
+            </View>
+            <VideoListItem videoList={videoList!} />
+          </>
+        );
+      })()}
     </View>
   );
 };

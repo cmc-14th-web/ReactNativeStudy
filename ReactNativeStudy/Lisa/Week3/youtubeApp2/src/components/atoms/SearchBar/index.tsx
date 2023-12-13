@@ -1,26 +1,42 @@
-import {useState} from 'react';
-import {StyleSheet, TextInput} from 'react-native';
+import {StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {useStore} from 'zustand';
 
 import {theme} from 'styles/theme';
+import {searchTextStore} from 'libs/store/searchText';
+import SvgIcons from 'assets/icons/SvgIcons';
 
 const SearchBar = () => {
-  const [searchText, setSearchText] = useState('');
+  const {searchText, setSearchText, setIsSearchFinished} =
+    useStore(searchTextStore);
 
-  const handleChangeSearchText = (inputText: string) => {
-    if (!inputText.length) {
-      console.log(inputText);
-      setSearchText(inputText);
-    }
+  const handleSubmitEditing = () => {
+    searchText && setIsSearchFinished(true);
+  };
+
+  const handlePressCloseIcon = () => {
+    setIsSearchFinished(false);
+    setSearchText('');
   };
 
   return (
-    <TextInput
-      placeholder="Youtube 검색"
-      placeholderTextColor={theme.palette.gray_600}
-      style={searchBarStyles.container}
-      value={searchText}
-      onChangeText={handleChangeSearchText}
-    />
+    <>
+      <TextInput
+        placeholder="Youtube 검색"
+        placeholderTextColor={theme.palette.gray_600}
+        value={searchText}
+        onChangeText={setSearchText}
+        returnKeyType="search"
+        onSubmitEditing={handleSubmitEditing}
+        style={searchBarStyles.container}
+      />
+      {searchText && (
+        <TouchableOpacity
+          onPress={handlePressCloseIcon}
+          style={searchBarStyles.iconContainer}>
+          <SvgIcons.CloseIcon />
+        </TouchableOpacity>
+      )}
+    </>
   );
 };
 
@@ -36,5 +52,9 @@ const searchBarStyles = StyleSheet.create({
     paddingVertical: 6,
     flex: 1,
     color: theme.palette.white,
+  },
+  iconContainer: {
+    position: 'absolute',
+    right: 32,
   },
 });
