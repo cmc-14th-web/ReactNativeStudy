@@ -56,6 +56,7 @@ const style = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         padding: 0,
+        flex: 1,
     }
 })
 
