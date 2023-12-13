@@ -7,15 +7,22 @@ import { useSearchStore } from "../store/searchStore";
 import IconButton from "./IconButton";
 
 function SearchBar() {
+    const [isCloseButtonVisible, setIsCloseButtonVisible] = useState(false);
     const [searchText, setSearchText] = useState('');
     const handleChangeText = (text: string) => {
         setSearchText(text);
+        if (text.length > 0) {
+            showCloseButton();
+        } else {
+            hideCloseButton();
+        }
     }
 
     const deleteSearch = useSearchStore(state => state.deleteSearch);
     const clearSearchText = () => {
         setSearchText('');
         deleteSearch();
+        hideCloseButton();
     }
 
     const setSearch = useSearchStore(state => state.setSearch)
@@ -24,6 +31,9 @@ function SearchBar() {
         setSearch(searchText);
         setIsSearched(true);
     }
+
+    const showCloseButton = () => setIsCloseButtonVisible(true);
+    const hideCloseButton = () => setIsCloseButtonVisible(false);
 
     return (
         <View style={style.container}>
@@ -37,7 +47,7 @@ function SearchBar() {
                 returnKeyType="search"
                 onSubmitEditing={handleSearch}
             />
-            <IconButton id="Close" width={22} height={22} fill={COLOR.Gray600} handlePress={clearSearchText} />
+            {isCloseButtonVisible && <IconButton id="Close" width={22} height={22} fill={COLOR.Gray600} handlePress={clearSearchText} />}
         </View>
     );
 }
