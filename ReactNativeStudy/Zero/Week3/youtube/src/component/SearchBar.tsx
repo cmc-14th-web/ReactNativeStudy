@@ -2,6 +2,7 @@ import { TextInput, StyleSheet, View } from "react-native";
 import { COLOR } from "../constant/color";
 import { useState } from "react";
 import IconButton from "./IconButton";
+import { useSearchStore } from "../store/searchStore";
 
 function SearchBar() {
     const [searchText, setSearchText] = useState('');
@@ -9,8 +10,17 @@ function SearchBar() {
         setSearchText(text);
     }
 
+    const deleteSearch = useSearchStore(state => state.deleteSearch);
     const clearSearchText = () => {
         setSearchText('');
+        deleteSearch();
+    }
+
+    const setSearch = useSearchStore(state => state.setSearch)
+    const setIsSearched = useSearchStore(state => state.setIsSearched)
+    const handleSearch = () => {
+        setSearch(searchText);
+        setIsSearched(true);
     }
 
     return (
@@ -22,6 +32,8 @@ function SearchBar() {
                 inputMode="search"
                 value={searchText}
                 onChangeText={handleChangeText}
+                returnKeyType="search"
+                onSubmitEditing={handleSearch}
             />
             <IconButton id="Close" width={22} height={22} fill={COLOR.Gray600} handlePress={clearSearchText} />
         </View>

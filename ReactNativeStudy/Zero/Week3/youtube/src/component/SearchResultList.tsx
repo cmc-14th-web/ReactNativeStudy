@@ -2,14 +2,16 @@ import { FlatList, View } from "react-native";
 import { useGetSearchResults } from "../api/search";
 import VideoItem from "./VideoItem";
 import { Text } from "react-native-svg";
+import { useSearchStore } from "../store/searchStore";
 
 function SearchResultList() {
+    const query = useSearchStore(state => state.search);
     const { searchResults,
         isLoading,
         error,
         fetchNextPage,
         hasNextPage
-    } = useGetSearchResults('react');
+    } = useGetSearchResults(query);
 
     const loadNextPageData = () => {
         if (hasNextPage) {
