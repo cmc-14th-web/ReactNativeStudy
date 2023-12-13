@@ -3,6 +3,8 @@ import VideoItem from "../component/VideoItem";
 import { COLOR } from "../constant/color";
 import { useGetMostPopularVideoList } from "../api/mostPopularVideo";
 import { videoInfo } from "../type/videoInfo";
+import Header from "../component/Header";
+import SearchBar from "../component/SearchBar";
 
 function Home() {
     const { mostPopularVideoList, isLoading, error } = useGetMostPopularVideoList();
@@ -11,6 +13,7 @@ function Home() {
             backgroundColor: COLOR.Gray900,
             height: '100%',
         }}>
+            <Header />
             <Text style={style.listTitle}>
                 인기 동영상
             </Text>
