@@ -25,3 +25,5 @@
   - [date-fns](https://github.com/date-fns/date-fns)
   - [react-query](https://tanstack.com/query/latest)
   - [react-native-dotenv](https://github.com/goatandsheep/react-native-dotenv)
+  - [react-native-youtube-iframe](https://github.com/LonelyCpp/react-native-youtube-iframe)
+  - [react-native-webview](https://github.com/react-native-webview/react-native-webview)
