@@ -8,12 +8,17 @@ import {useGetMoreResults} from '../../hooks/useGetMoreResults';
 
 export default function SearchHeader() {
   const stackNavigation = useNavigator();
-  const {searchContent, setSearchContent} = useStore();
+  const {searchContent, setSearchContent, setSearchResults} = useStore();
   const {getMoreResults} = useGetMoreResults();
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => stackNavigation.goBack()}>
+      <Pressable
+        onPress={() => {
+          stackNavigation.goBack();
+          setSearchContent('');
+          setSearchResults([]);
+        }}>
         <SvgIcons.BackIcon />
       </Pressable>
       <View style={styles.contentWrapStyle}>

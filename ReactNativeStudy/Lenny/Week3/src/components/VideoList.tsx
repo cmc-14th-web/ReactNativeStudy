@@ -12,7 +12,9 @@ export default function VideoList({videos, onEndReached}: VideoListProps) {
   return (
     <FlatList
       data={videos}
-      keyExtractor={(item: SnippetVideosType) => item.publishedAt}
+      keyExtractor={(item: SnippetVideosType) =>
+        `${item.title}-${item.channelTitle}`
+      }
       onEndReached={onEndReached}
       renderItem={({item}: {item: SnippetVideosType}) => (
         <TrendingVideosList item={item} />

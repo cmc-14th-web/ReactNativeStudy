@@ -9,20 +9,24 @@ interface LastPageProps {
 
 export const useGetSearchResults = () => {
   const {searchContent} = useStore();
-  const {fetchNextPage, error, isError} = useInfiniteQuery({
-    queryKey: ['search'],
-    queryFn: getSearchResult,
-    initialPageParam: {
-      nextPageToken: '',
-      searchContent: searchContent,
-    },
-    getNextPageParam: (lastPage: LastPageProps) => {
-      return lastPage.nextPageToken
-        ? {nextPageToken: lastPage.nextPageToken, searchContent: searchContent}
-        : undefined;
-    },
-    enabled: false,
-  });
+  const {fetchNextPage, error, isError, isFetchingNextPage, isFetching} =
+    useInfiniteQuery({
+      queryKey: ['search'],
+      queryFn: getSearchResult,
+      initialPageParam: {
+        nextPageToken: '',
+        searchContent: searchContent,
+      },
+      getNextPageParam: (lastPage: LastPageProps) => {
+        return lastPage.nextPageToken
+          ? {
+              nextPageToken: lastPage.nextPageToken,
+              searchContent: searchContent,
+            }
+          : undefined;
+      },
+      enabled: false,
+    });
 
   if (isError) {
     console.log(error);
@@ -30,5 +34,6 @@ export const useGetSearchResults = () => {
 
   return {
     fetchNextPage,
+    isFetchingNextPage,
   };
 };
