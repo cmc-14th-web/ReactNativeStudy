@@ -4,10 +4,15 @@ type ThumbnailsType = {
   height: number;
 };
 
-export type SnippetVideosType = {
+export interface VideoDetailType {
+  videoId: string;
   viewCount: string;
   channelTitle: string;
   title: string;
+  publishedAt: string;
+}
+
+export interface SnippetVideosType extends VideoDetailType {
   thumbnails: {
     default: ThumbnailsType;
     high: ThumbnailsType;
@@ -15,14 +20,14 @@ export type SnippetVideosType = {
     medium: ThumbnailsType;
     standard: ThumbnailsType;
   };
-  publishedAt: string;
-};
+}
 
 type StatisticsTrendingVideosType = {
   viewCount: string;
 };
 
 export type VideosType = {
+  id: string;
   snippet: SnippetVideosType;
   statistics: StatisticsTrendingVideosType;
 };

@@ -4,6 +4,7 @@ import {calculatePublishedTime} from './calculatePublishedTime';
 const extractVideoData = (items: VideosType[]) =>
   items.map((item: VideosType) => {
     return {
+      videoId: item.id, // 동영상 ID
       viewCount: item.statistics.viewCount, // 조회수
       channelTitle: item.snippet.channelTitle, // 채널 이름
       title: item.snippet.title, // 제목

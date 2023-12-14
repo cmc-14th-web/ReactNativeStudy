@@ -1,5 +1,5 @@
 import React from 'react';
-import {ActivityIndicator, Text} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import Container from '../components/Container';
 import SearchHeader from '../components/search/SearchHeader';
 import {useStore} from '../store/store';

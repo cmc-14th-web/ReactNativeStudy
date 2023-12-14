@@ -1,7 +1,7 @@
 import React from 'react';
 import {FlatList} from 'react-native';
 import {SnippetVideosType, UsingVideosType} from '../types/videos';
-import TrendingVideosList from './home/TrendingVideosList';
+import VideoDetail from './VideoDetail';
 
 interface VideoListProps {
   videos: UsingVideosType;
@@ -17,7 +17,7 @@ export default function VideoList({videos, onEndReached}: VideoListProps) {
       }
       onEndReached={onEndReached}
       renderItem={({item}: {item: SnippetVideosType}) => (
-        <TrendingVideosList item={item} />
+        <VideoDetail item={item} />
       )}
     />
   );
