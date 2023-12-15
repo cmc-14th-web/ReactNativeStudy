@@ -5,7 +5,7 @@ import {useFocusEffect} from '@react-navigation/native';
 
 import useGetSearchedVideosInfiniteQuery from 'libs/hooks/useGetSearchedVideosInfiniteQuery';
 import {searchTextStore} from 'libs/store/searchText';
-import VideoListItem from 'components/VideoListItem';
+import VideoListItem from 'components/atoms/VideoListItem';
 import Loading from 'components/atoms/Loading';
 import Error from 'components/atoms/Error';
 

@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {typoStyles} from 'styles/typo';
 import {theme} from 'styles/theme';
 import {useGetPopularVideosQuery} from 'libs/hooks/useGetPopularVideosQuery';
-import VideoListItem from 'components/VideoListItem';
+import VideoListItem from 'components/atoms/VideoListItem';
 import Loading from 'components/atoms/Loading';
 import Error from 'components/atoms/Error';
 
