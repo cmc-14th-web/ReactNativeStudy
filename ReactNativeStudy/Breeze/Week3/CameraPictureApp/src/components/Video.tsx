@@ -1,5 +1,6 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {palette} from '../styles/ColorPalette';
+import getDate from '../utils/getDate';
 
 interface VideoProps {
   uri: string;
@@ -17,7 +18,8 @@ function Video({uri, writer, title, date, view = 0}: VideoProps) {
         <View style={styles.content}>
           <Text style={styles.detailContent}>{writer}..</Text>
           {/*<Text style={styles.detailContent}>조회수{view}</Text>*/}
-          <Text style={styles.detailContent}>{date}</Text>
+          {/*<Text style={styles.detailContent}>{date}</Text>*/}
+          <Text style={styles.detailContent}>&nbsp;· {getDate(date)}</Text>
         </View>
       </View>
     </View>

@@ -81,3 +81,5 @@ env/
 *.xcodeproj
 
 __tests__
+
+.env

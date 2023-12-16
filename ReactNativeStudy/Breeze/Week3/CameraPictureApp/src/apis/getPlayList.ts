@@ -1,7 +1,6 @@
 import Config from 'react-native-config';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getPlayList = async (maxResults = 25): Promise<any[]> => {
+export const getPlayList = async (maxResults = 25) => {
   const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=${maxResults}&key=${Config.API_KEY}`;
 
   const options = {
@@ -21,6 +20,7 @@ export const getPlayList = async (maxResults = 25): Promise<any[]> => {
 
     const data = await response.json();
     return data.items;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error fetching data:', error.message);
     throw error;

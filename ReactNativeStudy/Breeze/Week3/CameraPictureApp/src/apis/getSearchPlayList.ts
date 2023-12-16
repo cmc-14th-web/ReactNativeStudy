@@ -27,6 +27,7 @@ export const getSearchPlayList = async (
       items: data.items,
       nextPageToken: data.nextPageToken,
     };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error('Error fetching data:', error.message);
     throw error;
