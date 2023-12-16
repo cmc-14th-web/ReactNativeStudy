@@ -29,8 +29,8 @@ export type VideoType = {
 };
 
 export type VideoListType = {
-  kind: string;
-  etag: 'etag';
+  kind: VideoType['kind'];
+  etag: VideoType['etag'];
   nextPageToken: string;
   prevPageToken: string;
   pageInfo: {
@@ -46,10 +46,10 @@ export type SearchedVideoListType = {
 };
 
 export type VideoDetailPropsType = {
-  publishedAt: string;
-  title: string;
-  thumbnailUrl: string;
-  channelTitle: string;
+  publishedAt: VideoType['snippet']['publishedAt'];
+  title: VideoType['snippet']['title'];
+  thumbnailUrl: VideoType['snippet']['thumbnails']['medium']['url'];
+  channelTitle: VideoType['snippet']['channelTitle'];
 };
 
 export type VideoListItemVariant = 'search' | 'popular';
