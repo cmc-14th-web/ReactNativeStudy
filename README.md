@@ -1,4 +1,4 @@
-# CMC 14th Team Web :React Native Study
+# CMC 14th Team Web: React Native Study
 
 - 🎄 **참여자**: CMC 14th 우리 웹 팀 전체
 - 🎄 **일시** : 2023.11.25 ~ 12.30 12:00 - 14:00 (주 1회 2시간, 총 4회 예정)
@@ -14,10 +14,10 @@
 ## 🎁 과제 요구사항
 
 - 🎄 [Figma 참고](https://www.figma.com/file/nWK5hwJfj70Su98vJrVRws/CMC-14th-Team-Web?type=design&node-id=0%3A1&mode=design&t=1TMCspkqHMmUtZJH-1)
-
 - 1주차 과제: TODO 앱 만들기
 - 2주차 과제: 사진첩 앱 만들기
 - 3주차 과제: Youtube 앱 만들기
+- 4주차 과제: 지도 앱 만들기
 
 ## 🎁 트러블 슈팅 문서
 
@@ -80,14 +80,14 @@ ex) [1주차] 제인 과제 제출합니다
 | ----- | -------- | ------ | ------ | ---- | ---- | --- | --- | ----- | ---- |
 | Week1 | 23.12.02 | ☑️     | ☑️     | ☑️   | ☑️   | ☑️  | ☑️  | ☑️    | ☑️   |
 | Week2 | 23.12.09 | ☑️     | ☑️     | ☑️   | ☑️   | ☑️  | ☑️  | △     | ☑️   |
-| Week3 | 23.12.16 |        |        |      |      |     |     |       |      |
+| Week3 | 23.12.16 | ☑️     | ☑️     | ☑️   | ☑️   | ☑️  | ☑️  | ☑️    | ☑️   |
 | Week4 | 23.12.30 |        |        |      |      |     |     |       |      |
 
 ## 🎁 코드리뷰 파트너
 
-| 주차  | TeamA         | TeamB          | TeamC        | TeamD        |
-| ----- | ------------- | -------------- | ------------ | ------------ |
-| Week1 | Breeze & Lany | Eurali & Sarah | MJ & Lisa    | Od & Zero    |
-| Week2 | Breeze & Lisa | Eurali & Od    | MJ & Lany    | Sarah & Zero |
-| Week3 | Breeze & Od   | Eurali & Lany  | Lisa & Sarah | MJ & Zero    |
-| Week4 |               |                |              |              |
+| 주차  | TeamA          | TeamB          | TeamC        | TeamD        |
+| ----- | -------------- | -------------- | ------------ | ------------ |
+| Week1 | Breeze & Lany  | Eurali & Sarah | MJ & Lisa    | Od & Zero    |
+| Week2 | Breeze & Lisa  | Eurali & Od    | MJ & Lany    | Sarah & Zero |
+| Week3 | Breeze & Od    | Eurali & Lany  | Lisa & Sarah | MJ & Zero    |
+| Week4 | Breeze & Sarah | Lany & Od      | Lisa & Zero  | MJ & Eurali  |
