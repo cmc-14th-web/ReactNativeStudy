@@ -29,3 +29,4 @@ tsconfig.node.json
 package.json
 package-lock.json
 .eslintrc.cjs
+.env
