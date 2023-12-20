@@ -5,9 +5,10 @@
  * @format
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import type {PropsWithChildren} from 'react';
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -16,6 +17,7 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {check, PERMISSIONS, request} from 'react-native-permissions';
 
 import {
   Colors,
@@ -56,6 +58,25 @@ function Section({children, title}: SectionProps): JSX.Element {
 }
 
 function App(): JSX.Element {
+  // 앱 최초 진입 시 권한 부여 알림 뜨게하는 예제
+
+  useEffect(() => {
+    check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
+      .then(result => {
+        if (result === 'denied') {
+          request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        } else if (result === 'blocked') {
+          Alert.alert('위치 권한을 허용해주세요.');
+        }
+
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
