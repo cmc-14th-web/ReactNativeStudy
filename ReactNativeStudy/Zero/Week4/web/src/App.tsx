@@ -1,8 +1,9 @@
+import Map from "./Map";
+import "./App.css";
+
 function App() {
   return (
-    <div>
-      hi
-    </div>
+    <Map />
   )
 }
 
