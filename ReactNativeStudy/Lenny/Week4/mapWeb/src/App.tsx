@@ -26,8 +26,13 @@ export default function App() {
     });
 
     const marker = new naver.maps.Marker({
-      position: new naver.maps.LatLng(latitude, longitude),
+      position: center,
       map: map,
+      icon: {
+        url: "../public/marker.svg",
+        origin: new naver.maps.Point(0, 0),
+        anchor: new naver.maps.Point(10, 10), // 이미지의 중심점으로 설정
+      },
     });
 
     map;
