@@ -17,5 +17,16 @@
     "metro.config.js",
     "jest.config.js"
   ],
+  "paths": {
+    "@assets/*": ["src/assets/*"],
+    "@components/*": ["src/components/*"],
+    "@constants/*": ["src/constants/*"],
+    "@libs/*": ["src/libs/*"],
+    "@navigators/*": ["src/navigators/*"],
+    "@screens/*": ["src/screens/*"],
+    "@styles/*": ["src/styles/*"],
+    "@types/*": ["src/types/*"],
+    "@utils/*": ["src/utils/*"]
+  },
   "extends": "@tsconfig/react-native/tsconfig.json"
 }
