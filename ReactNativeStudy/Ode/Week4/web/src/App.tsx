@@ -1,10 +1,9 @@
-import React from "react";
-import MapContainer from "./map/MapContainer";
+import Map from "./map/Map";
 
 function App() {
   return (
-    <div>
-      <MapContainer />;
+    <div style={{ height: "100vh", width: "100vw" }}>
+      <Map />
     </div>
   );
 }

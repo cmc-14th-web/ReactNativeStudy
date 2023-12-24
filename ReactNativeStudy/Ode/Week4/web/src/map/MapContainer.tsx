@@ -8,7 +8,7 @@ type MapData = {
 };
 
 const MapContainer = (props: IMapProps) => {
-  const [center, setCenter] = useState<MapData>(props.initialCenter);
+  const [center, setCenter] = useState<MapData | undefined>(props.initialCenter);
   console.log(center);
 
   useEffect(() => {
