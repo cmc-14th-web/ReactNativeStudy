@@ -2,20 +2,39 @@ import { useEffect, useState } from "react";
 import { Map, GoogleApiWrapper, IMapProps } from "google-maps-react";
 import { key } from "./key";
 
+type MapData = {
+  lat: number;
+  lng: number;
+};
+
 const MapContainer = (props: IMapProps) => {
-  const [center, setCenter] = useState(props.initialCenter);
+  const [center, setCenter] = useState<MapData>(props.initialCenter);
+  console.log(center);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       try {
-        const mapData: MapData = JSON.parse(event.data);
-        setCenter({ lat: mapData.lat, lng: mapData.lng });
+        const parsedData = JSON.parse(event.data);
+        switch (parsedData?.type) {
+          case "init": {
+            setCenter(parsedData.data);
+            break;
+          }
+          case "location": {
+            setCenter(parsedData.data);
+            break;
+          }
+          default: {
+            return;
+          }
+        }
       } catch (error) {
-        console.error("Error parsing message from React Native", error);
+        console.error(error);
       }
     };
 
     window.addEventListener("message", handleMessage);
+
     return () => {
       window.removeEventListener("message", handleMessage);
     };
@@ -27,12 +46,3 @@ const MapContainer = (props: IMapProps) => {
 export default GoogleApiWrapper({
   apiKey: key,
 })(MapContainer);
-
-type MapData = {
-  lat: number;
-  lng: number;
-  initialCenter: {
-    lat: number;
-    lng: number;
-  };
-};
