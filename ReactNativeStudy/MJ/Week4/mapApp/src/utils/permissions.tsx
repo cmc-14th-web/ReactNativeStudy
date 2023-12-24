@@ -6,7 +6,6 @@ export async function requestLocationPermissions() {
     PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
     PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
   ]);
-  console.log(PermissionStatus);
   if (
     PermissionStatus[PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION] !==
       RESULTS.GRANTED &&
