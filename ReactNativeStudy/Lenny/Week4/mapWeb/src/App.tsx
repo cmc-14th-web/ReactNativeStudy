@@ -21,12 +21,14 @@ export default function App() {
   const [map, setMap] = useState<naver.maps.Map>();
   const [marker, setMarker] = useState<naver.maps.Marker>();
   const [centerLocation, setCenterLocation] = useState<naver.maps.LatLng>(new naver.maps.LatLng(37.3595704, 127.105399));
+  const [activatedFavorite, setActivatedFavorite] = useState<boolean>(false);
+
+  const favoriteButtonState = `${activatedFavorite ? "activated" : "deactivated"}-favorite`;
 
   const initMap = (latitude: number, longitude: number) => {
     const center: naver.maps.LatLng = new naver.maps.LatLng(latitude, longitude);
     const naverMap: naver.maps.Map = new naver.maps.Map("map", {
       center: center,
-      zoomControl: true,
       zoom: 16,
     });
 
@@ -45,9 +47,10 @@ export default function App() {
   };
 
   if (map) {
-    naver.maps.Event.addListener(map, "click", (e) => {
+    const click = naver.maps.Event.addListener(map, "click", (e) => {
       marker?.setPosition(e.coord);
       marker?.setIcon(clickedLocation);
+      naver.maps.Event.removeListener(click);
     });
   }
 
@@ -78,6 +81,10 @@ export default function App() {
 
   return (
     <div id="map">
+      <button className={`${favoriteButtonState}-button`} onClick={() => setActivatedFavorite(!activatedFavorite)}>
+        <img className="favorite-img" src={`../public/assets/${favoriteButtonState}.svg`} alt="즐겨찾기" />
+        즐겨찾기
+      </button>
       <button className="current-location-button" onClick={setMapCetner}>
         <img src="../public/assets/my-location.svg" alt="내 위치" />
       </button>
