@@ -1,12 +1,12 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {ParamListBase, RouteProp} from '@react-navigation/native';
 
 import {tabBarLabel, tabMenu} from '../constants/navigatorMenu';
-import {ParamListBase, RouteProp} from '@react-navigation/native';
 import {BottomTabParamList} from '../types/navigator';
+import {typoStyles} from '../styles/typo';
 import Home from '../screens/Home';
 import Favorite from '../screens/Favorite';
 import SvgIcons from '../components/SvgIcons';
-import {typoStyles} from '../styles/typo';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 

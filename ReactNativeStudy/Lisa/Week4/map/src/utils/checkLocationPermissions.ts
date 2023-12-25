@@ -3,8 +3,9 @@ import {
   request,
   requestMultiple,
 } from 'react-native-permissions';
-import {permissions} from '../constants/permission';
 import {Alert} from 'react-native';
+
+import {permissions} from '../constants/permission';
 
 export const checkLocationPermissions = () => {
   checkMultiple([

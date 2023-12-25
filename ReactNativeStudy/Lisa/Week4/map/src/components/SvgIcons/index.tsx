@@ -1,4 +1,5 @@
 import {Path, Svg, SvgProps} from 'react-native-svg';
+
 import {KeyOfPalette, theme} from '../../styles/theme';
 import {svgIconPath} from '../../constants/svgIconPath';
 
@@ -18,10 +19,7 @@ const SvgIcons = ({
 }: SvgIconsProps) => {
   return (
     <Svg {...props} width={width} height={height} viewBox="0 0 24 24">
-      <Path
-        d={svgIconPath[iconVariant]}
-        fill={theme.palette[fill]}
-      />
+      <Path d={svgIconPath[iconVariant]} fill={theme.palette[fill]} />
     </Svg>
   );
 };
