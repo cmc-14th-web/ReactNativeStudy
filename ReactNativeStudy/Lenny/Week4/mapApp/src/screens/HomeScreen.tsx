@@ -1,20 +1,15 @@
 import {WEB_URI} from '@env';
-import Geolocation from '@react-native-community/geolocation';
-import React, {useEffect, useRef} from 'react';
-import {
-  Dimensions,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {Dimensions, SafeAreaView, StyleSheet} from 'react-native';
 import WebView from 'react-native-webview';
 import sendCurrentLocation from '../utils/sendCurrentLocation';
+import Loading from '../components/Loading';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function HomeScreen() {
   const currentRef = useRef<WebView>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const sendLocation = setTimeout(() => {
@@ -23,13 +18,19 @@ export default function HomeScreen() {
     }, 1000);
   }, []);
 
+  const handleOnMessage = (e: any) => {
+    const loadingState = JSON.parse(e.nativeEvent.data);
+    setLoading(loadingState.loading);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
+      {loading && <Loading />}
       <WebView
         ref={currentRef}
-        style={styles.webview}
+        style={loading ? styles.loading : styles.webview}
         source={{uri: `${WEB_URI}`}}
-        onMessage={e => console.log(e.nativeEvent.data)}
+        onMessage={handleOnMessage}
         scrollEnabled={false}
       />
     </SafeAreaView>
@@ -39,6 +40,9 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  loading: {
+    display: 'none',
   },
   webview: {
     flex: 1,
