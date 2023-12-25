@@ -70,7 +70,11 @@ export default function App() {
     window.removeEventListener("message", (e) => console.log(e));
   }
 
-  const setMapCetner = () => map?.setCenter(centerLocation);
+  const setMapCetner = () => {
+    map?.setCenter(centerLocation);
+    marker?.setPosition(centerLocation);
+    marker?.setIcon(myLocation);
+  };
 
   return (
     <div id="map">
