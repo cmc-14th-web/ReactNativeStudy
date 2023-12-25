@@ -2336,6 +2336,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/geolocation@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@react-native-community/geolocation@npm:3.1.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: defc42ed11d0a3cc697d5db56c17cc19af2ca35b32674dc7323b40a458f5066b051191e5dc58c367f2643a0ed70b47e8eb2ac87ab1566e642ca0cbab1a1f09a9
+  languageName: node
+  linkType: hard
+
 "@react-native-community/masked-view@npm:^0.1.11":
   version: 0.1.11
   resolution: "@react-native-community/masked-view@npm:0.1.11"
@@ -7199,6 +7209,7 @@ __metadata:
     "@babel/core": ^7.20.0
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
+    "@react-native-community/geolocation": ^3.1.0
     "@react-native-community/masked-view": ^0.1.11
     "@react-native/eslint-config": ^0.72.2
     "@react-native/metro-config": ^0.72.11
