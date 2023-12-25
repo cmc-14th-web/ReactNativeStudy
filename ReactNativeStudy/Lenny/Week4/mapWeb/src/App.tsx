@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { clickedLocation, myLocation } from "./constants/icon";
 
 declare global {
   interface Window {
@@ -17,33 +18,38 @@ interface CoordinationProps {
 }
 
 export default function App() {
-  const [naverMap, setNaverMap] = useState<naver.maps.Map>();
+  const [map, setMap] = useState<naver.maps.Map>();
+  const [marker, setMarker] = useState<naver.maps.Marker>();
   const [centerLocation, setCenterLocation] = useState<naver.maps.LatLng>(new naver.maps.LatLng(37.3595704, 127.105399));
 
   const initMap = (latitude: number, longitude: number) => {
     const center: naver.maps.LatLng = new naver.maps.LatLng(latitude, longitude);
-    const map: naver.maps.Map = new naver.maps.Map("map", {
+    const naverMap: naver.maps.Map = new naver.maps.Map("map", {
       center: center,
       zoomControl: true,
       zoom: 16,
     });
 
-    const marker = new naver.maps.Marker({
+    const myLocationMarker = new naver.maps.Marker({
       position: center,
-      map: map,
-      icon: {
-        url: "../public/assets/marker.svg",
-        origin: new naver.maps.Point(0, 0),
-        anchor: new naver.maps.Point(10, 10), // 이미지의 중심점으로 설정
-      },
+      map: naverMap,
+      icon: myLocation,
     });
 
-    setNaverMap(map);
+    setMap(naverMap);
+    setMarker(myLocationMarker);
     setCenterLocation(center);
 
-    map;
-    marker;
+    naverMap;
+    myLocationMarker;
   };
+
+  if (map) {
+    naver.maps.Event.addListener(map, "click", (e) => {
+      marker?.setPosition(e.coord);
+      marker?.setIcon(clickedLocation);
+    });
+  }
 
   // web으로 확인할 때 사용
   // useEffect(() => {
@@ -59,12 +65,12 @@ export default function App() {
       const currentLocation: CoordinationProps = JSON.parse(e.data);
       const { latitude: currentLatitude, longitude: currentLongitude } = currentLocation.coords;
       initMap(currentLatitude, currentLongitude);
-      window.ReactNativeWebView.postMessage(JSON.stringify({ loading: false }));
+      window.ReactNativeWebView.postMessage(JSON.stringify({ type: "init", loading: false }));
     });
     window.removeEventListener("message", (e) => console.log(e));
   }
 
-  const setMapCetner = () => naverMap?.setCenter(centerLocation);
+  const setMapCetner = () => map?.setCenter(centerLocation);
 
   return (
     <div id="map">
