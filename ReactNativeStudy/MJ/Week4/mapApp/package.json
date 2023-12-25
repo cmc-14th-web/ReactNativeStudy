@@ -14,7 +14,8 @@
     "react-native": "0.73.1",
     "react-native-geolocation-service": "^5.3.1",
     "react-native-permissions": "^4.0.1",
-    "react-native-webview": "^13.6.3"
+    "react-native-webview": "^13.6.3",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
