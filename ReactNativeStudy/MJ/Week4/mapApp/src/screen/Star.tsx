@@ -2,7 +2,7 @@ import React from 'react';
 import {Text} from 'react-native';
 import ScreenContainer from '../components/ScreenContainer';
 
-const Setting = () => {
+const Star = () => {
   return (
     <ScreenContainer>
       <Text>test</Text>
@@ -10,4 +10,4 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+export default Star;
