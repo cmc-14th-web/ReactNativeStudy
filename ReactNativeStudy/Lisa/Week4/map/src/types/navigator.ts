@@ -2,7 +2,7 @@ export type StackParamList = {
   BottomTabNavigator: undefined;
 };
 
-export type TabParamList = {
+export type BottomTabParamList = {
   Home: undefined;
-  Setting: undefined;
+  Favorite: undefined;
 };

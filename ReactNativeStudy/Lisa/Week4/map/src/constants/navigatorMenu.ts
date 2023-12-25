@@ -4,5 +4,10 @@ export const enum stackMenu {
 
 export const enum tabMenu {
   Home = 'Home',
-  Setting = 'Setting',
+  Favorite = 'Favorite',
+}
+
+export const enum tabBarLabel {
+  Home = '홈',
+  Favorite = '즐겨찾기'
 }

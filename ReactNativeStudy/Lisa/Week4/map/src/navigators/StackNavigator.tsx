@@ -6,9 +6,14 @@ import TabNavigator from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
+const screenOptions = {
+  headerShown: false,
+  headerShadowVisible: false,
+};
+
 const StackNavigator = () => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
         name={stackMenu.BottomTabNavigator}
         component={TabNavigator}

@@ -1,7 +1,7 @@
 import {View} from 'react-native';
 
-const Setting = () => {
+const Favorite = () => {
   return <View></View>;
 };
 
-export default Setting;
+export default Favorite;
