@@ -47,10 +47,9 @@ export default function App() {
   };
 
   if (map) {
-    const click = naver.maps.Event.addListener(map, "click", (e) => {
+    naver.maps.Event.addListener(map, "click", (e) => {
       marker?.setPosition(e.coord);
       marker?.setIcon(clickedLocation);
-      naver.maps.Event.removeListener(click);
     });
   }
 
