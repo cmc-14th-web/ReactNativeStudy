@@ -3,7 +3,7 @@ import WebView from 'react-native-webview';
 import Geolocation from '@react-native-community/geolocation';
 import {useCallback, useEffect, useRef} from 'react';
 
-import {windowWidth, windowHeight} from '../../constants/screenSize';
+import {windowWidth, windowHeight} from '../constants/screenSize';
 
 const Map = () => {
   const webViewRef = useRef<WebView>(null);
