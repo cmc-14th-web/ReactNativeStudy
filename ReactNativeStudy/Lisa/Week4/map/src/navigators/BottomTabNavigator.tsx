@@ -1,8 +1,8 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ParamListBase, RouteProp} from '@react-navigation/native';
+import {RouteProp} from '@react-navigation/native';
 
 import {tabBarLabel, tabMenu} from '../constants/navigatorMenu';
-import {BottomTabParamList} from '../models/navigator';
+import {BottomTabParamList, BottomTabScreenName} from '../models/navigator';
 import {typoStyles} from '../styles/typo';
 import Home from '../screens/Home';
 import Favorite from '../screens/Favorite';
@@ -25,7 +25,11 @@ const getTabBarIcon = (routeName: string, focused: boolean) => {
   );
 };
 
-const screenOptions = ({route}: {route: RouteProp<ParamListBase, string>}) => ({
+const screenOptions = ({
+  route,
+}: {
+  route: RouteProp<BottomTabParamList, BottomTabScreenName>;
+}) => ({
   tabBarIcon: ({focused}: {focused: boolean}) =>
     getTabBarIcon(route.name, focused),
   headerShown: false,
