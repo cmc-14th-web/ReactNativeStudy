@@ -2,7 +2,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {ParamListBase, RouteProp} from '@react-navigation/native';
 
 import {tabBarLabel, tabMenu} from '../constants/navigatorMenu';
-import {BottomTabParamList} from '../types/navigator';
+import {BottomTabParamList} from '../models/navigator';
 import {typoStyles} from '../styles/typo';
 import Home from '../screens/Home';
 import Favorite from '../screens/Favorite';

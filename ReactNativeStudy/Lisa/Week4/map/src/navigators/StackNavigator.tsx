@@ -1,7 +1,7 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {stackMenu} from '../constants/navigatorMenu';
-import {StackParamList} from '../types/navigator';
+import {StackParamList} from '../models/navigator';
 import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator<StackParamList>();
