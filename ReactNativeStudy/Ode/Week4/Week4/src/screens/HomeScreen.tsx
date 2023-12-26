@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import Container from '../components/Container';
 import WebView from 'react-native-webview';
-import {TouchableOpacity, Text} from 'react-native';
 import useLocationState from '../libraries/recoil/useLocationState';
 
 export default function HomeScreen() {
@@ -10,19 +9,13 @@ export default function HomeScreen() {
 
   useEffect(() => {
     async function initializeData() {
-      postMessage({type: 'init', data: location});
+      location;
+      postMessage({type: 'init', data: {lat: 39, lng: 127}});
     }
 
     initializeData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  async function sendDataToWeb() {
-    postMessage({
-      type: 'location',
-      data: {lat: 39, lng: 127},
-    });
-  }
 
   async function postMessage(message: {type: string; data: any}) {
     try {
@@ -38,7 +31,7 @@ export default function HomeScreen() {
     <Container>
       <WebView
         ref={webViewRef}
-        source={{uri: 'http://172.30.1.100:3000'}}
+        source={{uri: 'http://172.30.1.69:3000'}}
         injectedJavaScript={`(function() {
           var originalConsoleLog = console.log;
           console.log = function() {
@@ -52,10 +45,8 @@ export default function HomeScreen() {
             event.nativeEvent.data,
           );
         }}
+        onLoadStart={() => postMessage({type: 'init', data: location})}
       />
-      <TouchableOpacity onPress={sendDataToWeb}>
-        <Text>웹뷰로 데이터 전송</Text>
-      </TouchableOpacity>
     </Container>
   );
 }

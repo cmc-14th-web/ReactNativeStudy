@@ -15,6 +15,7 @@ export default function useLocationState() {
 
       const initialData: MapData = {lat, lng, initialCenter: {lat, lng}};
       setLocation(initialData);
+      console.log('current loc', initialData);
     }
 
     initialiseLocation();

@@ -8,8 +8,7 @@ type MapData = {
 };
 
 const MapContainer = (props: IMapProps) => {
-  const [center, setCenter] = useState<MapData | undefined>(props.initialCenter);
-  console.log(center);
+  const [center, setCenter] = useState<MapData | undefined>(undefined);
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -18,6 +17,7 @@ const MapContainer = (props: IMapProps) => {
         switch (parsedData?.type) {
           case "init": {
             setCenter(parsedData.data);
+            console.log("init", center);
             break;
           }
           case "location": {
@@ -38,7 +38,11 @@ const MapContainer = (props: IMapProps) => {
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, []);
+  }, [center]);
+
+  if (!center) {
+    return null;
+  }
 
   return <Map google={props.google} center={center} />;
 };

@@ -13,11 +13,16 @@ export default function Map() {
     googleMapsApiKey: key,
   });
 
-  const [currentLocation, setCurrentLocation] = useState<{
-    lat: number;
-    lng: number;
-  }>({ lat: 0, lng: 0 });
-  console.log(currentLocation);
+  const [currentLocation, setCurrentLocation] = useState<
+    | {
+        lat: number;
+        lng: number;
+      }
+    | undefined
+  >(() => {
+    const savedLocation = localStorage.getItem("currentLocation");
+    return savedLocation ? JSON.parse(savedLocation) : undefined;
+  });
 
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
@@ -26,6 +31,8 @@ export default function Map() {
         switch (parsedData?.type) {
           case "init": {
             setCurrentLocation(parsedData.data);
+            localStorage.setItem("currentLocation", JSON.stringify(parsedData.data));
+            console.log("init", parsedData.data);
             break;
           }
           case "location": {
@@ -42,23 +49,27 @@ export default function Map() {
     };
 
     window.addEventListener("message", handleMessage);
-    console.log("mount");
+
+    // Load the initial location from local storage
+    const savedLocation = localStorage.getItem("currentLocation");
+    if (savedLocation) {
+      setCurrentLocation(JSON.parse(savedLocation));
+    }
+
     return () => {
       window.removeEventListener("message", handleMessage);
     };
   }, []);
 
-  return isLoaded ? (
+  return isLoaded && currentLocation ? (
     <GoogleMap mapContainerStyle={containerStyle} center={currentLocation} zoom={10}>
       <MarkerF
         position={currentLocation}
         icon={{
-          url: require("./map.svg"),
-          scaledSize: new window.google.maps.Size(32, 32),
+          url: require("./map.svg").default,
+          scaledSize: new window.google.maps.Size(46, 46),
         }}
       />
     </GoogleMap>
-  ) : (
-    <></>
-  );
+  ) : null;
 }
