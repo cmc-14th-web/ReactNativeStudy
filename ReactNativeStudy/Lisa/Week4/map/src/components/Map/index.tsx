@@ -9,20 +9,28 @@ const Map = () => {
   const webViewRef = useRef<WebView>(null);
 
   const sendCurrentPosition = useCallback(() => {
-    Geolocation.getCurrentPosition(position => {
-      const {coords} = position;
-      const message = {
-        type: 'location',
-        payload: {
-          latitude: coords.latitude,
-          longitude: coords.longitude,
-        },
-      };
+    Geolocation.getCurrentPosition(
+      position => {
+        const {coords} = position;
+        const message = {
+          type: 'location',
+          payload: {
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+          },
+        };
 
-      setInterval(() => {
-        webViewRef.current?.postMessage(JSON.stringify(message));
-      }, 1000);
-    });
+        setInterval(() => {
+          webViewRef.current?.postMessage(JSON.stringify(message));
+        }, 5000);
+      },
+      error => console.log(error),
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 10000,
+      },
+    );
   }, []);
 
   useEffect(() => {
