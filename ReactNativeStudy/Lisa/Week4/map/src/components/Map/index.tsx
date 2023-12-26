@@ -1,12 +1,40 @@
 import {StyleSheet} from 'react-native';
 import WebView from 'react-native-webview';
+import Geolocation from '@react-native-community/geolocation';
+import {useCallback, useEffect, useRef} from 'react';
 
 import {windowWidth, windowHeight} from '../../constants/screenSize';
 
 const Map = () => {
+  const webViewRef = useRef<WebView>(null);
+
+  const sendCurrentPosition = useCallback(() => {
+    Geolocation.getCurrentPosition(position => {
+      const {coords} = position;
+      const message = {
+        type: 'location',
+        payload: {
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+        },
+      };
+
+      setInterval(() => {
+        webViewRef.current?.postMessage(JSON.stringify(message));
+      }, 1000);
+    });
+  }, []);
+
+  useEffect(() => {
+    sendCurrentPosition();
+  }, []);
+
   return (
     <WebView
-      source={{uri: 'https://cmc-map.vercel.app/'}}
+      ref={webViewRef}
+      source={{
+        uri: 'https://cmc-map.vercel.app/',
+      }}
       style={mapStyles.webview}
     />
   );
