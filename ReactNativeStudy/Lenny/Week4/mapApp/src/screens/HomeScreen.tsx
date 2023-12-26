@@ -12,9 +12,8 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const sendLocation = setTimeout(() => {
+    setTimeout(() => {
       sendCurrentLocation(currentRef);
-      clearInterval(sendLocation);
     }, 1000);
   }, []);
 
