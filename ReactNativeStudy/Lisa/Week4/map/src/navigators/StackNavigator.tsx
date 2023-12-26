@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {stackMenu} from '../constants/navigatorMenu';
 import {StackParamList} from '../types/navigator';
-import TabNavigator from './BottomTabNavigator';
+import BottomTabNavigator from './BottomTabNavigator';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
@@ -16,7 +16,7 @@ const StackNavigator = () => {
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
         name={stackMenu.BottomTabNavigator}
-        component={TabNavigator}
+        component={BottomTabNavigator}
       />
     </Stack.Navigator>
   );
