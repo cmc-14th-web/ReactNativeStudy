@@ -1,8 +1,37 @@
-type FavoriteButtonProps = { onClick: () => void };
+import { Location } from "./map/Map";
 
-export default function FavoriteButton({ onClick }: FavoriteButtonProps) {
+declare global {
+  interface Window {
+    ReactNativeWebview: {
+      postMessage: any;
+    };
+  }
+}
+
+type FavoriteButtonProps = {
+  location: Location | undefined;
+};
+
+export default function FavoriteButton({ location }: FavoriteButtonProps) {
+  const handleClick = () => {
+    console.log(location);
+    if (location) {
+      const message = JSON.stringify({
+        type: "favoriteLocation",
+        data: location,
+      });
+      // Post the message to the React Native WebView
+      if (window.ReactNativeWebview) {
+        console.log("hi");
+        window.ReactNativeWebview.postMessage(message);
+      } else {
+        console.error("The React Native WebView environment is not available.");
+      }
+    }
+  };
+
   return (
-    <button onClick={onClick} style={buttonStyle}>
+    <button onClick={handleClick} style={buttonStyle} id="favoriteButton">
       <div style={iconStyle}>
         {/* You can use an img tag or an svg tag here depending on what your icon is */}
         <svg

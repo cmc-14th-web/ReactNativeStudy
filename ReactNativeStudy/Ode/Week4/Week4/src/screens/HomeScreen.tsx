@@ -27,24 +27,35 @@ export default function HomeScreen() {
     }
   }
 
+  const eventScript = `function sendFavoriteClicked() {
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify(
+          {
+          type: 'favoriteLocation',
+          data: '${JSON.stringify(location)}'
+        },
+      )
+    );
+  }
+  window.addEventListener("click", sendFavoriteClicked);
+  true;`;
+
   return (
     <Container>
       <WebView
         ref={webViewRef}
         source={{uri: 'http://172.30.1.69:3000'}}
-        injectedJavaScript={`(function() {
-          var originalConsoleLog = console.log;
-          console.log = function() {
-            originalConsoleLog.apply(console, arguments);
-            window.ReactNativeWebView.postMessage(JSON.stringify(arguments));
-          };
-        })();`}
         onMessage={event => {
-          console.debug(
-            'success to send current location',
-            event.nativeEvent.data,
-          );
+          console.log(event.nativeEvent.data);
+          const message = JSON.parse(event.nativeEvent.data);
+          switch (message?.type) {
+            case 'favoriteLocation': {
+              const loc = message.data;
+              console.log('favoriteLocation', loc);
+            }
+          }
         }}
+        onLoad={() => webViewRef.current?.injectJavaScript(eventScript)}
         onLoadStart={() => postMessage({type: 'init', data: location})}
       />
     </Container>

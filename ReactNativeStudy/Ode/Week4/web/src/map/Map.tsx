@@ -2,14 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { key } from "./key";
 import ReactDOM from "react-dom";
-import FavoriteButton from "./FavoriteButton";
+import FavoriteButton from "../FavoriteButton";
 
 const containerStyle = {
   width: "100%",
   height: "100%",
 };
 
-type Location = {
+export type Location = {
   lat: number;
   lng: number;
 };
@@ -22,7 +22,7 @@ export default function Map() {
 
   const [currentLocation, setCurrentLocation] = useState<Location | undefined>(() => {
     const savedLocation = localStorage.getItem("currentLocation");
-    return savedLocation ? JSON.parse(savedLocation) : undefined;
+    return savedLocation ? (JSON.parse(savedLocation) as Location) : undefined;
   });
 
   useEffect(() => {
@@ -63,16 +63,24 @@ export default function Map() {
     }
   }, []);
 
-  const onLoad = useCallback((mapInstance: google.maps.Map) => {
-    const controlButton = document.createElement("div");
-    ReactDOM.render(<FavoriteButton onClick={onFavoriteClick} />, controlButton);
-    mapInstance.controls[window.google.maps.ControlPosition.LEFT_TOP].push(controlButton);
-  }, []);
+  // const onMessageEvent = (e: MessageEvent) => {
+  //   e.stopPropagation();
+  //   console.log(String(e.data));
+  // };
 
-  function onFavoriteClick() {
-    console.log("Favorite button clicked");
-    // You can add your logic here, for example, saving the current location as favorite
-  }
+  // useEffect(() => {
+  //   window.addEventListener("message", onMessageEvent, { capture: true });
+  //   return () => window.removeEventListener("message", onMessageEvent);
+  // }, []);
+
+  const onLoad = useCallback(
+    (mapInstance: google.maps.Map) => {
+      const controlButton = document.createElement("div");
+      ReactDOM.render(<FavoriteButton location={currentLocation} />, controlButton);
+      mapInstance.controls[window.google.maps.ControlPosition.LEFT_TOP].push(controlButton);
+    },
+    [currentLocation]
+  );
 
   return isLoaded && currentLocation ? (
     <GoogleMap
