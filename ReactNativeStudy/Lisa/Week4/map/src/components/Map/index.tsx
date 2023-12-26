@@ -22,7 +22,7 @@ const Map = () => {
 
         setInterval(() => {
           webViewRef.current?.postMessage(JSON.stringify(message));
-        }, 5000);
+        }, 2000);
       },
       error => console.log(error),
       {
