@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { key } from "./key";
+import ReactDOM from "react-dom";
+import FavoriteButton from "./FavoriteButton";
 
 const containerStyle = {
   width: "100%",
   height: "100%",
+};
+
+type Location = {
+  lat: number;
+  lng: number;
 };
 
 export default function Map() {
@@ -13,13 +20,7 @@ export default function Map() {
     googleMapsApiKey: key,
   });
 
-  const [currentLocation, setCurrentLocation] = useState<
-    | {
-        lat: number;
-        lng: number;
-      }
-    | undefined
-  >(() => {
+  const [currentLocation, setCurrentLocation] = useState<Location | undefined>(() => {
     const savedLocation = localStorage.getItem("currentLocation");
     return savedLocation ? JSON.parse(savedLocation) : undefined;
   });
@@ -50,19 +51,36 @@ export default function Map() {
 
     window.addEventListener("message", handleMessage);
 
-    // Load the initial location from local storage
-    const savedLocation = localStorage.getItem("currentLocation");
-    if (savedLocation) {
-      setCurrentLocation(JSON.parse(savedLocation));
-    }
-
     return () => {
       window.removeEventListener("message", handleMessage);
     };
   }, []);
 
+  useEffect(() => {
+    const savedLocation = localStorage.getItem("currentLocation");
+    if (savedLocation) {
+      setCurrentLocation(JSON.parse(savedLocation));
+    }
+  }, []);
+
+  const onLoad = useCallback((mapInstance: google.maps.Map) => {
+    const controlButton = document.createElement("div");
+    ReactDOM.render(<FavoriteButton onClick={onFavoriteClick} />, controlButton);
+    mapInstance.controls[window.google.maps.ControlPosition.LEFT_TOP].push(controlButton);
+  }, []);
+
+  function onFavoriteClick() {
+    console.log("Favorite button clicked");
+    // You can add your logic here, for example, saving the current location as favorite
+  }
+
   return isLoaded && currentLocation ? (
-    <GoogleMap mapContainerStyle={containerStyle} center={currentLocation} zoom={10}>
+    <GoogleMap
+      options={{ disableDefaultUI: true }}
+      mapContainerStyle={containerStyle}
+      center={currentLocation}
+      zoom={10}
+      onLoad={onLoad}>
       <MarkerF
         position={currentLocation}
         icon={{
