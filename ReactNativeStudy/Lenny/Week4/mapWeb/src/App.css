@@ -9,12 +9,18 @@ body {
 
 .current-location-button,
 .activated-favorite-button,
-.deactivated-favorite-button {
+.deactivated-favorite-button,
+.add-favorite-button {
   position: fixed;
-  left: 15px;
   z-index: 10;
   align-items: center;
   display: flex;
+}
+
+.current-location-button,
+.activated-favorite-button,
+.deactivated-favorite-button {
+  left: 15px;
 }
 
 .current-location-button {
@@ -44,6 +50,15 @@ body {
 .activated-favorite-button {
   background-color: #5061ff;
   color: #ffffff;
+}
+
+.add-favorite-button {
+  top: 15px;
+  right: 15px;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0px;
+  border: 0px;
+  border-radius: 100%;
 }
 
 .favorite-img {

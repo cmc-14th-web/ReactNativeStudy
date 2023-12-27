@@ -1,11 +1,17 @@
-export const clickedLocation = {
-  url: "../public/assets/clicked-location.svg",
+export const clickedLocationOptions = {
+  url: "../assets/clicked-location.svg",
   origin: new naver.maps.Point(0, 0),
   anchor: new naver.maps.Point(23, 46), // 이미지의 중심점으로 설정
 };
 
-export const myLocation = {
-  url: "../public/assets/marker.svg",
+export const myLocationOptions = {
+  url: "../assets/marker.svg",
   origin: new naver.maps.Point(0, 0),
   anchor: new naver.maps.Point(10, 10), // 이미지의 중심점으로 설정
+};
+
+export const favoriteMarkerOptions = {
+  url: "../assets/deactivated-favorite.svg",
+  origin: new naver.maps.Point(0, 0),
+  anchor: new naver.maps.Point(8, 8), // 이미지의 중심점으로 설정
 };
