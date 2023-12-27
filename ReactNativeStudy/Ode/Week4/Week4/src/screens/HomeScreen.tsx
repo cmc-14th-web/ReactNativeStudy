@@ -2,13 +2,15 @@ import React, {useEffect, useRef} from 'react';
 import Container from '../components/Container';
 import WebView from 'react-native-webview';
 import useLocationState from '../libraries/recoil/hooks/useLocationState';
-import useFavoritesState from '../libraries/recoil/hooks/useFavoritesState';
+import useBookmarkState from '../libraries/recoil/hooks/useBookmarkState';
 import {Location} from '../types/location';
 
 export default function HomeScreen() {
   const {location} = useLocationState();
-  const {addFavorites} = useFavoritesState();
+  const {addBookmarks} = useBookmarkState();
+
   const webViewRef = useRef<WebView>(null);
+
   useEffect(() => {
     async function initializeData() {
       location;
@@ -40,7 +42,7 @@ export default function HomeScreen() {
           switch (message?.type) {
             case 'favoriteLocation': {
               console.debug(message.data);
-              addFavorites(message.data);
+              addBookmarks(message.data);
             }
           }
         }}

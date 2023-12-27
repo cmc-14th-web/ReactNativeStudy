@@ -1,16 +1,17 @@
 import React from 'react';
 import Container from '../components/Container';
 import {Text} from 'react-native';
-import useFavoritesState from '../libraries/recoil/hooks/useFavoritesState';
+import useBookmarkState from '../libraries/recoil/hooks/useBookmarkState';
 
 export default function BookmarksScreen() {
-  const {favorites} = useFavoritesState();
+  const {bookmarks} = useBookmarkState();
+
   return (
     <Container>
       <Text>북마크</Text>
-      {favorites.map((favorite, index) => (
+      {bookmarks.map((bookmark, index) => (
         <Text key={index}>
-          {favorite.lat}, {favorite.lng}
+          {bookmark.lat}, {bookmark.lng}
         </Text>
       ))}
     </Container>
