@@ -9,7 +9,7 @@ const Map = () => {
   const webViewRef = useRef<WebView>(null);
 
   const sendCurrentPosition = useCallback(() => {
-    Geolocation.getCurrentPosition(
+    Geolocation.watchPosition(
       position => {
         const {coords} = position;
         const message = {
@@ -20,9 +20,7 @@ const Map = () => {
           },
         };
 
-        setInterval(() => {
-          webViewRef.current?.postMessage(JSON.stringify(message));
-        }, 1000);
+        webViewRef.current?.postMessage(JSON.stringify(message));
       },
       error => console.log(error),
       {
