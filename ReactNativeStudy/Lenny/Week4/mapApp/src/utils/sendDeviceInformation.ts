@@ -7,7 +7,7 @@ const sendDeviceInformation = (
 ) => {
   Geolocation.getCurrentPosition(info =>
     currentRef.current?.postMessage(
-      JSON.stringify({...info, topInset: topInset}),
+      JSON.stringify({type: 'initialRequest', ...info, topInset: topInset}),
     ),
   );
 };

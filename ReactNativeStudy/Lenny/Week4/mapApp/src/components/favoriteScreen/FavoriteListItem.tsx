@@ -1,35 +1,25 @@
 import React from 'react';
-import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import palette from '../../styles/palette';
 import {useStore} from '../../store/store';
 import DeleteSvg from '../../assets/delete.svg';
-
-interface FavoriteListItemProps {
-  data: {
-    index: number;
-    item: {
-      address: string;
-      latitude: number;
-      longitude: number;
-    };
-  };
-}
+import {FavoriteListItemProps} from '../../types/favorite';
 
 export default function FavoriteListItem({data}: FavoriteListItemProps) {
-  const {favoriteMarkers} = useStore();
+  const {favoriteMarkerLists} = useStore();
   return (
     <View
       style={
-        data.index !== favoriteMarkers.length - 1
+        data.index !== favoriteMarkerLists.length - 1
           ? withLineContainer
           : noLineContainer
       }>
       <Text numberOfLines={1} style={{marginRight: 4}}>
         {data.item.address}
       </Text>
-      <Pressable>
+      <TouchableOpacity>
         <DeleteSvg />
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 }

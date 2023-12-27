@@ -37,7 +37,6 @@ body {
 .activated-favorite-button {
   padding: 4px 8px;
   font-size: 14px;
-  top: 15px;
   border-radius: 20px;
   border: 1px solid #000000;
 }
@@ -53,7 +52,6 @@ body {
 }
 
 .add-favorite-button {
-  top: 15px;
   right: 15px;
   background-color: rgba(0, 0, 0, 0);
   padding: 0px;

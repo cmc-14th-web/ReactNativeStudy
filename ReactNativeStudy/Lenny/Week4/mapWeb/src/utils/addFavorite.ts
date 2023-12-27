@@ -1,30 +1,22 @@
 import { favoriteMarkerOptions } from "../constants/icon";
-import { FavoriteMarkersProps } from "../store/store";
+import { AddFavoriteProps } from "../types/favorite";
 
-interface AddFavoriteProps {
-  favoriteMarkerLists: FavoriteMarkersProps[];
-  map: naver.maps.Map | undefined;
-  reverseLocation: naver.maps.LatLng;
-  favoriteMarkers: naver.maps.Marker[];
-  setFavoriteMarkers: React.Dispatch<React.SetStateAction<naver.maps.Marker[]>>;
-}
-
-const addFavorite = ({ favoriteMarkerLists, map, reverseLocation, favoriteMarkers, setFavoriteMarkers }: AddFavoriteProps) => {
+const addFavorite = ({ favoriteMarkerInformationLists, map, currentLatLng, favoriteMarkerLists, setFavoriteMarkerLists }: AddFavoriteProps) => {
   // 좌표 -> 도로명 주소 변환 코드
   naver.maps.Service.reverseGeocode(
-    { coords: reverseLocation, orders: [naver.maps.Service.OrderType.ADDR, naver.maps.Service.OrderType.ROAD_ADDR].join(",") },
+    { coords: currentLatLng, orders: [naver.maps.Service.OrderType.ADDR, naver.maps.Service.OrderType.ROAD_ADDR].join(",") },
     (status, response) => {
-      favoriteMarkerLists.push({ latitude: reverseLocation.y, longitude: reverseLocation.x, address: response.v2.address.roadAddress });
-      setFavoriteMarkers([
-        ...favoriteMarkers,
+      favoriteMarkerInformationLists.push({ latitude: currentLatLng.y, longitude: currentLatLng.x, address: response.v2.address.roadAddress });
+      setFavoriteMarkerLists([
+        ...favoriteMarkerLists,
         new naver.maps.Marker({
-          position: new naver.maps.LatLng(reverseLocation.y, reverseLocation.x),
+          position: new naver.maps.LatLng(currentLatLng.y, currentLatLng.x),
           map: map,
           icon: favoriteMarkerOptions,
           visible: false,
         }),
       ]);
-      window.ReactNativeWebView.postMessage(JSON.stringify({ type: "addData", favoriteMarkerLists: favoriteMarkerLists }));
+      window.ReactNativeWebView.postMessage(JSON.stringify({ type: "addData", favoriteMarkerInformationLists: favoriteMarkerInformationLists }));
     }
   );
 };

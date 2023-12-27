@@ -1,14 +1,9 @@
-import { FavoriteMarkersProps } from "../store/store";
+import { RemoveFavoriteProps } from "../types/favorite";
 
-interface RemoveFavoriteProps {
-  favoriteMarkerLists: FavoriteMarkersProps[];
-  favoriteMarkers: naver.maps.Marker[];
-}
-
-const removeFavorite = ({ favoriteMarkerLists, favoriteMarkers }: RemoveFavoriteProps) => {
+const removeFavorite = ({ favoriteMarkerInformationLists, favoriteMarkerLists }: RemoveFavoriteProps) => {
+  favoriteMarkerInformationLists.pop();
   favoriteMarkerLists.pop();
-  favoriteMarkers.pop();
-  window.ReactNativeWebView.postMessage(JSON.stringify({ type: "removeData", favoriteMarkerLists: favoriteMarkerLists }));
+  window.ReactNativeWebView.postMessage(JSON.stringify({ type: "removeData", favoriteMarkerInformationLists: favoriteMarkerInformationLists }));
 };
 
 export default removeFavorite;

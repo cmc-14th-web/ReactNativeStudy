@@ -2,21 +2,18 @@ import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {useStore} from '../../store/store';
 import FavoriteListItem from './FavoriteListItem';
-
-interface FavoriteMarkerProps {
-  address: string;
-  latitude: number;
-  longitude: number;
-}
+import {FavoriteMarkerProps} from '../../types/favorite';
 
 export default function FavoriteList() {
-  const {favoriteMarkers} = useStore();
+  const {favoriteMarkerLists} = useStore();
   return (
     <View style={styles.container}>
-      {!favoriteMarkers.length && <Text>아직 즐겨찾기가 없습니다.</Text>}
-      {favoriteMarkers && (
+      {!favoriteMarkerLists.length && (
+        <Text style={styles.textStyle}>아직 즐겨찾기가 없습니다.</Text>
+      )}
+      {favoriteMarkerLists && (
         <FlatList
-          data={favoriteMarkers}
+          data={favoriteMarkerLists}
           keyExtractor={(item: FavoriteMarkerProps) => item.address}
           renderItem={props => {
             return <FavoriteListItem data={props} />;
@@ -36,4 +33,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 45,
   },
+  textStyle: {textAlign: 'center'},
 });

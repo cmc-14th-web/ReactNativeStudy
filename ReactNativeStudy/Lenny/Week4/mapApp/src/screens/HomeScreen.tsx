@@ -12,7 +12,7 @@ const {width, height} = Dimensions.get('screen');
 export default function HomeScreen() {
   const [loading, setLoading] = useState<boolean>(true);
   const currentRef = useRef<WebView>(null);
-  const {setFavoriteMarkers} = useStore();
+  const {setFavoriteMarkerLists} = useStore();
   const {top: topInset} = useSafeAreaInsets();
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function HomeScreen() {
         break;
       case 'addData':
       case 'removeData':
-        setFavoriteMarkers([...getData.favoriteMarkerLists]);
+        setFavoriteMarkerLists([...getData.favoriteMarkerInformationLists]);
         break;
       default:
         Alert.alert('Something went wrong!');

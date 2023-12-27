@@ -1,11 +1,5 @@
 import { myLocationOptions } from "../constants/icon";
-
-interface SetMapCenterProps {
-  map: naver.maps.Map | undefined;
-  marker: naver.maps.Marker | undefined;
-  centerLocation: naver.maps.LatLng;
-  setIsMarkerFixed: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import { SetMapCenterProps } from "../types/map";
 
 const setMapCenter = ({ map, marker, centerLocation, setIsMarkerFixed }: SetMapCenterProps) => {
   map?.setCenter(centerLocation);

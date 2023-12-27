@@ -1,21 +1,16 @@
 import {create} from 'zustand';
-
-interface favoriteMarkersProps {
-  latitude: number;
-  longitude: number;
-  address: string;
-}
+import {FavoriteMarkerProps} from '../types/favorite';
 
 interface StoreState {
-  favoriteMarkers: favoriteMarkersProps[];
+  favoriteMarkerLists: FavoriteMarkerProps[];
 }
 
 interface StoreAction {
-  setFavoriteMarkers: (favoriteMarkers: favoriteMarkersProps[]) => void;
+  setFavoriteMarkerLists: (favoriteMarkerLists: FavoriteMarkerProps[]) => void;
 }
 
 export const useStore = create<StoreState & StoreAction>(set => ({
-  favoriteMarkers: [],
-  setFavoriteMarkers: (state: favoriteMarkersProps[]) =>
-    set({favoriteMarkers: [...state]}),
+  favoriteMarkerLists: [],
+  setFavoriteMarkerLists: (state: FavoriteMarkerProps[]) =>
+    set({favoriteMarkerLists: [...state]}),
 }));
