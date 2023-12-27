@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { key } from "./key";
 import ReactDOM from "react-dom";
+import StarButton from "./StarButton";
 import FavoriteButton from "./FavoriteButton";
 
 const containerStyle = {
@@ -65,7 +66,13 @@ export default function Map() {
   const setBookmarkButton = useCallback(
     (mapInstance: google.maps.Map) => {
       const controlButton = document.createElement("div");
-      ReactDOM.render(<FavoriteButton location={currentLocation} />, controlButton);
+      ReactDOM.render(
+        <>
+          <FavoriteButton />
+          <StarButton location={currentLocation} />
+        </>,
+        controlButton
+      );
       mapInstance.controls[window.google.maps.ControlPosition.LEFT_TOP].push(controlButton);
     },
     [currentLocation]

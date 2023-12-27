@@ -35,12 +35,16 @@ export default function HomeScreen() {
         ref={webViewRef}
         source={{uri: 'http://172.30.1.15:3000'}}
         onMessage={event => {
-          const message = JSON.parse(JSON.parse(event.nativeEvent.data));
-          switch (message?.type) {
-            case 'favoriteLocation': {
-              console.debug(message.data);
-              addBookmarks(message.data);
+          try {
+            const message = JSON.parse(JSON.parse(event.nativeEvent.data));
+            switch (message?.type) {
+              case 'favoriteLocation': {
+                console.debug(message.data);
+                addBookmarks(message.data);
+              }
             }
+          } catch (error) {
+            console.error(error);
           }
         }}
         injectedJavaScript={`(function() {
