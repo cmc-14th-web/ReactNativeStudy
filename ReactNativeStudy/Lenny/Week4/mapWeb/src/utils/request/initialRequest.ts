@@ -4,8 +4,8 @@ import initMarker from "../map/initMarker";
 
 const initialRequest = ({ response, setMap, setCenter, setMarker, setTopInset }: InitialRequestProps) => {
   const { latitude, longitude } = response.coords;
-  const { map: initialMap, center: initialCenter } = initMap({ latitude, longitude, setMap, setCenter });
-  initMarker({ center: initialCenter, map: initialMap, setMarker });
+  const { map, center } = initMap({ latitude, longitude, setMap, setCenter });
+  initMarker({ center, map, setMarker });
   setTopInset(response.topInset);
   window.ReactNativeWebView.postMessage(JSON.stringify({ type: "init", loading: false }));
 };

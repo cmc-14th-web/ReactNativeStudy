@@ -1,7 +1,7 @@
 import Geolocation from '@react-native-community/geolocation';
 import WebView from 'react-native-webview';
 
-const sendDeviceInformation = (
+const initialRequest = (
   currentRef: React.RefObject<WebView>,
   topInset: number,
 ) => {
@@ -12,4 +12,4 @@ const sendDeviceInformation = (
   );
 };
 
-export default sendDeviceInformation;
+export default initialRequest;

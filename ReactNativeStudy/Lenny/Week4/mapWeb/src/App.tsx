@@ -31,14 +31,6 @@ export default function App() {
     }
   }, [map, marker, favoriteMarkerLists, center]);
 
-  // web으로 확인할 때 사용
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition(
-  //     (e) => initMap({ latitude: e.coords.latitude, longitude: e.coords.longitude, setMap, setCenter }),
-  //     (err) => console.log(err)
-  //   );
-  // }, []);
-
   useEffect(() => {
     // react-native와 통신할 때 사용
     if (window.ReactNativeWebView) {
@@ -46,6 +38,9 @@ export default function App() {
         const response: CoordinationProps = JSON.parse(e.data);
         if (response.type === "initialRequest") {
           initialRequest({ response, setMap, setCenter, setMarker, setTopInset });
+        }
+        if (response.type === "realTimeRequest") {
+          setCenter(new naver.maps.LatLng(response.coords.latitude, response.coords.longitude));
         }
       });
       window.removeEventListener("message", (e) => console.log(e));

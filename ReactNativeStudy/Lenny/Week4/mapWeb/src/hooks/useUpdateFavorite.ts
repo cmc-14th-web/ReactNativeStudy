@@ -20,7 +20,7 @@ const useAddFavorite = () => {
             visible: false,
           }),
         ]);
-        window.ReactNativeWebView.postMessage(JSON.stringify({ type: "addData", favoriteMarkerInformationLists: favoriteMarkerInformationLists }));
+        window.ReactNativeWebView.postMessage(JSON.stringify({ type: "updateData", favoriteMarkerInformationLists: favoriteMarkerInformationLists }));
       }
     );
   };
@@ -28,7 +28,7 @@ const useAddFavorite = () => {
   const removeFavorite = ({ favoriteMarkerLists }: RemoveFavoriteProps) => {
     favoriteMarkerInformationLists.pop();
     favoriteMarkerLists.pop();
-    window.ReactNativeWebView.postMessage(JSON.stringify({ type: "removeData", favoriteMarkerInformationLists: favoriteMarkerInformationLists }));
+    window.ReactNativeWebView.postMessage(JSON.stringify({ type: "updateData", favoriteMarkerInformationLists: favoriteMarkerInformationLists }));
   };
 
   return { addFavorite, removeFavorite };

@@ -5,7 +5,8 @@ import WebView from 'react-native-webview';
 import Loading from '../components/Loading';
 import {useStore} from '../store/store';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import sendDeviceInformation from '../utils/sendDeviceInformation';
+import initialRequest from '../utils/initialRequest';
+import realTimeRequest from '../utils/realTimeRequest';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -16,10 +17,16 @@ export default function HomeScreen() {
   const {top: topInset} = useSafeAreaInsets();
 
   useEffect(() => {
-    setTimeout(() => {
-      sendDeviceInformation(currentRef, topInset);
-    }, 1000);
-  }, [topInset]);
+    const sendDeviceInformation = setInterval(() => {
+      initialRequest(currentRef, topInset);
+      clearInterval(sendDeviceInformation);
+    }, 500);
+    if (!loading) {
+      setInterval(() => {
+        realTimeRequest(currentRef);
+      }, 2000);
+    }
+  }, [loading, topInset]);
 
   const handleOnMessage = (e: any) => {
     const getData = JSON.parse(e.nativeEvent.data);
@@ -29,8 +36,7 @@ export default function HomeScreen() {
       case 'init':
         setLoading(getData.loading);
         break;
-      case 'addData':
-      case 'removeData':
+      case 'updateData':
         setFavoriteMarkerLists([...getData.favoriteMarkerInformationLists]);
         break;
       default:
