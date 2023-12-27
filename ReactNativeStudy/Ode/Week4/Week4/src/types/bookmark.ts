@@ -1,7 +1,8 @@
 export type BookMark = {
-  name: string;
+  id: number;
   address: string;
   lat: number;
   lng: number;
-  id: number;
 };
+
+export type BookMarks = Record<string, BookMark>;

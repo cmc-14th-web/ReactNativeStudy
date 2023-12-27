@@ -5,8 +5,12 @@ import {BookMark} from '../../../types/bookmark';
 export default function useBookmarkState() {
   const [bookmarks, setBookmarks] = useRecoilState(bookmarksState);
 
-  const addBookmarks = (newBookmark: BookMark) =>
-    setBookmarks([...bookmarks, newBookmark]);
+  const addBookmarks = (newBookmark: BookMark) => {
+    setBookmarks(prev => ({
+      ...prev,
+      [newBookmark.id]: newBookmark,
+    }));
+  };
 
   return {
     bookmarks,

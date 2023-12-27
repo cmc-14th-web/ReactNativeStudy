@@ -1,9 +1,9 @@
 import {atom} from 'recoil';
-import {BookMark} from '../../../types/bookmark';
+import {BookMarks} from '../../../types/bookmark';
 
-const BookmarksState = 'BookmarksState';
+const BookmarksState = 'BookmarkObjectState';
 
-export const bookmarksState = atom<BookMark[]>({
+export const bookmarksState = atom<BookMarks>({
   key: BookmarksState,
-  default: [],
+  default: {},
 });

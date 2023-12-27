@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { key } from "./key";
 import ReactDOM from "react-dom";
-import FavoriteButton from "../FavoriteButton";
+import FavoriteButton from "./FavoriteButton";
 
 const containerStyle = {
   width: "100%",
@@ -33,7 +33,6 @@ export default function Map() {
           case "init": {
             setCurrentLocation(parsedData.data);
             localStorage.setItem("currentLocation", JSON.stringify(parsedData.data));
-            // console.log("init", parsedData.data);
             break;
           }
           case "location": {
@@ -45,7 +44,7 @@ export default function Map() {
           }
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
 
@@ -63,7 +62,7 @@ export default function Map() {
     }
   }, []);
 
-  const onLoad = useCallback(
+  const setBookmarkButton = useCallback(
     (mapInstance: google.maps.Map) => {
       const controlButton = document.createElement("div");
       ReactDOM.render(<FavoriteButton location={currentLocation} />, controlButton);
@@ -78,11 +77,11 @@ export default function Map() {
       mapContainerStyle={containerStyle}
       center={currentLocation}
       zoom={10}
-      onLoad={onLoad}>
+      onLoad={setBookmarkButton}>
       <MarkerF
         position={currentLocation}
         icon={{
-          url: require("./map.svg").default,
+          url: require("../assets/map.svg").default,
           scaledSize: new window.google.maps.Size(46, 46),
         }}
       />

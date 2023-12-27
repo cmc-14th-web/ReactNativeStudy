@@ -8,13 +8,11 @@ import {Location} from '../types/location';
 export default function HomeScreen() {
   const {location} = useLocationState();
   const {addBookmarks} = useBookmarkState();
-
   const webViewRef = useRef<WebView>(null);
 
   useEffect(() => {
     async function initializeData() {
-      location;
-      postMessage({type: 'init', data: {lat: 39, lng: 127}});
+      postMessage({type: 'init', data: location});
     }
 
     initializeData();
@@ -38,7 +36,6 @@ export default function HomeScreen() {
         source={{uri: 'http://172.30.1.15:3000'}}
         onMessage={event => {
           const message = JSON.parse(JSON.parse(event.nativeEvent.data));
-          console.log('event', message);
           switch (message?.type) {
             case 'favoriteLocation': {
               console.debug(message.data);
@@ -53,6 +50,12 @@ export default function HomeScreen() {
             } else {
               console.error('ReactNativeWebView is not available.');
             }
+          };
+
+          var originalConsoleLog = console.log;
+          console.log = function() {
+            originalConsoleLog.apply(console, arguments);
+            window.ReactNativeWebView.postMessage(JSON.stringify(arguments));
           };
         })();`}
         onLoadStart={() => postMessage({type: 'init', data: location})}
