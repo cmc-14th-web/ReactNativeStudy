@@ -13,6 +13,7 @@ interface CoordinationProps {
     latitude: number;
     longitude: number;
   };
+  topInset: number;
 }
 
 export default function App() {
@@ -24,6 +25,8 @@ export default function App() {
   const [isMarkerFixed, setIsMarkerFixed] = useState<boolean>(false);
   const [isAddFavorite, setIsAddFavorite] = useState<boolean>(false);
   const [favoriteMarkers, setFavoriteMarkers] = useState<naver.maps.Marker[]>([]);
+
+  const [topInset, setTopInset] = useState<number>(0);
 
   const { favoriteMarkerLists } = useStore();
 
@@ -67,9 +70,10 @@ export default function App() {
   // react-native와 통신할 때 사용
   // if (window.ReactNativeWebView) {
   //   window.addEventListener("message", (e) => {
-  //     const currentLocation: CoordinationProps = JSON.parse(e.data);
-  //     const { latitude: currentLatitude, longitude: currentLongitude } = currentLocation.coords;
+  //     const deviceInformation: CoordinationProps = JSON.parse(e.data);
+  //     const { latitude: currentLatitude, longitude: currentLongitude } = deviceInformation.coords;
   //     initMap(currentLatitude, currentLongitude);
+  //     setTopInset(deviceInformation.topInset);
   //     window.ReactNativeWebView.postMessage(JSON.stringify({ type: "init", loading: false }));
   //   });
   //   window.removeEventListener("message", (e) => console.log(e));
@@ -100,13 +104,13 @@ export default function App() {
   return (
     <div id="map">
       {!isMarkerFixed && (
-        <button className={`${favoriteButtonState}-button`} onClick={handleShowFavorite}>
+        <button className={`${favoriteButtonState}-button`} style={{ top: topInset }} onClick={handleShowFavorite}>
           <img className="favorite-img" src={`../assets/${favoriteButtonState}.svg`} alt="즐겨찾기" />
           즐겨찾기
         </button>
       )}
       {isMarkerFixed && (
-        <button className="add-favorite-button" onClick={handleAddFavorite}>
+        <button className="add-favorite-button" style={{ top: topInset }} onClick={handleAddFavorite}>
           <img src={`../assets/${isAddFavorite ? "after" : "before"}-add-favorite.svg`} alt="즐겨찾기 추가" />
         </button>
       )}
