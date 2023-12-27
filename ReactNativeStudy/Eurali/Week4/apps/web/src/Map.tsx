@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import currentPosIcon from './constants/currentPosIcon';
 import clickedPosIcon from './constants/clickedPosIcon';
+import roundStar from './constants/roundStar';
 import getAddress from './utils/getAddress';
 
 const { kakao } = window;
@@ -17,9 +18,11 @@ const Map = () => {
       level: 3
     };
     setKakaoMap(new kakao.maps.Map(container, options));
-    const marker = new kakao.maps.Marker()
-    markersArr.push(marker);
   }
+
+  useEffect(() => {
+    kakao.maps.load(() => initMap());
+  }, []);
 
   const deleteAllMarkers = () => {
     for (let i=0; i<markersArr.length; i++) {
@@ -28,36 +31,26 @@ const Map = () => {
     markersArr.length = 0;
   }
 
-  useEffect(() => {
-    kakao.maps.load(() => initMap());
-  }, []);
-
   const getMessage = (event: any) => {
     const data = JSON.parse(event.data);
-    if (data.latitude && data.longitude) {
+    if (data.latitude && data.longitude) { // 현위치 정보를 받는 경우
       const currentPosition = new kakao.maps.LatLng(data.latitude, data.longitude);
       kakaoMap.panTo(currentPosition);
-      const marker = new kakao.maps.Marker()
+
+      const marker = new kakao.maps.Marker({
+        map: kakaoMap,
+        position: currentPosition,
+        image: currentPosIcon
+      })
       deleteAllMarkers();
-      
-      marker.setImage(currentPosIcon);
-      marker.setPosition(currentPosition);
-      marker.setMap(kakaoMap);
       markersArr.push(marker);
-    } else {
+    } else { // 즐겨찾기 장소들 정보를 받는 경우
       deleteAllMarkers();
       for (let i = 0; i < data.length; i ++) {
-        const imageSize = new kakao.maps.Size(20, 20); 
-        
-        // 마커 이미지를 생성합니다    
-        const markerImage = new kakao.maps.MarkerImage('/roundStar.png', imageSize); 
-        
-        // 마커를 생성합니다
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const favoriteMarker = new kakao.maps.Marker({
-            map: kakaoMap, // 마커를 표시할 지도
-            position: new kakao.maps.LatLng(data[i].position.latitude, data[i].position.longitude), // 마커를 표시할 위치
-            image : markerImage // 마커 이미지 
+            map: kakaoMap,
+            position: new kakao.maps.LatLng(data[i].position.latitude, data[i].position.longitude),
+            image : roundStar
         });
         markersArr.push(favoriteMarker);
       }
@@ -67,12 +60,14 @@ const Map = () => {
   const handleClickMap = async(mouseEvent: any) => {
     const latlng = mouseEvent.latLng;
     
-    const marker = new kakao.maps.Marker()
+    const marker = new kakao.maps.Marker({
+      map: kakaoMap,
+      position: latlng,
+      image: clickedPosIcon
+    })
     deleteAllMarkers();
-    marker.setImage(clickedPosIcon);
-    marker.setPosition(latlng);
-    marker.setMap(kakaoMap);
     markersArr.push(marker);
+    
     const clickedPos = {
       position: {
         latitude: latlng.Ma,
@@ -94,6 +89,7 @@ const Map = () => {
         kakao.maps.event.removeListener(kakaoMap, 'click', handleClickMap);
       }
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [kakaoMap]);
 
   return (
