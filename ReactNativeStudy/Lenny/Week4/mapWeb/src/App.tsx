@@ -52,9 +52,9 @@ export default function App() {
 
   useEffect(() => {
     if (map) {
-      clickMap({ map, marker, setReverseLocation, setIsMarkerFixed, setActivatedFavorite, setIsAddFavorite });
+      clickMap({ favoriteMarkers, map, marker, setReverseLocation, setIsMarkerFixed, setActivatedFavorite, setIsAddFavorite });
     }
-  }, [map, marker]);
+  }, [map, marker, favoriteMarkers]);
 
   // web으로 확인할 때 사용
   useEffect(() => {
