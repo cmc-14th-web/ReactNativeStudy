@@ -1,17 +1,13 @@
-import {Alert, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import WebView from 'react-native-webview';
 import Geolocation from '@react-native-community/geolocation';
-import {useCallback, useEffect} from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 
 import {windowWidth, windowHeight} from '../constants/screenSize';
 import FavoriteButton from './FavoriteButton';
-import {useStore} from 'zustand';
-import {webViewRefStore} from '../libs/store/webviewRef';
-import {mapStore} from '../libs/store/map';
 
 const Map = () => {
-  const {webViewRef} = useStore(webViewRefStore);
-  const {setFavoriteLocationList} = useStore(mapStore);
+  const webViewRef = useRef<WebView>(null);
 
   const sendCurrentPosition = useCallback(() => {
     Geolocation.watchPosition(
@@ -46,13 +42,6 @@ const Map = () => {
         ref={webViewRef}
         source={{
           uri: 'https://cmc-map.vercel.app/',
-        }}
-        onMessage={({nativeEvent}) => {
-          const {data, type} = JSON.parse(nativeEvent.data);
-
-          if (type === 'favoriteLocationAddress') {
-            setFavoriteLocationList(data);
-          }
         }}
         style={mapStyles.webview}
       />

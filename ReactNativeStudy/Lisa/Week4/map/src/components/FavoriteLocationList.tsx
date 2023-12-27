@@ -1,8 +1,18 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {theme} from '../styles/theme';
+import {useStore} from 'zustand';
+import {mapStore} from '../libs/store/map';
 
 const FavoriteLocationList = () => {
-  return <View style={favoriteLocationListStyles.container}></View>;
+  const {favoriteLocationList} = useStore(mapStore);
+
+  return (
+    <View style={favoriteLocationListStyles.container}>
+      {favoriteLocationList.map(favoriteLocation => (
+        <Text>{favoriteLocation}</Text>
+      ))}
+    </View>
+  );
 };
 
 export default FavoriteLocationList;
