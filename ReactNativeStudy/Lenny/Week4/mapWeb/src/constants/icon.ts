@@ -4,7 +4,7 @@ export const clickedLocationOptions = {
   anchor: new naver.maps.Point(23, 46), // 이미지의 중심점으로 설정
 };
 
-export const myLocationOptions = {
+export const currentLocationOptions = {
   url: "../assets/marker.svg",
   origin: new naver.maps.Point(0, 0),
   anchor: new naver.maps.Point(10, 10), // 이미지의 중심점으로 설정

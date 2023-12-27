@@ -1,4 +1,4 @@
-import { ShowFavoriteProps } from "../types/favorite";
+import { ShowFavoriteProps } from "../../types/favorite";
 
 export const showFavorite = ({ showFavoriteState, setShowFavoriteState, favoriteMarkerLists }: ShowFavoriteProps) => {
   setShowFavoriteState(!showFavoriteState);

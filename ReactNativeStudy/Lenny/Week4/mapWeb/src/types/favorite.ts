@@ -12,7 +12,6 @@ export interface favoriteMarkerInformationListsProps {
 }
 
 export interface AddFavoriteProps {
-  favoriteMarkerInformationLists: favoriteMarkerInformationListsProps[];
   map: naver.maps.Map | undefined;
   currentLatLng: naver.maps.LatLng;
   favoriteMarkerLists: naver.maps.Marker[];
@@ -20,7 +19,6 @@ export interface AddFavoriteProps {
 }
 
 export interface RemoveFavoriteProps {
-  favoriteMarkerInformationLists: favoriteMarkerInformationListsProps[];
   favoriteMarkerLists: naver.maps.Marker[];
 }
 

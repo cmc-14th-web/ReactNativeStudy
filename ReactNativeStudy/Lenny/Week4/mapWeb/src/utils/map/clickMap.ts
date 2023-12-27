@@ -1,5 +1,5 @@
-import { clickedLocationOptions } from "../constants/icon";
-import { ClickMapProps } from "../types/map";
+import { clickedLocationOptions } from "../../constants/icon";
+import { ClickMapProps } from "../../types/map";
 
 const clickMap = ({ favoriteMarkerLists, map, marker, setCurrentLatLng, setIsMarkerFixed, setShowFavoriteState, setAddFavoriteState }: ClickMapProps) => {
   naver.maps.Event.addListener(map, "click", (e) => {

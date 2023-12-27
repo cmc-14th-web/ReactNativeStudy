@@ -1,61 +1,40 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { myLocationOptions } from "./constants/icon";
-import { useStore } from "./store/store";
-import addFavorite from "./utils/addFavorite";
-import { showFavorite } from "./utils/showFavorite";
-import removeFavorite from "./utils/removeFavorite";
-import clickMap from "./utils/clickMap";
-import setMapCenter from "./utils/setMapCenter";
+import { showFavorite } from "./utils/favorite/showFavorite";
+import clickMap from "./utils/map/clickMap";
+import setMapCenter from "./utils/map/setMapCenter";
 import { CoordinationProps } from "./types/map";
+import useAddFavorite from "./hooks/useUpdateFavorite";
+import initialRequest from "./utils/request/initialRequest";
+import dragMap from "./utils/map/dragMap";
 
 export default function App() {
   const [map, setMap] = useState<naver.maps.Map>();
   const [marker, setMarker] = useState<naver.maps.Marker>();
-  const [centerLocation, setCenterLocation] = useState<naver.maps.LatLng>(new naver.maps.LatLng(37.3595704, 127.105399));
+  const [center, setCenter] = useState<naver.maps.LatLng>(new naver.maps.LatLng(37.3595704, 127.105399));
   const [currentLatLng, setCurrentLatLng] = useState<naver.maps.LatLng>(new naver.maps.LatLng(37.3595704, 127.105399));
   const [showFavoriteState, setShowFavoriteState] = useState<boolean>(false);
   const [isMarkerFixed, setIsMarkerFixed] = useState<boolean>(false);
   const [addFavoriteState, setAddFavoriteState] = useState<boolean>(false);
   const [favoriteMarkerLists, setFavoriteMarkerLists] = useState<naver.maps.Marker[]>([]);
 
+  const { addFavorite, removeFavorite } = useAddFavorite();
+
   const [topInset, setTopInset] = useState<number>(0);
 
-  const { favoriteMarkerInformationLists } = useStore();
-
   const favoriteButtonState = `${showFavoriteState ? "activated" : "deactivated"}-favorite`;
-
-  const initMap = (latitude: number, longitude: number) => {
-    const center: naver.maps.LatLng = new naver.maps.LatLng(latitude, longitude);
-    const naverMap: naver.maps.Map = new naver.maps.Map("map", {
-      center: center,
-      zoom: 16,
-    });
-
-    const myLocationMarker = new naver.maps.Marker({
-      position: center,
-      map: naverMap,
-      icon: myLocationOptions,
-    });
-
-    setMap(naverMap);
-    setMarker(myLocationMarker);
-    setCenterLocation(center);
-
-    naverMap;
-    myLocationMarker;
-  };
 
   useEffect(() => {
     if (map) {
       clickMap({ favoriteMarkerLists, map, marker, setCurrentLatLng, setIsMarkerFixed, setShowFavoriteState, setAddFavoriteState });
+      dragMap({ map, setIsMarkerFixed });
     }
-  }, [map, marker, favoriteMarkerLists]);
+  }, [map, marker, favoriteMarkerLists, center]);
 
   // web으로 확인할 때 사용
   // useEffect(() => {
   //   navigator.geolocation.getCurrentPosition(
-  //     (e) => initMap(e.coords.latitude, e.coords.longitude),
+  //     (e) => initMap({ latitude: e.coords.latitude, longitude: e.coords.longitude, setMap, setCenter }),
   //     (err) => console.log(err)
   //   );
   // }, []);
@@ -66,10 +45,7 @@ export default function App() {
       window.addEventListener("message", (e) => {
         const response: CoordinationProps = JSON.parse(e.data);
         if (response.type === "initialRequest") {
-          const { latitude: currentLatitude, longitude: currentLongitude } = response.coords;
-          initMap(currentLatitude, currentLongitude);
-          setTopInset(response.topInset);
-          window.ReactNativeWebView.postMessage(JSON.stringify({ type: "init", loading: false }));
+          initialRequest({ response, setMap, setCenter, setMarker, setTopInset });
         }
       });
       window.removeEventListener("message", (e) => console.log(e));
@@ -77,7 +53,7 @@ export default function App() {
   }, []);
 
   const handleSetMapCetner = () => {
-    setMapCenter({ map, marker, centerLocation, setIsMarkerFixed });
+    setMapCenter({ map, marker, center, setIsMarkerFixed });
   };
 
   const handleShowFavorite = () => {
@@ -85,16 +61,16 @@ export default function App() {
   };
 
   const handleAddFavorite = () => {
-    setAddFavoriteState(!addFavoriteState);
+    setAddFavoriteState((prev) => !prev);
 
     // 추가할 때
     if (!addFavoriteState) {
-      addFavorite({ favoriteMarkerInformationLists, map, currentLatLng, favoriteMarkerLists, setFavoriteMarkerLists });
+      addFavorite({ map, currentLatLng, favoriteMarkerLists, setFavoriteMarkerLists });
     }
 
     // 제거할 때
     if (addFavoriteState) {
-      removeFavorite({ favoriteMarkerInformationLists, favoriteMarkerLists });
+      removeFavorite({ favoriteMarkerLists });
     }
   };
 
