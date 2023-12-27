@@ -7,5 +7,10 @@ export const typoStyles = {
       fontWeight: '400',
       lineHeight: 16.8,
     },
+    body_2: {
+      fontSize: 14,
+      fontWeight: '400',
+      lineHeight: 19.6,
+    },
   }),
 };
