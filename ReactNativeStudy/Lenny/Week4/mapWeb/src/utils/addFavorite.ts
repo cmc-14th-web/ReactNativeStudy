@@ -24,6 +24,7 @@ const addFavorite = ({ favoriteMarkerLists, map, reverseLocation, favoriteMarker
           visible: false,
         }),
       ]);
+      window.ReactNativeWebView.postMessage(JSON.stringify({ type: "addData", favoriteMarkerLists: favoriteMarkerLists }));
     }
   );
 };

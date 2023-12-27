@@ -1,15 +1,18 @@
 import {WEB_URI} from '@env';
 import React, {useEffect, useRef, useState} from 'react';
-import {Dimensions, SafeAreaView, StyleSheet} from 'react-native';
+import {Alert, Dimensions, StyleSheet} from 'react-native';
 import WebView from 'react-native-webview';
 import sendCurrentLocation from '../utils/sendCurrentLocation';
 import Loading from '../components/Loading';
+import {useStore} from '../store/store';
+import Container from '../components/Container';
 
 const {width, height} = Dimensions.get('screen');
 
 export default function HomeScreen() {
-  const currentRef = useRef<WebView>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const currentRef = useRef<WebView>(null);
+  const {setFavoriteMarkers} = useStore();
 
   useEffect(() => {
     setTimeout(() => {
@@ -18,12 +21,24 @@ export default function HomeScreen() {
   }, []);
 
   const handleOnMessage = (e: any) => {
-    const loadingState = JSON.parse(e.nativeEvent.data);
-    setLoading(loadingState.loading);
+    const getData = JSON.parse(e.nativeEvent.data);
+    const getDataType = getData.type;
+
+    switch (getDataType) {
+      case 'init':
+        setLoading(getData.loading);
+        break;
+      case 'addData':
+      case 'removeData':
+        setFavoriteMarkers([...getData.favoriteMarkerLists]);
+        break;
+      default:
+        Alert.alert('Something went wrong!');
+    }
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
       {loading && <Loading />}
       <WebView
         ref={currentRef}
@@ -32,14 +47,11 @@ export default function HomeScreen() {
         onMessage={handleOnMessage}
         scrollEnabled={false}
       />
-    </SafeAreaView>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   loading: {
     display: 'none',
   },

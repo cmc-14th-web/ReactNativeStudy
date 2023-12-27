@@ -8,6 +8,7 @@ interface RemoveFavoriteProps {
 const removeFavorite = ({ favoriteMarkerLists, favoriteMarkers }: RemoveFavoriteProps) => {
   favoriteMarkerLists.pop();
   favoriteMarkers.pop();
+  window.ReactNativeWebView.postMessage(JSON.stringify({ type: "removeData", favoriteMarkerLists: favoriteMarkerLists }));
 };
 
 export default removeFavorite;
