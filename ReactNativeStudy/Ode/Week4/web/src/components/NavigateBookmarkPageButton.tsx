@@ -1,9 +1,10 @@
 import React from "react";
 import StarIcon from "./StarIcon";
+import { Message } from "../types/message";
 
-export default function FavoriteButton() {
+export default function NavigateBookmarkPageButton() {
   const handleClick = () => {
-    const message = { type: "navigateBookmarkPage" };
+    const message: Message = { type: "navigateBookmarkPage" };
     window.sendMessageToReactNative(message);
   };
 

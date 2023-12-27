@@ -48,7 +48,6 @@ export default function HomeScreen() {
             const message = JSON.parse(event.nativeEvent.data);
             switch (message?.type) {
               case 'favoriteLocation': {
-                console.debug(message.data);
                 addBookmarks(message.data);
                 break;
               }

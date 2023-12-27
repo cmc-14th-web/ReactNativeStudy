@@ -2,6 +2,8 @@ import { useMemo } from "react";
 import { getAddressFromLatLng } from "../utils/getAddressFromLatLng";
 import { Location } from "./Map";
 import StarIcon from "./StarIcon";
+import { Message } from "../types/message";
+import { Address } from "../types/address";
 declare global {
   interface Window {
     sendMessageToReactNative: any;
@@ -29,7 +31,7 @@ export default function StarButton({ location }: StarButtonProps) {
       if (results) {
         const { place_id, formatted_address } = results[0];
 
-        const message = {
+        const message: Message<Address> = {
           type: "favoriteLocation",
           data: {
             id: place_id,

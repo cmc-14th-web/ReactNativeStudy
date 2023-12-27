@@ -3,7 +3,7 @@ import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { key } from "./key";
 import ReactDOM from "react-dom";
 import StarButton from "./StarButton";
-import FavoriteButton from "./FavoriteButton";
+import NavigateBookmarkPageButton from "./NavigateBookmarkPageButton";
 
 const containerStyle = {
   width: "100%",
@@ -68,7 +68,7 @@ export default function Map() {
       const controlButton = document.createElement("div");
       ReactDOM.render(
         <>
-          <FavoriteButton />
+          <NavigateBookmarkPageButton />
           <StarButton location={currentLocation} />
         </>,
         controlButton
