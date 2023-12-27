@@ -5,6 +5,8 @@ import { useStore } from "./store/store";
 import addFavorite from "./utils/addFavorite";
 import { showFavorite } from "./utils/showFavorite";
 import removeFavorite from "./utils/removeFavorite";
+import clickMap from "./utils/clickMap";
+import setMapCenter from "./utils/setMapCenter";
 
 interface CoordinationProps {
   coords: {
@@ -50,14 +52,7 @@ export default function App() {
 
   useEffect(() => {
     if (map) {
-      naver.maps.Event.addListener(map, "click", (e) => {
-        marker?.setPosition(e.coord);
-        marker?.setIcon(clickedLocationOptions);
-        setReverseLocation(e.coord);
-        setIsMarkerFixed(true);
-        setActivatedFavorite(false);
-        setIsAddFavorite(false);
-      });
+      clickMap({ map, marker, setReverseLocation, setIsMarkerFixed, setActivatedFavorite, setIsAddFavorite });
     }
   }, [map, marker]);
 
@@ -80,14 +75,11 @@ export default function App() {
   //   window.removeEventListener("message", (e) => console.log(e));
   // }
 
-  const setMapCetner = () => {
-    map?.setCenter(centerLocation);
-    marker?.setPosition(centerLocation);
-    marker?.setIcon(myLocationOptions);
-    setIsMarkerFixed(false);
+  const handleSetMapCetner = () => {
+    setMapCenter({ map, marker, centerLocation, setIsMarkerFixed });
   };
 
-  const handleShowFavoriteMarkers = () => {
+  const handleShowFavorite = () => {
     showFavorite({ activatedFavorite, setActivatedFavorite, favoriteMarkers });
   };
 
@@ -108,7 +100,7 @@ export default function App() {
   return (
     <div id="map">
       {!isMarkerFixed && (
-        <button className={`${favoriteButtonState}-button`} onClick={handleShowFavoriteMarkers}>
+        <button className={`${favoriteButtonState}-button`} onClick={handleShowFavorite}>
           <img className="favorite-img" src={`../assets/${favoriteButtonState}.svg`} alt="즐겨찾기" />
           즐겨찾기
         </button>
@@ -118,7 +110,7 @@ export default function App() {
           <img src={`../assets/${isAddFavorite ? "after" : "before"}-add-favorite.svg`} alt="즐겨찾기 추가" />
         </button>
       )}
-      <button className="current-location-button" onClick={setMapCetner}>
+      <button className="current-location-button" onClick={handleSetMapCetner}>
         <img src="../assets/my-location.svg" alt="내 위치" />
       </button>
     </div>
