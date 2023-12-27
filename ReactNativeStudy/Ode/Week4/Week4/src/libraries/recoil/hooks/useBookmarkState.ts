@@ -8,7 +8,7 @@ export default function useBookmarkState() {
   const addBookmarks = (newBookmark: BookMark) => {
     setBookmarks(prev => ({
       ...prev,
-      [newBookmark.id]: newBookmark,
+      [new Date().toString()]: newBookmark,
     }));
   };
 

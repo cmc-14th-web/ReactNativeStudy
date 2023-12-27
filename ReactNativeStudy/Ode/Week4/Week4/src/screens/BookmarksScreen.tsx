@@ -9,8 +9,8 @@ export default function BookmarksScreen() {
   return (
     <Container>
       <Text>북마크</Text>
-      {Object.values(bookmarks).map(bookmark => (
-        <Text key={bookmark.id}>{bookmark.address}</Text>
+      {Object.entries(bookmarks).map(([key, bookmark]) => (
+        <Text key={key}>{bookmark.address}</Text>
       ))}
     </Container>
   );

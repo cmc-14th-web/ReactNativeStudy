@@ -1,12 +1,12 @@
 import React, {useEffect, useRef} from 'react';
-import Container from '../components/Container';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {useNavigation} from '@react-navigation/native';
 import WebView, {WebViewMessageEvent} from 'react-native-webview';
 import useLocationState from '../libraries/recoil/hooks/useLocationState';
 import useBookmarkState from '../libraries/recoil/hooks/useBookmarkState';
-import {Location} from '../types/location';
-import {useNavigation} from '@react-navigation/native';
+import Container from '../components/Container';
 import {RootStackParamList} from '../navigators/RootNavigator';
-import {StackNavigationProp} from '@react-navigation/stack';
+import type {Location} from '../types/location';
 
 type MapScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -65,7 +65,7 @@ export default function HomeScreen() {
         source={{uri: 'http://172.30.1.15:3000'}}
         onMessage={handleMessage}
         injectedJavaScript={injectedJavaScript}
-        onLoadStart={() => postMessage({type: 'init', data: location})}
+        // onLoadStart={() => postMessage({type: 'init', data: location})}
       />
     </Container>
   );
