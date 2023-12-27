@@ -29,14 +29,14 @@ export default function StarButton({ location }: StarButtonProps) {
       if (results) {
         const { place_id, formatted_address } = results[0];
 
-        const message = JSON.stringify({
+        const message = {
           type: "favoriteLocation",
           data: {
             id: place_id,
             address: formatted_address,
             ...location,
           },
-        });
+        };
 
         window.sendMessageToReactNative(message);
       }

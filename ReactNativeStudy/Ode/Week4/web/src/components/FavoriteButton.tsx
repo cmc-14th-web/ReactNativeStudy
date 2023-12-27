@@ -2,8 +2,13 @@ import React from "react";
 import StarIcon from "./StarIcon";
 
 export default function FavoriteButton() {
+  const handleClick = () => {
+    const message = { type: "navigateBookmarkPage" };
+    window.sendMessageToReactNative(message);
+  };
+
   return (
-    <button style={buttonStyle}>
+    <button style={buttonStyle} onClick={handleClick}>
       <StarIcon />
       즐겨찾기
     </button>
@@ -27,6 +32,5 @@ const buttonStyle: React.CSSProperties = {
   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
   cursor: "pointer",
   fontSize: "14px",
-  userSelect: "none",
   outline: "none",
 };

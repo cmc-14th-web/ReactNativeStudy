@@ -5,7 +5,12 @@ import BookmarksScreen from '../screens/BookmarksScreen';
 import SvgIcon from '../components/SvgIcon';
 import Colors from '../styles/colors';
 
-const BottomTab = createBottomTabNavigator();
+const BottomTab = createBottomTabNavigator<RootStackParamList>();
+
+export type RootStackParamList = {
+  HomeScreen: undefined;
+  BookmarksScreen: undefined;
+};
 
 export default function RootNavigator() {
   return (
