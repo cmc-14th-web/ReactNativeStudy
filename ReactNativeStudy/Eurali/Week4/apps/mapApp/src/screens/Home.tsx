@@ -17,7 +17,7 @@ const Home = () => {
 
   const onMessage = (e: WebViewMessageEvent) => {
     const data = JSON.parse(e.nativeEvent.data);
-    if (favorites.filter(favorite => favorite.address !== data.address)) {
+    if (favorites.filter(favorite => favorite.position !== data.position)) {
       setCurState(NOT_ACTIVATED);
     } else {
       setCurState(ACTIVATED);

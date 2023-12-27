@@ -34,6 +34,7 @@ const Map = () => {
   const getMessage = (event: any) => {
     const data = JSON.parse(event.data);
     if (data.latitude && data.longitude) { // 현위치 정보를 받는 경우
+      deleteAllMarkers();
       const currentPosition = new kakao.maps.LatLng(data.latitude, data.longitude);
       kakaoMap.panTo(currentPosition);
 
@@ -42,7 +43,6 @@ const Map = () => {
         position: currentPosition,
         image: currentPosIcon
       })
-      deleteAllMarkers();
       markersArr.push(marker);
     } else { // 즐겨찾기 장소들 정보를 받는 경우
       deleteAllMarkers();
@@ -58,6 +58,7 @@ const Map = () => {
   };
 
   const handleClickMap = async(mouseEvent: any) => {
+    deleteAllMarkers();
     const latlng = mouseEvent.latLng;
     
     const marker = new kakao.maps.Marker({
@@ -65,9 +66,8 @@ const Map = () => {
       position: latlng,
       image: clickedPosIcon
     })
-    deleteAllMarkers();
     markersArr.push(marker);
-    
+
     const clickedPos = {
       position: {
         latitude: latlng.Ma,

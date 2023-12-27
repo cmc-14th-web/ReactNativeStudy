@@ -39,7 +39,7 @@ const favoriteStore = create<StoreType>(set => ({
   removeFavorites: (f: FavoriteType) =>
     set(state => ({
       favorites: state.favorites.filter(
-        favorite => favorite.address !== f.address,
+        favorite => favorite.position !== f.position,
       ),
     })),
 }));
