@@ -1,6 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import Container from '../components/Container';
-import WebView from 'react-native-webview';
+import WebView, {WebViewMessageEvent} from 'react-native-webview';
 import useLocationState from '../libraries/recoil/hooks/useLocationState';
 import useBookmarkState from '../libraries/recoil/hooks/useBookmarkState';
 import {Location} from '../types/location';
@@ -38,47 +38,51 @@ export default function HomeScreen() {
     }
   }
 
+  const handleMessage = (event: WebViewMessageEvent) => {
+    try {
+      const message = JSON.parse(event.nativeEvent.data);
+      switch (message?.type) {
+        case 'favoriteLocation': {
+          addBookmarks(message.data);
+          break;
+        }
+        case 'navigateBookmarkPage': {
+          navigation.navigate('BookmarksScreen');
+          break;
+        }
+        default:
+          break;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Container>
       <WebView
         ref={webViewRef}
         source={{uri: 'http://172.30.1.15:3000'}}
-        onMessage={event => {
-          try {
-            const message = JSON.parse(event.nativeEvent.data);
-            switch (message?.type) {
-              case 'favoriteLocation': {
-                addBookmarks(message.data);
-                break;
-              }
-              case 'navigateBookmarkPage': {
-                navigation.navigate('BookmarksScreen');
-                break;
-              }
-              default:
-                break;
-            }
-          } catch (error) {
-            console.error(error);
-          }
-        }}
-        injectedJavaScript={`(function() {
-          window.sendMessageToReactNative = function(message) {
-            if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-              window.ReactNativeWebView.postMessage(JSON.stringify(message));
-            } else {
-              console.error('ReactNativeWebView is not available.');
-            }
-          };
-
-          var originalConsoleLog = console.log;
-          console.log = function() {
-            originalConsoleLog.apply(console, arguments);
-            window.ReactNativeWebView.postMessage(JSON.stringify(arguments));
-          };
-        })();`}
+        onMessage={handleMessage}
+        injectedJavaScript={injectedJavaScript}
         onLoadStart={() => postMessage({type: 'init', data: location})}
       />
     </Container>
   );
 }
+
+const injectedJavaScript = `(function() {
+  window.sendMessageToReactNative = function(message) {
+    if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+      window.ReactNativeWebView.postMessage(JSON.stringify(message));
+    } else {
+      console.error('ReactNativeWebView is not available.');
+    }
+  };
+
+  var originalConsoleLog = console.log;
+  console.log = function() {
+    originalConsoleLog.apply(console, arguments);
+    window.ReactNativeWebView.postMessage(JSON.stringify(arguments));
+  };
+})();`;
