@@ -4,6 +4,7 @@ import Geolocation from '@react-native-community/geolocation';
 import {useCallback, useEffect, useRef} from 'react';
 
 import {windowWidth, windowHeight} from '../constants/screenSize';
+import FavoriteButton from './FavoriteButton';
 
 const Map = () => {
   const webViewRef = useRef<WebView>(null);
@@ -36,13 +37,16 @@ const Map = () => {
   }, []);
 
   return (
-    <WebView
-      ref={webViewRef}
-      source={{
-        uri: 'https://cmc-map.vercel.app/',
-      }}
-      style={mapStyles.webview}
-    />
+    <>
+      <WebView
+        ref={webViewRef}
+        source={{
+          uri: 'https://cmc-map.vercel.app/',
+        }}
+        style={mapStyles.webview}
+      />
+      <FavoriteButton />
+    </>
   );
 };
 
