@@ -33,7 +33,7 @@ export default function Map() {
           case "init": {
             setCurrentLocation(parsedData.data);
             localStorage.setItem("currentLocation", JSON.stringify(parsedData.data));
-            console.log("init", parsedData.data);
+            // console.log("init", parsedData.data);
             break;
           }
           case "location": {
@@ -62,16 +62,6 @@ export default function Map() {
       setCurrentLocation(JSON.parse(savedLocation));
     }
   }, []);
-
-  // const onMessageEvent = (e: MessageEvent) => {
-  //   e.stopPropagation();
-  //   console.log(String(e.data));
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("message", onMessageEvent, { capture: true });
-  //   return () => window.removeEventListener("message", onMessageEvent);
-  // }, []);
 
   const onLoad = useCallback(
     (mapInstance: google.maps.Map) => {

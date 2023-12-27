@@ -1,7 +1,7 @@
-import {locationState} from './location';
-import {MapData} from '../../screens/HomeScreen';
+import {locationState} from '../states/location';
+import {MapData} from '../../../screens/HomeScreen';
 import {useRecoilState} from 'recoil';
-import getCurrentLocation from '../../permissions/location';
+import getCurrentLocation from '../../../permissions/location';
 import {useEffect} from 'react';
 
 export default function useLocationState() {

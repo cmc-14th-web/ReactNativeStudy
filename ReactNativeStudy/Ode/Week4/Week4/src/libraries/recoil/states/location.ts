@@ -1,5 +1,5 @@
 import {atom} from 'recoil';
-import {MapData} from '../../screens/HomeScreen';
+import {MapData} from '../../../screens/HomeScreen';
 
 const LocationState = 'locationState';
 export const locationState = atom<MapData>({

@@ -1,12 +1,14 @@
 import React, {useEffect, useRef} from 'react';
 import Container from '../components/Container';
 import WebView from 'react-native-webview';
-import useLocationState from '../libraries/recoil/useLocationState';
+import useLocationState from '../libraries/recoil/hooks/useLocationState';
+import useFavoritesState from '../libraries/recoil/hooks/useFavoritesState';
 
 export default function HomeScreen() {
   const {location} = useLocationState();
+  const {addFavorites} = useFavoritesState();
   const webViewRef = useRef<WebView>(null);
-
+  addFavorites;
   useEffect(() => {
     async function initializeData() {
       location;
@@ -17,7 +19,7 @@ export default function HomeScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function postMessage(message: {type: string; data: any}) {
+  async function postMessage(message: {type: string; data: Partial<MapData>}) {
     try {
       if (webViewRef.current) {
         webViewRef.current.postMessage(JSON.stringify(message));
@@ -27,35 +29,30 @@ export default function HomeScreen() {
     }
   }
 
-  const eventScript = `function sendFavoriteClicked() {
-    window.ReactNativeWebView.postMessage(
-      JSON.stringify(
-          {
-          type: 'favoriteLocation',
-          data: '${JSON.stringify(location)}'
-        },
-      )
-    );
-  }
-  window.addEventListener("click", sendFavoriteClicked);
-  true;`;
-
   return (
     <Container>
       <WebView
         ref={webViewRef}
-        source={{uri: 'http://172.30.1.69:3000'}}
+        source={{uri: 'http://172.30.1.15:3000'}}
         onMessage={event => {
-          console.log(event.nativeEvent.data);
-          const message = JSON.parse(event.nativeEvent.data);
+          const message = JSON.parse(JSON.parse(event.nativeEvent.data));
+          console.log('event', message);
           switch (message?.type) {
             case 'favoriteLocation': {
-              const loc = message.data;
-              console.log('favoriteLocation', loc);
+              console.debug(message.data);
+              // addFavorites(message.data);
             }
           }
         }}
-        onLoad={() => webViewRef.current?.injectJavaScript(eventScript)}
+        injectedJavaScript={`(function() {
+          window.sendMessageToReactNative = function(message) {
+            if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+              window.ReactNativeWebView.postMessage(JSON.stringify(message));
+            } else {
+              console.error('ReactNativeWebView is not available.');
+            }
+          };
+        })();`}
         onLoadStart={() => postMessage({type: 'init', data: location})}
       />
     </Container>
