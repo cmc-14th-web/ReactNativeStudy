@@ -3,12 +3,12 @@ import Container from '../components/Container';
 import WebView from 'react-native-webview';
 import useLocationState from '../libraries/recoil/hooks/useLocationState';
 import useFavoritesState from '../libraries/recoil/hooks/useFavoritesState';
+import {Location} from '../types/location';
 
 export default function HomeScreen() {
   const {location} = useLocationState();
   const {addFavorites} = useFavoritesState();
   const webViewRef = useRef<WebView>(null);
-  addFavorites;
   useEffect(() => {
     async function initializeData() {
       location;
@@ -19,7 +19,7 @@ export default function HomeScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function postMessage(message: {type: string; data: Partial<MapData>}) {
+  async function postMessage(message: {type: string; data: Partial<Location>}) {
     try {
       if (webViewRef.current) {
         webViewRef.current.postMessage(JSON.stringify(message));
@@ -40,7 +40,7 @@ export default function HomeScreen() {
           switch (message?.type) {
             case 'favoriteLocation': {
               console.debug(message.data);
-              // addFavorites(message.data);
+              addFavorites(message.data);
             }
           }
         }}
@@ -58,12 +58,3 @@ export default function HomeScreen() {
     </Container>
   );
 }
-
-export type MapData = {
-  lat: number;
-  lng: number;
-  initialCenter: {
-    lat: number;
-    lng: number;
-  };
-};

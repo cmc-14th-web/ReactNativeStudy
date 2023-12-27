@@ -1,11 +1,11 @@
-import {locationState} from '../states/location';
-import {MapData} from '../../../screens/HomeScreen';
-import {useRecoilState} from 'recoil';
-import getCurrentLocation from '../../../permissions/location';
 import {useEffect} from 'react';
+import {useRecoilState} from 'recoil';
+import {locationState} from '../states/location';
+import getCurrentLocation from '../../../permissions/location';
+import {Location} from '../../../types/location';
 
 export default function useLocationState() {
-  const [location, setLocation] = useRecoilState<MapData>(locationState);
+  const [location, setLocation] = useRecoilState<Location>(locationState);
 
   useEffect(() => {
     async function initialiseLocation() {
@@ -13,7 +13,7 @@ export default function useLocationState() {
         coords: {latitude: lat, longitude: lng},
       } = await getCurrentLocation();
 
-      const initialData: MapData = {lat, lng, initialCenter: {lat, lng}};
+      const initialData: Location = {lat, lng, initialCenter: {lat, lng}};
       setLocation(initialData);
       console.log('current loc', initialData);
     }

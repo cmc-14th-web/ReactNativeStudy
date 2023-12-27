@@ -1,8 +1,8 @@
 import {atom} from 'recoil';
-import {MapData} from '../../../screens/HomeScreen';
+import {BookMark} from '../../../types/bookmark';
 
 const FavoritesState = 'favoriteLocationsState';
-export const favoritesState = atom<MapData[]>({
+export const favoritesState = atom<BookMark[]>({
   key: FavoritesState,
   default: [],
 });

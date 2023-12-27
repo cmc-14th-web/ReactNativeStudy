@@ -1,8 +1,8 @@
 import {atom} from 'recoil';
-import {MapData} from '../../../screens/HomeScreen';
+import {Location} from '../../../types/location';
 
 const LocationState = 'locationState';
-export const locationState = atom<MapData>({
+export const locationState = atom<Location>({
   key: LocationState,
   default: {lat: 31, lng: 123, initialCenter: {lat: 31, lng: 123}},
 });
