@@ -21,6 +21,7 @@ const Home = () => {
         JSON.stringify({
           latitude: location.latitude,
           longitude: location.longitude,
+          type: location.type,
         }),
       );
     }
