@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 
-import {theme} from '../styles/theme';
+import {theme} from '../styles';
 import FavoriteLocationHeader from '../components/FavoriteLocation/FavoriteLocationHeader';
 import FavoriteLocationList from '../components/FavoriteLocation/FavoriteLocationList';
 

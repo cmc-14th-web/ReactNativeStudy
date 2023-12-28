@@ -3,7 +3,7 @@ import {RouteProp} from '@react-navigation/native';
 
 import {tabBarLabel, tabMenu} from '../constants/navigatorMenu';
 import {BottomTabParamList, BottomTabScreenName} from '../models/navigator';
-import {typoStyles} from '../styles/typo';
+import {typoStyles} from '../styles';
 import Home from '../screens/Home';
 import Favorite from '../screens/Favorite';
 import SvgIcons from '../components/SvgIcons';

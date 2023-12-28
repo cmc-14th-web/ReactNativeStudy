@@ -1,7 +1,7 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import {FavoriteButtonProps} from '../../models/favoriteButton';
-import {theme} from '../../styles/theme';
+import {theme} from '../../styles';
 import SvgIcons from '../SvgIcons';
 
 const FavoriteButton = ({

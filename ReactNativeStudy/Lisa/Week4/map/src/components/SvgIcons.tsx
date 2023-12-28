@@ -1,7 +1,7 @@
 import {Path, Svg, SvgProps} from 'react-native-svg';
 
 import {svgIconPath} from '../constants/svgIconPath';
-import {KeyOfPalette, theme} from '../styles/theme';
+import {KeyOfPalette, theme} from '../styles';
 
 interface SvgIconsProps extends SvgProps {
   iconVariant: keyof typeof svgIconPath;
