@@ -42,14 +42,14 @@ const Map = () => {
   useEffect(() => {
     const map = initMap();
 
-    document.addEventListener("message", (event: Event) =>
-      getLocationFromMessage(map, event)
-    );
+    const handleMessageEvent = (event: Event) => {
+      getLocationFromMessage(map, event);
+    };
+
+    document.addEventListener("message", handleMessageEvent);
 
     return () => {
-      document.removeEventListener("message", (event: Event) =>
-        getLocationFromMessage(map, event)
-      );
+      document.removeEventListener("message", handleMessageEvent);
     };
   }, []);
 
