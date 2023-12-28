@@ -17,6 +17,6 @@ export default Favorite;
 
 const favoriteScreenStyles = StyleSheet.create({
   container: {
-    backgroundColor: `${theme.palette.blue_200}`,
+    backgroundColor: theme.palette.blue_200,
   },
 });
