@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 
-import {theme} from '../styles/theme';
+import {theme} from '../../styles/theme';
 import FavoriteButton from './FavoriteButton';
 import FavoriteText from './FavoriteText';
 

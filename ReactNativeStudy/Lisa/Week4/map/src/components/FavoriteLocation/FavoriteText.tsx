@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 
-import {typoStyles} from '../styles/typo';
-import {theme} from '../styles/theme';
+import {theme} from '../../styles/theme';
+import {typoStyles} from '../../styles/typo';
 
 const FavoriteText = () => {
   return (

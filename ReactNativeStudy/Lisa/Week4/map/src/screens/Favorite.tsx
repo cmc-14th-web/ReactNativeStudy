@@ -1,8 +1,8 @@
 import {StyleSheet, View} from 'react-native';
 
-import FavoriteLocationHeader from '../components/FavoriteLocationHeader';
-import FavoriteLocationList from '../components/FavoriteLocationList';
 import {theme} from '../styles/theme';
+import FavoriteLocationHeader from '../components/FavoriteLocation/FavoriteLocationHeader';
+import FavoriteLocationList from '../components/FavoriteLocation/FavoriteLocationList';
 
 const Favorite = () => {
   return (

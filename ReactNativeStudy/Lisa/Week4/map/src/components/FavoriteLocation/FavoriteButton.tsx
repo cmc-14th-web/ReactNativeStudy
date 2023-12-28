@@ -1,8 +1,8 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
-import {theme} from '../styles/theme';
-import {FavoriteButtonProps} from '../models/favoriteButton';
-import SvgIcons from './SvgIcons';
+import {FavoriteButtonProps} from '../../models/favoriteButton';
+import {theme} from '../../styles/theme';
+import SvgIcons from '../SvgIcons';
 
 const FavoriteButton = ({
   variant = 'home',

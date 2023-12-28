@@ -5,7 +5,7 @@ import Geolocation from '@react-native-community/geolocation';
 
 import {windowWidth, windowHeight} from '../constants/screenSize';
 import {MAP_API_URL} from '../constants/api';
-import FavoriteButton from './FavoriteButton';
+import FavoriteButton from './FavoriteLocation/FavoriteButton';
 
 const Map = () => {
   const webViewRef = useRef<WebView>(null);
