@@ -1,3 +1,4 @@
-import {permissions} from '../constants/permission';
+import {permissions as availablePermissions} from '../constants/permission';
 
-export type LocationPermission = (typeof permissions)[keyof typeof permissions];
+export type LocationPermission =
+  (typeof availablePermissions)[keyof typeof availablePermissions];
