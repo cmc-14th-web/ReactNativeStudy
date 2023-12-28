@@ -1,4 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
+
 import {typoStyles} from '../styles/typo';
 import {theme} from '../styles/theme';
 
@@ -22,13 +23,13 @@ const favoriteTextStyles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: `${theme.palette.black}`,
-    backgroundColor: `${theme.palette.white}`,
+    borderColor: theme.palette.black,
+    backgroundColor: theme.palette.white,
   },
   text: {
     fontSize: typoStyles.typo.body_2.fontSize,
     fontWeight: typoStyles.typo.body_2.fontWeight,
     lineHeight: typoStyles.typo.body_2.lineHeight,
-    color: `${theme.palette.black}`,
+    color: theme.palette.black,
   },
 });

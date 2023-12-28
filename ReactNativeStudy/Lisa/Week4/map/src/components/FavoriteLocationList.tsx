@@ -1,4 +1,5 @@
 import {StyleSheet, View} from 'react-native';
+
 import {theme} from '../styles/theme';
 
 const FavoriteLocationList = () => {
@@ -12,6 +13,6 @@ const favoriteLocationListStyles = StyleSheet.create({
     height: `100%`,
     borderTopStartRadius: 40,
     borderTopEndRadius: 40,
-    backgroundColor: `${theme.palette.white}`,
+    backgroundColor: theme.palette.white,
   },
 });
