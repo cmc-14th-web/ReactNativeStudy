@@ -6,6 +6,7 @@ const App = () => {
   const mapRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
   const starsRef = useRef<any[]>([]);
+
   function addMarker(position: any) {
     if (markerRef.current) {
       markerRef.current.setMap(null);
@@ -30,8 +31,10 @@ const App = () => {
         (result: any, status: any) => {
           if (status === kakao.maps.services.Status.OK) {
             const roadAddress = result[0].road_address?.address_name;
-
-            if (navigator.userAgent.includes("iPhone")) {
+            if (
+              navigator.userAgent.includes("iPhone") ||
+              navigator.userAgent.includes("Android")
+            ) {
               const message = JSON.stringify({
                 latitude: position.Ma,
                 longitude: position.La,
@@ -62,7 +65,9 @@ const App = () => {
       );
     }
 
-    addEventListener("message", (e) => {
+    const global = navigator.userAgent.includes("iPhone") ? window : document;
+
+    global.addEventListener("message", (e: any) => {
       const data = JSON.parse(e.data);
       const type = data.type;
 
