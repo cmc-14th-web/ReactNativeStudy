@@ -18,7 +18,11 @@ const SvgIcons = ({
   ...props
 }: SvgIconsProps) => {
   return (
-    <Svg {...props} width={width} height={height} viewBox="0 0 24 24">
+    <Svg
+      {...props}
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}>
       <Path d={svgIconPath[iconVariant]} fill={theme.palette[fill]} />
     </Svg>
   );
