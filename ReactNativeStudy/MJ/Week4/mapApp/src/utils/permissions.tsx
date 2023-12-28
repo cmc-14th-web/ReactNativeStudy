@@ -30,7 +30,7 @@ export async function requestLocationPermissions() {
   }
 }
 
-export async function isAllowLocation(platform: PlatformType) {
+export async function getLocationPermission(platform: PlatformType) {
   if (platform === 'ios') {
     const result = await check(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
     return result === RESULTS.GRANTED;

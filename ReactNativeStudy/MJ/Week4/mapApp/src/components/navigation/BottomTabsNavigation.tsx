@@ -10,6 +10,7 @@ const Tabs = createBottomTabNavigator();
 
 const BottomTabsNavigation = () => {
   const color = useColorStore(state => state.color);
+
   return (
     <Tabs.Navigator
       screenOptions={{

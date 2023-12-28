@@ -7,8 +7,9 @@ import {requestLocationPermissions} from '../utils/permissions';
 
 const Home = () => {
   useGeolocation();
+
   const webViewRef = useRef<WebView | null>(null);
-  const {location} = useLocationStore(state => state);
+  const location = useLocationStore(state => state.location);
 
   useEffect(() => {
     requestLocationPermissions();
