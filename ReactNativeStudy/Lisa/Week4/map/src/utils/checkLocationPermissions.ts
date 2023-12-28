@@ -3,7 +3,6 @@ import {
   RESULTS,
   checkMultiple,
   request,
-  requestMultiple,
 } from 'react-native-permissions';
 import {Alert} from 'react-native';
 
@@ -24,51 +23,38 @@ export const checkLocationPermissions = async () => {
 };
 
 const handleSinglePermissionRequest = async (
-  permissionStatus: PermissionStatus,
   permissionType: LocationPermission,
 ) => {
+  try {
+    const result = await request(permissionType);
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const checkPermissionStatus = async (
+  result: Record<LocationPermission, PermissionStatus>,
+  permissionType: LocationPermission,
+) => {
+  const permissionStatus = result[permissionType];
+
   if (permissionStatus === RESULTS.DENIED) {
-    try {
-      const result = await request(permissionType);
-      console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
+    await handleSinglePermissionRequest(permissionType);
   }
 };
 
 const handlePermissionResult = async (
   result: Record<LocationPermission, PermissionStatus>,
 ) => {
-  const coarseLocationPermissionStatus =
-    result[permissions.coarseLocationPermission];
-  const fineLocationPermissionStatus =
-    result[permissions.fineLocationPermission];
+  await checkPermissionStatus(result, permissions.coarseLocationPermission);
+  await checkPermissionStatus(result, permissions.fineLocationPermission);
 
-  if (
-    coarseLocationPermissionStatus === RESULTS.DENIED &&
-    fineLocationPermissionStatus === RESULTS.DENIED
-  ) {
-    await requestMultiple([
-      permissions.coarseLocationPermission,
-      permissions.fineLocationPermission,
-    ]);
-  } else {
-    await handleSinglePermissionRequest(
-      coarseLocationPermissionStatus,
-      permissions.coarseLocationPermission,
-    );
+  const isBlocked =
+    result[permissions.coarseLocationPermission] === RESULTS.BLOCKED ||
+    result[permissions.fineLocationPermission] === RESULTS.BLOCKED;
 
-    await handleSinglePermissionRequest(
-      fineLocationPermissionStatus,
-      permissions.fineLocationPermission,
-    );
-  }
-
-  if (
-    coarseLocationPermissionStatus === RESULTS.BLOCKED ||
-    fineLocationPermissionStatus === RESULTS.BLOCKED
-  ) {
+  if (isBlocked) {
     Alert.alert('위치 권한을 허용해주세요.');
   }
 };
