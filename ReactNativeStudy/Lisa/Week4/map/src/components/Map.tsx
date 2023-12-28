@@ -1,16 +1,17 @@
+import {useCallback, useEffect, useRef} from 'react';
 import {StyleSheet} from 'react-native';
 import WebView from 'react-native-webview';
 import Geolocation from '@react-native-community/geolocation';
-import {useCallback, useEffect, useRef} from 'react';
 
 import {windowWidth, windowHeight} from '../constants/screenSize';
+import {MAP_API_URL} from '../constants/api';
 import FavoriteButton from './FavoriteButton';
 
 const Map = () => {
   const webViewRef = useRef<WebView>(null);
 
   const sendCurrentPosition = useCallback(() => {
-    Geolocation.watchPosition(
+    const watchId = Geolocation.watchPosition(
       position => {
         const {coords} = position;
         const message = {
@@ -30,10 +31,16 @@ const Map = () => {
         maximumAge: 10000,
       },
     );
+
+    return watchId;
   }, []);
 
   useEffect(() => {
-    sendCurrentPosition();
+    const watchId = sendCurrentPosition();
+
+    return () => {
+      Geolocation.clearWatch(watchId);
+    };
   }, []);
 
   return (
@@ -41,7 +48,7 @@ const Map = () => {
       <WebView
         ref={webViewRef}
         source={{
-          uri: 'https://cmc-map.vercel.app/',
+          uri: MAP_API_URL,
         }}
         style={mapStyles.webview}
       />
