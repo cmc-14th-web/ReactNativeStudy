@@ -1,4 +1,4 @@
-import React, {RefObject} from 'react';
+import React, {RefObject, useState} from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import SvgIcons from '../assets/icons/SvgIcons';
 import COLORS from '../constants/colors';
@@ -10,18 +10,31 @@ const ShowFavoritesButton = ({
 }: {
   webViewRef: RefObject<WebView>;
 }) => {
+  const [focused, setFocused] = useState(false);
   const favorites = favoriteStore((state: StoreType) => state.favorites);
 
   const handleClickButton = () => {
+    setFocused(!focused);
     webViewRef.current?.postMessage(JSON.stringify(favorites));
   };
 
   return (
-    <TouchableOpacity style={styles.container} onPress={handleClickButton}>
-      <View style={styles.star}>
-        <SvgIcons.SmallStarIcon />
+    <TouchableOpacity
+      style={{
+        ...styles.container,
+        backgroundColor: focused ? COLORS.BLUE_600 : COLORS.WHITE,
+      }}
+      onPress={handleClickButton}>
+      <View
+        style={{
+          ...styles.star,
+          backgroundColor: focused ? COLORS.WHITE : COLORS.BLUE_600,
+        }}>
+        <SvgIcons.SmallStarIcon focused={focused} />
       </View>
-      <Text style={styles.text}>즐겨찾기</Text>
+      <Text style={{color: focused ? COLORS.WHITE : COLORS.BLACK}}>
+        즐겨찾기
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -42,7 +55,6 @@ const styles = StyleSheet.create({
     left: 10,
   },
   star: {
-    backgroundColor: COLORS.WHITE,
     width: 10,
     height: 10,
     display: 'flex',

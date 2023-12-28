@@ -19,11 +19,11 @@ const SvgIcons = {
       />
     </Svg>
   ),
-  SmallStarIcon: () => (
+  SmallStarIcon: ({focused}: {focused: boolean}) => (
     <Svg width="12" height="12" viewBox="0 0 15 15" fill="none">
       <Path
         d="M3.32441 14.923L4.56441 9.61001L0.441406 6.03801L5.87241 5.56801L7.99941 0.557007L10.1264 5.56701L15.5564 6.03701L11.4344 9.60901L12.6744 14.922L7.99941 12.102L3.32441 14.923Z"
-        fill={COLORS.BLUE_600}
+        fill={focused ? COLORS.BLUE_600 : COLORS.WHITE}
       />
     </Svg>
   ),

@@ -3,6 +3,6 @@ const deleteAllMarkers = (markersArr: any) => {
     markersArr[i].setMap(null);
   }
   markersArr.length = 0;
-}
+};
 
 export default deleteAllMarkers;

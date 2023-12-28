@@ -14,7 +14,9 @@ const Favorites = () => {
         <View style={styles.starIcon}>
           <SvgIcons.WhiteStarIcon />
         </View>
-        <Text style={styles.favoriteText}>즐겨찾기</Text>
+        <View style={styles.favoriteText}>
+          <Text style={styles.text}>즐겨찾기</Text>
+        </View>
       </View>
       <View style={styles.bottomContainer}>
         {favorites &&
@@ -58,6 +60,8 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.WHITE,
     paddingHorizontal: 10,
     paddingVertical: 5,
+  },
+  text: {
     color: COLORS.BLACK,
     fontSize: 14,
     fontWeight: '500',

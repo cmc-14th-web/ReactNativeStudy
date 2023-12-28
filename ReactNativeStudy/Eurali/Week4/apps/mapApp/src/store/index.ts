@@ -1,4 +1,5 @@
 import {create} from 'zustand';
+import {NORMAL} from '../constants/state';
 
 export type PositionType = {
   latitude: Number;
@@ -21,7 +22,7 @@ export type StoreType = {
 };
 
 const favoriteStore = create<StoreType>(set => ({
-  curState: 'NORMAL',
+  curState: NORMAL,
   setCurState: (s: String) => set({curState: s}),
 
   curPos: {

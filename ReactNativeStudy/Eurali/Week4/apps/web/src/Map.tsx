@@ -4,6 +4,8 @@ import clickedPosIcon from './constants/clickedPosIcon';
 import roundStar from './constants/roundStar';
 import getAddress from './utils/getAddress';
 import deleteAllMarkers from './utils/deleteAllMarkers';
+import initMap from './utils/initMap';
+import initMarker from './utils/initMarker';
 
 const { kakao } = window;
 
@@ -12,17 +14,8 @@ const Map = () => {
   const [kakaoMap, setKakaoMap] = useState<any>();
   const markersArr: any[] = [];
 
-  const initMap = () => {
-    const container = mapContainerRef.current;
-    const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
-      level: 3
-    };
-    setKakaoMap(new kakao.maps.Map(container, options));
-  }
-
   useEffect(() => {
-    kakao.maps.load(() => initMap());
+    kakao.maps.load(() => initMap(mapContainerRef, setKakaoMap));
   }, []);
 
   const getMessage = (event: any) => {
@@ -31,22 +24,12 @@ const Map = () => {
       deleteAllMarkers(markersArr);
       const currentPosition = new kakao.maps.LatLng(data.latitude, data.longitude);
       kakaoMap.panTo(currentPosition);
-
-      const marker = new kakao.maps.Marker({
-        map: kakaoMap,
-        position: currentPosition,
-        image: currentPosIcon
-      })
-      markersArr.push(marker);
+      initMarker(kakaoMap, currentPosition, currentPosIcon, markersArr)
     } else { // 즐겨찾기 장소들 정보를 받는 경우
       deleteAllMarkers(markersArr);
       for (let i = 0; i < data.length; i ++) {
-        const favoriteMarker = new kakao.maps.Marker({
-            map: kakaoMap,
-            position: new kakao.maps.LatLng(data[i].position.latitude, data[i].position.longitude),
-            image : roundStar
-        });
-        markersArr.push(favoriteMarker);
+        const favoritePos = new kakao.maps.LatLng(data[i].position.latitude, data[i].position.longitude)
+        initMarker(kakaoMap, favoritePos, roundStar, markersArr);
       }
     }
   };
@@ -54,13 +37,7 @@ const Map = () => {
   const handleClickMap = async (mouseEvent: any) => {
     deleteAllMarkers(markersArr);
     const latlng = mouseEvent.latLng;
-    
-    const marker = new kakao.maps.Marker({
-      map: kakaoMap,
-      position: latlng,
-      image: clickedPosIcon
-    })
-    markersArr.push(marker);
+    initMarker(kakaoMap, latlng, clickedPosIcon, markersArr);
 
     const clickedPos = {
       position: {

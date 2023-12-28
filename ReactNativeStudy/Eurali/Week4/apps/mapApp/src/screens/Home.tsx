@@ -29,7 +29,7 @@ const Home = () => {
     <View style={styles.mapView}>
       <WebView
         ref={webViewRef}
-        source={{uri: 'http://10.10.75.194:3000'}}
+        source={{uri: 'http://192.168.35.246:3000'}}
         onMessage={onMessage}
       />
       <CurrentLocationButton webViewRef={webViewRef} />

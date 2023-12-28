@@ -6,6 +6,7 @@ import {TouchableOpacity} from 'react-native';
 import accessLocationInfo from '../utils/getLocationInfo';
 import WebView from 'react-native-webview';
 import favoriteStore, {StoreType} from '../store';
+import {NORMAL} from '../constants/state';
 
 const CurrentLocationButton = ({
   webViewRef,
@@ -15,7 +16,7 @@ const CurrentLocationButton = ({
   const setCurState = favoriteStore((state: StoreType) => state.setCurState);
 
   const handleClickButton = async () => {
-    setCurState('NORMAL');
+    setCurState(NORMAL);
     const [latitude, longitude] = await accessLocationInfo();
 
     if (latitude && longitude) {
