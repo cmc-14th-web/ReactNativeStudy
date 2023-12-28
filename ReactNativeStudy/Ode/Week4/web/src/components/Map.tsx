@@ -1,9 +1,12 @@
+import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
 import { useCallback, useEffect, useState } from "react";
-import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
-import { key } from "./key";
 import ReactDOM from "react-dom";
-import StarButton from "./StarButton";
 import NavigateBookmarkPageButton from "./NavigateBookmarkPageButton";
+import StarButton from "./StarButton";
+import { key } from "./key";
+import CurrentMarker from "./CurrentMarker";
+import { BookMarks } from "../types/bookmarks";
+import BookMarker from "./BookMarker";
 
 const containerStyle = {
   width: "100%",
@@ -26,18 +29,26 @@ export default function Map() {
     return savedLocation ? (JSON.parse(savedLocation) as Location) : undefined;
   });
 
+  const [bookmarks, setbookmarks] = useState<BookMarks>(() => {
+    const savedBookmarks = localStorage.getItem("bookmarks");
+    return savedBookmarks ? JSON.parse(savedBookmarks) : {};
+  });
+
   useEffect(() => {
     const handleMessage = (event: MessageEvent) => {
       try {
-        const parsedData = JSON.parse(event.data);
-        switch (parsedData?.type) {
-          case "init": {
-            setCurrentLocation(parsedData.data);
-            localStorage.setItem("currentLocation", JSON.stringify(parsedData.data));
+        const { type, data } = JSON.parse(event.data);
+        console.log("web:", type, data);
+        switch (type) {
+          case "init":
+          case "location": {
+            setCurrentLocation(data);
+            localStorage.setItem("currentLocation", JSON.stringify(data));
             break;
           }
-          case "location": {
-            setCurrentLocation(parsedData.data);
+          case "bookmarks": {
+            setbookmarks(data);
+            localStorage.setItem("currentLocation", JSON.stringify(data));
             break;
           }
           default: {
@@ -63,21 +74,19 @@ export default function Map() {
     }
   }, []);
 
-  const setBookmarkButton = useCallback(
-    (mapInstance: google.maps.Map) => {
-      const controlButton = document.createElement("div");
-      ReactDOM.render(
-        <>
-          <NavigateBookmarkPageButton />
-          <StarButton location={currentLocation} />
-        </>,
-        controlButton
-      );
-      mapInstance.controls[window.google.maps.ControlPosition.LEFT_TOP].push(controlButton);
-    },
-    [currentLocation]
-  );
+  const setBookmarkButton = useCallback((mapInstance: google.maps.Map) => {
+    const controlButton = document.createElement("div");
+    ReactDOM.render(
+      <>
+        <NavigateBookmarkPageButton />
+        <StarButton />
+      </>,
+      controlButton
+    );
+    mapInstance.controls[window.google.maps.ControlPosition.LEFT_TOP].push(controlButton);
+  }, []);
 
+  console.log(currentLocation);
   return isLoaded && currentLocation ? (
     <GoogleMap
       options={{ disableDefaultUI: true }}
@@ -85,13 +94,10 @@ export default function Map() {
       center={currentLocation}
       zoom={10}
       onLoad={setBookmarkButton}>
-      <MarkerF
-        position={currentLocation}
-        icon={{
-          url: require("../assets/map.svg").default,
-          scaledSize: new window.google.maps.Size(46, 46),
-        }}
-      />
+      <CurrentMarker location={currentLocation} />
+      {Object.entries(bookmarks).map(([key, bookmark]) => (
+        <BookMarker key={key} {...bookmark} />
+      ))}
     </GoogleMap>
   ) : null;
 }

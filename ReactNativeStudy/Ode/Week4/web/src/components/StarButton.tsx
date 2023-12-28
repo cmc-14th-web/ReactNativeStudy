@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { getAddressFromLatLng } from "../utils/getAddressFromLatLng";
-import { Location } from "./Map";
 import StarIcon from "./StarIcon";
 import { Message } from "../types/message";
 import { Address } from "../types/address";
@@ -13,36 +12,37 @@ declare global {
   }
 }
 
-type StarButtonProps = {
-  location: Location | undefined;
-};
-
-export default function StarButton({ location }: StarButtonProps) {
+export default function StarButton() {
+  const location = JSON.parse(localStorage.getItem("currentLocation") ?? "");
+  // 저장방법 고민 좀 .. recoil 쓰자 ~! ?
   const handleClick = () => {
     if (!location) {
       return;
     }
 
-    getAddressFromLatLng(location, (error, results) => {
-      if (error) {
-        console.error(error);
+    getAddressFromLatLng(
+      JSON.parse(localStorage.getItem("currentLocation") ?? ""),
+      (error, results) => {
+        if (error) {
+          console.error(error);
+        }
+
+        if (results) {
+          const { place_id, formatted_address } = results[0];
+
+          const message: Message<Address> = {
+            type: "favoriteLocation",
+            data: {
+              id: place_id,
+              address: formatted_address,
+              ...location,
+            },
+          };
+
+          window.sendMessageToReactNative(message);
+        }
       }
-
-      if (results) {
-        const { place_id, formatted_address } = results[0];
-
-        const message: Message<Address> = {
-          type: "favoriteLocation",
-          data: {
-            id: place_id,
-            address: formatted_address,
-            ...location,
-          },
-        };
-
-        window.sendMessageToReactNative(message);
-      }
-    });
+    );
   };
 
   const disabled = useMemo(() => !location, [location]);

@@ -7,6 +7,7 @@ import useBookmarkState from '../libraries/recoil/hooks/useBookmarkState';
 import Container from '../components/Container';
 import {RootStackParamList} from '../navigators/RootNavigator';
 import type {Location} from '../types/location';
+import {Message} from '../types/message';
 
 type MapScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -16,19 +17,28 @@ type MapScreenNavigationProp = StackNavigationProp<
 export default function HomeScreen() {
   const navigation = useNavigation<MapScreenNavigationProp>();
   const {location} = useLocationState();
-  const {addBookmarks} = useBookmarkState();
+  const {bookmarks, addBookmarks} = useBookmarkState();
   const webViewRef = useRef<WebView>(null);
-
   useEffect(() => {
     async function initializeData() {
-      postMessage({type: 'init', data: location});
+      const message: Message<Partial<Location>> = {
+        type: 'init',
+        // data: {lat: 37.74, lng: -122.41},
+        data: location,
+      };
+
+      postMessage(message);
     }
 
     initializeData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function postMessage(message: {type: string; data: Partial<Location>}) {
+  useEffect(() => {
+    postMessage({type: 'bookmarks', data: bookmarks});
+  }, [bookmarks]);
+
+  async function postMessage(message: Message) {
     try {
       if (webViewRef.current) {
         webViewRef.current.postMessage(JSON.stringify(message));
@@ -40,10 +50,11 @@ export default function HomeScreen() {
 
   const handleMessage = (event: WebViewMessageEvent) => {
     try {
-      const message = JSON.parse(event.nativeEvent.data);
-      switch (message?.type) {
+      const {type, data} = JSON.parse(event.nativeEvent.data);
+      // console.log(type, data);
+      switch (type) {
         case 'favoriteLocation': {
-          addBookmarks(message.data);
+          addBookmarks(data);
           break;
         }
         case 'navigateBookmarkPage': {
@@ -62,10 +73,9 @@ export default function HomeScreen() {
     <Container>
       <WebView
         ref={webViewRef}
-        source={{uri: 'http://172.30.1.15:3000'}}
+        source={{uri: 'http://127.0.0.1:3000'}}
         onMessage={handleMessage}
         injectedJavaScript={injectedJavaScript}
-        // onLoadStart={() => postMessage({type: 'init', data: location})}
       />
     </Container>
   );
