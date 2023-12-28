@@ -3,29 +3,50 @@ import {
   PERMISSIONS,
   RESULTS,
   check,
+  openSettings,
   requestMultiple,
 } from 'react-native-permissions';
 import {PlatformType} from '../types';
 
 export async function requestLocationPermissions() {
-  const PermissionStatus = await requestMultiple([
+  const permissionsToRequest = [
     PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
     PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
-  ]);
+  ];
+
+  const permissionStatus = await requestMultiple(permissionsToRequest);
 
   if (Platform.OS === 'android') {
-    if (
-      PermissionStatus[PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION] !==
-      RESULTS.GRANTED
-    ) {
-      Alert.alert('android 위치 정보 권한이 거부되었습니다.');
+    const fineLocationStatus =
+      permissionStatus[PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION];
+    if (fineLocationStatus !== RESULTS.GRANTED) {
+      Alert.alert(
+        'android 위치 정보 권한이 거부되었습니다.',
+        '앱을 사용하려면 위치 정보 권한이 필요합니다.',
+        [
+          {
+            text: '설정으로 이동',
+            onPress: () => openSettings(),
+          },
+        ],
+      );
     }
   }
+
   if (Platform.OS === 'ios') {
-    if (
-      PermissionStatus[PERMISSIONS.IOS.LOCATION_WHEN_IN_USE] !== RESULTS.GRANTED
-    ) {
-      Alert.alert('ios 위치 정보 권한이 거부되었습니다.');
+    const whenInUseStatus =
+      permissionStatus[PERMISSIONS.IOS.LOCATION_WHEN_IN_USE];
+    if (whenInUseStatus !== RESULTS.GRANTED) {
+      Alert.alert(
+        'iOS 위치 정보 권한이 거부되었습니다.',
+        '앱을 사용하려면 위치 정보 권한이 필요합니다.',
+        [
+          {
+            text: '설정으로 이동',
+            onPress: () => openSettings(),
+          },
+        ],
+      );
     }
   }
 }
