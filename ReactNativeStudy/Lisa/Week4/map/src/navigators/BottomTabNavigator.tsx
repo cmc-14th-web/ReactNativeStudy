@@ -11,29 +11,13 @@ import SvgIcons from '../components/SvgIcons';
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 
 const getTabBarIcon = (routeName: string, focused: boolean) => {
+  const iconVariant = routeName === 'Home' ? 'Home' : 'Star';
   const iconColor = focused ? 'blue_600' : 'gray_600';
 
-  return (
-    <>
-      {routeName === 'Home' && (
-        <SvgIcons iconVariant={'Home'} fill={iconColor} />
-      )}
-      {routeName === 'Favorite' && (
-        <SvgIcons iconVariant={'Star'} fill={iconColor} />
-      )}
-    </>
-  );
+  return <SvgIcons iconVariant={iconVariant} fill={iconColor} />;
 };
 
-const screenOptions = ({
-  route,
-}: {
-  route: RouteProp<BottomTabParamList, BottomTabScreenName>;
-}) => ({
-  tabBarIcon: ({focused}: {focused: boolean}) =>
-    getTabBarIcon(route.name, focused),
-  headerShown: false,
-  headerShadowVisible: false,
+const tabStyles = {
   tabBarStyle: {
     height: 61,
     paddingTop: 10,
@@ -49,6 +33,18 @@ const screenOptions = ({
     fontWeight: typoStyles.typo.body_1.fontWeight,
     lineHeight: typoStyles.typo.body_1.lineHeight,
   },
+};
+
+const screenOptions = ({
+  route,
+}: {
+  route: RouteProp<BottomTabParamList, BottomTabScreenName>;
+}) => ({
+  tabBarIcon: ({focused}: {focused: boolean}) =>
+    getTabBarIcon(route.name, focused),
+  headerShown: false,
+  headerShadowVisible: false,
+  ...tabStyles,
 });
 
 const BottomTabNavigator = () => {
