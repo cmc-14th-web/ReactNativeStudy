@@ -1,32 +1,24 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import {theme} from '../styles/theme';
+import {FavoriteButtonProps} from '../models/favoriteButton';
 import SvgIcons from './SvgIcons';
 
 const FavoriteButton = ({
   variant = 'home',
   activated = false,
-}: {
-  variant?: 'favorite' | 'home';
-  activated?: boolean;
-}) => {
+}: FavoriteButtonProps) => {
   const getStyle = () => {
-    if (variant === 'home') {
-      return {
-        ...favoriteButtonStyles.homeContainer,
-        ...favoriteButtonStyles.container,
-        ...(activated
-          ? {...favoriteButtonStyles.activated}
-          : {...favoriteButtonStyles.inactivated}),
-      };
-    } else {
-      return {
-        ...favoriteButtonStyles.container,
-        ...(activated
-          ? {...favoriteButtonStyles.activated}
-          : {...favoriteButtonStyles.inactivated}),
-      };
-    }
+    const baseStyle = {
+      ...favoriteButtonStyles.container,
+      ...(activated
+        ? {...favoriteButtonStyles.activated}
+        : {...favoriteButtonStyles.inactivated}),
+    };
+
+    return variant === 'home'
+      ? {...baseStyle, ...favoriteButtonStyles.homeContainer}
+      : baseStyle;
   };
 
   return (
@@ -53,9 +45,9 @@ const favoriteButtonStyles = StyleSheet.create({
     right: 13,
   },
   activated: {
-    backgroundColor: `${theme.palette.blue_600}`,
+    backgroundColor: theme.palette.blue_600,
   },
   inactivated: {
-    backgroundColor: `${theme.palette.gray_600}`,
+    backgroundColor: theme.palette.gray_600,
   },
 });
