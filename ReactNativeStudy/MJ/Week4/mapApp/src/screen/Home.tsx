@@ -34,7 +34,6 @@ const Home = () => {
 
   const handleWebViewMessage = (event: any) => {
     const message: Star = JSON.parse(event.nativeEvent.data);
-    console.log(message);
     setStar(message);
   };
 
