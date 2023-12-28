@@ -1,7 +1,5 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {useStore} from 'zustand';
 
-import {webViewRefStore} from '../libs/store/webviewRef';
 import {theme} from '../styles/theme';
 import SvgIcons from './SvgIcons';
 
@@ -12,16 +10,6 @@ const FavoriteButton = ({
   variant?: 'favorite' | 'home';
   activated?: boolean;
 }) => {
-  const {webViewRef} = useStore(webViewRefStore);
-
-  const handlePressFavoriteButton = () => {
-    const message = {
-      type: 'favoriteLocation',
-    };
-
-    webViewRef.current?.postMessage(JSON.stringify(message));
-  };
-
   const getStyle = () => {
     if (variant === 'home') {
       return {
@@ -42,7 +30,7 @@ const FavoriteButton = ({
   };
 
   return (
-    <TouchableOpacity style={getStyle()} onPress={handlePressFavoriteButton}>
+    <TouchableOpacity style={getStyle()}>
       <SvgIcons iconVariant={'Star'} fill={'white'} />
     </TouchableOpacity>
   );
