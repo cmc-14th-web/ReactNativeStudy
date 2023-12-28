@@ -3,6 +3,7 @@ import currentPosIcon from './constants/currentPosIcon';
 import clickedPosIcon from './constants/clickedPosIcon';
 import roundStar from './constants/roundStar';
 import getAddress from './utils/getAddress';
+import deleteAllMarkers from './utils/deleteAllMarkers';
 
 const { kakao } = window;
 
@@ -11,7 +12,7 @@ const Map = () => {
   const [kakaoMap, setKakaoMap] = useState<any>();
   const markersArr: any[] = [];
 
-  const initMap = () =>{
+  const initMap = () => {
     const container = mapContainerRef.current;
     const options = {
       center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -24,17 +25,10 @@ const Map = () => {
     kakao.maps.load(() => initMap());
   }, []);
 
-  const deleteAllMarkers = () => {
-    for (let i=0; i<markersArr.length; i++) {
-      markersArr[i].setMap(null);
-    }
-    markersArr.length = 0;
-  }
-
   const getMessage = (event: any) => {
     const data = JSON.parse(event.data);
     if (data.latitude && data.longitude) { // 현위치 정보를 받는 경우
-      deleteAllMarkers();
+      deleteAllMarkers(markersArr);
       const currentPosition = new kakao.maps.LatLng(data.latitude, data.longitude);
       kakaoMap.panTo(currentPosition);
 
@@ -45,7 +39,7 @@ const Map = () => {
       })
       markersArr.push(marker);
     } else { // 즐겨찾기 장소들 정보를 받는 경우
-      deleteAllMarkers();
+      deleteAllMarkers(markersArr);
       for (let i = 0; i < data.length; i ++) {
         const favoriteMarker = new kakao.maps.Marker({
             map: kakaoMap,
@@ -57,8 +51,8 @@ const Map = () => {
     }
   };
 
-  const handleClickMap = async(mouseEvent: any) => {
-    deleteAllMarkers();
+  const handleClickMap = async (mouseEvent: any) => {
+    deleteAllMarkers(markersArr);
     const latlng = mouseEvent.latLng;
     
     const marker = new kakao.maps.Marker({
