@@ -17,6 +17,7 @@
     "metro.config.js",
     "jest.config.js"
   ],
+  "baseUrl": "./src",
   "paths": {
     "@components/*": ["src/components/*"],
     "@constants/*": ["src/constants/*"],
