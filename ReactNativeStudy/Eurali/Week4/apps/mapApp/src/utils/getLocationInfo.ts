@@ -1,6 +1,6 @@
 import Geolocation from '@react-native-community/geolocation';
 
-const requestPermissions = (): Promise<
+const accessLocationInfo = (): Promise<
   [string | undefined, string | undefined]
 > => {
   return new Promise((resolve, reject) => {
@@ -38,4 +38,4 @@ const getLocationInfo = (): Promise<
   });
 };
 
-export default requestPermissions;
+export default accessLocationInfo;

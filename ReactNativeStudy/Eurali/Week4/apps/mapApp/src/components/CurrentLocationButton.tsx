@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import SvgIcons from '../assets/icons/SvgIcons';
 import COLORS from '../constants/colors';
 import {TouchableOpacity} from 'react-native';
-import requestPermissions from '../utils/getLocationInfo';
+import accessLocationInfo from '../utils/getLocationInfo';
 import WebView from 'react-native-webview';
 import favoriteStore, {StoreType} from '../store';
 
@@ -16,7 +16,7 @@ const CurrentLocationButton = ({
 
   const handleClickButton = async () => {
     setCurState('NORMAL');
-    const [latitude, longitude] = await requestPermissions();
+    const [latitude, longitude] = await accessLocationInfo();
 
     if (latitude && longitude) {
       webViewRef.current?.postMessage(JSON.stringify({latitude, longitude}));
