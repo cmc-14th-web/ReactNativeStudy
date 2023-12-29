@@ -5,6 +5,7 @@ import { likedPlaceState } from "@/atoms/likedPlace";
 import { kakaoKey } from "@/configs/key";
 import { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
+import { markerMakeHandler } from "@/utils/markerMakeHandler";
 
 interface MapProps {
   latitude: number | null;
@@ -52,13 +53,22 @@ function Map({
           latitude,
           longitude
         );
+
+        const initialMarkerImg = markerMakeHandler(
+          "currentLocation.png",
+          30,
+          30
+        );
+
         const marker = new window.kakao.maps.Marker({
           position: markerPosition,
+          image: initialMarkerImg,
         });
         marker.setMap(map);
 
         // 즐겨찾기 비활성화 상태일 때
         if (!liked) {
+          const checkMarkerImg = markerMakeHandler("marker.png", 45, 45);
           window.kakao.maps.event.addListener(
             map,
             "click",
@@ -66,6 +76,7 @@ function Map({
               if (!mapClicked) {
                 setMapClicked(true);
               }
+              marker.setImage(checkMarkerImg);
               const clickedLatlng = mouseEvent.latLng;
 
               marker.setMap(null);
@@ -85,6 +96,8 @@ function Map({
         } else {
           // 즐겨 찾기 활성화 상태
           // 즐겨찾기 한 모든 마커들 다 찍기
+          const likedMarkerImg = markerMakeHandler("likeLocation.png", 20, 20);
+
           allLikedPlaces.forEach((likedPlace) => {
             const { latitude, longitude } = likedPlace;
             const likedMarkerPosition = new window.kakao.maps.LatLng(
@@ -93,6 +106,7 @@ function Map({
             );
             const likedMarker = new window.kakao.maps.Marker({
               position: likedMarkerPosition,
+              image: likedMarkerImg,
             });
             likedMarker.setMap(map);
           });
