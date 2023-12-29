@@ -4,6 +4,9 @@ import WebView from "react-native-webview";
 import Geolocation from 'react-native-geolocation-service';
 
 import { MAP_WEB_VIEW_LINK } from "../constant/link";
+import { Position } from "../type/bookmark";
+import { useRecoilState } from "recoil";
+import { bookmarkState } from "../state/bookmark";
 
 function MapWebView() {
     const mapRef = useRef<any>();
@@ -20,18 +23,44 @@ function MapWebView() {
             ...position.coords,
             type: 'map',
         }));
-        console.log('postPosition', position.coords)
     }
 
-    const handleMessage = () => {
+    const handlePostPosition = () => {
         Geolocation.getCurrentPosition((position) => {
             postPostion(position);
         });
     }
+
+    const getID = (position: Position) => `${position.lat}-${position.lng}`;
+    const [bookmark, setBookmark] = useRecoilState(bookmarkState);
+
+    const saveBookmark = (position: Position) => {
+        const id = getID(position);
+        const isBookmarked = bookmark.some(bookmark => bookmark.id === id);
+
+        if (isBookmarked) {
+            return;
+        }
+
+        setBookmark(bookmark => [...bookmark, { ...position, id }]);
+    };
+
+    const handleMessage = (event: any) => {
+        const message = event.nativeEvent.data;
+        const data = JSON.parse(message);
+
+        if (data.type === 'saveBookmark') {
+            const position = data.payload;
+            console.log(position)
+            saveBookmark(position);
+        }
+    }
+
     return (
         <WebView source={{ uri: MAP_WEB_VIEW_LINK }}
             ref={mapRef}
-            onLoadEnd={handleMessage}
+            onLoadEnd={handlePostPosition}
+            onMessage={handleMessage}
         />
     )
 }
