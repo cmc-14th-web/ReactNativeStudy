@@ -1,0 +1,12 @@
+const COLORS = {
+  BLUE_100: '#E9EEFF',
+  BLUE_200: '#BFC9FF',
+  BLUE_600: '#5061FF',
+  WHITE: '#FFFFFF',
+  GRAY_100: '#E4E4E4',
+  GRAY_200: '#C3C3C3',
+  GRAY_600: '#888888',
+  BLACK: '#000000',
+};
+
+export default COLORS;
